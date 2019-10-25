@@ -23,6 +23,8 @@ allprojects {
     }
 }
 
+apply from: "libraries.gradle"
+
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
