@@ -43,5 +43,5 @@ class LoginFragment : BaseFragment() {
                 .LENGTH_LONG).show()
         })
     }
-    
+
 }

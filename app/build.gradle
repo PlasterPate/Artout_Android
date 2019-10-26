@@ -23,16 +23,23 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
+    dataBinding{
+        enabled = true
+    }
 }
 
 dependencies {
-
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
 
     implementation project(':data')
     implementation project(':remote')
     implementation project(':local')
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation 'androidx.appcompat:appcompat:1.1.0'
+    implementation 'androidx.core:core-ktx:1.1.0'
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
 
     implementation "androidx.appcompat:appcompat:$libraries.appCompat"
     implementation "androidx.core:core-ktx:$libraries.coreKtx"
@@ -46,6 +53,9 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-extensions:$libraries.lifecycle"
 
     implementation "com.google.dagger:dagger:$libraries.dagger"
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation 'androidx.lifecycle:lifecycle-extensions:2.0.0'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.0.0'
     kapt "com.google.dagger:dagger-compiler:$libraries.dagger"
     implementation "com.google.dagger:dagger-android-support:$libraries.dagger"
     kapt "com.google.dagger:dagger-android-processor:$libraries.dagger"
@@ -62,4 +72,7 @@ dependencies {
     testImplementation "junit:junit:$testLibraries.junit"
     androidTestImplementation "androidx.test:runner:$testLibraries.androidXTestRunner"
     androidTestImplementation "androidx.test.espresso:espresso-core:$testLibraries.espresso"
+    implementation project(":data")
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.1.0'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.1.0'
 }
