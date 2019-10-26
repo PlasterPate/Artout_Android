@@ -33,4 +33,5 @@ class LoginFragment : BaseFragment() {
             loginViewModel.onLoginClicked(tvUserName.text.toString(), tvPassword.text.toString())
         }
     }
+
 }

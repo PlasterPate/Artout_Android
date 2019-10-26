@@ -3,13 +3,14 @@ package com.mbglobal.artoutandroid.ui.login
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.mbglobal.artoutandroid.ui.base.BaseViewModel
 import com.mbglobal.data.entity.user.UserLoginItemEntity
 import com.mbglobal.data.repository.UserRepository
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
-class LoginViewModel @Inject constructor(private val userRepository: UserRepository) : ViewModel() {
+class LoginViewModel @Inject constructor(private val userRepository: UserRepository) : BaseViewModel() {
 
     private val _loginError : MutableLiveData<String> = MutableLiveData()
     val loginError : LiveData<String> = _loginError
@@ -33,14 +34,18 @@ class LoginViewModel @Inject constructor(private val userRepository: UserReposit
                         _loginStatus.value = false
                     }
                 ).also {
-                    it.dispose()
+                    compositeDisposable.add(it)
                 }
         }
 
     }
 
-    fun isLoginInfoValid(userLoginItemEntity: UserLoginItemEntity): Boolean {
-        return (userLoginItemEntity.password.isNotEmpty())
-                && (userLoginItemEntity.username.isNotEmpty())
+    companion object {
+
+        private fun isLoginInfoValid(userLoginItemEntity: UserLoginItemEntity): Boolean {
+            return (userLoginItemEntity.password.isNotEmpty())
+                    && (userLoginItemEntity.username.isNotEmpty())
+        }
+
     }
 }
