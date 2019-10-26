@@ -8,7 +8,9 @@ import com.mbglobal.data.entity.user.UserLoginItemEntity
 import com.mbglobal.data.repository.UserRepository
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
+import java.util.concurrent.TimeUnit
 import javax.inject.Inject
+import kotlin.random.Random
 
 class LoginViewModel @Inject constructor(private val userRepository: UserRepository) : BaseViewModel() {
 
@@ -18,19 +20,27 @@ class LoginViewModel @Inject constructor(private val userRepository: UserReposit
     private val _loginStatus : MutableLiveData<Boolean> = MutableLiveData()
     val loginStatus : LiveData<Boolean> = _loginStatus
 
+    private val _showLoading : MutableLiveData<Boolean> = MutableLiveData()
+    val showLoading : LiveData<Boolean> = _showLoading
+
     fun onLoginClicked(userName : String, password : String) {
 
         val userLoginItemEntity = UserLoginItemEntity(userName, password)
 
+
         if (isLoginInfoValid(userLoginItemEntity)) {
+            _showLoading.value = true
+
             userRepository.login(userLoginItemEntity)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
                     { userLoginResponseEntity ->
+                        _showLoading.value = false
                         _loginStatus.value = true
                     },
                     { throwable ->
+                        _showLoading.value = false
                         _loginStatus.value = false
                     }
                 ).also {

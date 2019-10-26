@@ -12,7 +12,7 @@ class ArtoutApp : DaggerApplication() {
     override fun onCreate() {
         super.onCreate()
 
-        instanse = this
+        instance = this
     }
 
     override fun applicationInjector(): AndroidInjector<out DaggerApplication> {
@@ -22,6 +22,6 @@ class ArtoutApp : DaggerApplication() {
     }
 
     companion object {
-        lateinit var instanse: ArtoutApp
+        lateinit var instance: ArtoutApp
     }
 }
