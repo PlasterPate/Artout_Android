@@ -22,7 +22,7 @@ class LoginFragment : BaseFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_login, container, false)
+        return inflater.inflate(R.layout.login_fragment, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -32,8 +32,8 @@ class LoginFragment : BaseFragment() {
     }
 
     private fun initializeListeners() {
-        btnLogin.setOnClickListener {
-            loginViewModel.onLoginClicked(tvUserName.text.toString(), tvPassword.text.toString())
+        login_button.setOnClickListener {
+            loginViewModel.onLoginClicked(phone_number_edit_text.text.toString(), password_edit_text.text.toString())
         }
     }
 

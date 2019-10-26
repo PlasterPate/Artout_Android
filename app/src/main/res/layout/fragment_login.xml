@@ -5,7 +5,7 @@
     android:layout_height="match_parent">
 
     <EditText
-        android:id="@+id/tvUserName"
+        android:id="@+id/phone_number_edit_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:hint="@string/hint_username"
@@ -15,21 +15,21 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/tvPassword"
+        android:id="@+id/password_edit_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:hint="@string/hint_password"
-        app:layout_constraintBottom_toTopOf="@id/tvUserName"
+        app:layout_constraintBottom_toTopOf="@id/phone_number_edit_text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/btnLogin"
+        android:id="@+id/login_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/login_btn"
-        app:layout_constraintEnd_toEndOf="@+id/tvUserName"
-        app:layout_constraintStart_toStartOf="@+id/tvUserName"
-        app:layout_constraintTop_toBottomOf="@+id/tvUserName" />
+        app:layout_constraintEnd_toEndOf="@+id/phone_number_edit_text"
+        app:layout_constraintStart_toStartOf="@+id/phone_number_edit_text"
+        app:layout_constraintTop_toBottomOf="@+id/phone_number_edit_text" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
