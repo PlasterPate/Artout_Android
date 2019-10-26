@@ -4,9 +4,7 @@ import dagger.Component
 import dagger.android.AndroidInjectionModule
 import dagger.android.AndroidInjector
 import com.mbglobal.artoutandroid.app.ArtoutApp
-import com.mbglobal.artoutandroid.di.module.AppModule
-import com.mbglobal.artoutandroid.di.module.LoginModule
-import com.mbglobal.artoutandroid.di.module.ViewModelFactoryModule
+import com.mbglobal.artoutandroid.di.module.*
 import com.mbglobal.artoutandroid.di.scope.AppScope
 
 @Component(
@@ -14,7 +12,10 @@ import com.mbglobal.artoutandroid.di.scope.AppScope
         AndroidInjectionModule::class,
         AppModule::class,
         ViewModelFactoryModule::class,
-        LoginModule::class
+        LoginModule::class,
+        UserModule::class,
+        TokenModule::class,
+        NetworkModule::class
     ]
 )
 @AppScope

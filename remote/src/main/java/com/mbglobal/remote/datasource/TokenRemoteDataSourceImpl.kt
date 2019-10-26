@@ -11,7 +11,7 @@ class TokenRemoteDataSourceImpl @Inject constructor(val tokenService: TokenServi
 
     override fun refreshAccessToken(refresh : String): Single<String?> {
         return tokenService.refreshAccessToken(RefreshAccessItemDto(refresh)).map {
-            it?.access
+            it.access
         }
     }
 

@@ -4,6 +4,8 @@ import androidx.lifecycle.ViewModel
 import com.mbglobal.artoutandroid.di.annotation.ViewModelKey
 import com.mbglobal.artoutandroid.ui.login.LoginFragment
 import com.mbglobal.artoutandroid.ui.login.LoginViewModel
+import com.mbglobal.data.datasource.UserRemoteDataSource
+import com.mbglobal.remote.datasource.UserRemoteDataSourceImpl
 import dagger.Binds
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
@@ -18,6 +20,6 @@ abstract class LoginModule {
     @Binds
     @IntoMap
     @ViewModelKey(LoginViewModel::class)
-    abstract fun loginViewModel(loginViewModel: LoginViewModel): ViewModel
+    abstract fun bindLoginViewModel(loginViewModel: LoginViewModel): ViewModel
 
 }

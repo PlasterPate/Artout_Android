@@ -1,2 +1,2 @@
-include ':app', ':remote', ':data'
+include ':app', ':remote', ':data', ':local'
 rootProject.name='ArtoutAndroid'
