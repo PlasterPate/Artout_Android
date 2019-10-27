@@ -13,6 +13,7 @@ import com.mbglobal.artoutandroid.di.scope.AppScope
         AppModule::class,
         ViewModelFactoryModule::class,
         LoginModule::class,
+        RegisterModule::class,
         UserModule::class,
         TokenModule::class,
         NetworkModule::class

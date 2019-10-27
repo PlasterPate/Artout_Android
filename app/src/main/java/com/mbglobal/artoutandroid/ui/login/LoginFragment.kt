@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.fragment.findNavController
 import com.mbglobal.artoutandroid.R
 import com.mbglobal.artoutandroid.ui.base.BaseFragment
 import kotlinx.android.synthetic.main.fragment_login.*
@@ -22,7 +23,7 @@ class LoginFragment : BaseFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.login_fragment, container, false)
+        return inflater.inflate(R.layout.fragment_login, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -34,6 +35,10 @@ class LoginFragment : BaseFragment() {
     private fun initializeListeners() {
         login_button.setOnClickListener {
             loginViewModel.onLoginClicked(phone_number_edit_text.text.toString(), password_edit_text.text.toString())
+        }
+
+        register_button.setOnClickListener{
+            findNavController().navigate(R.id.action_loginFragment_to_registerFragment)
         }
     }
 

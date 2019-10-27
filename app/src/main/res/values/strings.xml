@@ -11,4 +11,7 @@
     <string name="login_btn">Login</string>
     <string name="hint_password">Password</string>
     <string name="hint_username">Username</string>
+    <string name="first_name">First Name</string>
+    <string name="lastname">LastName</string>
+    <string name="confirm_password">Confirm Password</string>
 </resources>
