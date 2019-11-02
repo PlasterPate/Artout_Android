@@ -1,5 +1,6 @@
 package com.mbglobal.artoutandroid.ui.register
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.mbglobal.artoutandroid.ui.base.BaseViewModel
@@ -24,8 +25,11 @@ class RegisterViewModel @Inject constructor(private val userRepository: UserRepo
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({ userRegisterResponseEntity ->
                     _registerStatus.value = true
+                    println(userRegisterResponseEntity.id)
                 }, { throwable ->
                     _registerStatus.value = false
+                    println(throwable)
+                    println(throwable.message)
                 }).also {
                     compositeDisposable.add(it)
                 }

@@ -18,7 +18,7 @@ interface UserService {
     fun getUser(@Body userGetDto : UserGetDto, @Header("Authorization") bearerToken: String) : Single<UserResponseDto>
 
     companion object {
-        const val BASE_URL : String = "http://194.225.229.210:9000/api/"
+        const val BASE_URL : String = "http://artoutapi.pagekite.me/"
     }
 
 }

@@ -17,7 +17,7 @@ interface TokenService {
     fun sendAccessToken(@Body tokenItemDto : TokenItemDto, @Header("Authorization") bearerToken: String) : Single<Unit>
 
     companion object {
-        const val BASE_URL = "http://194.225.229.210:9000/api/"
+        const val BASE_URL = "http://artoutapi.pagekite.me/"
     }
 
 }
