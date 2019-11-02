@@ -52,12 +52,12 @@ class LoginFragment : BaseFragment(), LifecycleOwner {
 
         loginViewModel.showLoading.observe(this, Observer { loading ->
             Log.d("ShowLoading", loading.toString())
-            if (loading) {
-                progressBar.visibility = View.VISIBLE
-            } else {
-                progressBar.visibility = View.GONE
-            }
-            Log.d("Visibility", progressBar.visibility.toString())
+//            if (loading) {
+//                progressBar.visibility = View.VISIBLE
+//            } else {
+//                progressBar.visibility = View.GONE
+//            }
+//            Log.d("Visibility", progressBar.visibility.toString())
         })
     }
 
