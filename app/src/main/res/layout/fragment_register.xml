@@ -61,7 +61,7 @@
                         style="@style/TextInputEditTextStyle"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="@string/lastname"
+                        android:hint="@string/last_name"
                         android:inputType="none|textPersonName" />
                 </com.google.android.material.textfield.TextInputLayout>
 

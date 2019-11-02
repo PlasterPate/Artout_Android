@@ -6,6 +6,11 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+
+        <item name="android:textColorHint">@color/white</item>
+        <item name="colorControlNormal">@color/white</item>
+        <item name="colorControlActivated">@color/white</item>
+        <item name="colorControlHighlight">@color/white</item>
     </style>
 
     <style name="TextInputLayoutStyle">
@@ -14,14 +19,14 @@
         <item name="android:layout_marginLeft">16dp</item>
         <item name="android:layout_marginRight">16dp</item>
         <item name="android:padding">4dp</item>
-        <item name="android:background">@color/white</item>
+        <item name="android:textColorHint">@color/white</item>
+
     </style>
 
     <style name="TextInputEditTextStyle">
         <item name="android:padding">8dp</item>
         <item name="android:textSize">22sp</item>
-        <item name="android:textColor">@color/colorAccent</item>
-        <item name="android:textColorHint">@color/colorAccent</item>
+        <item name="android:textColor">@color/white</item>
     </style>
 
 <style name="ButtonStyle">
@@ -33,6 +38,19 @@
     <item name="android:paddingRight">16dp</item>
     <item name="android:paddingTop">8dp</item>
     <item name="android:paddingBottom">8dp</item>
+</style>
+
+<style name="OutlinedButtonStyle" parent="Widget.MaterialComponents.Button.OutlinedButton">
+    <item name="android:background">@color/colorPrimary</item>
+    <item name="android:textColor">@color/colorAccent</item>
+    <item name="android:textSize">20sp</item>
+    <item name="android:layout_margin">16dp</item>
+    <item name="android:paddingLeft">16dp</item>
+    <item name="android:paddingRight">16dp</item>
+    <item name="android:paddingTop">8dp</item>
+    <item name="android:paddingBottom">8dp</item>
+    <item name="strokeWidth">3dp</item>
+    <item name="strokeColor">@color/colorAccent</item>
 </style>
 
 </resources>

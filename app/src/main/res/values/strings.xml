@@ -3,15 +3,12 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="phone_number">PhoneNumber</string>
+    <string name="phone_number">Phone Number</string>
     <string name="password">Password</string>
     <string name="login">Login</string>
     <string name="register">Register</string>
     <string name="you_don_t_have_any_accounts">You don\'t have any accounts?</string>
-    <string name="login_btn">Login</string>
-    <string name="hint_password">Password</string>
-    <string name="hint_username">Username</string>
     <string name="first_name">First Name</string>
-    <string name="lastname">LastName</string>
+    <string name="last_name">Last Name</string>
     <string name="confirm_password">Confirm Password</string>
 </resources>

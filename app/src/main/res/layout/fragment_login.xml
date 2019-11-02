@@ -54,15 +54,15 @@
                     style="@style/TextInputLayoutStyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:hint="@string/password"
                     app:passwordToggleEnabled="true"
-                    app:passwordToggleTint="@color/colorPrimary">
+                    app:passwordToggleTint="@color/white">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/password_edit_text"
                         style="@style/TextInputEditTextStyle"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="@string/password"
                         android:inputType="none|textPassword" />
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -88,7 +88,7 @@
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/register_button"
-            style="@style/ButtonStyle"
+            style="@style/OutlinedButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/register"
