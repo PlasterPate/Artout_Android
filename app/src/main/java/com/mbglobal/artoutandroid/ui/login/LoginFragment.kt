@@ -46,8 +46,9 @@ class LoginFragment : BaseFragment(), LifecycleOwner {
 
     private fun initializeObservers() {
         loginViewModel.loginStatus.observe(this, Observer { status ->
-            Toast.makeText(requireContext(), if (status) "Success" else "Failure", Toast
-                .LENGTH_LONG).show()
+            if (status) {
+                findNavController().navigate(R.id.action_loginFragment_to_timelineFragment)
+            }
         })
 
         loginViewModel.showLoading.observe(this, Observer { loading ->
