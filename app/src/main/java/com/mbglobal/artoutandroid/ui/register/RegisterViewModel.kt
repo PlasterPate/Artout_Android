@@ -25,11 +25,8 @@ class RegisterViewModel @Inject constructor(private val userRepository: UserRepo
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({ userRegisterResponseEntity ->
                     _registerStatus.value = true
-                    println(userRegisterResponseEntity.id)
                 }, { throwable ->
                     _registerStatus.value = false
-                    println(throwable)
-                    println(throwable.message)
                 }).also {
                     compositeDisposable.add(it)
                 }
