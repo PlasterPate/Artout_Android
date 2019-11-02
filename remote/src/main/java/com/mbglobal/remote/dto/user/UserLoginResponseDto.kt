@@ -7,6 +7,6 @@ data class UserLoginResponseDto(
     val access: String,
     @SerializedName("refresh")
     val refresh: String,
-    @SerializedName("username")
+    @SerializedName("id")
     val id: String
 )
