@@ -2,6 +2,10 @@ package com.mbglobal.remote.api
 
 import com.mbglobal.remote.dto.user.*
 import io.reactivex.Single
+import okhttp3.OkHttpClient
+import retrofit2.Retrofit
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
+import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.Body
 import retrofit2.http.Header
 import retrofit2.http.POST
