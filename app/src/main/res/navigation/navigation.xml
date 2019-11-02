@@ -20,9 +20,7 @@
             android:id="@+id/action_loginFragment_to_timelineFragment"
             app:destination="@id/timelineFragment"
             app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right" />
+            app:exitAnim="@anim/slide_out_left" />
     </fragment>
     <fragment
         android:id="@+id/registerFragment"
@@ -33,9 +31,7 @@
             android:id="@+id/action_registerFragment_to_timelineFragment"
             app:destination="@id/timelineFragment"
             app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right" />
+            app:exitAnim="@anim/slide_out_left" />
     </fragment>
     <fragment
         android:id="@+id/timelineFragment"

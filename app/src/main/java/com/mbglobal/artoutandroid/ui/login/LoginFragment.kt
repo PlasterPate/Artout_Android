@@ -48,6 +48,8 @@ class LoginFragment : BaseFragment(), LifecycleOwner {
         loginViewModel.loginStatus.observe(this, Observer { status ->
             if (status) {
                 findNavController().navigate(R.id.action_loginFragment_to_timelineFragment)
+            }else{
+                Toast.makeText(requireContext(), "login failed", Toast.LENGTH_SHORT).show()
             }
         })
 
