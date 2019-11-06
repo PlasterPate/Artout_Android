@@ -14,7 +14,7 @@ import com.mbglobal.artoutandroid.di.scope.AppScope
         ViewModelFactoryModule::class,
         LoginModule::class,
         RegisterModule::class,
-        EventsModule::class,
+        EventModule::class,
         UserModule::class,
         TokenModule::class,
         NetworkModule::class,
