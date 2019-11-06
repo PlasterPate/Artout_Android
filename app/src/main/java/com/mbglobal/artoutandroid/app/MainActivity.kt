@@ -1,12 +1,15 @@
-package com.mbglobal.artoutandroid
+package com.mbglobal.artoutandroid.app
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
+import com.mbglobal.artoutandroid.R
+import com.mbglobal.artoutandroid.ui.login.LoginFragment
 
 class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
     }
 }
