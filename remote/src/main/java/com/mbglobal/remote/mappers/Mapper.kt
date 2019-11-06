@@ -1,6 +1,8 @@
 package com.mbglobal.remote.mappers
 
 import com.mbglobal.data.entity.user.*
+import com.mbglobal.remote.dto.event.EventDto
+import com.mbglobal.remote.dto.event.EventResponseDto
 import com.mbglobal.remote.dto.user.*
 
 fun UserLoginItemEntity.toUserLoginItemDto() : UserLoginItemDto {
@@ -42,5 +44,35 @@ fun UserResponseDto.toUserEntity() : UserEntity {
         avatar = avatar,
         username = username,
         id = id
+    )
+}
+
+fun EventResponseDto.toEventEntity() : EventEntity{
+    return EventEntity(
+        slug = slug,
+        title = title,
+        images = images,
+        description = description,
+        startDate = startDate,
+        endDate = endDate,
+        startTime = startTime,
+        endTime = endTime,
+        rate = rate,
+        category = category
+    )
+}
+
+fun EventEntity.toEventDto() : EventDto{
+    return EventDto(
+        slug = slug,
+        title = title,
+        images = images,
+        description = description,
+        startDate = startDate,
+        endDate = endDate,
+        startTime = startTime,
+        endTime = endTime,
+        rate = rate,
+        category = category
     )
 }

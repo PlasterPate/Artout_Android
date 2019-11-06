@@ -16,7 +16,7 @@
             android:src="@drawable/ic_logo"
             app:layout_constraintBottom_toTopOf="@+id/login_card_view"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/login_card_view"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintWidth_percent=".7" />
 
