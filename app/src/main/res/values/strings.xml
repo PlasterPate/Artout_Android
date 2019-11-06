@@ -12,4 +12,6 @@
     <string name="last_name">Last Name</string>
     <string name="confirm_password">Confirm Password</string>
     <string name="search_event">Search Event</string>
+    <string name="title">Title</string>
+    <string name="description">Description</string>
 </resources>

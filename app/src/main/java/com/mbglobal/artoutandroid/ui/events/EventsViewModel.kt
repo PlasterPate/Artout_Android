@@ -1,6 +1,5 @@
-package com.mbglobal.artoutandroid.ui.Events
+package com.mbglobal.artoutandroid.ui.events
 
-import androidx.lifecycle.ViewModel
 import com.mbglobal.artoutandroid.ui.base.BaseViewModel
 import com.mbglobal.data.repository.EventRepository
 import javax.inject.Inject
