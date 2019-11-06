@@ -4,17 +4,24 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
 import com.mbglobal.artoutandroid.R
+import com.mbglobal.artoutandroid.databinding.FragmentTimelineBinding
 import com.mbglobal.artoutandroid.ui.base.BaseFragment
 
 class TimelineFragment : BaseFragment() {
+
+    lateinit var binding : FragmentTimelineBinding
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_timeline, container, false)
+        binding = DataBindingUtil.inflate(
+            inflater, R.layout.fragment_timeline, container, false
+        )
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
