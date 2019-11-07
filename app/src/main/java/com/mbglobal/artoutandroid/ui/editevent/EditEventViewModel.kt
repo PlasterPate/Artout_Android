@@ -1,4 +1,4 @@
-package com.mbglobal.artoutandroid.ui.manageEvent
+package com.mbglobal.artoutandroid.ui.manageevent
 
 import javax.inject.Inject
 

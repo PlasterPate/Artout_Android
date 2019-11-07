@@ -1,4 +1,4 @@
-package com.mbglobal.artoutandroid.ui.eventDetails
+package com.mbglobal.artoutandroid.ui.eventdetails
 
 import android.os.Bundle
 import android.view.LayoutInflater

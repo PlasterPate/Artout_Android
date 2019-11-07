@@ -39,7 +39,7 @@
         android:label="TimelineFragment" />
     <fragment
         android:id="@+id/addEventFragment"
-        android:name="com.mbglobal.artoutandroid.ui.manageEvent.AddEventFragment"
+        android:name="com.mbglobal.artoutandroid.ui.manageevent.AddEventFragment"
         android:label="AddEventFragment" />
     <fragment
         android:id="@+id/eventsFragment"
