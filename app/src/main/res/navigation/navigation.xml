@@ -12,8 +12,8 @@
         <action
             android:id="@+id/action_loginFragment_to_registerFragment"
             app:destination="@id/registerFragment"
-            app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
+            app:enterAnim="@anim/slide_in_right"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
         <action
@@ -37,6 +37,10 @@
         android:id="@+id/timelineFragment"
         android:name="com.mbglobal.artoutandroid.ui.timeline.TimelineFragment"
         android:label="TimelineFragment" />
+    <fragment
+        android:id="@+id/addEventFragment"
+        android:name="com.mbglobal.artoutandroid.ui.manageEvent.AddEventFragment"
+        android:label="AddEventFragment" />
     <fragment
         android:id="@+id/eventsFragment"
         android:name="com.mbglobal.artoutandroid.ui.events.EventsFragment"

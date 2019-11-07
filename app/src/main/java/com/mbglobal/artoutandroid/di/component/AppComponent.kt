@@ -20,7 +20,8 @@ import com.mbglobal.artoutandroid.di.scope.AppScope
         NetworkModule::class,
         TimelineModule::class,
         EventsModule::class,
-        EventDetailsModule::class
+        EventDetailsModule::class,
+        ManageEventModule::class
     ]
 )
 @AppScope
