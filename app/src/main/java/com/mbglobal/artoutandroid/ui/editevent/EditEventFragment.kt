@@ -1,8 +1,9 @@
-package com.mbglobal.artoutandroid.ui.manageevent
+package com.mbglobal.artoutandroid.ui.editevent
 
 import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.ViewModelProviders
+import com.mbglobal.artoutandroid.ui.manageevent.ManageEventFragment
 
 class EditEventFragment : ManageEventFragment() {
 

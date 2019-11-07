@@ -1,7 +1,7 @@
 package com.mbglobal.artoutandroid.di.module
 
-import com.mbglobal.artoutandroid.ui.manageevent.AddEventFragment
-import com.mbglobal.artoutandroid.ui.manageevent.EditEventFragment
+import com.mbglobal.artoutandroid.ui.addevent.AddEventFragment
+import com.mbglobal.artoutandroid.ui.editevent.EditEventFragment
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 

@@ -36,13 +36,24 @@
     <fragment
         android:id="@+id/timelineFragment"
         android:name="com.mbglobal.artoutandroid.ui.timeline.TimelineFragment"
-        android:label="TimelineFragment" />
+        android:label="TimelineFragment" >
+        <action
+            android:id="@+id/action_timelineFragment_to_eventsFragment"
+            app:destination="@id/eventsFragment" />
+        <action
+            android:id="@+id/action_timelineFragment_to_editEventFragment2"
+            app:destination="@id/editEventFragment" />
+    </fragment>
     <fragment
         android:id="@+id/addEventFragment"
-        android:name="com.mbglobal.artoutandroid.ui.manageevent.AddEventFragment"
+        android:name="com.mbglobal.artoutandroid.ui.addevent.AddEventFragment"
         android:label="AddEventFragment" />
     <fragment
         android:id="@+id/eventsFragment"
         android:name="com.mbglobal.artoutandroid.ui.events.EventsFragment"
         android:label="EventsFragment" />
+    <fragment
+        android:id="@+id/editEventFragment"
+        android:name="com.mbglobal.artoutandroid.ui.editevent.EditEventFragment"
+        android:label="EditEventFragment" />
 </navigation>

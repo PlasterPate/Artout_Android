@@ -1,10 +1,11 @@
-package com.mbglobal.artoutandroid.ui.manageevent
+package com.mbglobal.artoutandroid.ui.addevent
 
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.ViewModelProviders
+import com.mbglobal.artoutandroid.ui.manageevent.ManageEventFragment
 import kotlinx.android.synthetic.main.fragment_manage_event.*
 
 class AddEventFragment : ManageEventFragment() {
