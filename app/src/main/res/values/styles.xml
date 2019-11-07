@@ -53,4 +53,20 @@
     <item name="strokeColor">@color/colorAccent</item>
 </style>
 
+<style name="NavItemActive">
+    <item name="android:text">24sp</item>
+    <item name="android:textColor">@color/white</item>
+    <item name="itemIconSize">48dp</item>
+    <item name="itemIconTint">@color/white</item>
+    <item name="itemTextColor">@color/white</item>
+</style>
+
+<style name="NavItemInActive">
+    <item name="android:text">18sp</item>
+    <item name="android:textColor">@color/colorAccent</item>
+    <item name="itemIconSize">32dp</item>
+    <item name="itemIconTint">@color/colorPrimaryDark</item>
+    <item name="itemTextColor">@color/colorPrimaryDark</item>
+</style>
+
 </resources>

@@ -18,6 +18,6 @@ interface EventService {
     fun addEvent(@Body eventDto: EventDto) : Completable
 
     companion object{
-        const val BASE_URL : String = "http://artoutapi.pagekite.me/"
+        const val BASE_URL : String = "http://35.202.66.168:8000/"
     }
 }

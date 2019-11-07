@@ -11,6 +11,7 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.mbglobal.artoutandroid.R
 import com.mbglobal.artoutandroid.databinding.FragmentLoginBinding
 import com.mbglobal.artoutandroid.ui.base.BaseFragment
@@ -39,6 +40,9 @@ class LoginFragment : BaseFragment(), LifecycleOwner {
         super.onViewCreated(view, savedInstanceState)
         initializeListeners()
         initializeObservers()
+        activity!!.findViewById<BottomNavigationView>(R.id.bottom_navigation_view).apply {
+            visibility = View.GONE
+        }
     }
 
     private fun initializeListeners() {

@@ -4,7 +4,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
+import androidx.navigation.fragment.findNavController
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.mbglobal.artoutandroid.R
 import com.mbglobal.artoutandroid.databinding.FragmentTimelineBinding
 import com.mbglobal.artoutandroid.ui.base.BaseFragment
@@ -26,6 +29,12 @@ class TimelineFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        activity!!.findViewById<BottomNavigationView>(R.id.bottom_navigation_view).apply {
+            visibility = View.VISIBLE
+        }
+
+
     }
 
 }
