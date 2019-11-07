@@ -22,4 +22,8 @@ class EventRemoteDataSourceImpl @Inject constructor(private val eventService: Ev
     override fun addEvent(eventEntity: EventEntity): Completable {
         return eventService.addEvent(eventEntity.toEventDto())
     }
+
+    override fun getUserEvents(userId: String): Single<List<String>> {
+        return eventService.getUserEvents(userId)
+    }
 }

@@ -1,9 +1,6 @@
 package com.mbglobal.data.repository
 
-import com.mbglobal.data.datasource.TokenLocalDataSource
-import com.mbglobal.data.datasource.TokenRemoteDataSource
-import com.mbglobal.data.datasource.UserLocalDataSource
-import com.mbglobal.data.datasource.UserRemoteDataSource
+import com.mbglobal.data.datasource.*
 import com.mbglobal.data.entity.user.UserEntity
 import com.mbglobal.data.entity.user.UserLoginItemEntity
 import com.mbglobal.data.entity.user.UserRegisterItemEntity
@@ -15,7 +12,8 @@ class UserRepository @Inject constructor(
     private val userRemoteDataSource: UserRemoteDataSource,
     private val userLocalDataSource: UserLocalDataSource,
     private val tokenRemoteDataSource: TokenRemoteDataSource,
-    private val tokenLocalDataSource: TokenLocalDataSource
+    private val tokenLocalDataSource: TokenLocalDataSource,
+    private val eventRemoteDataSource: EventRemoteDataSource
 ) {
     fun login(userLoginItemEntity: UserLoginItemEntity): Single<Unit> {
         return userRemoteDataSource.login(userLoginItemEntity).flatMap { userLoginResponseEntity ->
@@ -55,6 +53,12 @@ class UserRepository @Inject constructor(
                         }
                     }
             }
+        }
+    }
+
+    fun getUserEvents() : Single<List<String>> {
+        return userLocalDataSource.getUser().flatMap {
+            eventRemoteDataSource.getUserEvents(it)
         }
     }
 }

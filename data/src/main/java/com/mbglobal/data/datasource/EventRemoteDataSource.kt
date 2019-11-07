@@ -9,4 +9,6 @@ interface EventRemoteDataSource {
     fun getEvent(slug : String) : Single<EventEntity>
 
     fun addEvent(eventEntity: EventEntity) : Completable
+
+    fun getUserEvents(userId : String) : Single<List<String>>
 }
