@@ -19,7 +19,8 @@ import com.mbglobal.artoutandroid.di.scope.AppScope
         TokenModule::class,
         NetworkModule::class,
         TimelineModule::class,
-        EventsModule::class
+        EventsModule::class,
+        EventDetailsModule::class
     ]
 )
 @AppScope
