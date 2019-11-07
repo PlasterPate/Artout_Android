@@ -40,9 +40,6 @@ class LoginFragment : BaseFragment(), LifecycleOwner {
         super.onViewCreated(view, savedInstanceState)
         initializeListeners()
         initializeObservers()
-        activity!!.findViewById<BottomNavigationView>(R.id.bottom_navigation_view).apply {
-            visibility = View.GONE
-        }
     }
 
     private fun initializeListeners() {

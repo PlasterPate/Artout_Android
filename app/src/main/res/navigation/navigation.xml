@@ -37,4 +37,8 @@
         android:id="@+id/timelineFragment"
         android:name="com.mbglobal.artoutandroid.ui.timeline.TimelineFragment"
         android:label="TimelineFragment" />
+    <fragment
+        android:id="@+id/eventsFragment"
+        android:name="com.mbglobal.artoutandroid.ui.events.EventsFragment"
+        android:label="EventsFragment" />
 </navigation>

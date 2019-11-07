@@ -29,12 +29,6 @@ class TimelineFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        activity!!.findViewById<BottomNavigationView>(R.id.bottom_navigation_view).apply {
-            visibility = View.VISIBLE
-        }
-
-
     }
 
 }

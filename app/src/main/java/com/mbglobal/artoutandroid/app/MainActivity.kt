@@ -6,6 +6,7 @@ import android.util.AttributeSet
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.findNavController
 import com.mbglobal.artoutandroid.R
 import com.mbglobal.artoutandroid.ui.login.LoginFragment
 import kotlinx.android.synthetic.main.activity_main.*
@@ -31,6 +32,21 @@ class MainActivity : AppCompatActivity() {
                 }
             }
             false
+        }
+
+        initializeNavigationController()
+    }
+
+    fun initializeNavigationController() {
+        findNavController(R.id.nav_host_fragment).addOnDestinationChangedListener { controller, destination, arguments ->
+            when (destination.id) {
+                R.id.timelineFragment, R.id.eventsFragment -> {
+                    bottom_navigation_view.visibility = View.VISIBLE
+                }
+                else -> {
+                    bottom_navigation_view.visibility = View.GONE
+                }
+            }
         }
     }
 
