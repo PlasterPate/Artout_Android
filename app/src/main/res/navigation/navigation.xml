@@ -42,7 +42,7 @@
             app:destination="@id/eventsFragment" />
         <action
             android:id="@+id/action_timelineFragment_to_editEventFragment2"
-            app:destination="@id/editEventFragment" />
+            app:destination="@id/profileFragment" />
     </fragment>
     <fragment
         android:id="@+id/addEventFragment"
@@ -53,7 +53,7 @@
         android:name="com.mbglobal.artoutandroid.ui.events.EventsFragment"
         android:label="EventsFragment" />
     <fragment
-        android:id="@+id/editEventFragment"
-        android:name="com.mbglobal.artoutandroid.ui.editevent.EditEventFragment"
+        android:id="@+id/profileFragment"
+        android:name="com.mbglobal.artoutandroid.ui.profile.ProfileFragment"
         android:label="EditEventFragment" />
 </navigation>

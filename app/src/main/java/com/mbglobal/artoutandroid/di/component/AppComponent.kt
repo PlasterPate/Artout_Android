@@ -24,7 +24,8 @@ import com.mbglobal.artoutandroid.di.scope.AppScope
         ActivityModule::class,
         EventDetailsModule::class,
         ManageEventModule::class,
-        ProfileModule::class
+        ProfileModule::class,
+        MainModule::class
     ]
 )
 @AppScope

@@ -6,6 +6,7 @@ import android.util.AttributeSet
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.findNavController
@@ -16,7 +17,7 @@ import dagger.android.support.DaggerAppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import javax.inject.Inject
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : DaggerAppCompatActivity() {
 
     @Inject
     protected lateinit var viewModelFactory: ViewModelProvider.Factory
@@ -39,7 +40,7 @@ class MainActivity : AppCompatActivity() {
                     return@setOnNavigationItemSelectedListener true
                 }
                 R.id.navigation_profile -> {
-                    findNavController(R.id.nav_host_fragment).navigate(R.id.editEventFragment)
+                    findNavController(R.id.nav_host_fragment).navigate(R.id.profileFragment)
                     return@setOnNavigationItemSelectedListener true
                 }
             }
@@ -47,12 +48,22 @@ class MainActivity : AppCompatActivity() {
         }
 
         initializeNavigationController()
+        initializeObservers()
+        mainViewModel.onCreate()
+    }
+
+    private fun initializeObservers() {
+        mainViewModel.loginStatus.observe(this, Observer { status ->
+            if (status) {
+                findNavController(R.id.nav_host_fragment).navigate(R.id.timelineFragment)
+            }
+        })
     }
 
     fun initializeNavigationController() {
         findNavController(R.id.nav_host_fragment).addOnDestinationChangedListener { controller, destination, arguments ->
             when (destination.id) {
-                R.id.timelineFragment, R.id.eventsFragment, R.id.editEventFragment -> {
+                R.id.timelineFragment, R.id.eventsFragment, R.id.profileFragment -> {
                     bottom_navigation_view.visibility = View.VISIBLE
                 }
                 else -> {
