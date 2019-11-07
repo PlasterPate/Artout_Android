@@ -5,6 +5,7 @@ import com.mbglobal.data.entity.user.UserEntity
 import com.mbglobal.data.entity.user.UserLoginItemEntity
 import com.mbglobal.data.entity.user.UserRegisterItemEntity
 import com.mbglobal.data.entity.user.UserRegisterResponseEntity
+import io.reactivex.Completable
 import io.reactivex.Single
 import javax.inject.Inject
 
@@ -60,5 +61,11 @@ class UserRepository @Inject constructor(
         return userLocalDataSource.getUser().flatMap {
             eventRemoteDataSource.getUserEvents(it)
         }
+    }
+
+    fun logout() : Completable {
+        return tokenLocalDataSource.removeAllCredentials().andThen(
+            userLocalDataSource.removeUser()
+        )
     }
 }

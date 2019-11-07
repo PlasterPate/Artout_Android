@@ -60,16 +60,6 @@ class LoginFragment : BaseFragment(), LifecycleOwner {
                 Toast.makeText(requireContext(), "login failed", Toast.LENGTH_SHORT).show()
             }
         })
-
-        loginViewModel.showLoading.observe(this, Observer { loading ->
-            Log.d("ShowLoading", loading.toString())
-//            if (loading) {
-//                progressBar.visibility = View.VISIBLE
-//            } else {
-//                progressBar.visibility = View.GONE
-//            }
-//            Log.d("Visibility", progressBar.visibility.toString())
-        })
     }
 
 }

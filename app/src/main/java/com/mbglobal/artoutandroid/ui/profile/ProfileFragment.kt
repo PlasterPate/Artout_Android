@@ -4,12 +4,16 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.fragment.findNavController
 import com.mbglobal.artoutandroid.R
 import com.mbglobal.artoutandroid.databinding.FragmentProfileBinding
 import com.mbglobal.artoutandroid.ui.base.BaseFragment
 import com.mbglobal.artoutandroid.ui.profile.Adapter.EventAdapter
+import kotlinx.android.synthetic.main.fragment_profile.*
 
 class ProfileFragment : BaseFragment() {
 
@@ -35,5 +39,28 @@ class ProfileFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
         adapter = EventAdapter()
         binding.myEventsList.adapter = adapter
+        initializeListeners()
+        initializeObservers()
     }
+
+    private fun initializeObservers() {
+
+        profileViewModel.logoutStatus.observe(activity!!, Observer {
+            if (it == true) {
+                findNavController().navigate(R.id.loginFragment)
+            }
+        })
+
+        profileViewModel.logoutError.observe(activity!!, Observer {
+            Toast.makeText(requireContext(), it, Toast.LENGTH_LONG).show()
+        })
+
+    }
+
+    private fun initializeListeners() {
+        binding.btnLogout.setOnClickListener {
+            profileViewModel.clickLogout()
+        }
+    }
+
 }
