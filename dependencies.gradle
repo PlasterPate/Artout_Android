@@ -26,7 +26,9 @@ ext {
             crashlytics     : "2.9.9",
             javax_inject    : "1",
             glide           : "4.9.0",
-            retrofit        : "2.6.0"
+            retrofit        : "2.6.0",
+            okHttpLoggingInterceptor : "4.2.1",
+            timber          : "4.7.1"
     ]
 
     testLibraries = [
