@@ -13,6 +13,20 @@
         <item name="colorControlHighlight">@color/white</item>
     </style>
 
+    <style name="AppThemeLight" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+
+        <item name="android:textColorHint">@color/colorPrimary</item>
+        <item name="colorControlNormal">@color/colorPrimary</item>
+        <item name="colorControlActivated">@color/colorPrimary</item>
+        <item name="colorControlHighlight">@color/colorPrimary</item>
+    </style>
+
+
+
     <style name="TextInputLayoutStyle">
         <item name="android:layout_marginTop">8dp</item>
         <item name="android:layout_marginBottom">8dp</item>
@@ -23,13 +37,30 @@
 
     </style>
 
+    <style name="TextInputLayoutStyleLight">
+        <item name="android:layout_marginTop">8dp</item>
+        <item name="android:layout_marginBottom">8dp</item>
+        <item name="android:layout_marginLeft">16dp</item>
+        <item name="android:layout_marginRight">16dp</item>
+        <item name="android:padding">4dp</item>
+        <item name="android:textColorHint">@color/colorPrimary</item>
+
+    </style>
+
     <style name="TextInputEditTextStyle">
         <item name="android:padding">8dp</item>
         <item name="android:textSize">22sp</item>
         <item name="android:textColor">@color/white</item>
     </style>
 
-<style name="ButtonStyle">
+    <style name="TextInputEditTextStyleLight">
+        <item name="android:padding">8dp</item>
+        <item name="android:textSize">22sp</item>
+        <item name="android:textColor">@color/colorPrimary</item>
+    </style>
+
+
+    <style name="ButtonStyle">
     <item name="android:background">@color/colorPrimary</item>
     <item name="android:textColor">@color/white</item>
     <item name="android:textSize">20sp</item>

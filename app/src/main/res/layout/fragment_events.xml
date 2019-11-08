@@ -11,7 +11,8 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/search_bar_input_layout"
-            style="@style/TextInputLayoutStyle"
+            style="@style/TextInputLayoutStyleLight"
+            android:theme="@style/AppThemeLight"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"
@@ -20,11 +21,12 @@
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/search_bar_edit_text"
-                style="@style/TextInputEditTextStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:theme="@style/TextInputEditTextStyleLight"
                 android:drawableStart="@drawable/ic_search"
                 android:drawablePadding="8dp"
+                android:drawableTint="@color/colorPrimary"
                 android:hint="@string/search_event"
                 android:drawableLeft="@drawable/ic_search"/>
         </com.google.android.material.textfield.TextInputLayout>
