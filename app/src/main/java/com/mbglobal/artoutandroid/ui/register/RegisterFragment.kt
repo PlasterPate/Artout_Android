@@ -18,7 +18,7 @@ import kotlinx.android.synthetic.main.fragment_register.*
 class RegisterFragment : BaseFragment() {
 
     val registerViewModel : RegisterViewModel by lazy {
-        ViewModelProviders.of(activity!!, viewModelFactory)[RegisterViewModel::class.java]
+        ViewModelProviders.of(this, viewModelFactory)[RegisterViewModel::class.java]
     }
 
     lateinit var binding : FragmentRegisterBinding

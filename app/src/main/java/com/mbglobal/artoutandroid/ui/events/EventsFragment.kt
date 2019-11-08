@@ -14,7 +14,7 @@ import com.mbglobal.artoutandroid.ui.base.BaseFragment
 class EventsFragment : BaseFragment() {
 
     val eventsViewModel : EventsViewModel by lazy {
-        ViewModelProviders.of(activity!!, viewModelFactory)[EventsViewModel::class.java]
+        ViewModelProviders.of(this, viewModelFactory)[EventsViewModel::class.java]
     }
 
     lateinit var binding : FragmentEventsBinding

@@ -19,6 +19,7 @@ class ProfileViewModel @Inject constructor(private val eventRepository: EventRep
         userRepository.logout().subscribe({
             _logoutStatus.value = true
         }, {
+            _logoutStatus.value = false
             _logoutError.value = "Logout failed"
         }).also {
             compositeDisposable.add(it)

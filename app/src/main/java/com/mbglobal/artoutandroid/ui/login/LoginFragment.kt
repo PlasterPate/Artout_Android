@@ -20,7 +20,7 @@ import kotlinx.android.synthetic.main.fragment_login.*
 class LoginFragment : BaseFragment(), LifecycleOwner {
 
     val loginViewModel : LoginViewModel by lazy {
-        ViewModelProviders.of(activity!!, viewModelFactory)[LoginViewModel::class.java]
+        ViewModelProviders.of(this, viewModelFactory)[LoginViewModel::class.java]
     }
 
     lateinit var binding : FragmentLoginBinding

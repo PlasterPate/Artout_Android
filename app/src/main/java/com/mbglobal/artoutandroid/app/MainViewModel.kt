@@ -17,7 +17,7 @@ class MainViewModel @Inject constructor(private val userRepository: UserReposito
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe { userdId ->
-                _loginStatus.value = (userdId != null)
+                _loginStatus.value = !(userdId.isNullOrBlank())
             }.also {
                 compositeDisposable.add(it)
             }

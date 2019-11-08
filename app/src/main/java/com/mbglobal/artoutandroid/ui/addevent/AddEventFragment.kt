@@ -16,7 +16,7 @@ class AddEventFragment : ManageEventFragment() {
     private val PERMISSION_CODE = 1001
 
     private val addEventViewModel : AddEventViewModel by lazy {
-        ViewModelProviders.of(activity!!, viewModelFactory)[AddEventViewModel::class.java]
+        ViewModelProviders.of(this, viewModelFactory)[AddEventViewModel::class.java]
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

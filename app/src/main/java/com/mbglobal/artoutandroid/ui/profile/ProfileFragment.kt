@@ -23,7 +23,7 @@ class ProfileFragment : BaseFragment() {
 
 
     private val profileViewModel : ProfileViewModel by lazy {
-        ViewModelProviders.of(activity!!, viewModelFactory)[ProfileViewModel::class.java]
+        ViewModelProviders.of(this, viewModelFactory)[ProfileViewModel::class.java]
     }
 
     override fun onCreateView(
@@ -45,13 +45,13 @@ class ProfileFragment : BaseFragment() {
 
     private fun initializeObservers() {
 
-        profileViewModel.logoutStatus.observe(activity!!, Observer {
+        profileViewModel.logoutStatus.observe(this, Observer {
             if (it == true) {
                 findNavController().navigate(R.id.loginFragment)
             }
         })
 
-        profileViewModel.logoutError.observe(activity!!, Observer {
+        profileViewModel.logoutError.observe(this, Observer {
             Toast.makeText(requireContext(), it, Toast.LENGTH_LONG).show()
         })
 

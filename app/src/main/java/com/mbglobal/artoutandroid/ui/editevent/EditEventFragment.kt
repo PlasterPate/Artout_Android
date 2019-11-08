@@ -8,7 +8,7 @@ import com.mbglobal.artoutandroid.ui.manageevent.ManageEventFragment
 class EditEventFragment : ManageEventFragment() {
 
     private val editEventViewModel : EditEventViewModel by lazy {
-        ViewModelProviders.of(activity!!, viewModelFactory)[EditEventViewModel::class.java]
+        ViewModelProviders.of(this, viewModelFactory)[EditEventViewModel::class.java]
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
