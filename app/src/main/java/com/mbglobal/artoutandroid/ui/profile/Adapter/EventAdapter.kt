@@ -14,6 +14,10 @@ import com.squareup.picasso.Picasso
 class EventAdapter : RecyclerView.Adapter<EventAdapter.EventViewHolder>() {
 
     var data = listOf<EventEntity>()
+        set(value) {
+            field = value
+            notifyDataSetChanged()
+        }
 
     override fun getItemCount() = data.size
 
@@ -24,15 +28,17 @@ class EventAdapter : RecyclerView.Adapter<EventAdapter.EventViewHolder>() {
         return EventViewHolder(view)
     }
 
-
     override fun onBindViewHolder(holder: EventViewHolder, position: Int) {
-        val item = data[position]
-        Picasso.get().load(item.images[0]).into(holder.eventImage)
-        holder.eventTitle.text = item.title
+        holder.bind(data[position])
     }
 
     class EventViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
         val eventImage = itemView.findViewById<ImageView>(R.id.image_item)
         val eventTitle = itemView.findViewById<TextView>(R.id.title_item)
+
+        fun bind(eventEntity: EventEntity){
+            Picasso.get().load(eventEntity.images[0]).into(eventImage)
+            eventTitle.text = eventEntity.title
+        }
     }
 }

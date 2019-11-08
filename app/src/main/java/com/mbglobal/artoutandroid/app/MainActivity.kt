@@ -6,6 +6,7 @@ import android.util.AttributeSet
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.os.bundleOf
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
@@ -40,7 +41,9 @@ class MainActivity : DaggerAppCompatActivity() {
                     return@setOnNavigationItemSelectedListener true
                 }
                 R.id.navigation_profile -> {
-                    findNavController(R.id.nav_host_fragment).navigate(R.id.profileFragment)
+                    val bundle = Bundle()
+                    bundle.putString("userId", null)
+                    findNavController(R.id.nav_host_fragment).navigate(R.id.profileFragment, bundle)
                     return@setOnNavigationItemSelectedListener true
                 }
             }

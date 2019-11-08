@@ -12,6 +12,7 @@ import androidx.navigation.fragment.findNavController
 import com.mbglobal.artoutandroid.R
 import com.mbglobal.artoutandroid.databinding.FragmentProfileBinding
 import com.mbglobal.artoutandroid.ui.base.BaseFragment
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.mbglobal.artoutandroid.ui.profile.Adapter.EventAdapter
 import kotlinx.android.synthetic.main.fragment_profile.*
 
@@ -41,6 +42,25 @@ class ProfileFragment : BaseFragment() {
         binding.myEventsList.adapter = adapter
         initializeListeners()
         initializeObservers()
+
+        val userId = ProfileFragmentArgs.fromBundle(arguments!!).userId
+        profileViewModel.getUserEvents(userId)
+        profileViewModel.events.observe(viewLifecycleOwner, Observer {
+            it?.let {
+                adapter.data = it
+            }
+        })
+
+        binding.myEventsList.apply {
+            layoutManager = LinearLayoutManager(view.context)
+            addItemDecoration(
+                DividerItemDecoration(
+                    view.context,
+                    DividerItemDecoration.VERTICAL
+                )
+            )
+        }
+
     }
 
     private fun initializeObservers() {
