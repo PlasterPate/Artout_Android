@@ -32,8 +32,8 @@
             android:layout_marginBottom="12dp"
             android:background="@color/cardview_dark_background"
             android:scaleType="centerCrop"
-            app:layout_constraintBottom_toTopOf="@id/description_item"
             app:layout_constraintDimensionRatio="H,16:9"
+            app:layout_constraintBottom_toTopOf="@id/description_item"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/title_item" />
