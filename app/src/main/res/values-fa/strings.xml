@@ -13,4 +13,6 @@
     <string name="description">توضیح</string>
     <string name="my_events">رویدادهای من</string>
     <string name="logout">خروج</string>
+    <string name="detail_description">توضیحات:</string>
+    <string name="detail_category">دسته بندی:</string>
 </resources>

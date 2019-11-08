@@ -19,7 +19,6 @@ class ProfileViewModel @Inject constructor(private val eventRepository: EventRep
 
     fun getUserEvents(userId : String?) {
         events.value = eventRepository.getUserEvents(userId).blockingIterable().toList()
-
     }
 
     private val _logoutStatus : MutableLiveData<Boolean> = MutableLiveData()
