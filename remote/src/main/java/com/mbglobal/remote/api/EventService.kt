@@ -10,7 +10,7 @@ import retrofit2.http.*
 interface EventService {
 
     @POST("/api/event/eventdetail/{id}")
-    fun getEvent(@Path("id") eventId: String) : Single<EventDto>
+    fun getEvent(@Path("id") eventId: Int) : Single<EventDto>
 
     @POST("/api/event/events/")
     fun addEvent(@Body addEventDto: AddEventDto) : Single<EventDto>

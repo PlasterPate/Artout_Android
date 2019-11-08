@@ -120,6 +120,6 @@
         android:label="EventDetailsFragment" >
         <argument
             android:name="eventId"
-            app:argType="string" />
+            app:argType="integer" />
     </fragment>
 </navigation>

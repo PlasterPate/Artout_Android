@@ -3,7 +3,7 @@ package com.mbglobal.artoutandroid.ui.addevent
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.mbglobal.artoutandroid.ui.manageevent.ManageEventViewModel
-import com.mbglobal.data.entity.user.EventEntity
+import com.mbglobal.data.entity.event.EventEntity
 import com.mbglobal.data.repository.EventRepository
 import io.reactivex.Completable
 import io.reactivex.android.schedulers.AndroidSchedulers

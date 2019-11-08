@@ -80,6 +80,6 @@ class ProfileFragment : BaseFragment(), onEventItemClickListener{
     }
 
     override fun onClicked(eventEntity: EventEntity) {
-        findNavController().navigate(ProfileFragmentDirections.actionProfileFragmentToEventDetailsFragment(eventEntity.slug))
+        findNavController().navigate(ProfileFragmentDirections.actionProfileFragmentToEventDetailsFragment(eventEntity.id))
     }
 }

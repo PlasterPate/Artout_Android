@@ -11,11 +11,17 @@ import android.view.View
 import androidx.core.content.ContextCompat.checkSelfPermission
 import androidx.lifecycle.ViewModelProviders
 import com.mbglobal.artoutandroid.ui.manageevent.ManageEventFragment
-import com.mbglobal.data.entity.user.EventEntity
+import com.mbglobal.data.entity.event.EventEntity
+import com.mbglobal.data.entity.event.LocationEntity
+import com.mbglobal.data.repository.UserRepository
 import dagger.BindsInstance
 import kotlinx.android.synthetic.main.fragment_manage_event.*
+import javax.inject.Inject
 
 class AddEventFragment : ManageEventFragment() {
+
+    @Inject
+    lateinit var userRepository: UserRepository
 
     //image pick code
     private val IMAGE_PICK_CODE = 1000
@@ -54,16 +60,16 @@ class AddEventFragment : ManageEventFragment() {
         }
 
         binding.submitButton.setOnClickListener {
-            val eventEntity = EventEntity("",
-                binding.titleEditText.text.toString(),
-                "",
-                binding.descriptionEditText.text.toString(),
-                binding.startDateEditText.text.toString(),
-                binding.endDateEditText.text.toString(),
-                binding.startTimeEditText.text.toString(),
-                binding.endTimeEditText.text.toString(),
-                5.0,
-                binding.categoryEditText.text.toString())
+            val eventEntity = EventEntity(id = 1,
+                title = binding.titleEditText.text.toString(),
+                description = binding.descriptionEditText.text.toString(),
+                startDate = binding.startDateEditText.text.toString(),
+                endDate = binding.endDateEditText.text.toString(),
+                category = binding.categoryEditText.text.toString(),
+                eventOwner = userRepository.getUser().blockingGet()!!.toInt(),
+                location = LocationEntity(12.0, 10.0),
+                image = "http://www.google.com"
+            )
             addEventViewModel.addEvent(eventEntity)
         }
     }

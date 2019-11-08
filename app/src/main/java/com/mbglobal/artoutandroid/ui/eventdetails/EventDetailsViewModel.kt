@@ -18,9 +18,9 @@ class EventDetailsViewModel @Inject constructor(private val eventRepository: Eve
     private val _eventLoadError = MutableLiveData<String>()
     val eventLoadError: LiveData<String> = _eventLoadError
 
-    fun loadEvent(eventId: String) {
+    fun loadEvent(eventId: Int) {
 
-        if (eventId.isEmpty()) {
+        if (eventId == 0) {
             _eventLoadError.value = "Invalid event"
         }
 

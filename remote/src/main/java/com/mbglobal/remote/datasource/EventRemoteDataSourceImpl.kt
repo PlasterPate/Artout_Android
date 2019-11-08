@@ -12,7 +12,7 @@ import javax.inject.Inject
 class EventRemoteDataSourceImpl @Inject constructor(private val eventService: EventService) :
     EventRemoteDataSource{
 
-    override fun getEvent(eventId: String): Single<EventEntity> {
+    override fun getEvent(eventId: Int): Single<EventEntity> {
         return eventService.getEvent(eventId).map {
             it.toEventEntity()
         }

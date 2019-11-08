@@ -5,6 +5,8 @@ import com.mbglobal.artoutandroid.ui.base.BaseViewModel
 import com.mbglobal.data.entity.event.EventEntity
 import com.mbglobal.data.repository.EventRepository
 import com.mbglobal.data.repository.UserRepository
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
 class ProfileViewModel @Inject constructor(private val eventRepository: EventRepository,
@@ -13,7 +15,16 @@ class ProfileViewModel @Inject constructor(private val eventRepository: EventRep
     var events = MutableLiveData<List<EventEntity>>()
 
     fun getUserEvents(userId : String?) {
-        events.value = eventRepository.getUserEvents(userId).blockingIterable().toList()
+        eventRepository.getUserEvents(userId)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({it ->
+                println(it)
+            }, { it ->
+                println(it)
+            }).also {
+                compositeDisposable.add(it)
+            }
     }
 
     private val _logoutStatus : MutableLiveData<Boolean> = MutableLiveData()

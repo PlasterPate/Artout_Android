@@ -15,7 +15,7 @@ import kotlinx.android.synthetic.main.fragment_event_details.*
 
 class EventDetailsFragment : BaseFragment() {
 
-    private var eventId: String? = null
+    private var eventId: Int? = null
 
     private val eventDetailsViewModel : EventDetailsViewModel by lazy {
         ViewModelProviders.of(this, viewModelFactory)[EventDetailsViewModel::class.java]
@@ -39,7 +39,7 @@ class EventDetailsFragment : BaseFragment() {
 
         eventId = EventDetailsFragmentArgs.fromBundle(arguments!!).eventId
 
-        eventDetailsViewModel.loadEvent(eventId?:"")
+        eventDetailsViewModel.loadEvent(eventId?:0)
 
         binding.rvDetails.let {
             it.layoutManager = LinearLayoutManager(view.context)

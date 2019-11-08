@@ -1,10 +1,7 @@
 package com.mbglobal.data.repository
 
 import com.mbglobal.data.datasource.*
-import com.mbglobal.data.entity.user.UserEntity
-import com.mbglobal.data.entity.user.UserLoginItemEntity
-import com.mbglobal.data.entity.user.UserRegisterItemEntity
-import com.mbglobal.data.entity.user.UserRegisterResponseEntity
+import com.mbglobal.data.entity.user.*
 import io.reactivex.Completable
 import io.reactivex.Single
 import javax.inject.Inject
@@ -25,7 +22,20 @@ class UserRepository @Inject constructor(
     }
 
     fun register(userRegisterItemEntity: UserRegisterItemEntity): Single<UserRegisterResponseEntity> {
-        return userRemoteDataSource.register(userRegisterItemEntity)
+        return userRemoteDataSource.register(userRegisterItemEntity).flatMap { registerResponse ->
+            val userLoginItemEntity = UserLoginItemEntity(userRegisterItemEntity.username, userRegisterItemEntity.password)
+                userRemoteDataSource.login(userLoginItemEntity)
+            }.flatMap { loginResponse ->
+            tokenLocalDataSource.saveRefreshToken(loginResponse.access).flatMap {
+                tokenLocalDataSource.saveRefreshToken(loginResponse.refresh)
+            }.flatMap {
+                userLocalDataSource.saveUser(loginResponse.id)
+            }.flatMap { it ->
+                Single.just(loginResponse)
+            }
+        }.map { userLoginResponse ->
+            userLoginResponse.toUserRegisterResponseEntity()
+        }
     }
 
     fun getUser(): Single<String?> {
@@ -68,4 +78,10 @@ class UserRepository @Inject constructor(
             userLocalDataSource.removeUser()
         )
     }
+}
+
+private fun UserLoginResponseEntity.toUserRegisterResponseEntity(): UserRegisterResponseEntity? {
+    return UserRegisterResponseEntity(
+        id = id
+    )
 }
