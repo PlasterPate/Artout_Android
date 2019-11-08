@@ -1,19 +1,16 @@
 package com.mbglobal.artoutandroid.app
 
-import android.content.Context
 import android.os.Bundle
-import android.util.AttributeSet
 import android.view.View
-import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
-import androidx.core.os.bundleOf
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.findNavController
 import com.mbglobal.artoutandroid.R
-import com.mbglobal.artoutandroid.ui.login.LoginFragment
-import com.mbglobal.artoutandroid.ui.login.LoginViewModel
+import com.mbglobal.artoutandroid.ui.events.EventsFragmentDirections
+import com.mbglobal.artoutandroid.ui.navigation.NavigationManager
+import com.mbglobal.artoutandroid.ui.profile.ProfileFragmentDirections
+import com.mbglobal.artoutandroid.ui.timeline.TimelineFragmentDirections
 import dagger.android.support.DaggerAppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import javax.inject.Inject
@@ -31,19 +28,32 @@ class MainActivity : DaggerAppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         bottom_navigation_view.setOnNavigationItemSelectedListener { item ->
+            val currentDestinationId = findNavController(R.id.nav_host_fragment).currentDestination?.id
+
             when(item.itemId){
                 R.id.navigation_timeline -> {
-                    findNavController(R.id.nav_host_fragment).navigate(R.id.timelineFragment)
+                    if (currentDestinationId == R.id.eventsFragment) {
+                        findNavController(R.id.nav_host_fragment).navigate(EventsFragmentDirections.actionEventsFragmentToTimelineFragment())
+                    } else if (currentDestinationId == R.id.profileFragment) {
+                        findNavController(R.id.nav_host_fragment).navigate(ProfileFragmentDirections.actionProfileFragmentToTimelineFragment())
+                    }
                     return@setOnNavigationItemSelectedListener true
                 }
                 R.id.navigation_events -> {
-                    findNavController(R.id.nav_host_fragment).navigate(R.id.eventsFragment)
+                    if (currentDestinationId == R.id.timelineFragment) {
+                        findNavController(R.id.nav_host_fragment).navigate(TimelineFragmentDirections.actionTimelineFragmentToEventsFragment())
+                    } else if (currentDestinationId == R.id.profileFragment) {
+                        findNavController(R.id.nav_host_fragment).navigate(ProfileFragmentDirections.actionProfileFragmentToEventsFragment())
+                    }
                     return@setOnNavigationItemSelectedListener true
                 }
                 R.id.navigation_profile -> {
                     val bundle = Bundle()
-                    bundle.putString("userId", null)
-                    findNavController(R.id.nav_host_fragment).navigate(R.id.profileFragment, bundle)
+                    if (currentDestinationId == R.id.timelineFragment) {
+                        findNavController(R.id.nav_host_fragment).navigate(TimelineFragmentDirections.actionTimelineFragmentToProfileFragment(null))
+                    } else if (currentDestinationId == R.id.eventsFragment) {
+                        findNavController(R.id.nav_host_fragment).navigate(EventsFragmentDirections.actionEventsFragmentToProfileFragment(null))
+                    }
                     return@setOnNavigationItemSelectedListener true
                 }
             }
@@ -78,7 +88,7 @@ class MainActivity : DaggerAppCompatActivity() {
 
     override fun onBackPressed() {
         val selectedItemId = bottom_navigation_view.selectedItemId
-        if (selectedItemId != R.id.navigation_timeline) {
+        if (NavigationManager.tabbedFragmentIds.contains(selectedItemId) && bottom_navigation_view.visibility == View.VISIBLE) {
             bottom_navigation_view.selectedItemId = R.id.navigation_timeline
         } else {
             super.onBackPressed()

@@ -21,8 +21,6 @@ class ProfileFragment : BaseFragment() {
     lateinit var binding : FragmentProfileBinding
     lateinit var adapter : EventAdapter
 
-
-
     private val profileViewModel : ProfileViewModel by lazy {
         ViewModelProviders.of(this, viewModelFactory)[ProfileViewModel::class.java]
     }
@@ -53,12 +51,6 @@ class ProfileFragment : BaseFragment() {
 
         binding.myEventsList.apply {
             layoutManager = LinearLayoutManager(view.context)
-            addItemDecoration(
-                DividerItemDecoration(
-                    view.context,
-                    DividerItemDecoration.VERTICAL
-                )
-            )
         }
 
     }
@@ -67,7 +59,7 @@ class ProfileFragment : BaseFragment() {
 
         profileViewModel.logoutStatus.observe(this, Observer {
             if (it == true) {
-                findNavController().navigate(R.id.loginFragment)
+                findNavController().navigate(ProfileFragmentDirections.actionProfileFragmentToLoginFragment())
             }
         })
 

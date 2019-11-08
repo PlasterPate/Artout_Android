@@ -2,7 +2,6 @@ package com.mbglobal.artoutandroid.ui.profile
 
 import androidx.lifecycle.MutableLiveData
 import com.mbglobal.artoutandroid.R
-import androidx.lifecycle.MutableLiveData
 import com.mbglobal.artoutandroid.ui.base.BaseViewModel
 import com.mbglobal.data.entity.user.EventEntity
 import com.mbglobal.data.repository.EventRepository
