@@ -16,11 +16,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.mbglobal.artoutandroid.ui.profile.Adapter.EventAdapter
 import com.mbglobal.artoutandroid.ui.profile.Adapter.onEventItemClickListener
 import com.mbglobal.data.entity.user.EventEntity
-import kotlinx.android.synthetic.main.fragment_profile.*
 
 class ProfileFragment : BaseFragment(), onEventItemClickListener{
 
-
+    lateinit var slug: String
     lateinit var binding : FragmentProfileBinding
     lateinit var adapter : EventAdapter
 
@@ -81,6 +80,6 @@ class ProfileFragment : BaseFragment(), onEventItemClickListener{
     }
 
     override fun onClicked(eventEntity: EventEntity) {
-
+        findNavController().navigate(ProfileFragmentDirections.actionProfileFragmentToEventDetailsFragment(eventEntity.slug))
     }
 }

@@ -12,8 +12,21 @@ class EventRepository @Inject constructor(
     private val eventRemoteDataSource: EventRemoteDataSource,
     private val  userLocalDataSource: UserLocalDataSource) {
 
-    fun getEvent(slug : String) : Single<EventEntity>{
-        return eventRemoteDataSource.getEvent(slug)
+    fun getEvent(eventId : String) : Single<EventEntity> {
+        if (eventId == "1") {
+            val image = "https://imgs.6sqft.com/wp-content/uploads/2019/10/02112923/Central-Park-fall-foliage-2019.jpg"
+            val event = EventEntity("1",
+                "پارک مرکزی",
+                image,
+                "پارک مرکزی نیویورک (در زبان انگلیسی: Central Park) نام پارک بزرگ و معروفی است که در مرکز منهتن و در میان مراکز تجاری شهر نیویورک قرار دارد. پارک مرکزی نیویورک، اولین پارک مُدرن در تاریخ ایالات متحدهٔ آمریکا محسوب می\u200Cشود که در سال ۱۸۵۷ میلادی توسط فردریک لاو المستد (Frederick Law Olmsted) و همکار انگلیسی اش کالورت واکس (Calvert Vaux) طراحی و افتتاح شد.\n" +
+                        "\n" +
+                        "وسعت این پارک حدود ۳۴۲ هکتار است که به شکل مستطیل در قلب منطقه منهتن (منطقه تجاری نیویورک) واقع شده\u200Cاست. همچنین این پارک دارای دریاچه\u200Cهایی به وسعت جمعاً ۶۰٫۷ هکتار می\u200Cباشد.\n" +
+                        "\n" +
+                        "سالیانه ۳۷ تا ۳۸ میلیون نفر از این پارک بازدید می\u200Cکنند",
+                "2015","2016", "19:00", "20:00", 5.0, "پارک")
+            return Single.just(event)
+        }
+        return eventRemoteDataSource.getEvent(eventId)
     }
 
     fun addEvent(eventEntity : EventEntity) : Completable {
@@ -24,10 +37,14 @@ class EventRepository @Inject constructor(
         val list = mutableListOf<EventEntity>()
         val image = "https://imgs.6sqft.com/wp-content/uploads/2019/10/02112923/Central-Park-fall-foliage-2019.jpg"
         val event = EventEntity("1",
-            "Central Perk",
+            "پارک مرکزی",
             image,
-            "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.Why do we use it?It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using \\'Content here, content here\\', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for \\'lorem ipsum\\' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like)",
-            "","", "", "", 5.0, "")
+            "پارک مرکزی نیویورک (در زبان انگلیسی: Central Park) نام پارک بزرگ و معروفی است که در مرکز منهتن و در میان مراکز تجاری شهر نیویورک قرار دارد. پارک مرکزی نیویورک، اولین پارک مُدرن در تاریخ ایالات متحدهٔ آمریکا محسوب می\u200Cشود که در سال ۱۸۵۷ میلادی توسط فردریک لاو المستد (Frederick Law Olmsted) و همکار انگلیسی اش کالورت واکس (Calvert Vaux) طراحی و افتتاح شد.\n" +
+                    "\n" +
+                    "وسعت این پارک حدود ۳۴۲ هکتار است که به شکل مستطیل در قلب منطقه منهتن (منطقه تجاری نیویورک) واقع شده\u200Cاست. همچنین این پارک دارای دریاچه\u200Cهایی به وسعت جمعاً ۶۰٫۷ هکتار می\u200Cباشد.\n" +
+                    "\n" +
+                    "سالیانه ۳۷ تا ۳۸ میلیون نفر از این پارک بازدید می\u200Cکنند",
+            "2015","2016", "19:00", "20:00", 5.0, "پارک")
         for (i in 1..10){
             list.add(event)
         }

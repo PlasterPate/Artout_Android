@@ -10,7 +10,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
-            android:text="My Events"
+            android:text="@string/my_events"
             android:textSize="24sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -27,17 +27,17 @@
 
         <TextView
             android:id="@+id/btn_logout"
-            android:text="Logout"
+            android:text="@string/logout"
             android:gravity="center"
             android:drawablePadding="8dp"
             android:textStyle="bold"
-            android:layout_marginRight="16dp"
             android:drawableStart="@drawable/ic_logout"
-            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/tv_title"
             app:layout_constraintBottom_toBottomOf="@id/tv_title"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

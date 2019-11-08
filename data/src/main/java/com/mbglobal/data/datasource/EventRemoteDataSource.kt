@@ -6,7 +6,7 @@ import io.reactivex.Single
 
 interface EventRemoteDataSource {
 
-    fun getEvent(slug : String) : Single<EventEntity>
+    fun getEvent(eventId : String) : Single<EventEntity>
 
     fun addEvent(eventEntity: EventEntity) : Completable
 

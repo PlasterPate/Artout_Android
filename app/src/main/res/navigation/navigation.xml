@@ -95,5 +95,23 @@
         <action
             android:id="@+id/action_profileFragment_to_eventsFragment"
             app:destination="@id/eventsFragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_eventDetailsFragment"
+            app:destination="@id/eventDetailsFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:launchSingleTop="true"
+            app:popUpTo="@+id/profileFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/eventDetailsFragment"
+        android:name="com.mbglobal.artoutandroid.ui.eventdetails.EventDetailsFragment"
+        android:label="EventDetailsFragment" >
+        <argument
+            android:name="eventId"
+            app:argType="string" />
     </fragment>
 </navigation>
