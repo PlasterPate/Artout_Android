@@ -6,10 +6,11 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
-import android.renderscript.ScriptGroup
 import android.view.View
 import androidx.core.content.ContextCompat.checkSelfPermission
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.fragment.findNavController
 import com.mbglobal.artoutandroid.ui.manageevent.ManageEventFragment
 import com.mbglobal.data.entity.event.EventEntity
 import com.mbglobal.data.entity.event.LocationEntity
@@ -35,7 +36,16 @@ class AddEventFragment : ManageEventFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initializeListeners()
+        initilizeOvservers()
+    }
 
+    private fun initilizeOvservers() {
+        addEventViewModel.addedId.observe(this, Observer { id ->
+            id?.let {
+                findNavController().navigate(AddEventFragmentDirections
+                    .actionAddEventFragmentToEventDetailsFragment(id))
+            }
+        })
     }
 
     fun initializeListeners(){

@@ -32,11 +32,14 @@ abstract class ManageEventFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        initializeListeners()
+    }
 
-
+    private fun initializeListeners() {
         binding.btnCancel.setOnClickListener{
             findNavController().popBackStack()
         }
+
         binding.startDateEditText.let {editText ->
             editText.setOnClickListener{
                 createDatePicker(editText)
@@ -44,7 +47,7 @@ abstract class ManageEventFragment : BaseFragment() {
         }
         binding.endDateEditText.let {editText ->
             editText.setOnClickListener{
-                createTimePicker(editText)
+                createDatePicker(editText)
             }
         }
         binding.startTimeEditText.let {editText ->

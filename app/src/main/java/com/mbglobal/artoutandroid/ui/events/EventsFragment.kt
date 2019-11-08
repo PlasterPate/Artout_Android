@@ -20,8 +20,6 @@ class EventsFragment : BaseFragment() {
 
     lateinit var binding : FragmentEventsBinding
 
-    private lateinit var viewModel: EventsViewModel
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

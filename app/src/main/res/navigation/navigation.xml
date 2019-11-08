@@ -53,7 +53,16 @@
     <fragment
         android:id="@+id/addEventFragment"
         android:name="com.mbglobal.artoutandroid.ui.addevent.AddEventFragment"
-        android:label="AddEventFragment" />
+        android:label="AddEventFragment" >
+        <action
+            android:id="@+id/action_addEventFragment_to_eventDetailsFragment"
+            app:destination="@id/eventDetailsFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:popUpTo="@+id/eventDetailsFragment" />
+    </fragment>
     <fragment
         android:id="@+id/eventsFragment"
         android:name="com.mbglobal.artoutandroid.ui.events.EventsFragment"
