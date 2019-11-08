@@ -12,6 +12,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import com.mbglobal.artoutandroid.ui.manageevent.ManageEventFragment
+import com.mbglobal.data.entity.event.AddEventEntity
 import com.mbglobal.data.entity.event.EventEntity
 import com.mbglobal.data.entity.event.LocationEntity
 import com.mbglobal.data.repository.UserRepository
@@ -70,7 +71,7 @@ class AddEventFragment : ManageEventFragment() {
         }
 
         binding.submitButton.setOnClickListener {
-            val eventEntity = EventEntity(id = 1,
+            val eventEntity = AddEventEntity(
                 title = binding.titleEditText.text.toString(),
                 description = binding.descriptionEditText.text.toString(),
                 startDate = binding.startDateEditText.text.toString(),

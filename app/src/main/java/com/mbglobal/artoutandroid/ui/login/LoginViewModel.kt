@@ -53,8 +53,7 @@ class LoginViewModel @Inject constructor(private val userRepository: UserReposit
     companion object {
 
         private fun isLoginInfoValid(userLoginItemEntity: UserLoginItemEntity): Boolean {
-            return (userLoginItemEntity.password.isNotEmpty())
-                    && (userLoginItemEntity.username.isNotEmpty())
+            return true
         }
 
     }

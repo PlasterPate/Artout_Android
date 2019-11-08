@@ -3,6 +3,7 @@ package com.mbglobal.artoutandroid.ui.addevent
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.mbglobal.artoutandroid.ui.manageevent.ManageEventViewModel
+import com.mbglobal.data.entity.event.AddEventEntity
 import com.mbglobal.data.entity.event.EventEntity
 import com.mbglobal.data.repository.EventRepository
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -16,7 +17,7 @@ class AddEventViewModel @Inject constructor(private val eventRepository: EventRe
     val addedId : LiveData<Int?>
         get() = _addedId
 
-    fun addEvent(eventEntity: EventEntity){
+    fun addEvent(eventEntity: AddEventEntity){
         eventRepository.addEvent(eventEntity)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())

@@ -1,5 +1,6 @@
 package com.mbglobal.remote.mappers
 
+import com.mbglobal.data.entity.event.AddEventEntity
 import com.mbglobal.data.entity.event.EventEntity
 import com.mbglobal.data.entity.event.LocationEntity
 import com.mbglobal.data.entity.user.*
@@ -88,5 +89,18 @@ fun LocationEntity.toLocationDto(): LocationDto {
     return LocationDto(
         latitude = latitude,
         longitude = longitude
+    )
+}
+
+fun AddEventEntity.toAddEventDto() : AddEventDto {
+    return AddEventDto(
+        title = title,
+        image = image,
+        description = description,
+        startDate = startDate,
+        endDate = endDate,
+        category = category,
+        eventOwner = eventOwner,
+        location = location.toLocationDto()
     )
 }

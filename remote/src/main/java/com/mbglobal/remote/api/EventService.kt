@@ -9,13 +9,13 @@ import retrofit2.http.*
 
 interface EventService {
 
-    @POST("/api/event/eventdetail/{id}")
+    @GET("/api/event/eventdetail/{id}/")
     fun getEvent(@Path("id") eventId: Int) : Single<EventDto>
 
     @POST("/api/event/events/")
     fun addEvent(@Body addEventDto: AddEventDto) : Single<EventDto>
 
-    @GET("/api/event/events")
+    @GET("/api/event/events/")
     fun getUserEvents(@Query("id") userId : Int) : Single<List<String>>
 
     companion object{

@@ -2,6 +2,7 @@ package com.mbglobal.data.repository
 
 import com.mbglobal.data.datasource.EventRemoteDataSource
 import com.mbglobal.data.datasource.UserLocalDataSource
+import com.mbglobal.data.entity.event.AddEventEntity
 import com.mbglobal.data.entity.event.EventEntity
 import com.mbglobal.data.entity.event.LocationEntity
 import io.reactivex.Completable
@@ -37,7 +38,7 @@ class EventRepository @Inject constructor(
         return eventRemoteDataSource.getEvent(eventId)
     }
 
-    fun addEvent(eventEntity : EventEntity) : Single<EventEntity> {
+    fun addEvent(eventEntity : AddEventEntity) : Single<EventEntity> {
         return eventRemoteDataSource.addEvent(eventEntity)
     }
 

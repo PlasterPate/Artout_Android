@@ -12,7 +12,7 @@ import com.squareup.picasso.Picasso
 
 class EventAdapter(private val onEventItemClickListener: onEventItemClickListener) : RecyclerView.Adapter<EventAdapter.EventViewHolder>() {
 
-    var data = listOf<EventEntity>()
+    var data = mutableListOf<EventEntity>()
         set(value) {
             field = value
             notifyDataSetChanged()
@@ -29,6 +29,11 @@ class EventAdapter(private val onEventItemClickListener: onEventItemClickListene
 
     override fun onBindViewHolder(holder: EventViewHolder, position: Int) {
         holder.bind(data[position], onEventItemClickListener)
+    }
+
+    fun addData(it: EventEntity) {
+        data.add(it)
+        notifyDataSetChanged()
     }
 
     class EventViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){

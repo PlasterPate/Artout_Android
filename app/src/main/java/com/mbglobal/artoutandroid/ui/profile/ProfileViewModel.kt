@@ -12,14 +12,14 @@ import javax.inject.Inject
 class ProfileViewModel @Inject constructor(private val eventRepository: EventRepository,
                                            private val userRepository: UserRepository) : BaseViewModel() {
 
-    var events = MutableLiveData<List<EventEntity>>()
+    var eventToAdd = MutableLiveData<EventEntity>()
 
     fun getUserEvents(userId : String?) {
         eventRepository.getUserEvents(userId)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe({it ->
-                println(it)
+            .subscribe({eventEntity : EventEntity ->
+                eventToAdd.value = eventEntity
             }, { it ->
                 println(it)
             }).also {
