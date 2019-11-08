@@ -55,7 +55,7 @@
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.mbglobal.artoutandroid.ui.profile.ProfileFragment"
-        android:label="EditEventFragment">
+        android:label="ProfileFragment">
         <action
             android:id="@+id/action_profileFragment_to_loginFragment"
             app:destination="@id/loginFragment"
