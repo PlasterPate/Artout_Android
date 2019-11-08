@@ -6,10 +6,13 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
+import android.renderscript.ScriptGroup
 import android.view.View
 import androidx.core.content.ContextCompat.checkSelfPermission
 import androidx.lifecycle.ViewModelProviders
 import com.mbglobal.artoutandroid.ui.manageevent.ManageEventFragment
+import com.mbglobal.data.entity.user.EventEntity
+import dagger.BindsInstance
 import kotlinx.android.synthetic.main.fragment_manage_event.*
 
 class AddEventFragment : ManageEventFragment() {
@@ -25,7 +28,11 @@ class AddEventFragment : ManageEventFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        initializeListeners()
 
+    }
+
+    fun initializeListeners(){
         image_pick.setOnClickListener {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
                 if (checkSelfPermission(requireContext(), Manifest.permission.READ_EXTERNAL_STORAGE) ==
@@ -37,13 +44,27 @@ class AddEventFragment : ManageEventFragment() {
                 }
                 else{
                     //permission already granted
-                    pickImageFromGallery();
+                    pickImageFromGallery()
                 }
             }
             else{
                 //system OS is < Marshmallow
-                pickImageFromGallery();
+                pickImageFromGallery()
             }
+        }
+
+        binding.submitButton.setOnClickListener {
+            val eventEntity = EventEntity("",
+                binding.titleEditText.text.toString(),
+                "",
+                binding.descriptionEditText.text.toString(),
+                binding.startDateEditText.text.toString(),
+                binding.endDateEditText.text.toString(),
+                binding.startTimeEditText.text.toString(),
+                binding.endTimeEditText.text.toString(),
+                5.0,
+                binding.categoryEditText.text.toString())
+            addEventViewModel.addEvent(eventEntity)
         }
     }
 
