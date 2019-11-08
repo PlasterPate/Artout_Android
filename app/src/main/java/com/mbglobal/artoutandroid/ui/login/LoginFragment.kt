@@ -59,7 +59,6 @@ class LoginFragment : BaseFragment(), LifecycleOwner {
     private fun initializeObservers() {
         loginViewModel.loginStatus.observe(this, Observer { status ->
             if (status) {
-                view?.hideKeyboard()
                 findNavController().navigate(R.id.action_loginFragment_to_timelineFragment)
             }else{
                 Toast.makeText(requireContext(), "login failed", Toast.LENGTH_SHORT).show()
@@ -67,9 +66,6 @@ class LoginFragment : BaseFragment(), LifecycleOwner {
         })
     }
 
-    private fun View.hideKeyboard() {
-        val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-        imm.hideSoftInputFromWindow(windowToken, 0)
-    }
+
 
 }
