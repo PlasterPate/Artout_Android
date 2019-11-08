@@ -14,9 +14,12 @@ import com.mbglobal.artoutandroid.databinding.FragmentProfileBinding
 import com.mbglobal.artoutandroid.ui.base.BaseFragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.mbglobal.artoutandroid.ui.profile.Adapter.EventAdapter
+import com.mbglobal.artoutandroid.ui.profile.Adapter.onEventItemClickListener
+import com.mbglobal.data.entity.user.EventEntity
 import kotlinx.android.synthetic.main.fragment_profile.*
 
-class ProfileFragment : BaseFragment() {
+class ProfileFragment : BaseFragment(), onEventItemClickListener{
+
 
     lateinit var binding : FragmentProfileBinding
     lateinit var adapter : EventAdapter
@@ -36,10 +39,15 @@ class ProfileFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        adapter = EventAdapter()
+        adapter = EventAdapter(this)
         binding.myEventsList.adapter = adapter
         initializeListeners()
         initializeObservers()
+
+        binding.myEventsList.let { recyclerView ->
+            recyclerView.adapter = adapter
+            recyclerView.layoutManager = LinearLayoutManager(view.context)
+        }
 
         val userId = ProfileFragmentArgs.fromBundle(arguments!!).userId
         profileViewModel.getUserEvents(userId)
@@ -49,9 +57,6 @@ class ProfileFragment : BaseFragment() {
             }
         })
 
-        binding.myEventsList.apply {
-            layoutManager = LinearLayoutManager(view.context)
-        }
 
     }
 
@@ -75,4 +80,7 @@ class ProfileFragment : BaseFragment() {
         }
     }
 
+    override fun onClicked(eventEntity: EventEntity) {
+
+    }
 }

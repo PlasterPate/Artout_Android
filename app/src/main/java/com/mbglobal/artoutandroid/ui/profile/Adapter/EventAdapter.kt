@@ -11,7 +11,7 @@ import com.mbglobal.artoutandroid.R
 import com.mbglobal.data.entity.user.EventEntity
 import com.squareup.picasso.Picasso
 
-class EventAdapter : RecyclerView.Adapter<EventAdapter.EventViewHolder>() {
+class EventAdapter(private val onEventItemClickListener: onEventItemClickListener) : RecyclerView.Adapter<EventAdapter.EventViewHolder>() {
 
     var data = listOf<EventEntity>()
         set(value) {
@@ -29,16 +29,21 @@ class EventAdapter : RecyclerView.Adapter<EventAdapter.EventViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: EventViewHolder, position: Int) {
-        holder.bind(data[position])
+        holder.bind(data[position], onEventItemClickListener)
     }
 
     class EventViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
         val eventImage = itemView.findViewById<ImageView>(R.id.image_item)
         val eventTitle = itemView.findViewById<TextView>(R.id.title_item)
+        val eventDescription = itemView.findViewById<TextView>(R.id.description_item)
 
-        fun bind(eventEntity: EventEntity){
+        fun bind(eventEntity: EventEntity, onEventItemClickListener: onEventItemClickListener){
             Picasso.get().load(eventEntity.images[0]).into(eventImage)
             eventTitle.text = eventEntity.title
+            eventDescription.text = eventEntity.description
+            itemView.setOnClickListener{
+                onEventItemClickListener.onClicked(eventEntity)
+            }
         }
     }
 }

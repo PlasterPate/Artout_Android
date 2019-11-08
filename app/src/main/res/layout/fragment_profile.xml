@@ -11,7 +11,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
             android:text="My Events"
-            android:textSize="32sp"
+            android:textSize="24sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -19,6 +19,7 @@
             android:id="@+id/my_events_list"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:layout_marginTop="16dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
