@@ -7,8 +7,8 @@ data class EventResponseDto (
     val slug : String,
     @SerializedName("title")
     val title : String,
-    @SerializedName("images")
-    val images : List<String>,
+    @SerializedName("image")
+    val images : String?,
     @SerializedName("description")
     val description : String,
     @SerializedName("startDate")

@@ -51,7 +51,7 @@ fun EventResponseDto.toEventEntity() : EventEntity{
     return EventEntity(
         slug = slug,
         title = title,
-        images = images,
+        image = images,
         description = description,
         startDate = startDate,
         endDate = endDate,
@@ -66,7 +66,7 @@ fun EventEntity.toEventDto() : EventDto{
     return EventDto(
         slug = slug,
         title = title,
-        images = images,
+        images = image,
         description = description,
         startDate = startDate,
         endDate = endDate,
