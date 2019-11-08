@@ -18,7 +18,7 @@ ext {
             rxJava          : "2.2.8",
             rxKotlin        : "2.3.0",
             lifecycle       : "2.1.0-beta01",
-            materialDesign  : "1.1.0-beta01",
+            materialDesign  : "1.0.0",
             navigation      : "2.0.0",
             gson            : "2.8.5",
             easypermissions : "3.0.0",
