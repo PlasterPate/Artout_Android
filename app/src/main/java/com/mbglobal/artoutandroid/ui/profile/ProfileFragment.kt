@@ -15,7 +15,7 @@ import com.mbglobal.artoutandroid.ui.base.BaseFragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.mbglobal.artoutandroid.ui.profile.Adapter.EventAdapter
 import com.mbglobal.artoutandroid.ui.profile.Adapter.onEventItemClickListener
-import com.mbglobal.data.entity.user.EventEntity
+import com.mbglobal.data.entity.event.EventEntity
 
 class ProfileFragment : BaseFragment(), onEventItemClickListener{
 

@@ -1,8 +1,11 @@
 package com.mbglobal.remote.mappers
 
+import com.mbglobal.data.entity.event.EventEntity
+import com.mbglobal.data.entity.event.LocationEntity
 import com.mbglobal.data.entity.user.*
+import com.mbglobal.remote.dto.event.AddEventDto
 import com.mbglobal.remote.dto.event.EventDto
-import com.mbglobal.remote.dto.event.EventResponseDto
+import com.mbglobal.remote.dto.event.LocationDto
 import com.mbglobal.remote.dto.user.*
 
 fun UserLoginItemEntity.toUserLoginItemDto() : UserLoginItemDto {
@@ -47,32 +50,43 @@ fun UserResponseDto.toUserEntity() : UserEntity {
     )
 }
 
-fun EventResponseDto.toEventEntity() : EventEntity{
+fun EventDto.toEventEntity() : EventEntity {
     return EventEntity(
-        slug = slug,
-        title = title,
-        image = images,
-        description = description,
-        startDate = startDate,
-        endDate = endDate,
-        startTime = startTime,
-        endTime = endTime,
-        rate = rate,
-        category = category
-    )
-}
-
-fun EventEntity.toEventDto() : EventDto{
-    return EventDto(
-        slug = slug,
         title = title,
         image = image,
         description = description,
         startDate = startDate,
         endDate = endDate,
-        startTime = startTime,
-        endTime = endTime,
-        rate = rate,
-        category = category
+        category = category,
+        eventOwner = eventOwner,
+        location = location.toLocationEntity(),
+        id = id
+    )
+}
+
+fun EventEntity.toAddEventDto() : AddEventDto {
+    return AddEventDto(
+        title = title,
+        image = image,
+        description = description,
+        startDate = startDate,
+        endDate = endDate,
+        category = category,
+        eventOwner = eventOwner,
+        location = location.toLocationDto()
+    )
+}
+
+fun LocationDto.toLocationEntity() : LocationEntity {
+    return LocationEntity(
+        longitude = longitude,
+        latitude = latitude
+    )
+}
+
+fun LocationEntity.toLocationDto(): LocationDto {
+    return LocationDto(
+        latitude = latitude,
+        longitude = longitude
     )
 }

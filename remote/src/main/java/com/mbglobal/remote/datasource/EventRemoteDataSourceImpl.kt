@@ -1,12 +1,11 @@
 package com.mbglobal.remote.datasource
 
 import com.mbglobal.data.datasource.EventRemoteDataSource
-import com.mbglobal.data.entity.user.EventEntity
+import com.mbglobal.data.entity.event.EventEntity
 import com.mbglobal.remote.api.EventService
 import com.mbglobal.remote.dto.event.EventGetDto
-import com.mbglobal.remote.mappers.toEventDto
+import com.mbglobal.remote.mappers.toAddEventDto
 import com.mbglobal.remote.mappers.toEventEntity
-import io.reactivex.Completable
 import io.reactivex.Single
 import javax.inject.Inject
 
@@ -14,16 +13,19 @@ class EventRemoteDataSourceImpl @Inject constructor(private val eventService: Ev
     EventRemoteDataSource{
 
     override fun getEvent(eventId: String): Single<EventEntity> {
-        return eventService.getEvent(EventGetDto(eventId)).map {
+        return eventService.getEvent(eventId).map {
             it.toEventEntity()
         }
     }
 
-    override fun addEvent(eventEntity: EventEntity): Completable {
-        return eventService.addEvent(eventEntity.toEventDto())
+    override fun addEvent(eventEntity: EventEntity): Single<EventEntity> {
+        return eventService.addEvent(eventEntity.toAddEventDto()).map {
+            it -> it.toEventEntity()
+        }
     }
 
-    override fun getUserEvents(userId: String): Single<List<String>> {
+    override fun getUserEvents(userId: Int): Single<List<String>> {
         return eventService.getUserEvents(userId)
     }
 }
+

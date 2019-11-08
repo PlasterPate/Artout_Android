@@ -4,7 +4,7 @@ import android.view.View
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.mbglobal.artoutandroid.R
-import com.mbglobal.data.entity.user.EventEntity
+import com.mbglobal.data.entity.event.EventEntity
 
 class EventInfoViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 

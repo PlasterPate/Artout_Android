@@ -3,9 +3,7 @@ package com.mbglobal.remote.dto.event
 
 import com.google.gson.annotations.SerializedName
 
-data class EventDto(
-    @SerializedName("id")
-    val id: Int,
+data class AddEventDto(
     @SerializedName("description")
     val description: String,
     @SerializedName("end_date")

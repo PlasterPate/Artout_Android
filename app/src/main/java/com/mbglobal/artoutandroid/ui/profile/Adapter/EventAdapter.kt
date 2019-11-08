@@ -7,7 +7,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.mbglobal.artoutandroid.R
-import com.mbglobal.data.entity.user.EventEntity
+import com.mbglobal.data.entity.event.EventEntity
 import com.squareup.picasso.Picasso
 
 class EventAdapter(private val onEventItemClickListener: onEventItemClickListener) : RecyclerView.Adapter<EventAdapter.EventViewHolder>() {

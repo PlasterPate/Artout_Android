@@ -59,7 +59,7 @@ class UserRepository @Inject constructor(
 
     fun getUserEvents() : Single<List<String>> {
         return userLocalDataSource.getUser().flatMap {
-            eventRemoteDataSource.getUserEvents(it)
+            eventRemoteDataSource.getUserEvents(it.toInt())
         }
     }
 

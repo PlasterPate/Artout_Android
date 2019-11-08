@@ -8,7 +8,7 @@ import com.mbglobal.artoutandroid.ui.eventdetails.viewholder.CoverViewHolder
 import com.mbglobal.artoutandroid.ui.eventdetails.viewholder.EventDescriptionViewHolder
 import com.mbglobal.artoutandroid.ui.eventdetails.viewholder.EventInfoViewHolder
 import com.mbglobal.artoutandroid.ui.eventdetails.viewholder.EventTimeViewHolder
-import com.mbglobal.data.entity.user.EventEntity
+import com.mbglobal.data.entity.event.EventEntity
 
 class EventDetailsAdapter(private val eventEntity: EventEntity) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
