@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.navigation.fragment.findNavController
 import com.google.android.material.textfield.TextInputEditText
 import com.mbglobal.artoutandroid.R
 import com.mbglobal.artoutandroid.databinding.FragmentManageEventBinding
@@ -32,6 +33,10 @@ abstract class ManageEventFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+
+        binding.btnCancel.setOnClickListener{
+            findNavController().popBackStack()
+        }
         binding.startDateEditText.let {editText ->
             editText.setOnClickListener{
                 createDatePicker(editText)
