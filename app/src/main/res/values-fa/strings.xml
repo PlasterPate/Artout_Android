@@ -15,4 +15,10 @@
     <string name="logout">خروج</string>
     <string name="detail_description">توضیحات:</string>
     <string name="detail_category">دسته بندی:</string>
+    <string name="ending_date">تاریخ پایان</string>
+    <string name="starting_date">تاریخ شروع</string>
+    <string name="ending_time">ساعت پایان</string>
+    <string name="starting_time">ساعت شروع</string>
+    <string name="done">تایید</string>
+    <string name="category">دسته بندی</string>
 </resources>
