@@ -101,16 +101,19 @@
 </style>
 
 <style name="OutlineTextInputLayoutStyle" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+    <item name="android:theme">@style/AppThemeLight</item>
     <item name="android:strokeWidth">5.0</item>
     <item name="boxStrokeColor">@color/colorPrimary</item>
     <item name="android:layout_marginStart">32dp</item>
     <item name="android:layout_marginEnd">16dp</item>
     <item name="android:layout_marginTop">8dp</item>
     <item name="android:layout_marginBottom">8dp</item>
+    <item name="android:paddingStart">8dp</item>
 </style>
 
 <style name="LabelTextView">
     <item name="android:textSize">20sp</item>
+    <item name="android:textColor">@color/colorPrimaryDark</item>
     <item name="android:layout_marginStart">16dp</item>
     <item name="android:layout_marginEnd">16dp</item>
     <item name="android:layout_marginTop">8dp</item>
