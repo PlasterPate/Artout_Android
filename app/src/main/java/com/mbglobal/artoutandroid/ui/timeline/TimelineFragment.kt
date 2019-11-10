@@ -13,6 +13,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.mbglobal.artoutandroid.R
 import com.mbglobal.artoutandroid.databinding.FragmentTimelineBinding
 import com.mbglobal.artoutandroid.ui.base.BaseFragment
+import javax.inject.Inject
 
 class TimelineFragment : BaseFragment() {
 

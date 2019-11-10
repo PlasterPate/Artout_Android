@@ -22,20 +22,14 @@ class EventRepository @Inject constructor(
         return eventRemoteDataSource.addEvent(eventEntity)
     }
 
-    fun getUserEvents(userId : String?) : Observable<EventEntity> {
-        val ids= if (userId == null){
-            userLocalDataSource.getUser().flatMap {
-                eventRemoteDataSource.getUserEvents(it.toInt())
+    fun getUserEvents(userId : String?) : Single<List<EventEntity>> {
+        if (userId == null) {
+            return userLocalDataSource.getUser().flatMap {userId ->
+                eventRemoteDataSource.getUserEvents(userId.toInt())
             }
-        }else{
-            eventRemoteDataSource.getUserEvents(userId.toInt())
+        } else {
+            return eventRemoteDataSource.getUserEvents(userId.toInt())
         }
-        return ids.toObservable()
-            .flatMap {
-                Observable.fromIterable(it)
-            }.flatMap {
-                eventRemoteDataSource.getEvent(it.toInt()).toObservable()
-            }
     }
 
 }

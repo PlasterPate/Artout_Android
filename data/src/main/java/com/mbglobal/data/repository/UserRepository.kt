@@ -1,7 +1,9 @@
 package com.mbglobal.data.repository
 
 import com.mbglobal.data.datasource.*
+import com.mbglobal.data.entity.event.EventEntity
 import com.mbglobal.data.entity.user.*
+import com.mbglobal.data.mapper.toUserRegisterResponseEntity
 import io.reactivex.Completable
 import io.reactivex.Single
 import javax.inject.Inject
@@ -67,7 +69,7 @@ class UserRepository @Inject constructor(
         }
     }
 
-    fun getUserEvents() : Single<List<String>> {
+    fun getUserEvents() : Single<List<EventEntity>> {
         return userLocalDataSource.getUser().flatMap {
             eventRemoteDataSource.getUserEvents(it.toInt())
         }
@@ -78,10 +80,4 @@ class UserRepository @Inject constructor(
             userLocalDataSource.removeUser()
         )
     }
-}
-
-private fun UserLoginResponseEntity.toUserRegisterResponseEntity(): UserRegisterResponseEntity? {
-    return UserRegisterResponseEntity(
-        id = id
-    )
 }

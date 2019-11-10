@@ -50,9 +50,9 @@ class ProfileFragment : BaseFragment(), onEventItemClickListener{
 
         val userId = ProfileFragmentArgs.fromBundle(arguments!!).userId
         profileViewModel.getUserEvents(userId)
-        profileViewModel.eventToAdd.observe(viewLifecycleOwner, Observer {
+        profileViewModel.userEvents.observe(viewLifecycleOwner, Observer {
             it?.let {
-                adapter.addData(it)
+                adapter.refreshData(it)
             }
         })
 
