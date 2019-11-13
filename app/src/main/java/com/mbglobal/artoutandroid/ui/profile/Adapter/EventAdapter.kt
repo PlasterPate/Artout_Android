@@ -12,11 +12,7 @@ import com.squareup.picasso.Picasso
 
 class EventAdapter(private val onEventItemClickListener: onEventItemClickListener) : RecyclerView.Adapter<EventAdapter.EventViewHolder>() {
 
-    var data = mutableListOf<EventEntity>()
-        set(value) {
-            field = value
-            notifyDataSetChanged()
-        }
+    var data = listOf<EventEntity>()
 
     override fun getItemCount() = data.size
 
@@ -31,8 +27,8 @@ class EventAdapter(private val onEventItemClickListener: onEventItemClickListene
         holder.bind(data[position], onEventItemClickListener)
     }
 
-    fun addData(it: EventEntity) {
-        data.add(it)
+    fun refreshData(events: List<EventEntity>) {
+        data = events
         notifyDataSetChanged()
     }
 
