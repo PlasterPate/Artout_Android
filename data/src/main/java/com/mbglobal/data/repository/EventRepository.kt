@@ -8,6 +8,7 @@ import com.mbglobal.data.entity.event.LocationEntity
 import io.reactivex.Completable
 import io.reactivex.Observable
 import io.reactivex.Single
+import java.awt.Event
 import javax.inject.Inject
 
 class EventRepository @Inject constructor(
@@ -32,4 +33,7 @@ class EventRepository @Inject constructor(
         }
     }
 
+    fun editEvent(eventId: Int, eventEntity: AddEventEntity) : Single<EventEntity>{
+        return eventRemoteDataSource.editEvent(eventId, eventEntity)
+    }
 }

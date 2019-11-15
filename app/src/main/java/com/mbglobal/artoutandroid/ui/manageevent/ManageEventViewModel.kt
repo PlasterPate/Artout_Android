@@ -8,6 +8,7 @@ import javax.inject.Inject
 abstract class ManageEventViewModel : BaseViewModel() {
 
 
+
 //    fun validateEvent(eventEntity: EventEntity) : Boolean{
 //
 //    }

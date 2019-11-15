@@ -2,6 +2,7 @@ package com.mbglobal.artoutandroid.ui.eventdetails.viewholder
 
 import android.view.View
 import android.widget.ImageView
+import androidx.appcompat.widget.Toolbar
 import androidx.recyclerview.widget.RecyclerView
 import com.mbglobal.artoutandroid.R
 import com.mbglobal.data.entity.event.EventEntity

@@ -19,6 +19,9 @@ interface EventService {
     @GET("/api/event/eventsd/")
     fun getUserEvents(@Query("id") userId : Int) : Single<List<EventEntity>>
 
+    @PUT("/api/event/eventdetail/{id}/")
+    fun editEvent(@Path("id") eventId: Int, @Body addEventDto: AddEventDto) : Single<EventDto>
+
     companion object{
         const val BASE_URL : String = "http://35.202.66.168:8000/"
     }

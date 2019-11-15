@@ -89,7 +89,7 @@ class AddEventFragment : ManageEventFragment() {
         //Intent to pick image
         val intent = Intent(Intent.ACTION_PICK)
         intent.type = "image/*"
-        //intent.action = Intent.ACTION_GET_CONTENT
+        intent.action = Intent.ACTION_GET_CONTENT
         startActivityForResult(Intent.createChooser(intent, "Select Picture"), IMAGE_PICK_CODE)
     }
 

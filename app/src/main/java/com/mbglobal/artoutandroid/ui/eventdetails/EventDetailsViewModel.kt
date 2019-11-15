@@ -36,5 +36,4 @@ class EventDetailsViewModel @Inject constructor(private val eventRepository: Eve
             }
 
     }
-
 }

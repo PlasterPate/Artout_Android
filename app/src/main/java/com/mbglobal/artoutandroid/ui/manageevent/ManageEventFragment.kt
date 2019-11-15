@@ -11,9 +11,11 @@ import com.google.android.material.textfield.TextInputEditText
 import com.mbglobal.artoutandroid.R
 import com.mbglobal.artoutandroid.databinding.FragmentManageEventBinding
 import com.mbglobal.artoutandroid.ui.base.BaseFragment
+import com.mbglobal.data.repository.UserRepository
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog
 import com.wdullaer.materialdatetimepicker.time.TimePickerDialog
 import java.util.*
+import javax.inject.Inject
 
 abstract class ManageEventFragment : BaseFragment() {
 

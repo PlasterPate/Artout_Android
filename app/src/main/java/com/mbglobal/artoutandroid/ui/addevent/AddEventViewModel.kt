@@ -10,9 +10,8 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
-class AddEventViewModel @Inject constructor(private val eventRepository: EventRepository) : ManageEventViewModel() {
+class AddEventViewModel @Inject constructor(private val eventRepository: EventRepository): ManageEventViewModel() {
 
-    
     private val _addedId = MutableLiveData<Int?>()
     val addedId : LiveData<Int?>
         get() = _addedId

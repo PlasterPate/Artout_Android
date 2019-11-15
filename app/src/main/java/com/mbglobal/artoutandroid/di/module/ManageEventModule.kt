@@ -26,4 +26,9 @@ abstract class ManageEventModule {
     @ViewModelKey(AddEventViewModel::class)
     abstract fun bindAddEventViewModel(addEventViewModel: AddEventViewModel) : ViewModel
 
+    @Binds
+    @IntoMap
+    @ViewModelKey(EditEventViewModel::class)
+    abstract fun bindEditEventViewModel(editEventViewModel: EditEventViewModel) : ViewModel
+
 }

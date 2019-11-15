@@ -1,12 +1,11 @@
 package com.mbglobal.artoutandroid.ui.eventdetails
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.mbglobal.artoutandroid.R
 import com.mbglobal.artoutandroid.databinding.FragmentEventDetailsBinding
@@ -45,6 +44,19 @@ class EventDetailsFragment : BaseFragment() {
             it.layoutManager = LinearLayoutManager(view.context)
         }
 
+        binding.toolbarEventDetail.setOnMenuItemClickListener { item ->
+            when(item.itemId){
+                R.id.edit_menu_item -> {
+                    findNavController().navigate(
+                        EventDetailsFragmentDirections
+                            .actionEventDetailsFragmentToEditEventFragment(eventId!!)
+                    )
+                    return@setOnMenuItemClickListener true
+                }
+            }
+            false
+        }
+
         initializeObservers()
     }
 
@@ -53,6 +65,5 @@ class EventDetailsFragment : BaseFragment() {
         eventDetailsViewModel.eventEntity.observe(this, Observer {
             binding.rvDetails.adapter = EventDetailsAdapter(it)
         })
-
     }
 }

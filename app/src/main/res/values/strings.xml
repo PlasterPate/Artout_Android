@@ -25,4 +25,5 @@
     <string name="starting_time">Starting Time</string>
     <string name="done">Done</string>
     <string name="category">Category</string>
+    <string name="edit">Edit</string>
 </resources>
