@@ -18,7 +18,6 @@ class EditEventViewModel @Inject constructor(private val eventRepository: EventR
     val addedId : LiveData<Int?>
         get() = _addedId
 
-
     fun editEvent(eventId : Int, eventEntity: AddEventEntity){
         eventRepository.editEvent(eventId, eventEntity)
             .subscribeOn(Schedulers.io())
@@ -27,6 +26,19 @@ class EditEventViewModel @Inject constructor(private val eventRepository: EventR
                 _addedId.value = it.id
             },{
                 _addedId.value = null
+            }).also {
+                compositeDisposable.add(it)
+            }
+    }
+
+    fun loadEvent(eventId: Int){
+        eventRepository.getEvent(eventId)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({
+                eventEntity.value = it
+            },{
+               eventEntity.value = null
             }).also {
                 compositeDisposable.add(it)
             }

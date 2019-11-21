@@ -2,6 +2,7 @@ package com.mbglobal.artoutandroid.ui.editevent
 
 import android.os.Bundle
 import android.view.View
+import androidx.core.net.toUri
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
@@ -16,10 +17,12 @@ class EditEventFragment : ManageEventFragment() {
     @Inject
     lateinit var userRepository: UserRepository
 
-    private var eventId : Int? = null
-
     private val editEventViewModel : EditEventViewModel by lazy {
         ViewModelProviders.of(this, viewModelFactory)[EditEventViewModel::class.java]
+    }
+
+    private val eventId : Int by lazy {
+        EditEventFragmentArgs.fromBundle(arguments!!).eventId
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -27,7 +30,7 @@ class EditEventFragment : ManageEventFragment() {
 
         initializeListeners()
         initializeObservers()
-
+        editEventViewModel.loadEvent(eventId)
     }
 
     fun initializeListeners(){
@@ -42,8 +45,7 @@ class EditEventFragment : ManageEventFragment() {
                 location = LocationEntity(12.0, 10.0),
                 image = "https://www.euroarts.com/sites/default/files/styles/product_cover_mobile/public/media_product/Argerich%20%26%20Barenboim%20_c_Arnaldo%20Colombaroli%20%282%29.jpg"
             )
-            eventId = EditEventFragmentArgs.fromBundle(arguments!!).eventId
-            editEventViewModel.editEvent(eventId!!, eventEntity)
+            editEventViewModel.editEvent(eventId, eventEntity)
         }
     }
 
@@ -51,9 +53,18 @@ class EditEventFragment : ManageEventFragment() {
         editEventViewModel.addedId.observe(this, Observer { eventId ->
             eventId?.let {
                 findNavController().navigate(
-                    EditEventFragmentDirections.actionEditEventFragmentToEventDetailsFragment(eventId)
+                    EditEventFragmentDirections.actionEditEventFragmentToEventDetailsFragment(it)
                 )
             }
+        })
+
+        editEventViewModel.eventEntity.observe(this, Observer {
+            binding.titleEditText.setText(it.title)
+            binding.categoryEditText.setText(it.category)
+            binding.descriptionEditText.setText(it.description)
+            binding.startDateEditText.setText(it.startDate)
+            binding.endDateEditText.setText(it.endDate)
+            binding.imagePick.setImageURI(it.image?.toUri())
         })
     }
 }

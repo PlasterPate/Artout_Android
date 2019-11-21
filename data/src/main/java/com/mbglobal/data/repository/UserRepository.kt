@@ -25,9 +25,12 @@ class UserRepository @Inject constructor(
 
     fun register(userRegisterItemEntity: UserRegisterItemEntity): Single<UserRegisterResponseEntity> {
         return userRemoteDataSource.register(userRegisterItemEntity).flatMap { registerResponse ->
-            val userLoginItemEntity = UserLoginItemEntity(userRegisterItemEntity.username, userRegisterItemEntity.password)
-                userRemoteDataSource.login(userLoginItemEntity)
-            }.flatMap { loginResponse ->
+            val userLoginItemEntity = UserLoginItemEntity(
+                userRegisterItemEntity.username,
+                userRegisterItemEntity.password
+            )
+            userRemoteDataSource.login(userLoginItemEntity)
+        }.flatMap { loginResponse ->
             tokenLocalDataSource.saveRefreshToken(loginResponse.access).flatMap {
                 tokenLocalDataSource.saveRefreshToken(loginResponse.refresh)
             }.flatMap {
@@ -69,13 +72,13 @@ class UserRepository @Inject constructor(
         }
     }
 
-    fun getUserEvents() : Single<List<EventEntity>> {
+    fun getUserEvents(): Single<List<EventEntity>> {
         return userLocalDataSource.getUser().flatMap {
             eventRemoteDataSource.getUserEvents(it.toInt())
         }
     }
 
-    fun logout() : Completable {
+    fun logout(): Completable {
         return tokenLocalDataSource.removeAllCredentials().andThen(
             userLocalDataSource.removeUser()
         )
