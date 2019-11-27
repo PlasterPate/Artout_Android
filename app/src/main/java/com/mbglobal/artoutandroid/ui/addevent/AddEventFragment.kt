@@ -8,15 +8,16 @@ import android.os.Build
 import android.os.Bundle
 import android.view.View
 import androidx.core.content.ContextCompat.checkSelfPermission
+import androidx.core.net.toUri
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
+import com.mbglobal.artoutandroid.R
 import com.mbglobal.artoutandroid.ui.manageevent.ManageEventFragment
 import com.mbglobal.data.entity.event.AddEventEntity
-import com.mbglobal.data.entity.event.EventEntity
 import com.mbglobal.data.entity.event.LocationEntity
 import com.mbglobal.data.repository.UserRepository
-import dagger.BindsInstance
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_manage_event.*
 import javax.inject.Inject
 
@@ -36,15 +37,26 @@ class AddEventFragment : ManageEventFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         initializeListeners()
-        initilizeOvservers()
+        initializeObservers()
+        val pageName = getString(R.string.add_event)
+        addEventViewModel.setPageName(pageName)
     }
 
-    private fun initilizeOvservers() {
+    private fun initializeObservers() {
+        addEventViewModel.pageNameText.observe(this, Observer {
+            binding.pageName.text = it
+        })
+
+        addEventViewModel.eventImage.observe(this, Observer { imageUri ->
+            Picasso.get().load(imageUri?.toUri()).into(binding.imagePick)
+        })
+
         addEventViewModel.addedId.observe(this, Observer { id ->
             id?.let {
                 findNavController().navigate(AddEventFragmentDirections
-                    .actionAddEventFragmentToEventDetailsFragment(id))
+                    .actionAddEventFragmentToEventDetailsFragment(it))
             }
         })
     }
@@ -79,7 +91,7 @@ class AddEventFragment : ManageEventFragment() {
                 category = binding.categoryEditText.text.toString(),
                 eventOwner = userRepository.getUser().blockingGet()!!.toInt(),
                 location = LocationEntity(12.0, 10.0),
-                image = "https://www.euroarts.com/sites/default/files/styles/product_cover_mobile/public/media_product/Argerich%20%26%20Barenboim%20_c_Arnaldo%20Colombaroli%20%282%29.jpg"
+                image = addEventViewModel.eventImage.value
             )
             addEventViewModel.addEvent(eventEntity)
         }
@@ -95,7 +107,7 @@ class AddEventFragment : ManageEventFragment() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (resultCode == Activity.RESULT_OK && requestCode == IMAGE_PICK_CODE){
-            image_pick.setImageURI(data?.data)
+            addEventViewModel.setImage(data?.data)
         }
     }
 }

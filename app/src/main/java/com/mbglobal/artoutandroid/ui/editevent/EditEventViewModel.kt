@@ -1,7 +1,9 @@
 package com.mbglobal.artoutandroid.ui.editevent
 
+import android.content.res.Resources
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.mbglobal.artoutandroid.R
 import com.mbglobal.artoutandroid.ui.manageevent.ManageEventViewModel
 import com.mbglobal.data.entity.event.AddEventEntity
 import com.mbglobal.data.entity.event.EventEntity
@@ -42,5 +44,9 @@ class EditEventViewModel @Inject constructor(private val eventRepository: EventR
             }).also {
                 compositeDisposable.add(it)
             }
+    }
+
+    fun setPageName(pageName : String){
+        pageNameText.value = pageName
     }
 }

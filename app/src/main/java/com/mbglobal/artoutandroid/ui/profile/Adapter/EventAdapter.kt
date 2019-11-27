@@ -5,6 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.net.toUri
 import androidx.recyclerview.widget.RecyclerView
 import com.mbglobal.artoutandroid.R
 import com.mbglobal.data.entity.event.EventEntity
@@ -38,7 +39,7 @@ class EventAdapter(private val onEventItemClickListener: onEventItemClickListene
         val eventDescription = itemView.findViewById<TextView>(R.id.description_item)
 
         fun bind(eventEntity: EventEntity, onEventItemClickListener: onEventItemClickListener){
-            Picasso.get().load(eventEntity.image).into(eventImage)
+            Picasso.get().load(eventEntity.image?.toUri()).into(eventImage)
             eventTitle.text = eventEntity.title
             eventDescription.text = eventEntity.description
             itemView.setOnClickListener{

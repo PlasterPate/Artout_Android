@@ -20,5 +20,8 @@
     <string name="ending_time">ساعت پایان</string>
     <string name="starting_time">ساعت شروع</string>
     <string name="done">تایید</string>
+    <string name="edit">ویرایش</string>
     <string name="category">دسته بندی</string>
+    <string name="add_event">ساخت رویداد</string>
+    <string name="edit_event">ویرایش رویداد</string>
 </resources>

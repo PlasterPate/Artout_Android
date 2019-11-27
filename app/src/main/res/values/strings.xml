@@ -26,4 +26,6 @@
     <string name="done">Done</string>
     <string name="category">Category</string>
     <string name="edit">Edit</string>
+    <string name="add_event">Add Event</string>
+    <string name="edit_event">Edit Event</string>
 </resources>

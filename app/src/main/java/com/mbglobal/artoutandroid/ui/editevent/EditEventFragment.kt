@@ -6,10 +6,12 @@ import androidx.core.net.toUri
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
+import com.mbglobal.artoutandroid.R
 import com.mbglobal.artoutandroid.ui.manageevent.ManageEventFragment
 import com.mbglobal.data.entity.event.AddEventEntity
 import com.mbglobal.data.entity.event.LocationEntity
 import com.mbglobal.data.repository.UserRepository
+import com.squareup.picasso.Picasso
 import javax.inject.Inject
 
 class EditEventFragment : ManageEventFragment() {
@@ -30,6 +32,8 @@ class EditEventFragment : ManageEventFragment() {
 
         initializeListeners()
         initializeObservers()
+        val pageName = getString(R.string.edit_event)
+        editEventViewModel.setPageName(pageName)
         editEventViewModel.loadEvent(eventId)
     }
 
@@ -50,6 +54,10 @@ class EditEventFragment : ManageEventFragment() {
     }
 
     fun initializeObservers(){
+        editEventViewModel.pageNameText.observe(this, Observer {
+            binding.pageName.text = it
+        })
+
         editEventViewModel.addedId.observe(this, Observer { eventId ->
             eventId?.let {
                 findNavController().navigate(
@@ -64,7 +72,7 @@ class EditEventFragment : ManageEventFragment() {
             binding.descriptionEditText.setText(it.description)
             binding.startDateEditText.setText(it.startDate)
             binding.endDateEditText.setText(it.endDate)
-            binding.imagePick.setImageURI(it.image?.toUri())
+            Picasso.get().load(it.image).into(binding.imagePick)
         })
     }
 }
