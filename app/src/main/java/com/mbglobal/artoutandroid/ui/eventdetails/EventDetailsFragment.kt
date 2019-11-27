@@ -5,9 +5,12 @@ import android.view.*
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.NavigationUI
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.mbglobal.artoutandroid.R
+import com.mbglobal.artoutandroid.app.MainActivity
 import com.mbglobal.artoutandroid.databinding.FragmentEventDetailsBinding
 import com.mbglobal.artoutandroid.ui.base.BaseFragment
 import kotlinx.android.synthetic.main.fragment_event_details.*
@@ -58,6 +61,13 @@ class EventDetailsFragment : BaseFragment() {
         }
 
         initializeObservers()
+        initializeListeners()
+    }
+
+    private fun initializeListeners() {
+        binding.toolbarEventDetail.setNavigationOnClickListener {
+            findNavController().navigateUp()
+        }
     }
 
     private fun initializeObservers() {
