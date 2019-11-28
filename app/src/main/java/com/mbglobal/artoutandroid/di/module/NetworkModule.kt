@@ -9,18 +9,29 @@ import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
+import okhttp3.logging.HttpLoggingInterceptor
+import timber.log.Timber
+import javax.inject.Singleton
+
 
 @Module
 class NetworkModule {
 
     @Provides
-    fun providesOkHttp() : OkHttpClient {
-        return OkHttpClient.Builder().build()
+    fun provideHttpLoggingInterceptor(): HttpLoggingInterceptor {
+        return HttpLoggingInterceptor().apply {
+            level = HttpLoggingInterceptor.Level.BODY
+        }
+    }
+
+    @Provides
+    fun providesOkHttp(okHttpLoggingInterceptor: HttpLoggingInterceptor) : OkHttpClient {
+        return OkHttpClient.Builder().addInterceptor(okHttpLoggingInterceptor).build()
     }
 
     @Provides
     fun providesRetrofit(okHttpClient: OkHttpClient) : Retrofit {
-        return Retrofit.Builder().baseUrl(UserService.BASE_URL)
+        return Retrofit.Builder().client(okHttpClient).baseUrl(UserService.BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .build()
@@ -37,12 +48,7 @@ class NetworkModule {
     }
 
     @Provides
-    fun providesTokenService() : TokenService {
-        return Retrofit.Builder()
-            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-            .addConverterFactory(GsonConverterFactory.create())
-            .baseUrl(TokenService.BASE_URL)
-            .build()
-            .create(TokenService::class.java)
+    fun providesTokenService(retrofit: Retrofit) : TokenService {
+        return retrofit.create(TokenService::class.java)
     }
 }
