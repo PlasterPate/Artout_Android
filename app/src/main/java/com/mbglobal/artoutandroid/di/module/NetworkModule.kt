@@ -1,5 +1,6 @@
 package com.mbglobal.artoutandroid.di.module
 
+import com.mbglobal.remote.api.EventService
 import com.mbglobal.remote.api.TokenService
 import com.mbglobal.remote.api.UserService
 import dagger.Module
@@ -23,6 +24,11 @@ class NetworkModule {
             .addConverterFactory(GsonConverterFactory.create())
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .build()
+    }
+
+    @Provides
+    fun providesEventService(retrofit: Retrofit) : EventService {
+        return retrofit.create(EventService::class.java)
     }
 
     @Provides

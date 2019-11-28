@@ -2,6 +2,7 @@ package com.mbglobal.local.datasource
 
 import android.content.SharedPreferences
 import com.mbglobal.data.datasource.TokenLocalDataSource
+import io.reactivex.Completable
 import io.reactivex.Single
 import javax.inject.Inject
 
@@ -30,6 +31,13 @@ class TokenLocalDataSourceImpl @Inject constructor(private val sharedPreferences
     override fun getRefreshToken(): Single<String?> {
         return Single.fromCallable {
             sharedPreferences.getString(REFRESH_TOKEN_KEY, "")
+        }
+    }
+
+    override fun removeAllCredentials(): Completable {
+        return Completable.fromAction {
+            sharedPreferences.edit().remove(REFRESH_TOKEN_KEY).apply()
+            sharedPreferences.edit().remove(ACCESS_TOKEN_KEY).apply()
         }
     }
 

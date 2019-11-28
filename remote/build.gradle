@@ -9,6 +9,8 @@ dependencies {
     implementation "com.squareup.retrofit2:adapter-rxjava2:$libraries.retrofit"
     implementation "com.squareup.retrofit2:converter-gson:$libraries.retrofit"
     implementation "com.squareup.okhttp3:okhttp:$libraries.okHttp"
+    implementation "com.squareup.okhttp3:logging-interceptor:$libraries.okHttpLoggingInterceptor"
+    implementation "com.jakewharton.timber:timber:$libraries.timber"
 
     //inject
     implementation 'javax.inject:javax.inject:1'

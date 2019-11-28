@@ -18,19 +18,26 @@ class RegisterViewModel @Inject constructor(private val userRepository: UserRepo
     private val _registerError : MutableLiveData<String> = MutableLiveData()
     val registerValidateError : LiveData<String> = _registerError
 
+    private val _showLoading: MutableLiveData<Boolean> = MutableLiveData()
+    val showLoading: LiveData<Boolean> = _showLoading
+
     fun onRegisterClicked(userRegisterItemEntity: UserRegisterItemEntity) {
+        _showLoading.value = true
         if (validateRegisterInfo(userRegisterItemEntity)) {
             userRepository.register(userRegisterItemEntity)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({ userRegisterResponseEntity ->
+                    _showLoading.value = false
                     _registerStatus.value = true
                 }, { throwable ->
+                    _showLoading.value = false
                     _registerStatus.value = false
                 }).also {
                     compositeDisposable.add(it)
                 }
         } else {
+            _showLoading.value = false
             _registerError.value = "Invalid register info!"
         }
     }

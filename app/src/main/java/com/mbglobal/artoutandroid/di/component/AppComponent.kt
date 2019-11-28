@@ -14,10 +14,18 @@ import com.mbglobal.artoutandroid.di.scope.AppScope
         ViewModelFactoryModule::class,
         LoginModule::class,
         RegisterModule::class,
+        EventModule::class,
         UserModule::class,
         TokenModule::class,
         NetworkModule::class,
-        TimelineModule::class
+        TimelineModule::class,
+        EventsModule::class,
+        EventDetailsModule::class,
+        ActivityModule::class,
+        EventDetailsModule::class,
+        ManageEventModule::class,
+        ProfileModule::class,
+        MainModule::class
     ]
 )
 @AppScope

@@ -6,12 +6,36 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+<!--        <item name="android:actionBarStyle">@style/ThemeActionBar</item>-->
+<!--        <item name="android:windowActionBarOverlay">true</item>-->
+<!--        <item name="windowActionBarOverlay">true</item>-->
 
         <item name="android:textColorHint">@color/white</item>
         <item name="colorControlNormal">@color/white</item>
         <item name="colorControlActivated">@color/white</item>
         <item name="colorControlHighlight">@color/white</item>
     </style>
+
+    <style name="ThemeActionBar"
+        parent="Widget.AppCompat.Light.ActionBar.Solid">
+        <item name="android:background">@null</item>
+        <!-- Support library compatibility -->
+        <item name="background">@null</item>
+    </style>
+
+    <style name="AppThemeLight" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+
+        <item name="android:textColorHint">@color/colorPrimary</item>
+        <item name="colorControlNormal">@color/colorPrimary</item>
+        <item name="colorControlActivated">@color/colorPrimary</item>
+        <item name="colorControlHighlight">@color/colorPrimary</item>
+    </style>
+
+
 
     <style name="TextInputLayoutStyle">
         <item name="android:layout_marginTop">8dp</item>
@@ -23,13 +47,30 @@
 
     </style>
 
+    <style name="TextInputLayoutStyleLight">
+        <item name="android:layout_marginTop">8dp</item>
+        <item name="android:layout_marginBottom">8dp</item>
+        <item name="android:layout_marginLeft">16dp</item>
+        <item name="android:layout_marginRight">16dp</item>
+        <item name="android:padding">4dp</item>
+        <item name="android:textColorHint">@color/colorPrimary</item>
+
+    </style>
+
     <style name="TextInputEditTextStyle">
         <item name="android:padding">8dp</item>
         <item name="android:textSize">22sp</item>
         <item name="android:textColor">@color/white</item>
     </style>
 
-<style name="ButtonStyle">
+    <style name="TextInputEditTextStyleLight">
+        <item name="android:padding">8dp</item>
+        <item name="android:textSize">22sp</item>
+        <item name="android:textColor">@color/colorPrimary</item>
+    </style>
+
+
+    <style name="ButtonStyle">
     <item name="android:background">@color/colorPrimary</item>
     <item name="android:textColor">@color/white</item>
     <item name="android:textSize">20sp</item>
@@ -51,6 +92,42 @@
     <item name="android:paddingBottom">8dp</item>
     <item name="strokeWidth">3dp</item>
     <item name="strokeColor">@color/colorAccent</item>
+</style>
+
+<style name="NavItemActive">
+    <item name="android:text">24sp</item>
+    <item name="android:textColor">@color/white</item>
+    <item name="itemIconSize">48dp</item>
+    <item name="itemIconTint">@color/white</item>
+    <item name="itemTextColor">@color/white</item>
+</style>
+
+<style name="NavItemInActive">
+    <item name="android:text">18sp</item>
+    <item name="android:textColor">@color/colorAccent</item>
+    <item name="itemIconSize">32dp</item>
+    <item name="itemIconTint">@color/colorPrimaryDark</item>
+    <item name="itemTextColor">@color/colorPrimaryDark</item>
+</style>
+
+<style name="OutlineTextInputLayoutStyle" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+    <item name="android:theme">@style/AppThemeLight</item>
+    <item name="android:strokeWidth">5.0</item>
+    <item name="boxStrokeColor">@color/colorPrimary</item>
+    <item name="android:layout_marginStart">32dp</item>
+    <item name="android:layout_marginEnd">16dp</item>
+    <item name="android:layout_marginTop">8dp</item>
+    <item name="android:layout_marginBottom">8dp</item>
+    <item name="android:paddingStart">8dp</item>
+</style>
+
+<style name="LabelTextView">
+    <item name="android:textSize">20sp</item>
+    <item name="android:textColor">@color/colorPrimaryDark</item>
+    <item name="android:layout_marginStart">16dp</item>
+    <item name="android:layout_marginEnd">16dp</item>
+    <item name="android:layout_marginTop">8dp</item>
+    <item name="android:layout_marginBottom">4dp</item>
 </style>
 
 </resources>

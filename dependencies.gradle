@@ -7,14 +7,14 @@ ext {
     libraries = [
             appCompat       : "1.1.0-beta01",
             activity        : "1.0.0-beta01",
-            fragment        : "1.1.0-beta01",
+            fragment        : "1.1.0",
             coroutines      : "1.2.1",
             coreKtx         : "1.0.2",
             constraintLayout: "2.0.0-beta1",
             room            : "2.0.0",
             okHttp          : "3.12.2",
             rxAndroid       : "2.1.1",
-            dagger          : "2.23.1",
+            dagger          : "2.24",
             rxJava          : "2.2.8",
             rxKotlin        : "2.3.0",
             lifecycle       : "2.1.0-beta01",
@@ -26,7 +26,9 @@ ext {
             crashlytics     : "2.9.9",
             javax_inject    : "1",
             glide           : "4.9.0",
-            retrofit        : "2.6.0"
+            retrofit        : "2.6.0",
+            okHttpLoggingInterceptor : "4.2.1",
+            timber          : "4.7.1"
     ]
 
     testLibraries = [

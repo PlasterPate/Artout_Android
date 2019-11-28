@@ -1,5 +1,6 @@
 package com.mbglobal.data.datasource
 
+import io.reactivex.Completable
 import io.reactivex.Single
 
 interface TokenLocalDataSource {
@@ -12,4 +13,5 @@ interface TokenLocalDataSource {
 
     fun getRefreshToken() : Single<String?>
 
+    fun removeAllCredentials(): Completable
 }

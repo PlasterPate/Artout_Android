@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="phone_number">شماره موبایل</string>
+    <string name="password">رمز عبور</string>
+    <string name="login">ورود</string>
+    <string name="register">ثبت نام</string>
+    <string name="you_don_t_have_any_accounts">هنوز ثبت نام نکرده اید؟</string>
+    <string name="first_name">نام</string>
+    <string name="last_name">نام خانوادگی</string>
+    <string name="confirm_password">تایید</string>
+    <string name="search_event">جست‌وجوی رویداد</string>
+    <string name="title">عنوان</string>
+    <string name="description">توضیح</string>
+    <string name="my_events">رویدادهای من</string>
+    <string name="logout">خروج</string>
+    <string name="detail_description">توضیحات:</string>
+    <string name="detail_category">دسته بندی:</string>
+    <string name="ending_date">تاریخ پایان</string>
+    <string name="starting_date">تاریخ شروع</string>
+    <string name="ending_time">ساعت پایان</string>
+    <string name="starting_time">ساعت شروع</string>
+    <string name="done">تایید</string>
+    <string name="edit">ویرایش</string>
+    <string name="category">دسته بندی</string>
+    <string name="add_event">ساخت رویداد</string>
+    <string name="edit_event">ویرایش رویداد</string>
+</resources>

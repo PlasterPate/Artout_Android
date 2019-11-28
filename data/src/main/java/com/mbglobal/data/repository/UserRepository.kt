@@ -1,13 +1,10 @@
 package com.mbglobal.data.repository
 
-import com.mbglobal.data.datasource.TokenLocalDataSource
-import com.mbglobal.data.datasource.TokenRemoteDataSource
-import com.mbglobal.data.datasource.UserLocalDataSource
-import com.mbglobal.data.datasource.UserRemoteDataSource
-import com.mbglobal.data.entity.user.UserEntity
-import com.mbglobal.data.entity.user.UserLoginItemEntity
-import com.mbglobal.data.entity.user.UserRegisterItemEntity
-import com.mbglobal.data.entity.user.UserRegisterResponseEntity
+import com.mbglobal.data.datasource.*
+import com.mbglobal.data.entity.event.EventEntity
+import com.mbglobal.data.entity.user.*
+import com.mbglobal.data.mapper.toUserRegisterResponseEntity
+import io.reactivex.Completable
 import io.reactivex.Single
 import javax.inject.Inject
 
@@ -15,7 +12,8 @@ class UserRepository @Inject constructor(
     private val userRemoteDataSource: UserRemoteDataSource,
     private val userLocalDataSource: UserLocalDataSource,
     private val tokenRemoteDataSource: TokenRemoteDataSource,
-    private val tokenLocalDataSource: TokenLocalDataSource
+    private val tokenLocalDataSource: TokenLocalDataSource,
+    private val eventRemoteDataSource: EventRemoteDataSource
 ) {
     fun login(userLoginItemEntity: UserLoginItemEntity): Single<Unit> {
         return userRemoteDataSource.login(userLoginItemEntity).flatMap { userLoginResponseEntity ->
@@ -26,7 +24,23 @@ class UserRepository @Inject constructor(
     }
 
     fun register(userRegisterItemEntity: UserRegisterItemEntity): Single<UserRegisterResponseEntity> {
-        return userRemoteDataSource.register(userRegisterItemEntity)
+        return userRemoteDataSource.register(userRegisterItemEntity).flatMap { registerResponse ->
+            val userLoginItemEntity = UserLoginItemEntity(
+                userRegisterItemEntity.username,
+                userRegisterItemEntity.password
+            )
+            userRemoteDataSource.login(userLoginItemEntity)
+        }.flatMap { loginResponse ->
+            tokenLocalDataSource.saveRefreshToken(loginResponse.access).flatMap {
+                tokenLocalDataSource.saveRefreshToken(loginResponse.refresh)
+            }.flatMap {
+                userLocalDataSource.saveUser(loginResponse.id)
+            }.flatMap { it ->
+                Single.just(loginResponse)
+            }
+        }.map { userLoginResponse ->
+            userLoginResponse.toUserRegisterResponseEntity()
+        }
     }
 
     fun getUser(): Single<String?> {
@@ -56,5 +70,17 @@ class UserRepository @Inject constructor(
                     }
             }
         }
+    }
+
+    fun getUserEvents(): Single<List<EventEntity>> {
+        return userLocalDataSource.getUser().flatMap {
+            eventRemoteDataSource.getUserEvents(it.toInt())
+        }
+    }
+
+    fun logout(): Completable {
+        return tokenLocalDataSource.removeAllCredentials().andThen(
+            userLocalDataSource.removeUser()
+        )
     }
 }

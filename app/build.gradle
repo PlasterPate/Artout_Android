@@ -6,12 +6,14 @@ apply plugin: 'kotlin-android-extensions'
 
 apply plugin: 'kotlin-kapt'
 
+apply plugin: 'androidx.navigation.safeargs'
+
 android {
     compileSdkVersion 29
     buildToolsVersion "29.0.2"
     defaultConfig {
         applicationId "com.mbglobal.artoutandroid"
-        minSdkVersion 16
+        minSdkVersion 24
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
@@ -26,6 +28,11 @@ android {
 
     dataBinding {
         enabled = true
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
 }
 
@@ -55,8 +62,8 @@ dependencies {
 
     implementation "com.google.dagger:dagger:$libraries.dagger"
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-    implementation 'androidx.lifecycle:lifecycle-extensions:2.0.0'
-    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.0.0'
+    implementation 'androidx.lifecycle:lifecycle-extensions:2.1.0'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.1.0'
     kapt "com.google.dagger:dagger-compiler:$libraries.dagger"
     implementation "com.google.dagger:dagger-android-support:$libraries.dagger"
     kapt "com.google.dagger:dagger-android-processor:$libraries.dagger"
@@ -69,6 +76,8 @@ dependencies {
     implementation "com.squareup.retrofit2:adapter-rxjava2:$libraries.retrofit"
     implementation "com.squareup.retrofit2:converter-gson:$libraries.retrofit"
     implementation "com.squareup.okhttp3:okhttp:$libraries.okHttp"
+    implementation "com.squareup.okhttp3:logging-interceptor:$libraries.okHttpLoggingInterceptor"
+    implementation "com.jakewharton.timber:timber:$libraries.timber"
 
     testImplementation "junit:junit:$testLibraries.junit"
     androidTestImplementation "androidx.test:runner:$testLibraries.androidXTestRunner"
@@ -76,4 +85,10 @@ dependencies {
     implementation project(":data")
     implementation 'androidx.navigation:navigation-fragment-ktx:2.1.0'
     implementation 'androidx.navigation:navigation-ui-ktx:2.1.0'
+
+    //piccasso
+    implementation 'com.squareup.picasso:picasso:2.71828'
+
+    //date/time picker
+    implementation 'com.wdullaer:materialdatetimepicker:4.2.3'
 }
