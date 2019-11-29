@@ -4,7 +4,8 @@
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:paddingTop="24dp"
-    android:paddingStart="12dp"
+    android:paddingStart="16dp"
+    android:background="@drawable/custom_ripple"
     android:paddingEnd="24dp"
     android:paddingBottom="24dp"
     android:layout_height="wrap_content">
@@ -13,7 +14,7 @@
         android:layout_gravity="center_vertical"
         android:id="@+id/iv_icon"
         tools:src="@color/grey"
-        android:layout_marginEnd="12dp"
+        android:layout_marginEnd="16dp"
         android:layout_width="24dp"
         android:layout_height="24dp"/>
 
