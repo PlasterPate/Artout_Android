@@ -1,4 +1,4 @@
-package com.mbglobal.artoutandroid.ui.profile.Adapter
+package com.mbglobal.artoutandroid.ui.profile.adapter
 
 import android.view.LayoutInflater
 import android.view.View
@@ -11,7 +11,7 @@ import com.mbglobal.artoutandroid.R
 import com.mbglobal.data.entity.event.EventEntity
 import com.squareup.picasso.Picasso
 
-class EventAdapter(private val onEventItemClickListener: onEventItemClickListener) : RecyclerView.Adapter<EventAdapter.EventViewHolder>() {
+class EventAdapter(private val onEventItemClickListener: OnEventItemClickListener) : RecyclerView.Adapter<EventAdapter.EventViewHolder>() {
 
     var data = listOf<EventEntity>()
 
@@ -38,7 +38,7 @@ class EventAdapter(private val onEventItemClickListener: onEventItemClickListene
         val eventTitle = itemView.findViewById<TextView>(R.id.title_item)
         val eventDescription = itemView.findViewById<TextView>(R.id.description_item)
 
-        fun bind(eventEntity: EventEntity, onEventItemClickListener: onEventItemClickListener){
+        fun bind(eventEntity: EventEntity, onEventItemClickListener: OnEventItemClickListener){
             Picasso.get().load(eventEntity.image?.toUri()).into(eventImage)
             eventTitle.text = eventEntity.title
             eventDescription.text = eventEntity.description

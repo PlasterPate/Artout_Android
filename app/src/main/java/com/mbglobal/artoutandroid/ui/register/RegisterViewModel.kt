@@ -27,7 +27,7 @@ class RegisterViewModel @Inject constructor(private val userRepository: UserRepo
             userRepository.register(userRegisterItemEntity)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({ userRegisterResponseEntity ->
+                .subscribe({
                     _showLoading.value = false
                     _registerStatus.value = true
                 }, { throwable ->
