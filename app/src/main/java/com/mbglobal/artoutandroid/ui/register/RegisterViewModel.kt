@@ -8,6 +8,7 @@ import com.mbglobal.data.entity.user.UserRegisterItemEntity
 import com.mbglobal.data.repository.UserRepository
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
+import timber.log.Timber
 import javax.inject.Inject
 
 class RegisterViewModel @Inject constructor(private val userRepository: UserRepository) : BaseViewModel() {
@@ -31,6 +32,7 @@ class RegisterViewModel @Inject constructor(private val userRepository: UserRepo
                     _showLoading.value = false
                     _registerStatus.value = true
                 }, { throwable ->
+                    Timber.d("registerthroable"+throwable.message)
                     _showLoading.value = false
                     _registerStatus.value = false
                 }).also {
