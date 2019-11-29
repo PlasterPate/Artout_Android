@@ -35,7 +35,7 @@ class LoginViewModel @Inject constructor(private val userRepository: UserReposit
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
-                    { userLoginResponseEntity ->
+                    {
                         _showLoading.value = false
                         _loginStatus.value = true
                     },
