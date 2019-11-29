@@ -33,11 +33,45 @@ class UserRepository @Inject constructor(
         }
     }
 
+    fun getUser(): Single<String?> {
+        return userLocalDataSource.getUser()
+    }
+
     fun getUser(): Single<String> {
         return sessionLocalDataSource.getSession().map { session:SessionEntity -> session.userId }
     }
 
     fun logout() : Completable {
         return sessionLocalDataSource.removeSession()
+    }
+
+    fun follow(username: String): Completable {
+        return userRemoteDataSource.follow(username)
+    }
+
+    fun getFollowers(userId: String?): Single<List<UserEntity>> {
+        val idSingle =
+            userId?.let {
+                Single.just(userId)
+            } ?: userLocalDataSource.getUser()
+        return idSingle.flatMap {
+            userRemoteDataSource.getFollowers(it.toInt())
+        }
+    }
+
+    fun getFollowings(userId: String?): Single<List<UserEntity>> {
+        val idSingle =
+            userId?.let {
+                Single.just(userId)
+            } ?: userLocalDataSource.getUser()
+        return idSingle.flatMap {
+            userRemoteDataSource.getFollowings(it.toInt())
+        }
+    }
+
+    fun getFollowRequests(): Single<List<UserEntity>> {
+        return userLocalDataSource.getUser().flatMap {
+            userRemoteDataSource.getFollowRequests(it.toInt())
+        }
     }
 }

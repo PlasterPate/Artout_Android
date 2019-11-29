@@ -12,11 +12,11 @@ class EventRepository @Inject constructor(
     private val eventRemoteDataSource: EventRemoteDataSource,
     private val  sessionLocalDataSource: SessionLocalDataSource) {
 
-    fun getEvent(eventId : Int) : Single<EventEntity> {
+    fun getEvent(eventId: Int): Single<EventEntity> {
         return eventRemoteDataSource.getEvent(eventId)
     }
 
-    fun addEvent(eventEntity : AddEventEntity) : Single<EventEntity> {
+    fun addEvent(eventEntity: AddEventEntity): Single<EventEntity> {
         return eventRemoteDataSource.addEvent(eventEntity)
     }
 
@@ -30,7 +30,27 @@ class EventRepository @Inject constructor(
         }
     }
 
-    fun editEvent(eventId: Int, eventEntity: AddEventEntity) : Single<EventEntity>{
+    fun getUserCheckIns(userId: String?): Single<List<EventEntity>> {
+        val idSingle =
+            userId?.let {
+                Single.just(it)
+            } ?: userLocalDataSource.getUser()
+        return idSingle.flatMap {
+            eventRemoteDataSource.getUserCheckIns(it.toInt())
+        }
+    }
+
+    fun getUserSuggestions(userId: String?): Single<List<EventEntity>> {
+        val idSingle =
+            userId?.let {
+                Single.just(it)
+            } ?: userLocalDataSource.getUser()
+        return idSingle.flatMap {
+            eventRemoteDataSource.getUserSuggestions(it.toInt())
+        }
+    }
+
+    fun editEvent(eventId: Int, eventEntity: AddEventEntity): Single<EventEntity> {
         return eventRemoteDataSource.editEvent(eventId, eventEntity)
     }
 }
