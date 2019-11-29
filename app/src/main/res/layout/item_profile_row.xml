@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:paddingTop="24dp"
+    android:paddingStart="12dp"
+    android:paddingEnd="24dp"
+    android:paddingBottom="24dp"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:layout_gravity="center_vertical"
+        android:id="@+id/iv_icon"
+        tools:src="@color/grey"
+        android:layout_marginEnd="12dp"
+        android:layout_width="24dp"
+        android:layout_height="24dp"/>
+
+    <TextView
+        android:id="@+id/tv_title"
+        style="@style/ProfileRowItem"
+        tools:text="Check-Ins"
+        android:textStyle="bold"
+        android:layout_gravity="center_vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <View
+        android:layout_weight="1"
+        android:layout_width="0dp"
+        android:layout_height="0dp"/>
+
+    <TextView
+        style="@style/ProfileRowItem"
+        android:id="@+id/tv_count"
+        android:layout_gravity="center_vertical"
+        android:gravity="end"
+        tools:text="35"
+        android:layout_marginEnd="12dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <ImageView
+        android:id="@+id/iv_keyboard_arrow"
+        android:src="@drawable/ic_keyboard_arrow_right_grey_24dp"
+        android:layout_gravity="center_vertical"
+        android:layout_width="24dp"
+        android:layout_height="24dp"/>
+
+</LinearLayout>

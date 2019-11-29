@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Adapter
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
@@ -13,17 +14,19 @@ import com.mbglobal.artoutandroid.R
 import com.mbglobal.artoutandroid.databinding.FragmentProfileBinding
 import com.mbglobal.artoutandroid.ui.base.BaseFragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.mbglobal.artoutandroid.ui.profile.adapter.EventAdapter
-import com.mbglobal.artoutandroid.ui.profile.adapter.OnEventItemClickListener
+import com.mbglobal.artoutandroid.ui.profile.adapter.ProfileItemsAdapter
+import com.mbglobal.artoutandroid.ui.profile.listener.OnProfileItemClickListener
 import com.mbglobal.data.entity.event.EventEntity
+import com.mbglobal.data.entity.user.UserProfileEntity
+import com.squareup.picasso.Picasso
 
-class ProfileFragment : BaseFragment(), OnEventItemClickListener{
+class ProfileFragment : BaseFragment() {
 
     lateinit var slug: String
-    lateinit var binding : FragmentProfileBinding
-    lateinit var adapter : EventAdapter
+    lateinit var binding: FragmentProfileBinding
+    lateinit var adapter: ProfileItemsAdapter
 
-    private val profileViewModel : ProfileViewModel by lazy {
+    private val profileViewModel: ProfileViewModel by lazy {
         ViewModelProviders.of(this, viewModelFactory)[ProfileViewModel::class.java]
     }
 
@@ -38,48 +41,40 @@ class ProfileFragment : BaseFragment(), OnEventItemClickListener{
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        adapter = EventAdapter(this)
-        binding.myEventsList.adapter = adapter
-        initializeListeners()
-        initializeObservers()
+        binding.rvProfileItems.layoutManager = LinearLayoutManager(view.context)
+        binding.rvProfileItems.adapter = ProfileItemsAdapter(
+            UserProfileEntity(
+                followerCount = 21,
+                followingCount = 20,
+                suggestionCount = 48,
+                checkinCount = 30
+            )
+        )
+        adapter = binding.rvProfileItems.adapter as ProfileItemsAdapter
 
-        binding.myEventsList.let { recyclerView ->
-            recyclerView.adapter = adapter
-            recyclerView.layoutManager = LinearLayoutManager(view.context)
-        }
+        Picasso.get().load("https://pbs.twimg.com/profile_images/959929674355765248/fk3ALoeH.jpg")
+            .into(binding.ivProfileImage)
 
-        val userId = ProfileFragmentArgs.fromBundle(arguments!!).userId
-        profileViewModel.getUserEvents(userId)
-        profileViewModel.userEvents.observe(viewLifecycleOwner, Observer {
-            it?.let {
-                adapter.refreshData(it)
-            }
-        })
+        adapter.listeners.apply {
+            add(object: OnProfileItemClickListener {
 
+                override val itemTag: String = ProfileItem.SUGGESTIONS
 
-    }
+                override fun onClicked(profileItem: ProfileItem) {
+                    Toast.makeText(requireContext(), "Navigate to suggestions", Toast.LENGTH_LONG).show()
+                }
 
-    private fun initializeObservers() {
+            })
+            add(object: OnProfileItemClickListener {
 
-        profileViewModel.logoutStatus.observe(this, Observer {
-            if (it == true) {
-                findNavController().navigate(ProfileFragmentDirections.actionProfileFragmentToLoginFragment())
-            }
-        })
+                override val itemTag: String = ProfileItem.CHECKINS
 
-        profileViewModel.logoutError.observe(this, Observer {
-            Toast.makeText(requireContext(), it, Toast.LENGTH_LONG).show()
-        })
+                override fun onClicked(profileItem: ProfileItem) {
+                    Toast.makeText(requireContext(), "Navigate to checkins", Toast.LENGTH_LONG).show()
+                }
 
-    }
-
-    private fun initializeListeners() {
-        binding.btnLogout.setOnClickListener {
-            profileViewModel.clickLogout()
+            })
         }
     }
 
-    override fun onClicked(eventEntity: EventEntity) {
-        findNavController().navigate(ProfileFragmentDirections.actionProfileFragmentToEventDetailsFragment(eventEntity.id))
-    }
 }

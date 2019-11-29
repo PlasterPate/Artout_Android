@@ -28,4 +28,6 @@
     <string name="edit">Edit</string>
     <string name="add_event">Add Event</string>
     <string name="edit_event">Edit Event</string>
+    <string name="checkins">Check-Ins</string>
+    <string name="suggestions">Suggestions</string>
 </resources>
