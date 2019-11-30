@@ -145,4 +145,14 @@
 
     </style>
 
+    <style name="FollowerItemName">
+        <item name="android:textColor">@color/grey</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="ButtonAccept">
+        <item name="android:backgroundTint">@color/colorAccent</item>
+    </style>
+
 </resources>
