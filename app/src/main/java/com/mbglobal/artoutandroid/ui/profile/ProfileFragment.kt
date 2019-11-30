@@ -18,6 +18,7 @@ import com.mbglobal.artoutandroid.ui.profile.adapter.ProfileItemsAdapter
 import com.mbglobal.artoutandroid.ui.profile.listener.OnProfileItemClickListener
 import com.mbglobal.data.entity.user.UserProfileEntity
 import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.fragment_profile.*
 
 class ProfileFragment : BaseFragment() {
 
@@ -86,6 +87,13 @@ class ProfileFragment : BaseFragment() {
             profileViewModel.clickLogout()
         }
 
+        binding.containerFollowers.setOnClickListener {
+            findNavController().navigate(ProfileFragmentDirections.actionProfileFragmentToFollowersFragment())
+        }
+
+        binding.containerFollowings.setOnClickListener {
+            findNavController().navigate(ProfileFragmentDirections.actionProfileFragmentToFollowersFragment())
+        }
     }
 
     private fun initializeObservers() {

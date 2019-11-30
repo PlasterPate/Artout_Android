@@ -124,6 +124,9 @@
         <action
             android:id="@+id/action_profileFragment_to_eventListFragment"
             app:destination="@id/eventListFragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_followersFragment"
+            app:destination="@id/followersFragment" />
     </fragment>
 
     <fragment
@@ -170,4 +173,8 @@
             android:id="@+id/action_eventListFragment_to_eventDetailsFragment"
             app:destination="@id/eventDetailsFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/followersFragment"
+        android:name="com.mbglobal.artoutandroid.ui.users.followers.FollowersFragment"
+        android:label="FollowersFragment" />
 </navigation>
