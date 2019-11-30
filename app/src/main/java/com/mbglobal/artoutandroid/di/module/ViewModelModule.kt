@@ -3,6 +3,7 @@ package com.mbglobal.artoutandroid.di.module
 import androidx.lifecycle.ViewModel
 import com.mbglobal.artoutandroid.app.MainViewModel
 import com.mbglobal.artoutandroid.di.annotation.ViewModelKey
+import com.mbglobal.artoutandroid.ui.addevent.AddEventViewModel
 import com.mbglobal.artoutandroid.ui.discover.DiscoverViewModel
 import com.mbglobal.artoutandroid.ui.editevent.EditEventViewModel
 import com.mbglobal.artoutandroid.ui.eventdetails.EventDetailsViewModel
@@ -63,4 +64,10 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(EditEventViewModel::class)
     abstract fun bindEditEventViewModel(editEventViewModel: EditEventViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(AddEventViewModel::class)
+    abstract fun bindAddEventViewModel(addEventViewModel: AddEventViewModel): ViewModel
+
 }
