@@ -12,8 +12,8 @@
         <action
             android:id="@+id/action_loginFragment_to_registerFragment"
             app:destination="@id/registerFragment"
-            app:exitAnim="@anim/slide_out_left"
             app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
         <action
@@ -42,7 +42,7 @@
     <fragment
         android:id="@+id/timelineFragment"
         android:name="com.mbglobal.artoutandroid.ui.timeline.TimelineFragment"
-        android:label="TimelineFragment" >
+        android:label="TimelineFragment">
         <action
             android:id="@+id/action_timelineFragment_to_eventsFragment"
             app:destination="@id/eventsFragment" />
@@ -53,7 +53,7 @@
     <fragment
         android:id="@+id/addEventFragment"
         android:name="com.mbglobal.artoutandroid.ui.addevent.AddEventFragment"
-        android:label="AddEventFragment" >
+        android:label="AddEventFragment">
         <action
             android:id="@+id/action_addEventFragment_to_eventDetailsFragment"
             app:destination="@id/eventDetailsFragment"
@@ -66,13 +66,13 @@
     <fragment
         android:id="@+id/eventsFragment"
         android:name="com.mbglobal.artoutandroid.ui.discover.DiscoverFragment"
-        android:label="EventsFragment" >
+        android:label="EventsFragment">
         <action
             android:id="@+id/action_eventsFragment_to_timelineFragment"
             app:destination="@id/timelineFragment"
+            app:launchSingleTop="true"
             app:popUpTo="@id/navigation"
-            app:popUpToInclusive="true"
-            app:launchSingleTop="true" />
+            app:popUpToInclusive="true" />
         <action
             android:id="@+id/action_eventsFragment_to_profileFragment"
             app:destination="@id/profileFragment" />
@@ -88,7 +88,7 @@
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.mbglobal.artoutandroid.ui.profile.ProfileFragment"
-        android:label="ProfileFragment" >
+        android:label="ProfileFragment">
         <argument
             android:name="userId"
             app:argType="string"
@@ -98,17 +98,17 @@
             app:destination="@id/loginFragment"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
+            app:launchSingleTop="true"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right"
-            app:launchSingleTop="true"
             app:popUpTo="@+id/navigation"
             app:popUpToInclusive="true" />
         <action
             android:id="@+id/action_profileFragment_to_timelineFragment"
             app:destination="@id/timelineFragment"
+            app:launchSingleTop="true"
             app:popUpTo="@id/navigation"
-            app:popUpToInclusive="true"
-            app:launchSingleTop="true" />
+            app:popUpToInclusive="true" />
         <action
             android:id="@+id/action_profileFragment_to_eventsFragment"
             app:destination="@id/eventsFragment" />
@@ -117,42 +117,57 @@
             app:destination="@id/eventDetailsFragment"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
+            app:launchSingleTop="true"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right"
-            app:launchSingleTop="true"
             app:popUpTo="@+id/profileFragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_eventListFragment"
+            app:destination="@id/eventListFragment" />
     </fragment>
 
     <fragment
         android:id="@+id/eventDetailsFragment"
         android:name="com.mbglobal.artoutandroid.ui.eventdetails.EventDetailsFragment"
-        android:label="EventDetailsFragment" >
+        android:label="EventDetailsFragment">
         <argument
             android:name="eventId"
             app:argType="integer" />
         <action
             android:id="@+id/action_eventDetailsFragment_to_editEventFragment"
             app:destination="@id/editEventFragment"
-            app:exitAnim="@anim/slide_out_left"
             app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"/>
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
     <fragment
         android:id="@+id/editEventFragment"
         android:name="com.mbglobal.artoutandroid.ui.editevent.EditEventFragment"
-        android:label="EditEventFragment" >
+        android:label="EditEventFragment">
         <argument
             android:name="eventId"
             app:argType="integer" />
         <action
             android:id="@+id/action_editEventFragment_to_eventDetailsFragment"
             app:destination="@id/eventDetailsFragment"
-            app:launchSingleTop="true"
-            app:popUpTo="@+id/eventDetailsFragment"
-            app:exitAnim="@anim/slide_out_left"
             app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:launchSingleTop="true"
             app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"/>
+            app:popExitAnim="@anim/slide_out_right"
+            app:popUpTo="@+id/eventDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/eventListFragment"
+        android:name="com.mbglobal.artoutandroid.ui.eventlist.EventListFragment"
+        android:label="EventListFragment">
+        <argument
+            android:name="userId"
+            app:argType="string"
+            app:nullable="true" />
+        <action
+            android:id="@+id/action_eventListFragment_to_eventDetailsFragment"
+            app:destination="@id/eventDetailsFragment" />
     </fragment>
 </navigation>

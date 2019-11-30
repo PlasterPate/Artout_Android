@@ -10,24 +10,8 @@ import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
 class ProfileViewModel @Inject constructor(
-    private val eventRepository: EventRepository,
     private val userRepository: UserRepository
 ) : BaseViewModel() {
-
-    val userEvents = MutableLiveData<List<EventEntity>>()
-
-    fun getUserEvents(userId: String?) {
-        eventRepository.getUserEvents(userId)
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe({ events ->
-                userEvents.value = events
-            }, {
-                println(it)
-            }).also {
-                compositeDisposable.add(it)
-            }
-    }
 
     private val _logoutStatus: MutableLiveData<Boolean> = MutableLiveData()
     val logoutStatus = _logoutStatus

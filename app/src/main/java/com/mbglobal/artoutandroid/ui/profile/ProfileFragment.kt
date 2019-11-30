@@ -21,7 +21,7 @@ import com.squareup.picasso.Picasso
 
 class ProfileFragment : BaseFragment() {
 
-    lateinit var slug: String
+    private var userId: String? = null
     lateinit var binding: FragmentProfileBinding
     var adapter: ProfileItemsAdapter? = null
 
@@ -40,6 +40,7 @@ class ProfileFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        userId = ProfileFragmentArgs.fromBundle(arguments!!).userId
         binding.rvProfileItems.layoutManager = LinearLayoutManager(view.context)
         binding.rvProfileItems.adapter = ProfileItemsAdapter(
             UserProfileEntity(
@@ -60,7 +61,7 @@ class ProfileFragment : BaseFragment() {
                 override val itemTag: String = ProfileItem.SUGGESTIONS
 
                 override fun onClicked(profileItem: ProfileItem) {
-                    Toast.makeText(requireContext(), "Navigate to suggestions", Toast.LENGTH_LONG).show()
+                    findNavController().navigate(ProfileFragmentDirections.actionProfileFragmentToEventListFragment(userId))
                 }
 
             })
@@ -69,7 +70,7 @@ class ProfileFragment : BaseFragment() {
                 override val itemTag: String = ProfileItem.CHECKINS
 
                 override fun onClicked(profileItem: ProfileItem) {
-                    Toast.makeText(requireContext(), "Navigate to checkins", Toast.LENGTH_LONG).show()
+                    findNavController().navigate(ProfileFragmentDirections.actionProfileFragmentToEventListFragment(userId))
                 }
 
             })
