@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import com.mbglobal.artoutandroid.app.MainViewModel
 import com.mbglobal.artoutandroid.di.annotation.ViewModelKey
 import com.mbglobal.artoutandroid.ui.discover.DiscoverViewModel
+import com.mbglobal.artoutandroid.ui.editevent.EditEventViewModel
 import com.mbglobal.artoutandroid.ui.eventdetails.EventDetailsViewModel
 import com.mbglobal.artoutandroid.ui.eventlist.EventListViewModel
 import com.mbglobal.artoutandroid.ui.login.LoginViewModel
@@ -11,6 +12,7 @@ import com.mbglobal.artoutandroid.ui.profile.ProfileViewModel
 import com.mbglobal.artoutandroid.ui.register.RegisterViewModel
 import com.mbglobal.artoutandroid.ui.timeline.TimelineViewModel
 import dagger.Binds
+import dagger.BindsInstance
 import dagger.Module
 import dagger.multibindings.IntoMap
 
@@ -25,12 +27,12 @@ abstract class ViewModelModule {
     @Binds
     @IntoMap
     @ViewModelKey(EventDetailsViewModel::class)
-    abstract fun bindEventDetailsViewModel(eventDetailsViewModel: EventDetailsViewModel) : ViewModel
+    abstract fun bindEventDetailsViewModel(eventDetailsViewModel: EventDetailsViewModel): ViewModel
 
     @Binds
     @IntoMap
     @ViewModelKey(DiscoverViewModel::class)
-    abstract fun bindDiscoverViewModel(discoverViewModel: DiscoverViewModel) : ViewModel
+    abstract fun bindDiscoverViewModel(discoverViewModel: DiscoverViewModel): ViewModel
 
     @Binds
     @IntoMap
@@ -45,15 +47,20 @@ abstract class ViewModelModule {
     @Binds
     @IntoMap
     @ViewModelKey(ProfileViewModel::class)
-    abstract fun bindProfileViewModel(profileViewModel: ProfileViewModel) : ViewModel
+    abstract fun bindProfileViewModel(profileViewModel: ProfileViewModel): ViewModel
 
     @Binds
     @IntoMap
     @ViewModelKey(RegisterViewModel::class)
-    abstract fun bindRegisterViewModel(registerViewModel: RegisterViewModel) : ViewModel
+    abstract fun bindRegisterViewModel(registerViewModel: RegisterViewModel): ViewModel
 
     @Binds
     @IntoMap
     @ViewModelKey(TimelineViewModel::class)
-    abstract fun bindTimelineViewModel(viewModel: TimelineViewModel) : ViewModel
+    abstract fun bindTimelineViewModel(viewModel: TimelineViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(EditEventViewModel::class)
+    abstract fun bindEditEventViewModel(editEventViewModel: EditEventViewModel): ViewModel
 }

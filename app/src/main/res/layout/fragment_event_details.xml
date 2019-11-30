@@ -26,6 +26,5 @@
             app:menu="@menu/event_detail_menu"
             app:navigationIcon="@drawable/ic_back_arrow"/>
 
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
