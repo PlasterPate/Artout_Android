@@ -61,6 +61,7 @@ class EventListFragment : BaseFragment(), OnEventItemClickListener {
     private fun initializeObservers() {
         eventListViewModel.userEvents.observe(this, Observer { events ->
             adapter?.refreshData(events)
+            binding.progress.visibility = View.GONE
         })
     }
 
