@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Adapter
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
@@ -14,9 +13,9 @@ import com.mbglobal.artoutandroid.R
 import com.mbglobal.artoutandroid.databinding.FragmentProfileBinding
 import com.mbglobal.artoutandroid.ui.base.BaseFragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.mbglobal.artoutandroid.ui.profile.adapter.ProfileItem
 import com.mbglobal.artoutandroid.ui.profile.adapter.ProfileItemsAdapter
 import com.mbglobal.artoutandroid.ui.profile.listener.OnProfileItemClickListener
-import com.mbglobal.data.entity.event.EventEntity
 import com.mbglobal.data.entity.user.UserProfileEntity
 import com.squareup.picasso.Picasso
 

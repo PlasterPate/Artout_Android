@@ -65,7 +65,7 @@
     </fragment>
     <fragment
         android:id="@+id/eventsFragment"
-        android:name="com.mbglobal.artoutandroid.ui.events.EventsFragment"
+        android:name="com.mbglobal.artoutandroid.ui.discover.DiscoverFragment"
         android:label="EventsFragment" >
         <action
             android:id="@+id/action_eventsFragment_to_timelineFragment"

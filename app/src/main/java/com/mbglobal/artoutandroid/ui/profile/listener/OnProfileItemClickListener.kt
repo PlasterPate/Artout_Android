@@ -1,6 +1,6 @@
 package com.mbglobal.artoutandroid.ui.profile.listener
 
-import com.mbglobal.artoutandroid.ui.profile.ProfileItem
+import com.mbglobal.artoutandroid.ui.profile.adapter.ProfileItem
 
 interface OnProfileItemClickListener {
 

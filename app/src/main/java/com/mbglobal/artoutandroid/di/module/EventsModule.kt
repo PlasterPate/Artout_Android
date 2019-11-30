@@ -2,8 +2,8 @@ package com.mbglobal.artoutandroid.di.module
 
 import androidx.lifecycle.ViewModel
 import com.mbglobal.artoutandroid.di.annotation.ViewModelKey
-import com.mbglobal.artoutandroid.ui.events.EventsFragment
-import com.mbglobal.artoutandroid.ui.events.EventsViewModel
+import com.mbglobal.artoutandroid.ui.discover.DiscoverFragment
+import com.mbglobal.artoutandroid.ui.discover.DiscoverViewModel
 import dagger.Binds
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
@@ -13,10 +13,10 @@ import dagger.multibindings.IntoMap
 abstract class EventsModule {
 
     @ContributesAndroidInjector
-    abstract fun eventsFragment() : EventsFragment
+    abstract fun discoverFragment() : DiscoverFragment
 
     @Binds
     @IntoMap
-    @ViewModelKey(EventsViewModel::class)
-    abstract fun bindEventsViewModel(eventsViewModel: EventsViewModel) : ViewModel
+    @ViewModelKey(DiscoverViewModel::class)
+    abstract fun bindDiscoverViewModel(discoverViewModel: DiscoverViewModel) : ViewModel
 }

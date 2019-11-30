@@ -7,7 +7,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.findNavController
 import com.mbglobal.artoutandroid.R
-import com.mbglobal.artoutandroid.ui.events.EventsFragmentDirections
+import com.mbglobal.artoutandroid.ui.discover.DiscoverFragmentDirections
 import com.mbglobal.artoutandroid.ui.navigation.NavigationManager
 import com.mbglobal.artoutandroid.ui.profile.ProfileFragmentDirections
 import com.mbglobal.artoutandroid.ui.timeline.TimelineFragmentDirections
@@ -20,7 +20,7 @@ class MainActivity : DaggerAppCompatActivity() {
     @Inject
     protected lateinit var viewModelFactory: ViewModelProvider.Factory
 
-    val mainViewModel: MainViewModel by lazy {
+    private val mainViewModel: MainViewModel by lazy {
         ViewModelProviders.of(this, viewModelFactory)[MainViewModel::class.java]
     }
 
@@ -33,7 +33,7 @@ class MainActivity : DaggerAppCompatActivity() {
             when(item.itemId){
                 R.id.navigation_timeline -> {
                     if (currentDestinationId == R.id.eventsFragment) {
-                        findNavController(R.id.nav_host_fragment).navigate(EventsFragmentDirections.actionEventsFragmentToTimelineFragment())
+                        findNavController(R.id.nav_host_fragment).navigate(DiscoverFragmentDirections.actionEventsFragmentToTimelineFragment())
                     } else if (currentDestinationId == R.id.profileFragment) {
                         findNavController(R.id.nav_host_fragment).navigate(ProfileFragmentDirections.actionProfileFragmentToTimelineFragment())
                     }
@@ -52,7 +52,7 @@ class MainActivity : DaggerAppCompatActivity() {
                     if (currentDestinationId == R.id.timelineFragment) {
                         findNavController(R.id.nav_host_fragment).navigate(TimelineFragmentDirections.actionTimelineFragmentToProfileFragment(null))
                     } else if (currentDestinationId == R.id.eventsFragment) {
-                        findNavController(R.id.nav_host_fragment).navigate(EventsFragmentDirections.actionEventsFragmentToProfileFragment(null))
+                        findNavController(R.id.nav_host_fragment).navigate(DiscoverFragmentDirections.actionEventsFragmentToProfileFragment(null))
                     }
                     return@setOnNavigationItemSelectedListener true
                 }
@@ -73,7 +73,7 @@ class MainActivity : DaggerAppCompatActivity() {
         })
     }
 
-    fun initializeNavigationController() {
+    private fun initializeNavigationController() {
         findNavController(R.id.nav_host_fragment).addOnDestinationChangedListener { controller, destination, arguments ->
             when (destination.id) {
                 R.id.timelineFragment, R.id.eventsFragment, R.id.profileFragment -> {

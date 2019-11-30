@@ -5,7 +5,6 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.mbglobal.artoutandroid.R
-import com.mbglobal.artoutandroid.ui.profile.ProfileItem
 import com.mbglobal.artoutandroid.ui.profile.listener.OnProfileItemClickListener
 
 class ProfileItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
