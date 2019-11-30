@@ -24,7 +24,7 @@ class ProfileFragment : BaseFragment() {
 
     lateinit var slug: String
     lateinit var binding: FragmentProfileBinding
-    lateinit var adapter: ProfileItemsAdapter
+    var adapter: ProfileItemsAdapter? = null
 
     private val profileViewModel: ProfileViewModel by lazy {
         ViewModelProviders.of(this, viewModelFactory)[ProfileViewModel::class.java]
@@ -55,7 +55,7 @@ class ProfileFragment : BaseFragment() {
         Picasso.get().load("https://pbs.twimg.com/profile_images/959929674355765248/fk3ALoeH.jpg")
             .into(binding.ivProfileImage)
 
-        adapter.listeners.apply {
+        adapter!!.listeners.apply {
             add(object: OnProfileItemClickListener {
 
                 override val itemTag: String = ProfileItem.SUGGESTIONS
@@ -75,6 +75,36 @@ class ProfileFragment : BaseFragment() {
 
             })
         }
+
+        initializeListeners()
+        initializeObservers()
+    }
+
+    private fun initializeListeners() {
+
+        binding.btnLogout.setOnClickListener {
+            profileViewModel.clickLogout()
+        }
+
+    }
+
+    private fun initializeObservers() {
+
+        profileViewModel.logoutStatus.observe(this, Observer {
+            if (it == true) {
+                findNavController().navigate(ProfileFragmentDirections.actionProfileFragmentToLoginFragment())
+            }
+        })
+
+        profileViewModel.logoutError.observe(this, Observer {
+            Toast.makeText(requireContext(), it, Toast.LENGTH_LONG).show()
+        })
+
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        adapter = null
     }
 
 }
