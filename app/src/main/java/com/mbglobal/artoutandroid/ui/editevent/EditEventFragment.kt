@@ -29,7 +29,8 @@ class EditEventFragment : ManageEventFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        binding.progress.visibility = View.VISIBLE
+        binding.layoutGroup.visibility = View.INVISIBLE
         initializeListeners()
         initializeObservers()
         val pageName = getString(R.string.edit_event)
@@ -73,6 +74,8 @@ class EditEventFragment : ManageEventFragment() {
             binding.startDateEditText.setText(it.startDate)
             binding.endDateEditText.setText(it.endDate)
             Picasso.get().load(it.image).into(binding.imagePick)
+            binding.layoutGroup.visibility = View.VISIBLE
+            binding.progress.visibility = View.GONE
         })
     }
 }

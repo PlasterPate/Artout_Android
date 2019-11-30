@@ -7,6 +7,8 @@ import com.mbglobal.artoutandroid.app.ViewModelFactory
 
 @Module
 abstract class ViewModelFactoryModule {
+
     @Binds
     internal abstract fun bindViewModelFactory(factory: ViewModelFactory): ViewModelProvider.Factory
+
 }

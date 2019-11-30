@@ -13,8 +13,7 @@ import io.reactivex.Single
 import javax.inject.Inject
 
 class EventRemoteDataSourceImpl @Inject constructor(private val eventService: EventService) :
-    EventRemoteDataSource{
-
+    EventRemoteDataSource {
     override fun getEvent(eventId: Int): Single<EventEntity> {
         return eventService.getEvent(eventId).map {
             it.toEventEntity()
@@ -27,14 +26,22 @@ class EventRemoteDataSourceImpl @Inject constructor(private val eventService: Ev
         }
     }
 
+    override fun editEvent(eventId: Int, eventEntity: AddEventEntity): Single<EventEntity> {
+        return eventService.editEvent(eventId, eventEntity.toAddEventDto()).map {
+            it.toEventEntity()
+        }
+    }
+
     override fun getUserEvents(userId: Int): Single<List<EventEntity>> {
         return eventService.getUserEvents(userId)
     }
 
-    override fun editEvent(eventId: Int, eventEntity: AddEventEntity) : Single<EventEntity>{
-        return eventService.editEvent(eventId, eventEntity.toAddEventDto()).map {
-            it.toEventEntity()
-        }
+    override fun getUserCheckIns(userId: Int): Single<List<EventEntity>> {
+        return eventService.getUserCheckIns(userId)
+    }
+
+    override fun getUserSuggestions(userId: Int): Single<List<EventEntity>> {
+        return eventService.getUserSuggestions(userId)
     }
 }
 

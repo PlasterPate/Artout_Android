@@ -13,17 +13,19 @@ import com.mbglobal.artoutandroid.R
 import com.mbglobal.artoutandroid.databinding.FragmentProfileBinding
 import com.mbglobal.artoutandroid.ui.base.BaseFragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.mbglobal.artoutandroid.ui.profile.adapter.EventAdapter
-import com.mbglobal.artoutandroid.ui.profile.adapter.OnEventItemClickListener
-import com.mbglobal.data.entity.event.EventEntity
+import com.mbglobal.artoutandroid.ui.profile.adapter.ProfileItem
+import com.mbglobal.artoutandroid.ui.profile.adapter.ProfileItemsAdapter
+import com.mbglobal.artoutandroid.ui.profile.listener.OnProfileItemClickListener
+import com.mbglobal.data.entity.user.UserProfileEntity
+import com.squareup.picasso.Picasso
 
-class ProfileFragment : BaseFragment(), OnEventItemClickListener{
+class ProfileFragment : BaseFragment() {
 
-    lateinit var slug: String
-    lateinit var binding : FragmentProfileBinding
-    lateinit var adapter : EventAdapter
+    private var userId: String? = null
+    lateinit var binding: FragmentProfileBinding
+    var adapter: ProfileItemsAdapter? = null
 
-    private val profileViewModel : ProfileViewModel by lazy {
+    private val profileViewModel: ProfileViewModel by lazy {
         ViewModelProviders.of(this, viewModelFactory)[ProfileViewModel::class.java]
     }
 
@@ -38,24 +40,51 @@ class ProfileFragment : BaseFragment(), OnEventItemClickListener{
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        adapter = EventAdapter(this)
-        binding.myEventsList.adapter = adapter
-        initializeListeners()
-        initializeObservers()
+        userId = ProfileFragmentArgs.fromBundle(arguments!!).userId
+        binding.rvProfileItems.layoutManager = LinearLayoutManager(view.context)
+        binding.rvProfileItems.adapter = ProfileItemsAdapter(
+            UserProfileEntity(
+                followerCount = 21,
+                followingCount = 20,
+                suggestionCount = 48,
+                checkinCount = 30
+            )
+        )
+        adapter = binding.rvProfileItems.adapter as ProfileItemsAdapter
 
-        binding.myEventsList.let { recyclerView ->
-            recyclerView.adapter = adapter
-            recyclerView.layoutManager = LinearLayoutManager(view.context)
+        Picasso.get().load("https://pbs.twimg.com/profile_images/959929674355765248/fk3ALoeH.jpg")
+            .into(binding.ivProfileImage)
+
+        adapter!!.listeners.apply {
+            add(object: OnProfileItemClickListener {
+
+                override val itemTag: String = ProfileItem.SUGGESTIONS
+
+                override fun onClicked(profileItem: ProfileItem) {
+                    findNavController().navigate(ProfileFragmentDirections.actionProfileFragmentToEventListFragment(userId))
+                }
+
+            })
+            add(object: OnProfileItemClickListener {
+
+                override val itemTag: String = ProfileItem.CHECKINS
+
+                override fun onClicked(profileItem: ProfileItem) {
+                    findNavController().navigate(ProfileFragmentDirections.actionProfileFragmentToEventListFragment(userId))
+                }
+
+            })
         }
 
-        val userId = ProfileFragmentArgs.fromBundle(arguments!!).userId
-        profileViewModel.getUserEvents(userId)
-        profileViewModel.userEvents.observe(viewLifecycleOwner, Observer {
-            it?.let {
-                adapter.refreshData(it)
-            }
-        })
+        initializeListeners()
+        initializeObservers()
+    }
 
+    private fun initializeListeners() {
+
+        binding.btnLogout.setOnClickListener {
+            profileViewModel.clickLogout()
+        }
 
     }
 
@@ -73,13 +102,9 @@ class ProfileFragment : BaseFragment(), OnEventItemClickListener{
 
     }
 
-    private fun initializeListeners() {
-        binding.btnLogout.setOnClickListener {
-            profileViewModel.clickLogout()
-        }
+    override fun onDestroy() {
+        super.onDestroy()
+        adapter = null
     }
 
-    override fun onClicked(eventEntity: EventEntity) {
-        findNavController().navigate(ProfileFragmentDirections.actionProfileFragmentToEventDetailsFragment(eventEntity.id))
-    }
 }

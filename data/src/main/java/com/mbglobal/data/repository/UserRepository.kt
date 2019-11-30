@@ -40,4 +40,34 @@ class UserRepository @Inject constructor(
     fun logout() : Completable {
         return sessionLocalDataSource.removeSession()
     }
+
+    fun follow(username: String): Completable {
+        return userRemoteDataSource.follow(username)
+    }
+
+    fun getFollowers(userId: String?): Single<List<UserEntity>> {
+        val idSingle =
+            userId?.let {
+                Single.just(userId)
+            } ?: sessionLocalDataSource.getUser()
+        return idSingle.flatMap {
+            userRemoteDataSource.getFollowers(it.toInt())
+        }
+    }
+
+    fun getFollowings(userId: String?): Single<List<UserEntity>> {
+        val idSingle =
+            userId?.let {
+                Single.just(userId)
+            } ?: sessionLocalDataSource.getUser()
+        return idSingle.flatMap {
+            userRemoteDataSource.getFollowings(it.toInt())
+        }
+    }
+
+    fun getFollowRequests(): Single<List<UserEntity>> {
+        return sessionLocalDataSource.getUser().flatMap {
+            userRemoteDataSource.getFollowRequests(it.toInt())
+        }
+    }
 }

@@ -79,6 +79,8 @@ dependencies {
     implementation "com.squareup.okhttp3:logging-interceptor:$libraries.okHttpLoggingInterceptor"
     implementation "com.jakewharton.timber:timber:$libraries.timber"
 
+    implementation "de.hdodenhof:circleimageview:$libraries.circularImageView"
+
     testImplementation "junit:junit:$testLibraries.junit"
     androidTestImplementation "androidx.test:runner:$testLibraries.androidXTestRunner"
     androidTestImplementation "androidx.test.espresso:espresso-core:$testLibraries.espresso"
