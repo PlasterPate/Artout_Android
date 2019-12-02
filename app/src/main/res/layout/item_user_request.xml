@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
     android:orientation="horizontal"
     android:paddingTop="16dp"
-    android:paddingBottom="16dp"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:paddingBottom="16dp">
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/iv_profile_image"
@@ -16,41 +16,59 @@
         android:src="@color/white"
         app:civ_border_color="@color/black"
         app:civ_border_width="1dp"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/btn_logout" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        style="@style/FollowerItemName"
         android:id="@+id/tv_name"
-        tools:text="Sauleh Eetemadi"
-        android:layout_marginStart="16dp"
-        android:layout_gravity="center_vertical"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
-
-    <View
+        style="@style/FollowerItemName"
         android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_weight="1"/>
-
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="8dp"
+        android:ellipsize="end"
+        android:maxLines="1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/guideline"
+        app:layout_constraintStart_toEndOf="@id/iv_profile_image"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Sauleh Eetemadi" />
 
     <Button
         android:id="@+id/btn_reject"
-        android:text="Nay"
-        android:backgroundTint="@color/red"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
         android:layout_marginEnd="8dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_marginStart="8dp"
+        android:backgroundTint="@color/red"
+        android:text="Nay"
+        app:layout_constraintBottom_toBottomOf="@id/btn_accept"
+        app:layout_constraintStart_toEndOf="@id/btn_accept"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/btn_accept" />
 
     <Button
-        android:text="Yay"
-        android:textSize="12sp"
-        android:layout_gravity="center_vertical"
         android:id="@+id/btn_accept"
         android:layout_width="80dp"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginStart="8dp"
+        android:text="Yay"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="@id/iv_profile_image"
+        app:layout_constraintEnd_toStartOf="@+id/btn_reject"
+        app:layout_constraintStart_toStartOf="@id/guideline"
+        app:layout_constraintTop_toTopOf="@id/iv_profile_image" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="214dp" />
 
 
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

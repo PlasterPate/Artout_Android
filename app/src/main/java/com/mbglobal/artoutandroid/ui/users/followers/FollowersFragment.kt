@@ -58,10 +58,10 @@ class FollowersFragment : BaseFragment() {
             data = listOf(
                 UserEntity(
                     "https://pbs.twimg.com/profile_images/959929674355765248/fk3ALoeH.jpg",
-                    "Sauleh",
+                    "Saulehhhhhh",
                     12,
-                    "Eeti",
-                    "sauleh1"
+                    "Eeti123456789",
+                    "sauleh"
                 ),
                 UserEntity(
                     "https://pbs.twimg.com/profile_images/959929674355765248/fk3ALoeH.jpg",
