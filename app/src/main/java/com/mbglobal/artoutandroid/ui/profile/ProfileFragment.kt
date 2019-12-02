@@ -1,5 +1,6 @@
 package com.mbglobal.artoutandroid.ui.profile
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -18,6 +19,7 @@ import com.mbglobal.artoutandroid.ui.profile.adapter.ProfileItemsAdapter
 import com.mbglobal.artoutandroid.ui.profile.listener.OnProfileItemClickListener
 import com.mbglobal.data.entity.user.UserProfileEntity
 import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.dialog_add_friend.*
 import kotlinx.android.synthetic.main.fragment_profile.*
 
 class ProfileFragment : BaseFragment() {
@@ -82,6 +84,20 @@ class ProfileFragment : BaseFragment() {
     }
 
     private fun initializeListeners() {
+
+        binding.btnAddFriend.setOnClickListener{
+            val builder = AlertDialog.Builder(requireContext())
+            val dialog : AlertDialog = builder.setView(R.layout.dialog_add_friend).create()
+            dialog.show()
+
+            dialog.dialog_btn_add.setOnClickListener{
+                dialog.hide()
+            }
+
+            dialog.dialog_btn_cancel.setOnClickListener{
+                dialog.hide()
+            }
+        }
 
         binding.btnLogout.setOnClickListener {
             profileViewModel.clickLogout()
