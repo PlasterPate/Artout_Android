@@ -13,7 +13,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
-            android:text="Pending Follow Requests"
+            android:text="@string/pending_follow_requests"
             android:textSize="16sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -33,19 +33,17 @@
             android:id="@+id/rv_pending_followers"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:paddingStart="16dp"
-            android:paddingEnd="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/divider_pending"
             tools:itemCount="3"
-            tools:listitem="@layout/item_user" />
+            tools:listitem="@layout/item_user_request" />
 
         <TextView
             android:id="@+id/tv_followers_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Followers"
+            android:text="@string/followers"
             android:textSize="16sp"
             app:layout_constraintStart_toStartOf="@id/tv_pending_followers_title"
             app:layout_constraintTop_toBottomOf="@id/rv_pending_followers" />
@@ -63,8 +61,6 @@
             android:id="@+id/rv_followers"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:paddingStart="16dp"
-            android:paddingEnd="16dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

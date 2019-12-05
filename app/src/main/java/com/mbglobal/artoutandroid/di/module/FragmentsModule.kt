@@ -13,6 +13,7 @@ import com.mbglobal.artoutandroid.ui.profile.ProfileFragment
 import com.mbglobal.artoutandroid.ui.register.RegisterFragment
 import com.mbglobal.artoutandroid.ui.timeline.TimelineFragment
 import com.mbglobal.artoutandroid.ui.users.followers.FollowersFragment
+import com.mbglobal.artoutandroid.ui.users.followings.FollowingsFragment
 import dagger.Binds
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
@@ -50,4 +51,7 @@ abstract class FragmentsModule {
 
     @ContributesAndroidInjector
     abstract fun followersFragment(): FollowersFragment
+
+    @ContributesAndroidInjector
+    abstract fun followingsFragment(): FollowingsFragment
 }

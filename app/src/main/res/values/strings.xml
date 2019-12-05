@@ -35,4 +35,9 @@
     <string name="username">Username</string>
     <string name="cancel">Cancel</string>
     <string name="send">Send</string>
+    <string name="following">Following</string>
+    <string name="follow">Follow</string>
+    <string name="pending_follow_requests">Pending Follow Requests</string>
+    <string name="followers">Followers</string>
+    <string name="followings">Followings</string>
 </resources>
