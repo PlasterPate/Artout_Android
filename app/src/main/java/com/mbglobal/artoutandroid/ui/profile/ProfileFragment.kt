@@ -108,7 +108,7 @@ class ProfileFragment : BaseFragment() {
         }
 
         binding.containerFollowings.setOnClickListener {
-            findNavController().navigate(ProfileFragmentDirections.actionProfileFragmentToFollowersFragment())
+            findNavController().navigate(ProfileFragmentDirections.actionProfileFragmentToFollowingsFragment())
         }
     }
 
