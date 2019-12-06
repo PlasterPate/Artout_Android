@@ -21,6 +21,8 @@ interface UserService {
     @POST("/api/users/")
     fun getUser(@Body userGetDto: UserGetDto, @Header("Authorization") bearerToken: String): Single<UserResponseDto>
 
+    //////////////
+
     @PUT("/api/.../")
     fun follow(username: String): Completable
 

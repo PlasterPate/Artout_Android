@@ -1,6 +1,7 @@
 package com.mbglobal.artoutandroid.di.module
 
 import com.mbglobal.remote.api.EventService
+import com.mbglobal.remote.api.FollowerService
 import com.mbglobal.remote.api.TokenService
 import com.mbglobal.remote.api.UserService
 import dagger.Module
@@ -35,6 +36,11 @@ class NetworkModule {
             .addConverterFactory(GsonConverterFactory.create())
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .build()
+    }
+
+    @Provides
+    fun providesFollowerService(retrofit: Retrofit) : FollowerService{
+        return retrofit.create(FollowerService::class.java)
     }
 
     @Provides
