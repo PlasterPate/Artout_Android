@@ -1,9 +1,6 @@
 package com.mbglobal.artoutandroid.di.module
 
-import com.mbglobal.remote.api.EventService
-import com.mbglobal.remote.api.FollowerService
-import com.mbglobal.remote.api.TokenService
-import com.mbglobal.remote.api.UserService
+import com.mbglobal.remote.api.*
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
@@ -41,6 +38,11 @@ class NetworkModule {
     @Provides
     fun providesFollowerService(retrofit: Retrofit) : FollowerService{
         return retrofit.create(FollowerService::class.java)
+    }
+
+    @Provides
+    fun providesFollowingService(retrofit: Retrofit) : FollowingService{
+        return retrofit.create(FollowingService::class.java)
     }
 
     @Provides
