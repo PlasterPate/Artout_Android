@@ -25,7 +25,7 @@ class FollowRequestViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView
     }
 
     private val rejectButton by lazy {
-        itemView.findViewById(R.id.btn_reject) as Button
+        itemView.findViewById(R.id.btn_reject) as ImageView
     }
 
     fun bind(userEntity: UserEntity, onFollowRequestClickListener: OnFollowRequestClickListener) {

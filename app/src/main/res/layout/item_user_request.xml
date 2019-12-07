@@ -28,45 +28,38 @@
         android:layout_marginEnd="8dp"
         android:ellipsize="end"
         android:maxLines="1"
+        android:gravity="start"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/guideline"
+        app:layout_constraintEnd_toStartOf="@+id/btn_accept"
         app:layout_constraintStart_toEndOf="@id/iv_profile_image"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="Sauleh Eetemadi" />
 
     <Button
+        android:id="@+id/btn_accept"
+        android:layout_width="96dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginStart="8dp"
+        app:layout_constraintEnd_toStartOf="@id/btn_reject"
+        app:layout_constraintTop_toTopOf="@id/iv_profile_image"
+        app:layout_constraintBottom_toBottomOf="@id/iv_profile_image"
+        android:layout_marginEnd="8dp"
+        android:text="@string/accept"
+        android:textSize="12sp"/>
+
+    <ImageView
         android:id="@+id/btn_reject"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:backgroundTint="@color/red"
-        android:text="Nay"
+        android:clickable="true"
+        android:focusable="true"
+        android:foreground="?selectableItemBackground"
+        android:padding="12dp"
+        android:src="@drawable/ic_clear_black_24dp"
         app:layout_constraintBottom_toBottomOf="@id/btn_accept"
-        app:layout_constraintStart_toEndOf="@id/btn_accept"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@id/btn_accept" />
-
-    <Button
-        android:id="@+id/btn_accept"
-        android:layout_width="80dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
-        android:layout_marginStart="8dp"
-        android:text="Yay"
-        android:textSize="12sp"
-        app:layout_constraintBottom_toBottomOf="@id/iv_profile_image"
-        app:layout_constraintEnd_toStartOf="@+id/btn_reject"
-        app:layout_constraintStart_toStartOf="@id/guideline"
-        app:layout_constraintTop_toTopOf="@id/iv_profile_image" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_begin="214dp" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

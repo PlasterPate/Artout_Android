@@ -33,10 +33,11 @@
             android:id="@+id/rv_pending_followers"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:maxHeight="240dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/divider_pending"
-            tools:itemCount="3"
+            tools:itemCount="7"
             tools:listitem="@layout/item_user_request" />
 
         <TextView
