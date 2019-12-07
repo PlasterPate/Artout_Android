@@ -1,31 +1,32 @@
 package com.mbglobal.remote.api
 
 import com.mbglobal.data.entity.user.UserEntity
+import com.mbglobal.remote.dto.user.FollowRequestDto
+import com.mbglobal.remote.dto.user.UserDto
 import io.reactivex.Completable
 import io.reactivex.Single
-import retrofit2.http.DELETE
-import retrofit2.http.GET
-import retrofit2.http.POST
+import okhttp3.ResponseBody
+import retrofit2.http.*
 
 interface FollowingService {
 
     @GET("followings/")
-    fun getUserFollowings(): Single<List<UserEntity>>
+    fun getUserFollowings(): Single<List<UserDto>>
 
     @GET("users/{id}/followings")
-    fun getUserFollowings(userId: String): Single<List<UserEntity>>
+    fun getUserFollowings(@Path("id") userId: String): Single<List<UserDto>>
 
     @DELETE("followings/{id}/")
-    fun unfollow(userId: String): Completable
+    fun unfollow(@Path("id") userId: String): Single<ResponseBody>
 
     @POST("followings/pendings/")
-    fun follow(userId: String): Completable
+    fun follow(@Body userId: String): Single<ResponseBody>
 
     @GET("followings/pendings/")
-    fun getFollowPendings(): Single<List<UserEntity>>
+    fun getFollowPendings(): Single<List<FollowRequestDto>>
 
     @DELETE("followings/pendings/{id}/")
-    fun cancelFollowPending(userId: String): Completable
+    fun cancelFollowPending(@Path("id") userId: String): Single<ResponseBody>
 
 //    This method is gonna get completed in Sprint 5
 //

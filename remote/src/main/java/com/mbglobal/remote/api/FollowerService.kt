@@ -1,32 +1,33 @@
 package com.mbglobal.remote.api
 
 import com.mbglobal.data.entity.user.UserEntity
+import com.mbglobal.remote.dto.user.FollowRequestDto
+import com.mbglobal.remote.dto.user.UserDto
 import io.reactivex.Completable
 import io.reactivex.Single
-import retrofit2.http.DELETE
-import retrofit2.http.GET
-import retrofit2.http.PUT
+import okhttp3.ResponseBody
+import retrofit2.http.*
 import javax.print.DocFlavor
 
 interface FollowerService {
 
     @GET("followers/")
-    fun getUserFollowers(): Single<List<UserEntity>>
+    fun getUserFollowers(): Single<List<UserDto>>
 
     @GET("users/{id}/followers/")
-    fun getUserFollowers(userId: String): Single<List<UserEntity>>
+    fun getUserFollowers(@Path("id") userId: String): Single<List<UserDto>>
 
     @DELETE("followers/{id}/")
-    fun removeFollower(userId: String): Completable
+    fun removeFollower(@Path("id") userId: String): Single<ResponseBody>
 
     @GET("followers/requests/")
-    fun getFollowRequests(): Single<List<UserEntity>>
+    fun getFollowRequests(): Single<List<FollowRequestDto>>
 
     @PUT("followers/requests/{id}/")
-    fun acceptRequest(userId: String): Completable
+    fun acceptRequest(@Path("id") userId: String): Single<ResponseBody>
 
     @DELETE("followers/requests/{id}/")
-    fun rejectRequest(userId: String): Completable
+    fun rejectRequest(@Path("id") userId: String): Single<ResponseBody>
 
 //    This method is gonna get completed in Sprint 5
 //
