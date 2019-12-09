@@ -1,9 +1,7 @@
 package com.mbglobal.remote.api
 
-import com.mbglobal.data.entity.user.UserEntity
 import com.mbglobal.remote.dto.user.FollowRequestDto
 import com.mbglobal.remote.dto.user.UserDto
-import io.reactivex.Completable
 import io.reactivex.Single
 import okhttp3.ResponseBody
 import retrofit2.http.*
@@ -16,11 +14,11 @@ interface FollowingService {
     @GET("users/{id}/followings")
     fun getUserFollowings(@Path("id") userId: String): Single<List<UserDto>>
 
-    @DELETE("followings/{id}/")
-    fun unfollow(@Path("id") userId: String): Single<ResponseBody>
-
     @POST("followings/pendings/")
     fun follow(@Body userId: String): Single<ResponseBody>
+
+    @DELETE("followings/{id}/")
+    fun unfollow(@Path("id") userId: String): Single<ResponseBody>
 
     @GET("followings/pendings/")
     fun getFollowPendings(): Single<List<FollowRequestDto>>

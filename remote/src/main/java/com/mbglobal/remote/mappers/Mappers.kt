@@ -9,14 +9,14 @@ import com.mbglobal.remote.dto.event.EventDto
 import com.mbglobal.remote.dto.event.LocationDto
 import com.mbglobal.remote.dto.user.*
 
-fun UserLoginItemEntity.toUserLoginItemDto() : UserLoginItemDto {
+fun UserLoginItemEntity.toUserLoginItemDto(): UserLoginItemDto {
     return UserLoginItemDto(
         username = username,
         password = password
     )
 }
 
-fun UserRegisterItemEntity.toUserRegisterItemDto() : UserRegisterItemDto {
+fun UserRegisterItemEntity.toUserRegisterItemDto(): UserRegisterItemDto {
     return UserRegisterItemDto(
         avatar = avatar,
         password = password,
@@ -27,7 +27,7 @@ fun UserRegisterItemEntity.toUserRegisterItemDto() : UserRegisterItemDto {
     )
 }
 
-fun UserLoginResponseDto.toUserLoginResponseEntity() : UserLoginResponseEntity {
+fun UserLoginResponseDto.toUserLoginResponseEntity(): UserLoginResponseEntity {
     return UserLoginResponseEntity(
         access = access,
         id = id,
@@ -35,13 +35,13 @@ fun UserLoginResponseDto.toUserLoginResponseEntity() : UserLoginResponseEntity {
     )
 }
 
-fun UserRegisterResponseDto.toUserRegisterResponseEntity() : UserRegisterResponseEntity {
+fun UserRegisterResponseDto.toUserRegisterResponseEntity(): UserRegisterResponseEntity {
     return UserRegisterResponseEntity(
         id = id
     )
 }
 
-fun UserResponseDto.toUserEntity() : UserEntity {
+fun UserResponseDto.toUserEntity(): UserEntity {
     return UserEntity(
         firstName = firstName,
         lastName = lastName,
@@ -51,7 +51,7 @@ fun UserResponseDto.toUserEntity() : UserEntity {
     )
 }
 
-fun EventDto.toEventEntity() : EventEntity {
+fun EventDto.toEventEntity(): EventEntity {
     return EventEntity(
         title = title,
         image = image,
@@ -65,7 +65,7 @@ fun EventDto.toEventEntity() : EventEntity {
     )
 }
 
-fun EventEntity.toAddEventDto() : AddEventDto {
+fun EventEntity.toAddEventDto(): AddEventDto {
     return AddEventDto(
         title = title,
         image = image,
@@ -78,7 +78,7 @@ fun EventEntity.toAddEventDto() : AddEventDto {
     )
 }
 
-fun LocationDto.toLocationEntity() : LocationEntity {
+fun LocationDto.toLocationEntity(): LocationEntity {
     return LocationEntity(
         longitude = longitude,
         latitude = latitude
@@ -92,7 +92,7 @@ fun LocationEntity.toLocationDto(): LocationDto {
     )
 }
 
-fun AddEventEntity.toAddEventDto() : AddEventDto {
+fun AddEventEntity.toAddEventDto(): AddEventDto {
     return AddEventDto(
         title = title,
         image = image,
@@ -102,5 +102,41 @@ fun AddEventEntity.toAddEventDto() : AddEventDto {
         category = category,
         eventOwner = eventOwner,
         location = location.toLocationDto()
+    )
+}
+
+fun UserEntity.toUserDto(): UserDto {
+    return UserDto(
+        avatar = avatar,
+        firstName = firstName,
+        lastName = lastName,
+        username = username,
+        id = id
+    )
+}
+
+fun UserDto.toUserEntity(): UserEntity {
+    return UserEntity(
+        avatar = avatar,
+        firstName = firstName,
+        lastName = lastName,
+        username = username,
+        id = id
+    )
+}
+
+fun FollowRequestEntity.toFollowRequestDto(): FollowRequestDto {
+    return FollowRequestDto(
+        source = source,
+        destination = destination,
+        id = id
+    )
+}
+
+fun FollowRequestDto.toFollowRequsetEntity(): FollowRequestEntity {
+    return FollowRequestEntity(
+        source = source,
+        destination = destination,
+        id = id
     )
 }

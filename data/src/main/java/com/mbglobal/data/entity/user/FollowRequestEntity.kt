@@ -4,4 +4,4 @@ data class FollowRequestEntity(
     val source: UserEntity,
     val destination: UserEntity,
     val id: Int
-    )
+)
