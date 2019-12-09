@@ -1,5 +1,6 @@
 package com.mbglobal.artoutandroid.ui.login
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -8,6 +9,7 @@ import com.mbglobal.data.entity.user.UserLoginItemEntity
 import com.mbglobal.data.repository.UserRepository
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
+import timber.log.Timber
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 import kotlin.random.Random
@@ -40,6 +42,7 @@ class LoginViewModel @Inject constructor(private val userRepository: UserReposit
                         _loginStatus.value = true
                     },
                     { throwable ->
+                        Timber.v("throwable+${throwable.message}")
                         _showLoading.value = false
                         _loginStatus.value = false
                     }
