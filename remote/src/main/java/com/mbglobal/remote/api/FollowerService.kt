@@ -1,6 +1,7 @@
 package com.mbglobal.remote.api
 
 import com.mbglobal.data.entity.user.UserEntity
+import com.mbglobal.remote.dto.user.FollowItemDto
 import com.mbglobal.remote.dto.user.FollowRequestDto
 import com.mbglobal.remote.dto.user.UserDto
 import io.reactivex.Completable
@@ -12,10 +13,10 @@ import javax.print.DocFlavor
 interface FollowerService {
 
     @GET("followers/")
-    fun getUserFollowers(): Single<List<UserDto>>
+    fun getUserFollowers(): Single<List<FollowItemDto>>
 
     @GET("users/{id}/followers/")
-    fun getUserFollowers(@Path("id") userId: String): Single<List<UserDto>>
+    fun getUserFollowers(@Path("id") userId: String): Single<List<FollowItemDto>>
 
     @GET("followers/{id}/")
     fun getFollower(@Path("id") userId: String): Single<UserDto>
