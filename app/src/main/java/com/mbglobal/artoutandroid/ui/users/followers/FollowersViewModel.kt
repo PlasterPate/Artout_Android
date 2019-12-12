@@ -20,6 +20,9 @@ class FollowersViewModel @Inject constructor(
     private val _followers: MutableLiveData<List<UserEntity>> = MutableLiveData()
     val followers: LiveData<List<UserEntity>> = _followers
 
+    private val _followRequests: MutableLiveData<List<FollowRequestEntity>> = MutableLiveData()
+    val followRequests = _followRequests
+
     fun loadFollowers(userId: String?) {
         val id = userId?.let {
             Single.just(it)
@@ -39,12 +42,14 @@ class FollowersViewModel @Inject constructor(
             }
     }
 
-    fun loadPendingFollowRequests(userId: String?) {
+    fun loadPendingFollowRequests() {
         socialRepository.getFollowRequests()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe { followRequestEntities: List<FollowRequestEntity> ->
-
+                _followRequests.postValue(followRequestEntities)
+            }.also {
+                compositeDisposable.add(it)
             }
     }
 

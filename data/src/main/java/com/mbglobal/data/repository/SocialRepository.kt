@@ -84,6 +84,61 @@ class SocialRepository @Inject constructor(
     }
 
     fun getFollowRequests(): Single<List<FollowRequestEntity>> {
+        return Single.just(
+            mutableListOf(
+                FollowRequestEntity(
+                    source = UserEntity(
+                        "https://pbs.twimg.com/profile_images/959929674355765248/fk3ALoeH.jpg",
+                        "Mobin",
+                        12,
+                        "Dariush",
+                        "mobindh"
+                    ),
+                    destination = UserEntity(
+                        "https://pbs.twimg.com/profile_images/959929674355765248/fk3ALoeH.jpg",
+                        "Sauleh",
+                        12,
+                        "Eeetemadi4",
+                        "sauleh1"
+                    ),
+                    id = 112121
+                ),
+                FollowRequestEntity(
+                    source = UserEntity(
+                        "https://pbs.twimg.com/profile_images/959929674355765248/fk3ALoeH.jpg",
+                        "Mobin",
+                        12,
+                        "Dariush2",
+                        "mobindh"
+                    ),
+                    destination = UserEntity(
+                        "https://pbs.twimg.com/profile_images/959929674355765248/fk3ALoeH.jpg",
+                        "Sauleh",
+                        12,
+                        "Eeetemadi4",
+                        "sauleh1"
+                    ),
+                    id = 112121
+                ),
+                FollowRequestEntity(
+                    source = UserEntity(
+                        "https://pbs.twimg.com/profile_images/959929674355765248/fk3ALoeH.jpg",
+                        "Mobin",
+                        12,
+                        "Dariush3",
+                        "mobindh"
+                    ),
+                    destination = UserEntity(
+                        "https://pbs.twimg.com/profile_images/959929674355765248/fk3ALoeH.jpg",
+                        "Sauleh",
+                        12,
+                        "Eeetemadi4",
+                        "sauleh1"
+                    ),
+                    id = 112121
+                )
+            )
+        )
         return followerRemoteDataSource.getFollowRequests()
     }
 
