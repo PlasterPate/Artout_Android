@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.mbglobal.artoutandroid.R
@@ -18,6 +19,10 @@ import com.mbglobal.artoutandroid.ui.users.adapter.listener.OnUserItemClickListe
 import com.mbglobal.data.entity.user.UserEntity
 
 class FollowingsFragment : BaseFragment() {
+
+    val followingsViewModel: FollowingsViewModel by lazy {
+        ViewModelProviders.of(this)[FollowingsViewModel::class.java]
+    }
 
     lateinit var binding : FragmentFollowingsBinding
 

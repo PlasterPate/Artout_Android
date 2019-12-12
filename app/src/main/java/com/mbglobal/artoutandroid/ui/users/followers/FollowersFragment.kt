@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.mbglobal.artoutandroid.R
 import com.mbglobal.artoutandroid.databinding.FragmentFollowersBinding
@@ -22,6 +23,10 @@ import kotlinx.android.synthetic.main.fragment_followers.*
 import okhttp3.internal.waitMillis
 
 class FollowersFragment : BaseFragment() {
+
+    val followersViewModel: FollowersViewModel by lazy {
+        ViewModelProviders.of(this)[FollowersViewModel::class.java]
+    }
 
     lateinit var binding: FragmentFollowersBinding
 

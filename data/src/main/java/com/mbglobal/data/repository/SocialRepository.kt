@@ -22,6 +22,38 @@ class SocialRepository @Inject constructor(
     }
 
     fun getUserFollowers(userId: String?): Single<List<UserEntity>> {
+        return Single.just(
+            mutableListOf(
+                UserEntity(
+                    "https://pbs.twimg.com/profile_images/959929674355765248/fk3ALoeH.jpg",
+                    "Sauleh",
+                    12,
+                    "Eeetemadi1",
+                    "sauleh1"
+                ),
+                UserEntity(
+                    "https://pbs.twimg.com/profile_images/959929674355765248/fk3ALoeH.jpg",
+                    "Sauleh",
+                    12,
+                    "Eeetemadi2",
+                    "sauleh1"
+                ),
+                UserEntity(
+                    "https://pbs.twimg.com/profile_images/959929674355765248/fk3ALoeH.jpg",
+                    "Sauleh",
+                    12,
+                    "Eeetemadi3",
+                    "sauleh1"
+                ),
+                UserEntity(
+                    "https://pbs.twimg.com/profile_images/959929674355765248/fk3ALoeH.jpg",
+                    "Sauleh",
+                    12,
+                    "Eeetemadi4",
+                    "sauleh1"
+                )
+            )
+        )
         val idSingle =
             userId?.let {
                 Single.just(userId)

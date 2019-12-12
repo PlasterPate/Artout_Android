@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.mbglobal.artoutandroid.ui.base.BaseViewModel
 import com.mbglobal.data.datasource.SessionLocalDataSource
+import com.mbglobal.data.entity.user.FollowRequestEntity
 import com.mbglobal.data.entity.user.UserEntity
 import com.mbglobal.data.repository.SocialRepository
 import io.reactivex.Single
@@ -35,6 +36,15 @@ class FollowersViewModel @Inject constructor(
                 _followers.postValue(followers)
             }.also {
                 compositeDisposable.add(it)
+            }
+    }
+
+    fun loadPendingFollowRequests(userId: String?) {
+        socialRepository.getFollowRequests()
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe { followRequestEntities: List<FollowRequestEntity> ->
+
             }
     }
 
