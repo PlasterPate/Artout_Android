@@ -15,6 +15,8 @@ class SocialRepository @Inject constructor(
     private val sessionLocalDataSource: SessionLocalDataSource
 ) {
 
+    // FOLLOWERS
+
     fun getUserFollowers(): Single<List<UserEntity>> {
         return followerRemoteDataSource.getUserFollowers()
     }
@@ -26,6 +28,16 @@ class SocialRepository @Inject constructor(
             } ?: sessionLocalDataSource.getUser()
         return idSingle.flatMap {
             followerRemoteDataSource.getUserFollowers(it)
+        }
+    }
+
+    fun getFollower(userId: String?): Single<UserEntity>{
+        val idSingle =
+            userId?.let {
+                Single.just(userId)
+            } ?: sessionLocalDataSource.getUser()
+        return idSingle.flatMap {
+            followerRemoteDataSource.getFollower(it)
         }
     }
 
@@ -63,6 +75,8 @@ class SocialRepository @Inject constructor(
         }
     }
 
+    // FOLLOWINGS
+
     fun getUserFollowings(): Single<List<UserEntity>> {
         return followingRemoteDataSource.getUserFollowings()
     }
@@ -74,6 +88,16 @@ class SocialRepository @Inject constructor(
             } ?: sessionLocalDataSource.getUser()
         return idSingle.flatMap {
             followingRemoteDataSource.getUserFollowings(it)
+        }
+    }
+
+    fun getFollowing(userId: String?): Single<UserEntity>{
+        val idSingle =
+            userId?.let {
+                Single.just(userId)
+            } ?: sessionLocalDataSource.getUser()
+        return idSingle.flatMap {
+            followingRemoteDataSource.getFollowing(it)
         }
     }
 

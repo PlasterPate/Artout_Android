@@ -30,6 +30,12 @@ class FollowingRemoteDataSourceImpl @Inject constructor(
         }
     }
 
+    override fun getFollowing(userId: String): Single<UserEntity> {
+        return followingService.getFollowing(userId).map {user ->
+            user.toUserEntity()
+        }
+    }
+
     override fun follow(userId: String): Completable {
         return Completable.fromSingle(followingService.follow(userId))
     }

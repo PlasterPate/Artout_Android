@@ -11,6 +11,8 @@ interface FollowingRemoteDataSource {
 
     fun getUserFollowings(userId: String): Single<List<UserEntity>>
 
+    fun getFollowing(userId: String): Single<UserEntity>
+
     fun unfollow(userId: String): Completable
 
     fun follow(userId: String): Completable

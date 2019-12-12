@@ -17,6 +17,9 @@ interface FollowerService {
     @GET("users/{id}/followers/")
     fun getUserFollowers(@Path("id") userId: String): Single<List<UserDto>>
 
+    @GET("followers/{id}/")
+    fun getFollower(@Path("id") userId: String): Single<UserDto>
+
     @DELETE("followers/{id}/")
     fun removeFollower(@Path("id") userId: String): Single<ResponseBody>
 
@@ -28,11 +31,6 @@ interface FollowerService {
 
     @DELETE("followers/requests/{id}/")
     fun rejectRequest(@Path("id") userId: String): Single<ResponseBody>
-
-//    This method is gonna get completed in Sprint 5
-//
-//    @GET("followers/{id}/")
-//    fun getUserProfile(userId: String)
 
     companion object {
         const val BASE_URL: String = "http://35.202.66.168:8000/"

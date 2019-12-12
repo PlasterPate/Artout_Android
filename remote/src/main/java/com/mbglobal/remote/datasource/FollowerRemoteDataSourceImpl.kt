@@ -30,6 +30,12 @@ class FollowerRemoteDataSourceImpl @Inject constructor(
         }
     }
 
+    override fun getFollower(userId: String): Single<UserEntity> {
+        return followerService.getFollower(userId).map { user ->
+            user.toUserEntity()
+        }
+    }
+
     override fun removeFollower(userId: String): Completable {
         return Completable.fromSingle(followerService.removeFollower(userId))
     }
