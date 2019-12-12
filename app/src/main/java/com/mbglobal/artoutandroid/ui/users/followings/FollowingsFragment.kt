@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -37,53 +38,24 @@ class FollowingsFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        initializeObservers()
+        followingsViewModel.loadFollowings(null)
+    }
 
+    private fun initializeObservers() {
+        followingsViewModel.followings.observe(this, followingsObserver)
+    }
+
+    private val followingsObserver: Observer<List<UserEntity>> = Observer {
         binding.rvFollowings.apply {
             layoutManager = LinearLayoutManager(requireContext())
             adapter = UserAdapter()
         }
 
         with(binding.rvFollowings.adapter as UserAdapter){
-            data = listOf(
-                UserListItem(
-                    UserEntity(
-                        "https://pbs.twimg.com/profile_images/959929674355765248/fk3ALoeH.jpg",
-                        "sAuLeh",
-                        12,
-                        "Supfam",
-                        "sauleh1"
-                    ),
-                    UserState.FOLLOWING
-                ),
-                UserListItem(
-                    UserEntity(
-                        "https://pbs.twimg.com/profile_images/959929674355765248/fk3ALoeH.jpg",
-                        "XXXsAuLehXXX",
-                        12,
-                        "BIG",
-                        "sauleh1"
-                    ),
-                    UserState.FOLLOWING
-                ), UserListItem(
-                    UserEntity(
-                        "https://pbs.twimg.com/profile_images/959929674355765248/fk3ALoeH.jpg",
-                        "KING_sAuLeh",
-                        12,
-                        "GOD",
-                        "sauleh1"
-                    ),
-                    UserState.FOLLOWING
-                ), UserListItem(
-                    UserEntity(
-                        "https://pbs.twimg.com/profile_images/959929674355765248/fk3ALoeH.jpg",
-                        "SeAtUeLmEaHdi",
-                        12,
-                        "original",
-                        "sauleh1"
-                    ),
-                    UserState.FOLLOWING
-                )
-            )
+            data = it.map {
+                UserListItem(it, UserState.FOLLOWING)
+            }
 
             listeners.add(object : OnUserItemClickListener {
                 override val stateTag: UserState
@@ -106,4 +78,5 @@ class FollowingsFragment : BaseFragment() {
             })
         }
     }
+
 }

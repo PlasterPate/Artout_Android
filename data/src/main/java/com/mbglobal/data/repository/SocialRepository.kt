@@ -22,38 +22,7 @@ class SocialRepository @Inject constructor(
     }
 
     fun getUserFollowers(userId: String?): Single<List<UserEntity>> {
-        return Single.just(
-            mutableListOf(
-                UserEntity(
-                    "https://pbs.twimg.com/profile_images/959929674355765248/fk3ALoeH.jpg",
-                    "Sauleh",
-                    12,
-                    "Eeetemadi1",
-                    "sauleh1"
-                ),
-                UserEntity(
-                    "https://pbs.twimg.com/profile_images/959929674355765248/fk3ALoeH.jpg",
-                    "Sauleh",
-                    12,
-                    "Eeetemadi2",
-                    "sauleh1"
-                ),
-                UserEntity(
-                    "https://pbs.twimg.com/profile_images/959929674355765248/fk3ALoeH.jpg",
-                    "Sauleh",
-                    12,
-                    "Eeetemadi3",
-                    "sauleh1"
-                ),
-                UserEntity(
-                    "https://pbs.twimg.com/profile_images/959929674355765248/fk3ALoeH.jpg",
-                    "Sauleh",
-                    12,
-                    "Eeetemadi4",
-                    "sauleh1"
-                )
-            )
-        )
+        return Single.just(MockUserFactory.getFollowers())
         val idSingle =
             userId?.let {
                 Single.just(userId)
@@ -84,61 +53,7 @@ class SocialRepository @Inject constructor(
     }
 
     fun getFollowRequests(): Single<List<FollowRequestEntity>> {
-        return Single.just(
-            mutableListOf(
-                FollowRequestEntity(
-                    source = UserEntity(
-                        "https://i.kym-cdn.com/photos/images/newsfeed/001/286/500/2d0.jpg",
-                        "Mobin",
-                        12,
-                        "Dariush",
-                        "mobindh"
-                    ),
-                    destination = UserEntity(
-                        "https://pbs.twimg.com/profile_images/959929674355765248/fk3ALoeH.jpg",
-                        "Sauleh",
-                        12,
-                        "Eeetemadi4",
-                        "sauleh1"
-                    ),
-                    id = 112121
-                ),
-                FollowRequestEntity(
-                    source = UserEntity(
-                        "https://i.kym-cdn.com/photos/images/newsfeed/001/286/500/2d0.jpg",
-                        "Mobin",
-                        12,
-                        "Dariush2",
-                        "mobindh"
-                    ),
-                    destination = UserEntity(
-                        "https://pbs.twimg.com/profile_images/959929674355765248/fk3ALoeH.jpg",
-                        "Sauleh",
-                        12,
-                        "Eeetemadi4",
-                        "sauleh1"
-                    ),
-                    id = 112121
-                ),
-                FollowRequestEntity(
-                    source = UserEntity(
-                        "https://i.kym-cdn.com/photos/images/newsfeed/001/286/500/2d0.jpg",
-                        "Mobin",
-                        12,
-                        "Dariush3",
-                        "mobindh"
-                    ),
-                    destination = UserEntity(
-                        "https://pbs.twimg.com/profile_images/959929674355765248/fk3ALoeH.jpg",
-                        "Sauleh",
-                        12,
-                        "Eeetemadi4",
-                        "sauleh1"
-                    ),
-                    id = 112121
-                )
-            )
-        )
+        return Single.just(MockUserFactory.getFollowRequests())
         return followerRemoteDataSource.getFollowRequests()
     }
 
@@ -169,6 +84,7 @@ class SocialRepository @Inject constructor(
     }
 
     fun getUserFollowings(userId: String?): Single<List<UserEntity>> {
+        return Single.just(MockUserFactory.getFollowings())
         val idSingle =
             userId?.let {
                 Single.just(userId)
