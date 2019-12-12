@@ -27,7 +27,7 @@ import okhttp3.internal.waitMillis
 class FollowersFragment : BaseFragment() {
 
     val followersViewModel: FollowersViewModel by lazy {
-        ViewModelProviders.of(this)[FollowersViewModel::class.java]
+        ViewModelProviders.of(this, viewModelFactory)[FollowersViewModel::class.java]
     }
 
     lateinit var binding: FragmentFollowersBinding

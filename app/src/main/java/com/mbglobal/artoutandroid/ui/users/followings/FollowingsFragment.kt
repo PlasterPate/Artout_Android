@@ -21,7 +21,7 @@ import com.mbglobal.data.entity.user.UserEntity
 class FollowingsFragment : BaseFragment() {
 
     val followingsViewModel: FollowingsViewModel by lazy {
-        ViewModelProviders.of(this)[FollowingsViewModel::class.java]
+        ViewModelProviders.of(this, viewModelFactory)[FollowingsViewModel::class.java]
     }
 
     lateinit var binding : FragmentFollowingsBinding

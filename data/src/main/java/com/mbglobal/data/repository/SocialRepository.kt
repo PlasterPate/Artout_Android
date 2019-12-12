@@ -88,7 +88,7 @@ class SocialRepository @Inject constructor(
             mutableListOf(
                 FollowRequestEntity(
                     source = UserEntity(
-                        "https://pbs.twimg.com/profile_images/959929674355765248/fk3ALoeH.jpg",
+                        "https://i.kym-cdn.com/photos/images/newsfeed/001/286/500/2d0.jpg",
                         "Mobin",
                         12,
                         "Dariush",
@@ -105,7 +105,7 @@ class SocialRepository @Inject constructor(
                 ),
                 FollowRequestEntity(
                     source = UserEntity(
-                        "https://pbs.twimg.com/profile_images/959929674355765248/fk3ALoeH.jpg",
+                        "https://i.kym-cdn.com/photos/images/newsfeed/001/286/500/2d0.jpg",
                         "Mobin",
                         12,
                         "Dariush2",
@@ -122,7 +122,7 @@ class SocialRepository @Inject constructor(
                 ),
                 FollowRequestEntity(
                     source = UserEntity(
-                        "https://pbs.twimg.com/profile_images/959929674355765248/fk3ALoeH.jpg",
+                        "https://i.kym-cdn.com/photos/images/newsfeed/001/286/500/2d0.jpg",
                         "Mobin",
                         12,
                         "Dariush3",

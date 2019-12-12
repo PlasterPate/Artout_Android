@@ -1,10 +1,10 @@
 package com.mbglobal.artoutandroid.di.module
 
-import com.mbglobal.data.datasource.EventRemoteDataSource
-import com.mbglobal.data.datasource.SessionLocalDataSource
-import com.mbglobal.data.datasource.UserRemoteDataSource
+import com.mbglobal.data.datasource.*
 import com.mbglobal.local.datasource.SessionLocalDataSourceImpl
 import com.mbglobal.remote.datasource.EventRemoteDataSourceImpl
+import com.mbglobal.remote.datasource.FollowerRemoteDataSourceImpl
+import com.mbglobal.remote.datasource.FollowingRemoteDataSourceImpl
 import com.mbglobal.remote.datasource.UserRemoteDataSourceImpl
 import dagger.Binds
 import dagger.Module
@@ -23,4 +23,9 @@ abstract class DataModule {
     abstract fun bindUserRemoteDataSource(userRemoteDataSourceImpl: UserRemoteDataSourceImpl) :
             UserRemoteDataSource
 
+    @Binds
+    abstract fun bindFollowersRemoteDataSource(followerRemoteDataSourceImpl: FollowerRemoteDataSourceImpl): FollowerRemoteDataSource
+
+    @Binds
+    abstract fun bindFollowingRemoteDataSource(followingRemoteDataSourceImpl: FollowingRemoteDataSourceImpl): FollowingRemoteDataSource
 }
