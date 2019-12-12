@@ -16,7 +16,8 @@ import com.mbglobal.artoutandroid.di.scope.AppScope
         ActivityModule::class,
         FragmentsModule::class,
         DataModule::class,
-        ViewModelModule::class
+        ViewModelModule::class,
+        DatabaseModule::class
     ]
 )
 @AppScope

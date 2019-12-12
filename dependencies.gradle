@@ -11,7 +11,7 @@ ext {
             coroutines      : "1.2.1",
             coreKtx         : "1.0.2",
             constraintLayout: "2.0.0-beta1",
-            room            : "2.0.0",
+            room            : "2.2.2",
             okHttp          : "3.12.0",
             rxAndroid       : "2.1.1",
             dagger          : "2.24",
