@@ -6,7 +6,7 @@ import com.mbglobal.data.entity.user.UserEntity
 object MockUserFactory {
 
     fun getFollowers(): List<UserEntity> {
-        return listOf(SAULEH, SAULEH, SAULEH, SAULEH)
+        return listOf(SAULEH.withId(1), SAULEH.withId(2), SAULEH.withId(3), SAULEH.withId(4))
     }
 
     fun getFollowings(): List<UserEntity> {
@@ -14,11 +14,20 @@ object MockUserFactory {
     }
 
     fun getFollowRequests(): List<FollowRequestEntity> {
-        return getFollowings().zip(getFollowers(), { a, b ->
+        return getFollowings().zip(getFollowers()) { a, b ->
             FollowRequestEntity(a, b, 1)
-        })
+        }
     }
 
+    fun UserEntity.withId(id: Int): UserEntity {
+        return UserEntity(
+            this.avatar,
+            this.firstName,
+            id,
+            this.lastName,
+            this.username
+        )
+    }
     val SAULEH = UserEntity(
         "https://pbs.twimg.com/profile_images/959929674355765248/fk3ALoeH.jpg",
         "Sauleh",

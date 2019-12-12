@@ -61,14 +61,13 @@ class FollowersFragment : BaseFragment() {
         with(binding.rvFollowers.adapter as UserAdapter) {
             data = it.map {
                 UserListItem(it, UserState.NOT_FOLLOWING)
-            }
+            }.toMutableList()
             listeners.add(object : OnUserItemClickListener {
                 override val stateTag: UserState
                     get() = UserState.NOT_FOLLOWING
 
                 override fun onClicked(userEntity: UserEntity) {
-                    Toast.makeText(requireContext(), "Follow that guy", Toast.LENGTH_LONG)
-                        .show()
+                    this@with.updateUserState(userEntity, UserState.FOLLOWING)
                 }
 
             })
@@ -79,11 +78,7 @@ class FollowersFragment : BaseFragment() {
                     get() = UserState.FOLLOWING
 
                 override fun onClicked(userEntity: UserEntity) {
-                    Toast.makeText(
-                        requireContext(),
-                        "Fuck that guy, lets unfollow",
-                        Toast.LENGTH_LONG
-                    ).show()
+                    this@with.updateUserState(userEntity, UserState.NOT_FOLLOWING)
                 }
             })
         }

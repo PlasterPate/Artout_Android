@@ -8,6 +8,7 @@ import com.mbglobal.artoutandroid.R
 import com.mbglobal.artoutandroid.ui.users.UserState
 import com.mbglobal.artoutandroid.ui.users.adapter.listener.OnUserItemClickListener
 import com.mbglobal.artoutandroid.ui.users.adapter.listener.OnFollowRequestClickListener
+import com.mbglobal.data.entity.user.UserEntity
 
 class UserAdapter: RecyclerView.Adapter<UserViewHolder>() {
 
@@ -15,7 +16,7 @@ class UserAdapter: RecyclerView.Adapter<UserViewHolder>() {
 
     var onFollowRequestClickListener: OnFollowRequestClickListener? = null
 
-    var data = listOf<UserListItem>()
+    var data = mutableListOf<UserListItem>()
         set(value) {
             field = value
             notifyDataSetChanged()
@@ -47,6 +48,14 @@ class UserAdapter: RecyclerView.Adapter<UserViewHolder>() {
         holder.bind(data[position], findListenerByCurrentState(data[position].state))
     }
 
+    fun updateUserState(userEntity: UserEntity, state: UserState) {
+        data.forEachIndexed { index, userListItem ->
+            if (userListItem.userEntity == userEntity) {
+                data[index] = UserListItem(userEntity, state)
+                notifyItemChanged(index)
+            }
+        }
+    }
     private fun findListenerByCurrentState(userState: UserState): OnUserItemClickListener {
         return listeners.filter { it.stateTag == userState}[0]
     }
