@@ -1,8 +1,7 @@
 package com.mbglobal.remote.api
 
-import com.mbglobal.remote.dto.user.FollowItemDto
-import com.mbglobal.remote.dto.user.FollowRequestDto
 import com.mbglobal.remote.dto.user.UserDto
+import com.mbglobal.remote.dto.user.FollowRequestDto
 import io.reactivex.Single
 import okhttp3.ResponseBody
 import retrofit2.http.*
@@ -10,10 +9,10 @@ import retrofit2.http.*
 interface FollowingService {
 
     @GET("followings/")
-    fun getUserFollowings(): Single<List<FollowItemDto>>
+    fun getUserFollowings(): Single<List<UserDto>>
 
     @GET("users/{id}/followings")
-    fun getUserFollowings(@Path("id") userId: String): Single<List<FollowItemDto>>
+    fun getUserFollowings(@Path("id") userId: String): Single<List<UserDto>>
 
     @GET("followings/{id}/")
     fun getFollowing(@Path("id") userId: String): Single<UserDto>

@@ -1,13 +1,11 @@
 package com.mbglobal.remote.datasource
 
 import com.mbglobal.data.datasource.FollowingRemoteDataSource
-import com.mbglobal.data.entity.user.FollowItemEntity
-import com.mbglobal.data.entity.user.FollowRequestEntity
 import com.mbglobal.data.entity.user.UserEntity
+import com.mbglobal.data.entity.user.FollowRequestEntity
 import com.mbglobal.remote.api.FollowingService
-import com.mbglobal.remote.mappers.toFollowItemEntity
-import com.mbglobal.remote.mappers.toFollowRequsetEntity
 import com.mbglobal.remote.mappers.toUserEntity
+import com.mbglobal.remote.mappers.toFollowRequsetEntity
 import io.reactivex.Completable
 import io.reactivex.Single
 import javax.inject.Inject
@@ -16,18 +14,18 @@ class FollowingRemoteDataSourceImpl @Inject constructor(
     private val followingService: FollowingService
 ) : FollowingRemoteDataSource {
 
-    override fun getUserFollowings(): Single<List<FollowItemEntity>> {
+    override fun getUserFollowings(): Single<List<UserEntity>> {
         return followingService.getUserFollowings().map { users ->
-            users.map { followItemDto ->
-                followItemDto.toFollowItemEntity()
+            users.map { UserDto ->
+                UserDto.toUserEntity()
             }
         }
     }
 
-    override fun getUserFollowings(userId: String): Single<List<FollowItemEntity>> {
+    override fun getUserFollowings(userId: String): Single<List<UserEntity>> {
         return followingService.getUserFollowings(userId).map { users ->
-            users.map { followItemDto ->
-                followItemDto.toFollowItemEntity()
+            users.map { UserDto ->
+                UserDto.toUserEntity()
             }
         }
     }

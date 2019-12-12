@@ -1,22 +1,18 @@
 package com.mbglobal.remote.api
 
-import com.mbglobal.data.entity.user.UserEntity
-import com.mbglobal.remote.dto.user.FollowItemDto
-import com.mbglobal.remote.dto.user.FollowRequestDto
 import com.mbglobal.remote.dto.user.UserDto
-import io.reactivex.Completable
+import com.mbglobal.remote.dto.user.FollowRequestDto
 import io.reactivex.Single
 import okhttp3.ResponseBody
 import retrofit2.http.*
-import javax.print.DocFlavor
 
 interface FollowerService {
 
     @GET("followers/")
-    fun getUserFollowers(): Single<List<FollowItemDto>>
+    fun getUserFollowers(): Single<List<UserDto>>
 
     @GET("users/{id}/followers/")
-    fun getUserFollowers(@Path("id") userId: String): Single<List<FollowItemDto>>
+    fun getUserFollowers(@Path("id") userId: String): Single<List<UserDto>>
 
     @GET("followers/{id}/")
     fun getFollower(@Path("id") userId: String): Single<UserDto>

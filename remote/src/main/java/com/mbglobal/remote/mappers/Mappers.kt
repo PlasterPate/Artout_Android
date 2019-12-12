@@ -140,23 +140,3 @@ fun FollowRequestDto.toFollowRequsetEntity(): FollowRequestEntity {
         id = id
     )
 }
-
-fun FollowItemEntity.toFollowItemDto(): FollowItemDto{
-    return FollowItemDto(
-        id = id,
-        firstName = firstName,
-        lastName = lastName,
-        username = username,
-        avatar = avatar
-    )
-}
-
-fun FollowItemDto.toFollowItemEntity(): FollowItemEntity{
-    return FollowItemEntity(
-        id = id,
-        firstName = firstName,
-        lastName = lastName,
-        username = username,
-        avatar = avatar
-    )
-}

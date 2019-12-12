@@ -3,9 +3,8 @@ package com.mbglobal.data.repository
 import com.mbglobal.data.datasource.FollowerRemoteDataSource
 import com.mbglobal.data.datasource.FollowingRemoteDataSource
 import com.mbglobal.data.datasource.SessionLocalDataSource
-import com.mbglobal.data.entity.user.FollowItemEntity
-import com.mbglobal.data.entity.user.FollowRequestEntity
 import com.mbglobal.data.entity.user.UserEntity
+import com.mbglobal.data.entity.user.FollowRequestEntity
 import io.reactivex.Completable
 import io.reactivex.Single
 import javax.inject.Inject
@@ -18,11 +17,11 @@ class SocialRepository @Inject constructor(
 
     // FOLLOWERS
 
-    fun getUserFollowers(): Single<List<FollowItemEntity>> {
+    fun getUserFollowers(): Single<List<UserEntity>> {
         return followerRemoteDataSource.getUserFollowers()
     }
 
-    fun getUserFollowers(userId: String?): Single<List<FollowItemEntity>> {
+    fun getUserFollowers(userId: String?): Single<List<UserEntity>> {
         val idSingle =
             userId?.let {
                 Single.just(userId)
@@ -78,11 +77,11 @@ class SocialRepository @Inject constructor(
 
     // FOLLOWINGS
 
-    fun getUserFollowings(): Single<List<FollowItemEntity>> {
+    fun getUserFollowings(): Single<List<UserEntity>> {
         return followingRemoteDataSource.getUserFollowings()
     }
 
-    fun getUserFollowings(userId: String?): Single<List<FollowItemEntity>> {
+    fun getUserFollowings(userId: String?): Single<List<UserEntity>> {
         val idSingle =
             userId?.let {
                 Single.just(userId)
