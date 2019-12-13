@@ -89,11 +89,21 @@ class FollowersFragment : BaseFragment() {
             layoutManager = LinearLayoutManager(requireContext())
             adapter = FollowRequestAdapter(object : OnFollowRequestClickListener {
                 override fun onAcceptClicked(userEntity: UserEntity) {
-                    Toast.makeText(requireContext(), "Accept request", Toast.LENGTH_LONG).show()
+                    (binding.rvFollowers.adapter as UserAdapter).data.add(
+                        UserListItem(
+                            userEntity, UserState.NOT_FOLLOWING
+                        )
+                    )
                 }
 
                 override fun onRejectClicked(userEntity: UserEntity) {
-                    Toast.makeText(requireContext(), "Reject request", Toast.LENGTH_LONG).show()
+                    (adapter as FollowRequestAdapter).data.apply {
+                        remove(userEntity)
+                        if (isEmpty()) {
+                            divider_pending.visibility = View.GONE
+                            tv_pending_followers_title.visibility = View.GONE
+                        }
+                    }
                 }
 
             })
@@ -102,7 +112,7 @@ class FollowersFragment : BaseFragment() {
         with (binding.rvPendingFollowers.adapter as FollowRequestAdapter) {
             data = it.map {
                 it.source
-            }
+            }.toMutableList()
         }
     }
 }

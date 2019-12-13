@@ -10,11 +10,42 @@ import com.mbglobal.data.entity.user.UserEntity
 
 class FollowRequestAdapter(private val onFollowRequestClickListener: OnFollowRequestClickListener): RecyclerView.Adapter<FollowRequestViewHolder>() {
 
-    var data = listOf<UserEntity>()
-        set(value) {
-            field = value
+    var data:MutableList<UserEntity> = object : ArrayList<UserEntity>() {
+
+        init {
             notifyDataSetChanged()
         }
+
+        override fun add(element: UserEntity): Boolean {
+            val status = super.add(element)
+            if (status) {
+                notifyDataSetChanged()
+            }
+            return status
+        }
+
+        override fun set(index: Int, element: UserEntity): UserEntity {
+            val result = super.set(index, element)
+            notifyItemChanged(index)
+            return result
+        }
+
+        override fun remove(element: UserEntity): Boolean {
+            val idx = this.indexOf(element)
+            super.remove(element)
+            if (idx != -1) {
+                notifyDataSetChanged()
+                return true
+            } else {
+                return false
+            }
+        }
+    }
+    set (value) {
+        field.clear()
+        field.addAll(value)
+        notifyDataSetChanged()
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FollowRequestViewHolder {
 

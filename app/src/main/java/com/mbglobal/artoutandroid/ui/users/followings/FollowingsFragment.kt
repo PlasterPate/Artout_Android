@@ -55,7 +55,7 @@ class FollowingsFragment : BaseFragment() {
         with(binding.rvFollowings.adapter as UserAdapter){
             data = it.map {
                 UserListItem(it, UserState.FOLLOWING)
-            }.toMutableList()
+            }.toMutableList() as ArrayList<UserListItem>
 
             listeners.add(object : OnUserItemClickListener {
                 override val stateTag: UserState

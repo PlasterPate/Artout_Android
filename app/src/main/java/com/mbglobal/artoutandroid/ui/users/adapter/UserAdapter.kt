@@ -9,6 +9,7 @@ import com.mbglobal.artoutandroid.ui.users.UserState
 import com.mbglobal.artoutandroid.ui.users.adapter.listener.OnUserItemClickListener
 import com.mbglobal.artoutandroid.ui.users.adapter.listener.OnFollowRequestClickListener
 import com.mbglobal.data.entity.user.UserEntity
+import timber.log.Timber
 
 class UserAdapter: RecyclerView.Adapter<UserViewHolder>() {
 
@@ -16,11 +17,33 @@ class UserAdapter: RecyclerView.Adapter<UserViewHolder>() {
 
     var onFollowRequestClickListener: OnFollowRequestClickListener? = null
 
-    var data = mutableListOf<UserListItem>()
-        set(value) {
-            field = value
+    var data: MutableList<UserListItem> = object : ArrayList<UserListItem>()
+    {
+
+        init {
             notifyDataSetChanged()
         }
+
+        override fun add(element: UserListItem): Boolean {
+            val status = super.add(element)
+            Timber.v("Add Item $element")
+            if (status) {
+                notifyDataSetChanged()
+            }
+            return status
+        }
+
+        override fun set(index: Int, element: UserListItem): UserListItem {
+            val result = super.set(index, element)
+            notifyItemChanged(index)
+            return result
+        }
+    }
+    set (value) {
+        field.clear()
+        field.addAll(value)
+        notifyDataSetChanged()
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserViewHolder {
 
