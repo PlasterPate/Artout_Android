@@ -1,8 +1,7 @@
 package com.mbglobal.artoutandroid.di.module
 
-import com.mbglobal.remote.api.EventService
-import com.mbglobal.remote.api.TokenService
-import com.mbglobal.remote.api.UserService
+import com.mbglobal.artoutandroid.app.RequestInterceptor
+import com.mbglobal.remote.api.*
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
@@ -10,8 +9,6 @@ import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import okhttp3.logging.HttpLoggingInterceptor
-import timber.log.Timber
-import javax.inject.Singleton
 
 
 @Module
@@ -20,35 +17,53 @@ class NetworkModule {
     @Provides
     fun provideHttpLoggingInterceptor(): HttpLoggingInterceptor {
         return HttpLoggingInterceptor().apply {
-            level = HttpLoggingInterceptor.Level.BODY
+            level = HttpLoggingInterceptor.Level.HEADERS
         }
     }
 
     @Provides
-    fun providesOkHttp(okHttpLoggingInterceptor: HttpLoggingInterceptor) : OkHttpClient {
-        return OkHttpClient.Builder().addInterceptor(okHttpLoggingInterceptor).build()
+    fun providesOkHttp(
+        okHttpLoggingInterceptor: HttpLoggingInterceptor,
+        requestInterceptor: RequestInterceptor
+    ): OkHttpClient {
+        return OkHttpClient.Builder()
+            .addInterceptor(requestInterceptor)
+            .addInterceptor(okHttpLoggingInterceptor)
+            .build()
     }
 
     @Provides
-    fun providesRetrofit(okHttpClient: OkHttpClient) : Retrofit {
-        return Retrofit.Builder().client(okHttpClient).baseUrl(UserService.BASE_URL)
+    fun providesRetrofit(okHttpClient: OkHttpClient): Retrofit {
+        return Retrofit.Builder()
+            .baseUrl(UserService.BASE_URL)
+            .client(okHttpClient)
             .addConverterFactory(GsonConverterFactory.create())
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .build()
     }
 
     @Provides
-    fun providesEventService(retrofit: Retrofit) : EventService {
+    fun providesFollowerService(retrofit: Retrofit): FollowerService {
+        return retrofit.create(FollowerService::class.java)
+    }
+
+    @Provides
+    fun providesFollowingService(retrofit: Retrofit): FollowingService {
+        return retrofit.create(FollowingService::class.java)
+    }
+
+    @Provides
+    fun providesEventService(retrofit: Retrofit): EventService {
         return retrofit.create(EventService::class.java)
     }
 
     @Provides
-    fun providesUserService(retrofit: Retrofit) : UserService {
+    fun providesUserService(retrofit: Retrofit): UserService {
         return retrofit.create(UserService::class.java)
     }
 
     @Provides
-    fun providesTokenService(retrofit: Retrofit) : TokenService {
+    fun providesTokenService(retrofit: Retrofit): TokenService {
         return retrofit.create(TokenService::class.java)
     }
 }

@@ -20,13 +20,13 @@ interface EventService {
     fun editEvent(@Path("id") eventId: Int, @Body addEventDto: AddEventDto): Single<EventDto>
 
     @GET("/api/event/eventsd/")
-    fun getUserEvents(@Query("id") userId: Int): Single<List<EventEntity>>
+    fun getUserEvents(@Query("id") userId: Int): Single<List<EventDto>>
 
     @GET("/api/event/eventsd/")
-    fun getUserCheckIns(@Query("id") userId: Int): Single<List<EventEntity>>
+    fun getUserCheckIns(@Query("id") userId: Int): Single<List<EventDto>>
 
     @GET("/api/event/eventsd/")
-    fun getUserSuggestions(@Query("id") userId: Int): Single<List<EventEntity>>
+    fun getUserSuggestions(@Query("id") userId: Int): Single<List<EventDto>>
 
     companion object {
         const val BASE_URL: String = "http://35.202.66.168:8000/"
