@@ -7,7 +7,9 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.mbglobal.artoutandroid.R
 import com.mbglobal.artoutandroid.databinding.FragmentFollowersBinding
 import com.mbglobal.artoutandroid.ui.base.BaseFragment
@@ -42,8 +44,19 @@ class FollowersFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initializeObservers()
+        initializeViews()
         socialViewModel.loadFollowers(null)
         socialViewModel.loadPendingFollowRequests()
+    }
+
+    private fun initializeViews() {
+        binding.rvPendingFollowers.itemAnimator = object: DefaultItemAnimator() {
+            override fun onAnimationFinished(viewHolder: RecyclerView.ViewHolder) {
+                if ((binding.rvPendingFollowers.adapter as FollowRequestAdapter).data.size == 0) {
+                    hidePendingGroup()
+                }
+            }
+        }
     }
 
     private fun initializeObservers() {
@@ -91,9 +104,6 @@ class FollowersFragment : BaseFragment() {
                 override fun onAcceptClicked(userEntity: UserEntity) {
                     (adapter as FollowRequestAdapter).data.apply {
                         remove(userEntity)
-                        if (isEmpty()) {
-                            hidePendingGroup()
-                        }
                     }
                     (binding.rvFollowers.adapter as UserAdapter).data.add(0,
                         UserListItem(
@@ -106,10 +116,8 @@ class FollowersFragment : BaseFragment() {
 
                 override fun onRejectClicked(userEntity: UserEntity) {
                     (adapter as FollowRequestAdapter).data.apply {
+
                         remove(userEntity)
-                        if (isEmpty()) {
-                            hidePendingGroup()
-                        }
                     }
                     socialViewModel.rejectRequest(userEntity)
                 }
