@@ -4,15 +4,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.mbglobal.artoutandroid.R
 import com.mbglobal.artoutandroid.databinding.FragmentFollowersBinding
-import com.mbglobal.artoutandroid.databinding.FragmentProfileBinding
 import com.mbglobal.artoutandroid.ui.base.BaseFragment
+import com.mbglobal.artoutandroid.ui.users.SocialViewModel
 import com.mbglobal.artoutandroid.ui.users.UserState
 import com.mbglobal.artoutandroid.ui.users.adapter.FollowRequestAdapter
 import com.mbglobal.artoutandroid.ui.users.adapter.UserAdapter
@@ -22,12 +21,11 @@ import com.mbglobal.artoutandroid.ui.users.adapter.listener.OnUserItemClickListe
 import com.mbglobal.data.entity.user.FollowRequestEntity
 import com.mbglobal.data.entity.user.UserEntity
 import kotlinx.android.synthetic.main.fragment_followers.*
-import okhttp3.internal.waitMillis
 
 class FollowersFragment : BaseFragment() {
 
-    val followersViewModel: FollowersViewModel by lazy {
-        ViewModelProviders.of(this, viewModelFactory)[FollowersViewModel::class.java]
+    val socialViewModel: SocialViewModel by lazy {
+        ViewModelProviders.of(this, viewModelFactory)[SocialViewModel::class.java]
     }
 
     lateinit var binding: FragmentFollowersBinding
@@ -44,13 +42,13 @@ class FollowersFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initializeObservers()
-        followersViewModel.loadFollowers(null)
-        followersViewModel.loadPendingFollowRequests()
+        socialViewModel.loadFollowers(null)
+        socialViewModel.loadPendingFollowRequests()
     }
 
     private fun initializeObservers() {
-        followersViewModel.followers.observe(this, followersObserver)
-        followersViewModel.followRequests.observe(this, followRequestsObserver)
+        socialViewModel.followers.observe(this, followersObserver)
+        socialViewModel.followRequests.observe(this, followRequestsObserver)
     }
 
     private val followersObserver = Observer<List<UserEntity>> {

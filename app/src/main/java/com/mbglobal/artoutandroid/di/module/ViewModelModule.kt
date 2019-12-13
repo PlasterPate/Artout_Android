@@ -12,10 +12,8 @@ import com.mbglobal.artoutandroid.ui.login.LoginViewModel
 import com.mbglobal.artoutandroid.ui.profile.ProfileViewModel
 import com.mbglobal.artoutandroid.ui.register.RegisterViewModel
 import com.mbglobal.artoutandroid.ui.timeline.TimelineViewModel
-import com.mbglobal.artoutandroid.ui.users.followers.FollowersViewModel
-import com.mbglobal.artoutandroid.ui.users.followings.FollowingsViewModel
+import com.mbglobal.artoutandroid.ui.users.SocialViewModel
 import dagger.Binds
-import dagger.BindsInstance
 import dagger.Module
 import dagger.multibindings.IntoMap
 
@@ -74,12 +72,7 @@ abstract class ViewModelModule {
 
     @Binds
     @IntoMap
-    @ViewModelKey(FollowersViewModel::class)
-    abstract fun bindFollowersViewModel(followersViewModel: FollowersViewModel): ViewModel
-
-    @Binds
-    @IntoMap
-    @ViewModelKey(FollowingsViewModel::class)
-    abstract fun bindFollowingsViewModel(followingsViewModel: FollowingsViewModel): ViewModel
+    @ViewModelKey(SocialViewModel::class)
+    abstract fun bindSocialViewModel(socialViewModel: SocialViewModel): ViewModel
 
 }

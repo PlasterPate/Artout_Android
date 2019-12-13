@@ -4,15 +4,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.mbglobal.artoutandroid.R
 import com.mbglobal.artoutandroid.databinding.FragmentFollowingsBinding
 import com.mbglobal.artoutandroid.ui.base.BaseFragment
+import com.mbglobal.artoutandroid.ui.users.SocialViewModel
 import com.mbglobal.artoutandroid.ui.users.UserState
 import com.mbglobal.artoutandroid.ui.users.adapter.UserAdapter
 import com.mbglobal.artoutandroid.ui.users.adapter.UserListItem
@@ -21,8 +20,8 @@ import com.mbglobal.data.entity.user.UserEntity
 
 class FollowingsFragment : BaseFragment() {
 
-    val followingsViewModel: FollowingsViewModel by lazy {
-        ViewModelProviders.of(this, viewModelFactory)[FollowingsViewModel::class.java]
+    val socialViewModel: SocialViewModel by lazy {
+        ViewModelProviders.of(this, viewModelFactory)[SocialViewModel::class.java]
     }
 
     lateinit var binding : FragmentFollowingsBinding
@@ -39,11 +38,11 @@ class FollowingsFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initializeObservers()
-        followingsViewModel.loadFollowings(null)
+        socialViewModel.loadFollowings(null)
     }
 
     private fun initializeObservers() {
-        followingsViewModel.followings.observe(this, followingsObserver)
+        socialViewModel.followings.observe(this, followingsObserver)
     }
 
     private val followingsObserver: Observer<List<UserEntity>> = Observer {
