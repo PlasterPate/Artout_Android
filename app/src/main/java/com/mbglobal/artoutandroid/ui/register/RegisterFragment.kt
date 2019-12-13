@@ -57,12 +57,15 @@ class RegisterFragment : BaseFragment() {
 
     private fun initializeListeners() {
         binding.registerButton.setOnClickListener {
-            val userRegisterItemEntity = UserRegisterItemEntity("", "",
-                first_name_edit_text.text.toString(),
-                last_name_edit_text.text.toString(),
-                password_edit_text.text.toString(),
-                phone_number_edit_text.text.toString()
-                )
+            val userRegisterItemEntity = UserRegisterItemEntity(
+                avatar = "",
+                email = email_edit_text.text.toString(),
+                firstName = first_name_edit_text.text.toString(),
+                lastName = last_name_edit_text.text.toString(),
+                password = password_edit_text.text.toString(),
+                username = username_edit_text.text.toString(),
+                passwordConfirm = password_confirm_edit_text.text.toString()
+            )
             registerViewModel.onRegisterClicked(userRegisterItemEntity)
         }
     }
