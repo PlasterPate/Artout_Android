@@ -46,8 +46,7 @@ class RegisterViewModel @Inject constructor(private val userRepository: UserRepo
 
     fun validateRegisterInfo(userRegisterItemEntity: UserRegisterItemEntity) : Boolean {
         return with(userRegisterItemEntity) {
-            username.isNotEmpty() && password.isNotEmpty() && firstName.isNotEmpty() && lastName.isNotEmpty()
-                    && username.all { it.isDigit() } && password.length > 4
+            username.length > 4 && password.length > 4 && password == passwordConfirm
         }
     }
 }

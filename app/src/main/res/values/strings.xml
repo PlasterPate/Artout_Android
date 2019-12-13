@@ -30,4 +30,6 @@
     <string name="edit_event">Edit Event</string>
     <string name="checkins">Check-Ins</string>
     <string name="suggestions">Suggestions</string>
+    <string name="username">Username</string>
+    <string name="email">Email</string>
 </resources>
