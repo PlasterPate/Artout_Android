@@ -66,6 +66,7 @@ class FollowersFragment : BaseFragment() {
 
                 override fun onClicked(userEntity: UserEntity) {
                     this@with.updateUserState(userEntity, UserState.FOLLOWING)
+                    socialViewModel.followUser(userEntity)
                 }
 
             })
@@ -77,6 +78,7 @@ class FollowersFragment : BaseFragment() {
 
                 override fun onClicked(userEntity: UserEntity) {
                     this@with.updateUserState(userEntity, UserState.NOT_FOLLOWING)
+                    socialViewModel.unfollowUser(userEntity)
                 }
             })
         }
@@ -98,6 +100,7 @@ class FollowersFragment : BaseFragment() {
                             userEntity, UserState.NOT_FOLLOWING
                         )
                     )
+                    socialViewModel.acceptRequest(userEntity)
                 }
 
                 override fun onRejectClicked(userEntity: UserEntity) {
@@ -107,6 +110,7 @@ class FollowersFragment : BaseFragment() {
                             hidePendingGroup()
                         }
                     }
+                    socialViewModel.rejectRequest(userEntity)
                 }
 
             })

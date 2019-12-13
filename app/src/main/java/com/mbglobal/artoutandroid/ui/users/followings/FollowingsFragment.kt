@@ -62,6 +62,7 @@ class FollowingsFragment : BaseFragment() {
 
                 override fun onClicked(userEntity: UserEntity) {
                     this@with.updateUserState(userEntity, UserState.FOLLOWING)
+                    socialViewModel.followUser(userEntity)
                 }
 
             })
@@ -72,6 +73,7 @@ class FollowingsFragment : BaseFragment() {
 
                 override fun onClicked(userEntity: UserEntity) {
                     this@with.updateUserState(userEntity, UserState.NOT_FOLLOWING)
+                    socialViewModel.unfollowUser(userEntity)
                 }
 
             })

@@ -75,9 +75,9 @@ class SocialViewModel @Inject constructor(
             }
     }
 
-    fun acceptRequest(followRequestEntity: FollowRequestEntity) {
+    fun acceptRequest(requester: UserEntity) {
 
-        socialRepository.acceptRequest(followRequestEntity.source.id.toString())
+        socialRepository.acceptRequest(requester.id.toString())
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .retry(5)
@@ -87,9 +87,9 @@ class SocialViewModel @Inject constructor(
 
     }
 
-    fun rejectRequest(followRequestEntity: FollowRequestEntity) {
+    fun rejectRequest(requester: UserEntity) {
 
-        socialRepository.rejectRequest(followRequestEntity.source.id.toString())
+        socialRepository.rejectRequest(requester.id.toString())
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .retry(5)
