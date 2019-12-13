@@ -32,7 +32,6 @@
     <string name="suggestions">Suggestions</string>
     <string name="add_new_friend">Add new friend</string>
     <string name="enter_your_friend_s_exact_username">Enter your friend\'s exact username</string>
-    <string name="username">Username</string>
     <string name="cancel">Cancel</string>
     <string name="send">Send</string>
     <string name="following">Following</string>
@@ -41,4 +40,6 @@
     <string name="followers">Followers</string>
     <string name="followings">Followings</string>
     <string name="accept">Accept</string>
+    <string name="username">Username</string>
+    <string name="email">Email</string>
 </resources>

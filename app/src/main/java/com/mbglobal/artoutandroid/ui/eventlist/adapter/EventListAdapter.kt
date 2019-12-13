@@ -39,7 +39,7 @@ class EventListAdapter(private val onEventItemClickListener: OnEventItemClickLis
         private val eventDescription: TextView = itemView.findViewById(R.id.description_item)
 
         fun bind(eventEntity: EventEntity, onEventItemClickListener: OnEventItemClickListener){
-            Picasso.get().load(eventEntity.image?.toUri()).into(eventImage)
+            eventImage.setImageURI(eventEntity.image?.toUri())
             eventTitle.text = eventEntity.title
             eventDescription.text = eventEntity.description
             itemView.setOnClickListener{

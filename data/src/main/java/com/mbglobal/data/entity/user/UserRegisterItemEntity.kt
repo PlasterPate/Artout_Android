@@ -6,5 +6,6 @@ data class UserRegisterItemEntity(
     val firstName: String,
     val lastName: String,
     val password: String,
+    val passwordConfirm: String,
     val username: String
 )

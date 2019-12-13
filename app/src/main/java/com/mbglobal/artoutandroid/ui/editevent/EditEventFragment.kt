@@ -38,7 +38,7 @@ class EditEventFragment : ManageEventFragment() {
         editEventViewModel.loadEvent(eventId)
     }
 
-    fun initializeListeners(){
+    private fun initializeListeners(){
         binding.submitButton.setOnClickListener {
             val eventEntity = AddEventEntity(
                 title = binding.titleEditText.text.toString(),
@@ -54,7 +54,7 @@ class EditEventFragment : ManageEventFragment() {
         }
     }
 
-    fun initializeObservers(){
+    private fun initializeObservers(){
         editEventViewModel.pageNameText.observe(this, Observer {
             binding.pageName.text = it
         })
@@ -73,7 +73,7 @@ class EditEventFragment : ManageEventFragment() {
             binding.descriptionEditText.setText(it.description)
             binding.startDateEditText.setText(it.startDate)
             binding.endDateEditText.setText(it.endDate)
-            Picasso.get().load(it.image).into(binding.imagePick)
+            binding.imagePick.setImageURI(it.image?.toUri())
             binding.layoutGroup.visibility = View.VISIBLE
             binding.progress.visibility = View.GONE
         })
