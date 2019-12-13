@@ -1,9 +1,6 @@
 package com.mbglobal.artoutandroid.di.module
 
-import com.mbglobal.data.datasource.EventLocalDataSource
-import com.mbglobal.data.datasource.EventRemoteDataSource
-import com.mbglobal.data.datasource.SessionLocalDataSource
-import com.mbglobal.data.datasource.UserRemoteDataSource
+import com.mbglobal.data.datasource.*
 import com.mbglobal.local.datasource.SessionLocalDataSourceImpl
 import com.mbglobal.local.database.LocalDatabaseDao
 import com.mbglobal.local.datasource.EventLocalDataSourceImpl
