@@ -1,24 +1,29 @@
 package com.mbglobal.data.repository
 
+import com.mbglobal.data.datasource.EventLocalDataSource
 import com.mbglobal.data.datasource.EventRemoteDataSource
 import com.mbglobal.data.datasource.SessionLocalDataSource
 import com.mbglobal.data.entity.event.AddEventEntity
 import com.mbglobal.data.entity.event.EventEntity
 import io.reactivex.Single
-import java.awt.Event
 import javax.inject.Inject
 
 class EventRepository @Inject constructor(
     private val eventRemoteDataSource: EventRemoteDataSource,
+    private val eventLocalDataSource: EventLocalDataSource,
     private val sessionLocalDataSource: SessionLocalDataSource
 ) {
 
     fun getEvent(eventId: Int): Single<EventEntity> {
-        return eventRemoteDataSource.getEvent(eventId)
+        return eventLocalDataSource.getEvent(eventId).onErrorResumeNext {
+            eventRemoteDataSource.getEvent(eventId)
+        }
     }
 
     fun addEvent(eventEntity: AddEventEntity): Single<EventEntity> {
-        return eventRemoteDataSource.addEvent(eventEntity)
+        return eventRemoteDataSource.addEvent(eventEntity).flatMap {
+            eventLocalDataSource.addEvent(it)
+        }
     }
 
     fun getUserEvents(userId: String?): Single<List<EventEntity>> {
@@ -48,6 +53,8 @@ class EventRepository @Inject constructor(
     }
 
     fun editEvent(eventId: Int, eventEntity: AddEventEntity): Single<EventEntity> {
-        return eventRemoteDataSource.editEvent(eventId, eventEntity)
+        return eventRemoteDataSource.editEvent(eventId, eventEntity).flatMap {
+            eventLocalDataSource.editEvent(it)
+        }
     }
 }
