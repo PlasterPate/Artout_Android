@@ -3,6 +3,7 @@ package com.mbglobal.artoutandroid.ui.users.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.mbglobal.artoutandroid.R
 import com.mbglobal.artoutandroid.ui.users.UserState
@@ -38,7 +39,7 @@ class UserAdapter: RecyclerView.Adapter<UserViewHolder>() {
 
         override fun add(index: Int, element: UserListItem) {
             super.add(index, element)
-            notifyDataSetChanged()
+            notifyItemInserted(index)
         }
     }
     set (value) {

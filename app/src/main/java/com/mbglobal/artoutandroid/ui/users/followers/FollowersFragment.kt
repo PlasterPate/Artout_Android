@@ -100,6 +100,7 @@ class FollowersFragment : BaseFragment() {
                             userEntity, UserState.NOT_FOLLOWING
                         )
                     )
+                    binding.rvFollowers.scrollToPosition(0)
                     socialViewModel.acceptRequest(userEntity)
                 }
 

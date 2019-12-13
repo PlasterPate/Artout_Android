@@ -30,13 +30,9 @@ class FollowRequestAdapter(private val onFollowRequestClickListener: OnFollowReq
 
         override fun remove(element: UserEntity): Boolean {
             val idx = this.indexOf(element)
+            notifyItemRemoved(idx)
             super.remove(element)
-            if (idx != -1) {
-                notifyDataSetChanged()
-                return true
-            } else {
-                return false
-            }
+            return idx != -1
         }
     }
     set (value) {
