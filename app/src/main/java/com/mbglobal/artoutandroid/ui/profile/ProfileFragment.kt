@@ -17,6 +17,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.mbglobal.artoutandroid.ui.profile.adapter.ProfileItem
 import com.mbglobal.artoutandroid.ui.profile.adapter.ProfileItemsAdapter
 import com.mbglobal.artoutandroid.ui.profile.listener.OnProfileItemClickListener
+import com.mbglobal.data.entity.user.FollowRequestEntity
+import com.mbglobal.data.entity.user.UserEntity
 import com.mbglobal.data.entity.user.UserProfileEntity
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.dialog_add_friend.*
@@ -91,7 +93,7 @@ class ProfileFragment : BaseFragment() {
             dialog.show()
 
             dialog.dialog_btn_add.setOnClickListener{
-                dialog.hide()
+                profileViewModel.sendFollowRequest(dialog_edit_text.text.toString())
             }
 
             dialog.dialog_btn_cancel.setOnClickListener{
