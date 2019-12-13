@@ -81,7 +81,7 @@ class SocialViewModel @Inject constructor(
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .retry(5)
-            .subscribe().also {
+            .subscribe({}, {}).also {
                 compositeDisposable.add(it)
             }
 
@@ -93,7 +93,7 @@ class SocialViewModel @Inject constructor(
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .retry(5)
-            .subscribe().also {
+            .subscribe({}, {}).also {
                 compositeDisposable.add(it)
             }
 
@@ -105,7 +105,7 @@ class SocialViewModel @Inject constructor(
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .retry(5)
-            .subscribe().also {
+            .subscribe({}, {}).also {
                 compositeDisposable.add(it)
             }
 
@@ -117,7 +117,7 @@ class SocialViewModel @Inject constructor(
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .retry(5)
-            .subscribe().also {
+            .subscribe({}, {}).also {
                 compositeDisposable.add(it)
             }
 
