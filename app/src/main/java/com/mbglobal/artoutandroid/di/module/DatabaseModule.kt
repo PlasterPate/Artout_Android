@@ -2,6 +2,7 @@ package com.mbglobal.artoutandroid.di.module
 
 import android.content.Context
 import androidx.room.Room
+import com.mbglobal.artoutandroid.di.scope.AppScope
 import com.mbglobal.local.database.LocalDatabase
 import dagger.Module
 import dagger.Provides
@@ -12,7 +13,7 @@ import javax.inject.Singleton
 @Module
 class DatabaseModule {
 
-    @Singleton
+    @AppScope
     @Provides
     fun providesLocalDatabase(context: Context): LocalDatabase {
         return Room.databaseBuilder(
