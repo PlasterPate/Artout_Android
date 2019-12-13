@@ -8,7 +8,7 @@ fun EventEntity.toEventTable(): EventTable {
     return EventTable(
         id = id,
         title = title,
-        image = image,
+        imagePath = image,
         description = description,
         category = category,
         eventOwner = eventOwner,
@@ -23,7 +23,7 @@ fun EventTable.toEventEntity(): EventEntity {
     return EventEntity(
         id = id,
         title = title,
-        image = image,
+        image = imagePath,
         description = description,
         category = category,
         eventOwner = eventOwner,

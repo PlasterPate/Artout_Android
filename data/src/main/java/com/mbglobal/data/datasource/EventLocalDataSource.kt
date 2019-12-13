@@ -10,4 +10,6 @@ interface EventLocalDataSource {
     fun addEvent(eventEntity: EventEntity): Single<EventEntity>
 
     fun editEvent(eventEntity: EventEntity): Single<EventEntity>
+
+    fun getUserEvents(): Single<List<EventEntity>>
 }

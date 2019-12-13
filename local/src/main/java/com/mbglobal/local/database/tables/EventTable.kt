@@ -3,7 +3,6 @@ package com.mbglobal.local.database.tables
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.mbglobal.data.entity.event.LocationEntity
 
 @Entity(tableName = "events_table")
 data class EventTable(
@@ -15,8 +14,8 @@ data class EventTable(
     @ColumnInfo(name = "title")
     val title: String,
 
-    @ColumnInfo(name = "image")
-    val image: String?,
+    @ColumnInfo(name = "image_path")
+    val imagePath: String?,
 
     @ColumnInfo(name = "description")
     val description: String,
