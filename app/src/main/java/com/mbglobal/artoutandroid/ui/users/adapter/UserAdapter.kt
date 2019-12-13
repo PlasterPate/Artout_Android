@@ -25,18 +25,20 @@ class UserAdapter: RecyclerView.Adapter<UserViewHolder>() {
         }
 
         override fun add(element: UserListItem): Boolean {
-            val status = super.add(element)
-            Timber.v("Add Item $element")
-            if (status) {
-                notifyDataSetChanged()
-            }
-            return status
+            val result = super.add(element)
+            notifyDataSetChanged()
+            return result
         }
 
         override fun set(index: Int, element: UserListItem): UserListItem {
             val result = super.set(index, element)
             notifyItemChanged(index)
             return result
+        }
+
+        override fun add(index: Int, element: UserListItem) {
+            super.add(index, element)
+            notifyDataSetChanged()
         }
     }
     set (value) {

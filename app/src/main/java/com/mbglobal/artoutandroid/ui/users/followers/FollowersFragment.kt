@@ -89,7 +89,13 @@ class FollowersFragment : BaseFragment() {
             layoutManager = LinearLayoutManager(requireContext())
             adapter = FollowRequestAdapter(object : OnFollowRequestClickListener {
                 override fun onAcceptClicked(userEntity: UserEntity) {
-                    (binding.rvFollowers.adapter as UserAdapter).data.add(
+                    (adapter as FollowRequestAdapter).data.apply {
+                        remove(userEntity)
+                        if (isEmpty()) {
+                            hidePendingGroup()
+                        }
+                    }
+                    (binding.rvFollowers.adapter as UserAdapter).data.add(0,
                         UserListItem(
                             userEntity, UserState.NOT_FOLLOWING
                         )
@@ -100,8 +106,7 @@ class FollowersFragment : BaseFragment() {
                     (adapter as FollowRequestAdapter).data.apply {
                         remove(userEntity)
                         if (isEmpty()) {
-                            divider_pending.visibility = View.GONE
-                            tv_pending_followers_title.visibility = View.GONE
+                            hidePendingGroup()
                         }
                     }
                 }
@@ -114,6 +119,10 @@ class FollowersFragment : BaseFragment() {
                 it.source
             }.toMutableList()
         }
+    }
+
+    private fun hidePendingGroup() {
+        pending_group.visibility = View.GONE
     }
 }
 

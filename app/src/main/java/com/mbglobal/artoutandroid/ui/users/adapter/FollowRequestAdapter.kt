@@ -17,11 +17,9 @@ class FollowRequestAdapter(private val onFollowRequestClickListener: OnFollowReq
         }
 
         override fun add(element: UserEntity): Boolean {
-            val status = super.add(element)
-            if (status) {
-                notifyDataSetChanged()
-            }
-            return status
+            val result = super.add(element)
+            notifyDataSetChanged()
+            return result
         }
 
         override fun set(index: Int, element: UserEntity): UserEntity {
