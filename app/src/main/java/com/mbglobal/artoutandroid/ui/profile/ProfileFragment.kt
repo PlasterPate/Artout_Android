@@ -46,6 +46,7 @@ class ProfileFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         userId = ProfileFragmentArgs.fromBundle(arguments!!).userId
+        if (userId == "0") userId = null
         binding.rvProfileItems.layoutManager = LinearLayoutManager(view.context)
         binding.rvProfileItems.adapter = ProfileItemsAdapter(
             UserProfileEntity(

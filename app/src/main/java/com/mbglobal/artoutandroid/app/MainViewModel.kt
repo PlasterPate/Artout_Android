@@ -7,17 +7,18 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
-class MainViewModel @Inject constructor(private val userRepository: UserRepository) : BaseViewModel() {
+class MainViewModel @Inject constructor(private val userRepository: UserRepository) :
+    BaseViewModel() {
 
-    private val _loginStatus: MutableLiveData<Boolean> = MutableLiveData()
+    private val _loginStatus: MutableLiveData<LiveEvent<Boolean>> = MutableLiveData()
     val loginStatus = _loginStatus
 
     fun onCreate() {
         userRepository.getUser()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe { userdId ->
-                _loginStatus.value = !(userdId.isBlank())
+            .subscribe { userId ->
+                _loginStatus.value = LiveEvent(!(userId.isBlank()))
             }.also {
                 compositeDisposable.add(it)
             }

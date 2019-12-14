@@ -13,6 +13,10 @@ class CoverViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     private val cover = itemView.findViewById<ImageView>(R.id.cover)
 
     fun bind(eventEntity: EventEntity) {
-        cover.setImageURI(eventEntity.image?.toUri())
+        try {
+            Picasso.get().load(eventEntity.image?.toUri()).into(cover)
+        }catch (e: SecurityException){
+
+        }
     }
 }
