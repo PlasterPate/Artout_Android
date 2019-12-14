@@ -1,6 +1,7 @@
 package com.mbglobal.artoutandroid.app
 
 import android.os.Bundle
+import android.view.View
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
@@ -20,6 +21,12 @@ class MainActivity : DaggerAppCompatActivity() {
         ViewModelProviders.of(this, viewModelFactory)[MainViewModel::class.java]
     }
 
+    val bottomNavigationFragments = listOf<Int>(
+        R.id.navigation_timeline,
+        R.id.navigation_profile,
+        R.id.navigation_discover
+    )
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -27,6 +34,13 @@ class MainActivity : DaggerAppCompatActivity() {
         val navView: BottomNavigationView = findViewById(R.id.bottom_navigation_view)
         val navController = findNavController(R.id.nav_host_fragment)
         navView.setupWithNavController(navController)
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            navView.visibility =
+                if (destination.id in bottomNavigationFragments)
+                    View.VISIBLE
+                else
+                    View.GONE
+        }
 
         initializeObservers()
         if (navController.currentDestination?.id == R.id.loginFragment) {
