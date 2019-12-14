@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.mbglobal.artoutandroid.R
 import com.mbglobal.data.entity.event.EventEntity
 import com.squareup.picasso.Picasso
+import java.lang.Exception
 
 class EventListAdapter(private val onEventItemClickListener: OnEventItemClickListener) : RecyclerView.Adapter<EventListAdapter.EventViewHolder>() {
 
@@ -39,7 +40,11 @@ class EventListAdapter(private val onEventItemClickListener: OnEventItemClickLis
         private val eventDescription: TextView = itemView.findViewById(R.id.description_item)
 
         fun bind(eventEntity: EventEntity, onEventItemClickListener: OnEventItemClickListener){
-            eventImage.setImageURI(eventEntity.image?.toUri())
+            try {
+                Picasso.get().load(eventEntity.image?.toUri()).into(eventImage)
+            }catch (e: SecurityException){
+
+            }
             eventTitle.text = eventEntity.title
             eventDescription.text = eventEntity.description
             itemView.setOnClickListener{

@@ -18,7 +18,7 @@
             app:popExitAnim="@anim/slide_out_right" />
         <action
             android:id="@+id/action_loginFragment_to_timelineFragment"
-            app:destination="@id/timelineFragment"
+            app:destination="@id/navigation_timeline"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:launchSingleTop="true"
@@ -32,7 +32,7 @@
         tools:layout="@layout/fragment_register">
         <action
             android:id="@+id/action_registerFragment_to_timelineFragment"
-            app:destination="@id/timelineFragment"
+            app:destination="@id/navigation_timeline"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:launchSingleTop="true"
@@ -40,20 +40,15 @@
             app:popUpToInclusive="true" />
     </fragment>
     <fragment
-        android:id="@+id/timelineFragment"
+        android:id="@+id/navigation_timeline"
         android:name="com.mbglobal.artoutandroid.ui.timeline.TimelineFragment"
-        android:label="TimelineFragment">
-        <action
-            android:id="@+id/action_timelineFragment_to_eventsFragment"
-            app:destination="@id/eventsFragment" />
-        <action
-            android:id="@+id/action_timelineFragment_to_profileFragment"
-            app:destination="@id/profileFragment" />
-    </fragment>
+        android:label="TimelineFragment"
+        tools:layout="@layout/fragment_timeline" />
     <fragment
         android:id="@+id/addEventFragment"
         android:name="com.mbglobal.artoutandroid.ui.addevent.AddEventFragment"
-        android:label="AddEventFragment">
+        android:label="AddEventFragment"
+        tools:layout="@layout/fragment_manage_event">
         <action
             android:id="@+id/action_addEventFragment_to_eventDetailsFragment"
             app:destination="@id/eventDetailsFragment"
@@ -61,21 +56,13 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right"
-            app:popUpTo="@+id/eventsFragment" />
+            app:popUpTo="@+id/navigation_discover" />
     </fragment>
     <fragment
-        android:id="@+id/eventsFragment"
+        android:id="@+id/navigation_discover"
         android:name="com.mbglobal.artoutandroid.ui.discover.DiscoverFragment"
-        android:label="EventsFragment">
-        <action
-            android:id="@+id/action_eventsFragment_to_timelineFragment"
-            app:destination="@id/timelineFragment"
-            app:launchSingleTop="true"
-            app:popUpTo="@id/navigation"
-            app:popUpToInclusive="true" />
-        <action
-            android:id="@+id/action_eventsFragment_to_profileFragment"
-            app:destination="@id/profileFragment" />
+        android:label="DiscoverFragment"
+        tools:layout="@layout/fragment_discover">
         <action
             android:id="@+id/action_eventsFragment_to_addEventFragment"
             app:destination="@id/addEventFragment"
@@ -83,14 +70,16 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right"
-            app:popUpTo="@+id/eventsFragment" />
+            app:popUpTo="@+id/navigation_discover" />
     </fragment>
     <fragment
-        android:id="@+id/profileFragment"
+        android:id="@+id/navigation_profile"
         android:name="com.mbglobal.artoutandroid.ui.profile.ProfileFragment"
-        android:label="ProfileFragment">
+        android:label="ProfileFragment"
+        tools:layout="@layout/fragment_profile">
         <argument
             android:name="userId"
+            android:defaultValue="0"
             app:argType="string"
             app:nullable="true" />
         <action
@@ -104,15 +93,6 @@
             app:popUpTo="@+id/navigation"
             app:popUpToInclusive="true" />
         <action
-            android:id="@+id/action_profileFragment_to_timelineFragment"
-            app:destination="@id/timelineFragment"
-            app:launchSingleTop="true"
-            app:popUpTo="@id/navigation"
-            app:popUpToInclusive="true" />
-        <action
-            android:id="@+id/action_profileFragment_to_eventsFragment"
-            app:destination="@id/eventsFragment" />
-        <action
             android:id="@+id/action_profileFragment_to_eventDetailsFragment"
             app:destination="@id/eventDetailsFragment"
             app:enterAnim="@anim/slide_in_right"
@@ -120,14 +100,14 @@
             app:launchSingleTop="true"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right"
-            app:popUpTo="@+id/profileFragment" />
+            app:popUpTo="@+id/navigation_profile" />
         <action
             android:id="@+id/action_profileFragment_to_eventListFragment"
             app:destination="@id/eventListFragment"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"/>
+            app:popExitAnim="@anim/slide_out_right" />
         <action
             android:id="@+id/action_profileFragment_to_followersFragment"
             app:destination="@id/followersFragment"
@@ -135,7 +115,7 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right"
-            app:popUpTo="@+id/profileFragment" />
+            app:popUpTo="@+id/navigation_profile" />
         <action
             android:id="@+id/action_profileFragment_to_followingsFragment"
             app:destination="@id/followingsFragment"
@@ -143,13 +123,14 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right"
-            app:popUpTo="@+id/profileFragment" />
+            app:popUpTo="@+id/navigation_profile" />
     </fragment>
 
     <fragment
         android:id="@+id/eventDetailsFragment"
         android:name="com.mbglobal.artoutandroid.ui.eventdetails.EventDetailsFragment"
-        android:label="EventDetailsFragment">
+        android:label="EventDetailsFragment"
+        tools:layout="@layout/fragment_event_details">
         <argument
             android:name="eventId"
             app:argType="integer" />
@@ -164,7 +145,8 @@
     <fragment
         android:id="@+id/editEventFragment"
         android:name="com.mbglobal.artoutandroid.ui.editevent.EditEventFragment"
-        android:label="EditEventFragment">
+        android:label="EditEventFragment"
+        tools:layout="@layout/fragment_manage_event">
         <argument
             android:name="eventId"
             app:argType="integer" />
@@ -181,7 +163,8 @@
     <fragment
         android:id="@+id/eventListFragment"
         android:name="com.mbglobal.artoutandroid.ui.eventlist.EventListFragment"
-        android:label="EventListFragment">
+        android:label="EventListFragment"
+        tools:layout="@layout/fragment_event_list">
         <argument
             android:name="userId"
             app:argType="string"
@@ -193,9 +176,11 @@
     <fragment
         android:id="@+id/followersFragment"
         android:name="com.mbglobal.artoutandroid.ui.users.followers.FollowersFragment"
-        android:label="FollowersFragment" />
+        android:label="FollowersFragment"
+        tools:layout="@layout/fragment_followers" />
     <fragment
         android:id="@+id/followingsFragment"
         android:name="com.mbglobal.artoutandroid.ui.users.followings.FollowingsFragment"
-        android:label="FollowingsFragment" />
+        android:label="FollowingsFragment"
+        tools:layout="@layout/fragment_followings" />
 </navigation>
