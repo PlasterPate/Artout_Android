@@ -5,6 +5,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
@@ -91,7 +93,8 @@ class ProfileFragment : BaseFragment() {
             dialog.show()
 
             dialog.dialog_btn_add.setOnClickListener{
-                profileViewModel.sendFollowRequest(dialog.)
+                profileViewModel.sendFollowRequest(dialog.findViewById<EditText>(R.id
+                    .dialog_edit_text).text.toString())
             }
 
             dialog.dialog_btn_cancel.setOnClickListener{

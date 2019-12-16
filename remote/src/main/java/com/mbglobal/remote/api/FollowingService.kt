@@ -8,25 +8,25 @@ import retrofit2.http.*
 
 interface FollowingService {
 
-    @GET("followings/")
+    @GET("/api/v1.0/follow/followings/")
     fun getUserFollowings(): Single<List<UserDto>>
 
-    @GET("users/{id}/followings")
+    @GET("/api/v1.0/follow/users/{id}/followings")
     fun getUserFollowings(@Path("id") userId: String): Single<List<UserDto>>
 
-    @GET("followings/{id}/")
+    @GET("/api/v1.0/follow/followings/{id}/")
     fun getFollowing(@Path("id") userId: String): Single<UserDto>
 
-    @DELETE("followings/{id}/")
+    @DELETE("/api/v1.0/follow/followings/{id}/")
     fun unfollow(@Path("id") userId: String): Single<ResponseBody>
 
-    @POST("followings/pendings/")
+    @POST("/api/v1.0/follow/followings/pendings/")
     fun follow(@Body userId: String): Single<ResponseBody>
 
-    @GET("followings/pendings/")
+    @GET("/api/v1.0/follow/followings/pendings/")
     fun getFollowPendings(): Single<List<FollowRequestDto>>
 
-    @DELETE("followings/pendings/{id}/")
+    @DELETE("/api/v1.0/follow/followings/pendings/{id}/")
     fun cancelFollowPending(@Path("id") userId: String): Single<ResponseBody>
 
     companion object {
