@@ -1,6 +1,7 @@
 package com.mbglobal.artoutandroid.ui.profile
 
 import androidx.lifecycle.MutableLiveData
+import com.mbglobal.artoutandroid.app.LiveEvent
 import com.mbglobal.artoutandroid.ui.base.BaseViewModel
 import com.mbglobal.data.entity.event.EventEntity
 import com.mbglobal.data.entity.user.FollowRequestEntity
@@ -17,17 +18,20 @@ class ProfileViewModel @Inject constructor(
     private val socialRepository: SocialRepository
 ) : BaseViewModel() {
 
-    private val _logoutStatus: MutableLiveData<Boolean> = MutableLiveData()
+    private val _logoutStatus: MutableLiveData<LiveEvent<Boolean>> = MutableLiveData()
     val logoutStatus = _logoutStatus
 
     private val _logoutError: MutableLiveData<String> = MutableLiveData()
     val logoutError = _logoutError
 
+    private val _followStatus: MutableLiveData<LiveEvent<Boolean>> = MutableLiveData()
+    val followStatus = _followStatus
+
     fun clickLogout() {
         userRepository.logout().subscribe({
-            _logoutStatus.value = true
+            _logoutStatus.value = LiveEvent(true)
         }, {
-            _logoutStatus.value = false
+            _logoutStatus.value = LiveEvent(false)
             _logoutError.value = "Logout failed"
         }).also {
             compositeDisposable.add(it)
@@ -35,11 +39,19 @@ class ProfileViewModel @Inject constructor(
     }
 
     fun sendFollowRequest(userId: String) {
-
-        socialRepository.follow(userId)
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe({}, {})
+//        userRepository.getUser(userId)
+//            .subscribeOn(Schedulers.io())
+//            .observeOn(AndroidSchedulers.mainThread())
+//            .subscribe({
+                socialRepository.follow(userId)
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe({
+                        _followStatus.value = LiveEvent(true)
+                    }, {
+                        _followStatus.value = LiveEvent(false)
+                    })
+//            },{})
             .also {
                 compositeDisposable.add(it)
             }
