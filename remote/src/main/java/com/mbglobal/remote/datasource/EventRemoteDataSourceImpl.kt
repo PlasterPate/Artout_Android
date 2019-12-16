@@ -32,24 +32,24 @@ class EventRemoteDataSourceImpl @Inject constructor(private val eventService: Ev
         }
     }
 
-    override fun getUserEvents(userId: Int): Single<List<EventEntity>> {
-        return eventService.getUserEvents(userId).map { events ->
+    override fun getUserEvents(): Single<List<EventEntity>> {
+        return eventService.getUserEvents().map { events ->
             events.map { eventDto ->
                 eventDto.toEventEntity()
             }
         }
     }
 
-    override fun getUserCheckIns(userId: Int): Single<List<EventEntity>> {
-        return eventService.getUserCheckIns(userId).map { events ->
+    override fun getUserCheckIns(): Single<List<EventEntity>> {
+        return eventService.getUserCheckIns().map { events ->
             events.map { eventDto ->
                 eventDto.toEventEntity()
             }
         }
     }
 
-    override fun getUserSuggestions(userId: Int): Single<List<EventEntity>> {
-        return eventService.getUserSuggestions(userId).map { events ->
+    override fun getUserSuggestions(): Single<List<EventEntity>> {
+        return eventService.getUserSuggestions().map { events ->
             events.map { eventDto ->
                 eventDto.toEventEntity()
             }

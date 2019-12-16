@@ -16,16 +16,16 @@ interface EventService {
     @PUT("/api/v1.0/events/{id}/")
     fun editEvent(@Path("id") eventId: Int, @Body addEventDto: AddEventDto): Single<EventDto>
 
-    @POST("/api/v1.0/")
+    @POST("/api/v1.0/events/")
     fun addEvent(@Body addEventDto: AddEventDto): Single<EventDto>
 
-    @GET("/api/v1.0/")
+    @GET("/api/v1.0/events/")
     fun getUserEvents(): Single<List<EventDto>>
 
-    @GET("/api/v1.0/")
+    @GET("/api/v1.0/events/")
     fun getUserCheckIns(): Single<List<EventDto>>
 
-    @GET("/api/v1.0/")
+    @GET("/api/v1.0/events/")
     fun getUserSuggestions(): Single<List<EventDto>>
 
     companion object {

@@ -8,17 +8,23 @@ import retrofit2.http.*
 
 interface FollowerService {
 
+    @GET("followings/")
+    fun getUserFollowings(): Single<List<UserDto>>
+
     @GET("followers/")
     fun getUserFollowers(): Single<List<UserDto>>
 
-    @GET("users/{id}/followers/")
-    fun getUserFollowers(@Path("id") userId: String): Single<List<UserDto>>
+    @GET("followings/{id}")
+    fun getFollowing(@Path("id") userId: String): Single<UserDto>
 
     @GET("followers/{id}/")
     fun getFollower(@Path("id") userId: String): Single<UserDto>
 
     @DELETE("followers/{id}/")
     fun removeFollower(@Path("id") userId: String): Single<ResponseBody>
+
+    @GET("followings/pendings/")
+    fun getPendingFollowings(): Single<List<UserDto>>
 
     @GET("followers/requests/")
     fun getFollowRequests(): Single<List<FollowRequestDto>>

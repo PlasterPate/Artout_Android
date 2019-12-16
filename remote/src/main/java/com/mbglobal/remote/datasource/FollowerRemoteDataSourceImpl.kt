@@ -23,7 +23,7 @@ class FollowerRemoteDataSourceImpl @Inject constructor(
     }
 
     override fun getUserFollowers(userId: String): Single<List<UserEntity>> {
-        return followerService.getUserFollowers(userId).map { users ->
+        return followerService.getUserFollowers().map { users ->
             users.map { UserDto ->
                 UserDto.toUserEntity()
             }

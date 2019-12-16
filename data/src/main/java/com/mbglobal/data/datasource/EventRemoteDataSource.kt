@@ -13,9 +13,9 @@ interface EventRemoteDataSource {
 
     fun editEvent(eventId: Int, eventEntity: AddEventEntity) : Single<EventEntity>
 
-    fun getUserEvents(userId : Int) : Single<List<EventEntity>>
+    fun getUserEvents() : Single<List<EventEntity>>
 
-    fun getUserCheckIns(userId: Int): Single<List<EventEntity>>
+    fun getUserCheckIns(): Single<List<EventEntity>>
 
-    fun getUserSuggestions(userId: Int): Single<List<EventEntity>>
+    fun getUserSuggestions(): Single<List<EventEntity>>
 }
