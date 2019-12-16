@@ -30,6 +30,6 @@ interface FollowingService {
     fun cancelFollowPending(@Path("id") userId: String): Single<ResponseBody>
 
     companion object {
-        const val BASE_URL: String = "http://35.202.66.168:8000/"
+        const val BASE_URL: String = "http://35.202.66.168:8080/"
     }
 }
