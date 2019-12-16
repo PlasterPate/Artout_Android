@@ -13,7 +13,7 @@ interface UserService {
     fun login(@Body userLoginItemDto: UserLoginItemDto): Single<UserLoginResponseDto>
 
     @GET("/api/v1.0/users/username/{username}/")
-    fun getUser(@Query("username") username: String): Single<UserDto>
+    fun getUser(@Path("username") username: String): Single<UserDto>
 
     companion object {
         const val BASE_URL: String = "http://35.202.66.168:8080/"

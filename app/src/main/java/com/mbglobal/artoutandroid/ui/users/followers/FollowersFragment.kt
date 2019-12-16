@@ -50,7 +50,7 @@ class FollowersFragment : BaseFragment() {
     }
 
     private fun initializeViews() {
-        binding.rvPendingFollowers.itemAnimator = object: DefaultItemAnimator() {
+        binding.rvPendingFollowers.itemAnimator = object : DefaultItemAnimator() {
             override fun onAnimationFinished(viewHolder: RecyclerView.ViewHolder) {
                 if ((binding.rvPendingFollowers.adapter as FollowRequestAdapter).data.size == 0) {
                     hidePendingGroup()
@@ -97,7 +97,10 @@ class FollowersFragment : BaseFragment() {
         }
     }
 
-    private val followRequestsObserver = Observer<List<FollowRequestEntity>> {
+    private val followRequestsObserver = Observer<List<FollowRequestEntity>> { requests ->
+        if (requests.isEmpty()) hidePendingGroup()
+        else showPendingGroup()
+
         binding.rvPendingFollowers.apply {
             layoutManager = LinearLayoutManager(requireContext())
             adapter = FollowRequestAdapter(object : OnFollowRequestClickListener {
@@ -105,7 +108,8 @@ class FollowersFragment : BaseFragment() {
                     (adapter as FollowRequestAdapter).data.apply {
                         remove(userEntity)
                     }
-                    (binding.rvFollowers.adapter as UserAdapter).data.add(0,
+                    (binding.rvFollowers.adapter as UserAdapter).data.add(
+                        0,
                         UserListItem(
                             userEntity, UserState.NOT_FOLLOWING
                         )
@@ -125,15 +129,19 @@ class FollowersFragment : BaseFragment() {
             })
         }
 
-        with (binding.rvPendingFollowers.adapter as FollowRequestAdapter) {
-            data = it.map {
+        with(binding.rvPendingFollowers.adapter as FollowRequestAdapter) {
+            data = requests.map {
                 it.source
             }.toMutableList()
         }
     }
 
     private fun hidePendingGroup() {
-        pending_group.visibility = View.GONE
+        binding.pendingGroup.visibility = View.GONE
+    }
+
+    private fun showPendingGroup() {
+        binding.pendingGroup.visibility = View.VISIBLE
     }
 }
 
