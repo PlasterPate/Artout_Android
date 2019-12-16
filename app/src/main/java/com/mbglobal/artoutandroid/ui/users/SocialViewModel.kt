@@ -28,18 +28,10 @@ class SocialViewModel @Inject constructor(
     val followings: LiveData<List<UserEntity>> = _followings
 
     fun loadFollowers(userId: String?) {
-        val id = userId?.let {
-            Single.just(it)
-        } ?: sessionLocalDataSource.getSession()
-            .map {
-                it.userId
-            }
-
-        id.flatMap {
-            socialRepository.getUserFollowers(it)
-        }.subscribeOn(Schedulers.io())
+        socialRepository.getUserFollowers(userId)
+            .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe( { followers: List<UserEntity> ->
+            .subscribe({ followers: List<UserEntity> ->
                 _followers.postValue(followers)
             }, {
                 Timber.e("Throwable followers ${it.message}")
@@ -49,16 +41,8 @@ class SocialViewModel @Inject constructor(
     }
 
     fun loadFollowings(userId: String?) {
-        val id = userId?.let {
-            Single.just(it)
-        } ?: sessionLocalDataSource.getSession()
-            .map {
-                it.userId
-            }
-
-        id.flatMap {
-            socialRepository.getUserFollowings(it)
-        }.subscribeOn(Schedulers.io())
+        socialRepository.getUserFollowings(userId)
+            .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe { followers: List<UserEntity> ->
                 _followings.postValue(followers)
@@ -71,7 +55,8 @@ class SocialViewModel @Inject constructor(
         socialRepository.getFollowRequests()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe( { followRequestEntities: List<FollowRequestEntity> ->
+            .subscribe({ followRequestEntities: List<FollowRequestEntity> ->
+                println(followRequestEntities)
                 _followRequests.postValue(followRequestEntities)
             }, {
                 Timber.e("Throwable pending ${it.message}")

@@ -7,9 +7,7 @@ import io.reactivex.Single
 
 interface FollowingRemoteDataSource {
 
-    fun getUserFollowings(): Single<List<UserEntity>>
-
-    fun getUserFollowings(userId: String): Single<List<UserEntity>>
+    fun getUserFollowings(userId: String? = null): Single<List<UserEntity>>
 
     fun getFollowing(userId: String): Single<UserEntity>
 

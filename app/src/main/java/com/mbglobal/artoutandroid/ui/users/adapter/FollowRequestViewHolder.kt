@@ -31,7 +31,8 @@ class FollowRequestViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView
     fun bind(userEntity: UserEntity, onFollowRequestClickListener: OnFollowRequestClickListener) {
         val fullName = "${userEntity.firstName} ${userEntity.lastName}"
         name.text = fullName
-        Picasso.get().load(userEntity.avatar).into(profilePicture)
+        if (userEntity.avatar.isNotEmpty())
+            Picasso.get().load(userEntity.avatar).into(profilePicture)
         //TODO
         acceptButton.setOnClickListener {
             onFollowRequestClickListener.onAcceptClicked(userEntity)

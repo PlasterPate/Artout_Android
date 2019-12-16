@@ -138,3 +138,11 @@ fun FollowRequestDto.toFollowRequsetEntity(): FollowRequestEntity {
         id = id
     )
 }
+
+fun UserDto.toFollowRequestEntity(): FollowRequestEntity{
+    return FollowRequestEntity(
+        source = this.toUserEntity(),
+        destination = this.toUserEntity(),
+        id = this.id
+    )
+}
