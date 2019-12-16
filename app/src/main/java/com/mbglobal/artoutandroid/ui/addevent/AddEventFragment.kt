@@ -85,10 +85,11 @@ class AddEventFragment : ManageEventFragment() {
             val eventEntity = AddEventEntity(
                 title = binding.titleEditText.text.toString(),
                 description = binding.descriptionEditText.text.toString(),
-                startDate = binding.startDateEditText.text.toString(),
-                endDate = binding.endDateEditText.text.toString(),
+                startDate = "${binding.startDateEditText.text.toString()} " + binding
+                    .startTimeEditText.text.toString(),
+                endDate = binding.endDateEditText.text.toString() + " " + binding.endTimeEditText
+                    .text.toString(),
                 category = binding.categoryEditText.text.toString(),
-                eventOwner = userRepository.getUser().blockingGet()!!.toInt(),
                 location = LocationEntity(12.0, 10.0),
                 image = addEventViewModel.eventImage.value
             )

@@ -46,7 +46,6 @@ class EditEventFragment : ManageEventFragment() {
                 startDate = binding.startDateEditText.text.toString(),
                 endDate = binding.endDateEditText.text.toString(),
                 category = binding.categoryEditText.text.toString(),
-                eventOwner = userRepository.getUser().blockingGet()!!.toInt(),
                 location = LocationEntity(12.0, 10.0),
                 image = "https://www.euroarts.com/sites/default/files/styles/product_cover_mobile/public/media_product/Argerich%20%26%20Barenboim%20_c_Arnaldo%20Colombaroli%20%282%29.jpg"
             )

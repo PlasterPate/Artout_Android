@@ -2,6 +2,7 @@ package com.mbglobal.artoutandroid.ui.addevent
 
 import android.content.res.Resources
 import android.net.Uri
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.mbglobal.artoutandroid.R
@@ -33,6 +34,7 @@ class AddEventViewModel @Inject constructor(private val eventRepository: EventRe
                     _addedId.value = event.id
                 },
                 { throwable ->
+                    Log.v("OkHttp", "${throwable.message}");
                     _addedId.value = null
                 }
             ).also {
