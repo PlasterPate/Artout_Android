@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
@@ -14,6 +15,7 @@ import com.mbglobal.artoutandroid.R
 import com.mbglobal.artoutandroid.databinding.FragmentProfileBinding
 import com.mbglobal.artoutandroid.ui.base.BaseFragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.snackbar.Snackbar
 import com.mbglobal.artoutandroid.ui.profile.adapter.ProfileItem
 import com.mbglobal.artoutandroid.ui.profile.adapter.ProfileItemsAdapter
 import com.mbglobal.artoutandroid.ui.profile.listener.OnProfileItemClickListener
@@ -24,6 +26,7 @@ import kotlinx.android.synthetic.main.dialog_add_friend.*
 class ProfileFragment : BaseFragment() {
 
     private var userId: String? = null
+    lateinit var followDialog : AlertDialog
     lateinit var binding: FragmentProfileBinding
     var adapter: ProfileItemsAdapter? = null
 
@@ -87,15 +90,16 @@ class ProfileFragment : BaseFragment() {
 
         binding.btnAddFriend.setOnClickListener{
             val builder = AlertDialog.Builder(requireContext())
-            val dialog : AlertDialog = builder.setView(R.layout.dialog_add_friend).create()
-            dialog.show()
+            followDialog = builder.setView(R.layout.dialog_add_friend).create()
+            followDialog.show()
 
-            dialog.dialog_btn_add.setOnClickListener{
-                profileViewModel.sendFollowRequest(dialog_edit_text.text.toString())
+            followDialog.dialog_btn_add.setOnClickListener{
+                profileViewModel.sendFollowRequest(followDialog.findViewById<EditText>(R.id
+                    .dialog_edit_text).text.toString())
             }
 
-            dialog.dialog_btn_cancel.setOnClickListener{
-                dialog.hide()
+            followDialog.dialog_btn_cancel.setOnClickListener{
+                followDialog.hide()
             }
         }
 
@@ -115,15 +119,21 @@ class ProfileFragment : BaseFragment() {
     private fun initializeObservers() {
 
         profileViewModel.logoutStatus.observe(this, Observer {
-            if (it == true) {
+            if (it.getContentIfNotHandled() == true) {
                 findNavController().navigate(ProfileFragmentDirections.actionProfileFragmentToLoginFragment())
             }
         })
 
         profileViewModel.logoutError.observe(this, Observer {
-            Toast.makeText(requireContext(), it, Toast.LENGTH_LONG).show()
+            Snackbar.make(requireView(), it, Snackbar.LENGTH_LONG).show()
         })
 
+        profileViewModel.followStatus.observe(this, Observer {
+            if (it.getContentIfNotHandled() == true){
+                followDialog.hide()
+                Snackbar.make(requireView(), "Follow request Sent", Snackbar.LENGTH_LONG).show()
+            }
+        })
     }
 
     override fun onDestroy() {

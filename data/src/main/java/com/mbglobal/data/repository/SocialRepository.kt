@@ -17,124 +17,60 @@ class SocialRepository @Inject constructor(
 
     // FOLLOWERS
 
-    fun getUserFollowers(): Single<List<UserEntity>> {
-        return followerRemoteDataSource.getUserFollowers()
-    }
-
     fun getUserFollowers(userId: String?): Single<List<UserEntity>> {
-        return Single.just(MockUserFactory.getFollowers())
-        val idSingle =
-            userId?.let {
-                Single.just(userId)
-            } ?: sessionLocalDataSource.getUser()
-        return idSingle.flatMap {
-            followerRemoteDataSource.getUserFollowers(it)
-        }
+        return if (userId == null)
+            followerRemoteDataSource.getUserFollowers()
+        else
+            followerRemoteDataSource.getUserFollowers(userId)
     }
 
-    fun getFollower(userId: String?): Single<UserEntity>{
-        val idSingle =
-            userId?.let {
-                Single.just(userId)
-            } ?: sessionLocalDataSource.getUser()
-        return idSingle.flatMap {
-            followerRemoteDataSource.getFollower(it)
-        }
+    fun getFollower(userId: String): Single<UserEntity>{
+        return followerRemoteDataSource.getFollower(userId)
     }
 
-    fun removeFollower(userId: String?): Completable {
-        val idSingle =
-            userId?.let {
-                Single.just(userId)
-            } ?: sessionLocalDataSource.getUser()
-        return idSingle.flatMapCompletable {
-            followerRemoteDataSource.removeFollower(it)
-        }
+    fun removeFollower(userId: String): Completable {
+        return followerRemoteDataSource.removeFollower(userId)
     }
 
     fun getFollowRequests(): Single<List<FollowRequestEntity>> {
-        return Single.just(MockUserFactory.getFollowRequests())
-        return followerRemoteDataSource.getFollowRequests()
-    }
-
-    fun acceptRequest(userId: String?): Completable {
-        val idSingle =
-            userId?.let {
-                Single.just(userId)
-            } ?: sessionLocalDataSource.getUser()
-        return idSingle.flatMapCompletable {
-            followerRemoteDataSource.acceptRequest(it)
+        return followerRemoteDataSource.getFollowRequests().map {
+            println(it)
+            it
         }
     }
 
-    fun rejectRequest(userId: String?): Completable {
-        val idSingle =
-            userId?.let {
-                Single.just(userId)
-            } ?: sessionLocalDataSource.getUser()
-        return idSingle.flatMapCompletable {
-            followerRemoteDataSource.rejectRequest(it)
-        }
+    fun acceptRequest(userId: String): Completable {
+        return followerRemoteDataSource.acceptRequest(userId)
+    }
+
+    fun rejectRequest(userId: String): Completable {
+        return followerRemoteDataSource.rejectRequest(userId)
     }
 
     // FOLLOWINGS
 
-    fun getUserFollowings(): Single<List<UserEntity>> {
-        return followingRemoteDataSource.getUserFollowings()
-    }
-
     fun getUserFollowings(userId: String?): Single<List<UserEntity>> {
-        return Single.just(MockUserFactory.getFollowings())
-        val idSingle =
-            userId?.let {
-                Single.just(userId)
-            } ?: sessionLocalDataSource.getUser()
-        return idSingle.flatMap {
-            followingRemoteDataSource.getUserFollowings(it)
-        }
+        //return Single.just(MockUserFactory.getFollowings())
+        return followingRemoteDataSource.getUserFollowings(userId)
     }
 
-    fun getFollowing(userId: String?): Single<UserEntity>{
-        val idSingle =
-            userId?.let {
-                Single.just(userId)
-            } ?: sessionLocalDataSource.getUser()
-        return idSingle.flatMap {
-            followingRemoteDataSource.getFollowing(it)
-        }
+    fun getFollowing(userId: String): Single<UserEntity>{
+        return followingRemoteDataSource.getFollowing(userId)
     }
 
-    fun follow(userId: String?): Completable {
-        val idSingle =
-            userId?.let {
-                Single.just(userId)
-            } ?: sessionLocalDataSource.getUser()
-        return idSingle.flatMapCompletable {
-            followingRemoteDataSource.follow(it)
-        }
+    fun follow(userId: String): Completable {
+        return followingRemoteDataSource.follow(userId)
     }
 
-    fun unfollow(userId: String?): Completable {
-        val idSingle =
-            userId?.let {
-                Single.just(userId)
-            } ?: sessionLocalDataSource.getUser()
-        return idSingle.flatMapCompletable {
-            followingRemoteDataSource.unfollow(it)
-        }
+    fun unfollow(userId: String): Completable {
+        return followingRemoteDataSource.unfollow(userId)
     }
 
     fun getFollowPendings(): Single<List<FollowRequestEntity>> {
         return followingRemoteDataSource.getFollowPendings()
     }
 
-    fun cancelFollowPending(userId: String?): Completable {
-        val idSingle =
-            userId?.let {
-                Single.just(userId)
-            } ?: sessionLocalDataSource.getUser()
-        return idSingle.flatMapCompletable {
-            followingRemoteDataSource.cancelFollowPending(it)
-        }
+    fun cancelFollowPending(userId: String): Completable {
+        return followingRemoteDataSource.cancelFollowPending(userId)
     }
 }

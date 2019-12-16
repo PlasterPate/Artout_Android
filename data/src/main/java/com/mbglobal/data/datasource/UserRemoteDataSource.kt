@@ -9,6 +9,6 @@ interface UserRemoteDataSource {
 
     fun register(userLoginRegisterItemEntity: UserRegisterItemEntity) : Single<UserRegisterResponseEntity>
 
-    fun getUser(id : String, token : String) : Single<UserEntity>
+    fun getUser(username : String) : Single<UserEntity>
 
 }

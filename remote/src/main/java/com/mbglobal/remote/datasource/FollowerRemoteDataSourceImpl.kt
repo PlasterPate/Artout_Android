@@ -4,6 +4,7 @@ import com.mbglobal.data.datasource.FollowerRemoteDataSource
 import com.mbglobal.data.entity.user.UserEntity
 import com.mbglobal.data.entity.user.FollowRequestEntity
 import com.mbglobal.remote.api.FollowerService
+import com.mbglobal.remote.mappers.toFollowRequestEntity
 import com.mbglobal.remote.mappers.toUserEntity
 import com.mbglobal.remote.mappers.toFollowRequsetEntity
 import io.reactivex.Completable
@@ -14,16 +15,11 @@ class FollowerRemoteDataSourceImpl @Inject constructor(
     private val followerService: FollowerService
 ) : FollowerRemoteDataSource {
 
-    override fun getUserFollowers(): Single<List<UserEntity>> {
-        return followerService.getUserFollowers().map { users ->
-            users.map { UserDto ->
-                UserDto.toUserEntity()
-            }
-        }
-    }
-
-    override fun getUserFollowers(userId: String): Single<List<UserEntity>> {
-        return followerService.getUserFollowers(userId).map { users ->
+    override fun getUserFollowers(userId: String?): Single<List<UserEntity>> {
+        return (if (userId.isNullOrBlank())
+            followerService.getUserFollowers()
+        else
+            followerService.getUserFollowers(userId)).map { users ->
             users.map { UserDto ->
                 UserDto.toUserEntity()
             }
@@ -43,7 +39,7 @@ class FollowerRemoteDataSourceImpl @Inject constructor(
     override fun getFollowRequests(): Single<List<FollowRequestEntity>> {
         return followerService.getFollowRequests().map { requests ->
             requests.map { requestDto ->
-                requestDto.toFollowRequsetEntity()
+                requestDto.toFollowRequestEntity()
             }
         }
     }

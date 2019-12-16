@@ -8,28 +8,28 @@ import retrofit2.http.*
 
 interface FollowerService {
 
-    @GET("followers/")
+    @GET("/api/v1.0/follow/followers/")
     fun getUserFollowers(): Single<List<UserDto>>
 
-    @GET("users/{id}/followers/")
+    @GET("/api/v1.0/follow/users/{id}/followers")
     fun getUserFollowers(@Path("id") userId: String): Single<List<UserDto>>
 
-    @GET("followers/{id}/")
+    @GET("/api/v1.0/follow/followers/{id}/")
     fun getFollower(@Path("id") userId: String): Single<UserDto>
 
-    @DELETE("followers/{id}/")
+    @DELETE("/api/v1.0/follow/followers/{id}/")
     fun removeFollower(@Path("id") userId: String): Single<ResponseBody>
 
-    @GET("followers/requests/")
-    fun getFollowRequests(): Single<List<FollowRequestDto>>
+    @GET("/api/v1.0/follow/followers/requests/")
+    fun getFollowRequests(): Single<List<UserDto>>
 
-    @PUT("followers/requests/{id}/")
+    @PUT("/api/v1.0/follow/followers/requests/{id}/")
     fun acceptRequest(@Path("id") userId: String): Single<ResponseBody>
 
-    @DELETE("followers/requests/{id}/")
+    @DELETE("/api/v1.0/follow/followers/requests/{id}/")
     fun rejectRequest(@Path("id") userId: String): Single<ResponseBody>
 
     companion object {
-        const val BASE_URL: String = "http://35.202.66.168:8000/"
+        const val BASE_URL: String = "http://35.202.66.168:8080/"
     }
 }

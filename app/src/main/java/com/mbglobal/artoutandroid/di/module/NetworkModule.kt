@@ -17,7 +17,7 @@ class NetworkModule {
     @Provides
     fun provideHttpLoggingInterceptor(): HttpLoggingInterceptor {
         return HttpLoggingInterceptor().apply {
-            level = HttpLoggingInterceptor.Level.HEADERS
+            level = HttpLoggingInterceptor.Level.BODY
         }
     }
 
@@ -58,8 +58,9 @@ class NetworkModule {
     }
 
     @Provides
-    fun providesUserService(retrofit: Retrofit): UserService {
-        return retrofit.create(UserService::class.java)
+    fun providesUserService(): UserService {
+        return providesRetrofit(OkHttpClient.Builder().addInterceptor
+            (provideHttpLoggingInterceptor()).build()).create(UserService::class.java)
     }
 
     @Provides

@@ -20,8 +20,9 @@ class RequestInterceptor @Inject constructor(private val sessionLocalDataSource:
 
         val originalRequest = chain.request()
 
+
         val newRequest = originalRequest.newBuilder()
-            .addHeader("Authorization", "bearer $token")
+            .addHeader("Authorization", "Bearer $token")
             .build()
 
         Timber.v("movahedisstupid${newRequest.headers}")

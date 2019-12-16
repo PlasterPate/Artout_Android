@@ -73,7 +73,6 @@ fun EventEntity.toAddEventDto(): AddEventDto {
         startDate = startDate,
         endDate = endDate,
         category = category,
-        eventOwner = eventOwner,
         location = location.toLocationDto()
     )
 }
@@ -100,7 +99,6 @@ fun AddEventEntity.toAddEventDto(): AddEventDto {
         startDate = startDate,
         endDate = endDate,
         category = category,
-        eventOwner = eventOwner,
         location = location.toLocationDto()
     )
 }
@@ -138,5 +136,13 @@ fun FollowRequestDto.toFollowRequsetEntity(): FollowRequestEntity {
         source = source,
         destination = destination,
         id = id
+    )
+}
+
+fun UserDto.toFollowRequestEntity(): FollowRequestEntity{
+    return FollowRequestEntity(
+        source = this.toUserEntity(),
+        destination = this.toUserEntity(),
+        id = this.id
     )
 }

@@ -10,8 +10,8 @@ import javax.inject.Inject
 
 class UserRemoteDataSourceImpl @Inject constructor(private val userService: UserService) :
     UserRemoteDataSource {
-    override fun getUser(id: String, token: String): Single<UserEntity> {
-        return userService.getUser(UserGetDto(id), "Bearer $token").map {
+    override fun getUser(username: String): Single<UserEntity> {
+        return userService.getUser(username).map {
             it.toUserEntity()
         }
     }

@@ -31,7 +31,7 @@ class EventRepository @Inject constructor(
             userId?.let {
                 Single.just(userId)
             } ?: sessionLocalDataSource.getUser()
-        return idSingle.flatMap { id -> eventRemoteDataSource.getUserEvents(id.toInt()) }
+        return idSingle.flatMap { id -> eventLocalDataSource.getUserEvents() }
     }
 
     fun getUserCheckIns(userId: String?): Single<List<EventEntity>> {
@@ -39,7 +39,7 @@ class EventRepository @Inject constructor(
             userId?.let {
                 Single.just(it)
             } ?: sessionLocalDataSource.getUser()
-        return idSingle.flatMap { eventRemoteDataSource.getUserCheckIns(it.toInt()) }
+        return idSingle.flatMap { eventRemoteDataSource.getUserCheckIns() }
     }
 
     fun getUserSuggestions(userId: String?): Single<List<EventEntity>> {
@@ -48,7 +48,7 @@ class EventRepository @Inject constructor(
                 Single.just(it)
             } ?: sessionLocalDataSource.getUser()
         return idSingle.flatMap {
-            eventRemoteDataSource.getUserSuggestions(it.toInt())
+            eventRemoteDataSource.getUserSuggestions()
         }
     }
 

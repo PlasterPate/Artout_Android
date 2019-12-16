@@ -31,7 +31,8 @@ class UserViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     fun bind(userListItem: UserListItem, onUserItemClickListener: OnUserItemClickListener) {
         val fullName = "${userListItem.userEntity.firstName} ${userListItem.userEntity.lastName}"
         name.text = fullName
-        Picasso.get().load(userListItem.userEntity.avatar).into(profilePicture)
+        if (userListItem.userEntity.avatar.isNotEmpty())
+            Picasso.get().load(userListItem.userEntity.avatar).into(profilePicture)
         //TODO
         if (userListItem.state == UserState.FOLLOWING) {
             followingButton.visibility = View.VISIBLE

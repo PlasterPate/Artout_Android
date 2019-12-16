@@ -10,6 +10,7 @@ import com.mbglobal.data.repository.SocialRepository
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
+import timber.log.Timber
 import javax.inject.Inject
 
 class SocialViewModel @Inject constructor(
@@ -27,35 +28,21 @@ class SocialViewModel @Inject constructor(
     val followings: LiveData<List<UserEntity>> = _followings
 
     fun loadFollowers(userId: String?) {
-        val id = userId?.let {
-            Single.just(it)
-        } ?: sessionLocalDataSource.getSession()
-            .map {
-                it.userId
-            }
-
-        id.flatMap {
-            socialRepository.getUserFollowers(it)
-        }.subscribeOn(Schedulers.io())
+        socialRepository.getUserFollowers(userId)
+            .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe { followers: List<UserEntity> ->
+            .subscribe({ followers: List<UserEntity> ->
                 _followers.postValue(followers)
-            }.also {
+            }, {
+                Timber.e("Throwable followers ${it.message}")
+            }).also {
                 compositeDisposable.add(it)
             }
     }
 
     fun loadFollowings(userId: String?) {
-        val id = userId?.let {
-            Single.just(it)
-        } ?: sessionLocalDataSource.getSession()
-            .map {
-                it.userId
-            }
-
-        id.flatMap {
-            socialRepository.getUserFollowings(it)
-        }.subscribeOn(Schedulers.io())
+        socialRepository.getUserFollowings(userId)
+            .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe { followers: List<UserEntity> ->
                 _followings.postValue(followers)
@@ -68,9 +55,12 @@ class SocialViewModel @Inject constructor(
         socialRepository.getFollowRequests()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe { followRequestEntities: List<FollowRequestEntity> ->
+            .subscribe({ followRequestEntities: List<FollowRequestEntity> ->
+                println(followRequestEntities)
                 _followRequests.postValue(followRequestEntities)
-            }.also {
+            }, {
+                Timber.e("Throwable pending ${it.message}")
+            }).also {
                 compositeDisposable.add(it)
             }
     }

@@ -17,7 +17,7 @@ interface TokenService {
     fun sendAccessToken(@Body tokenItemDto : TokenItemDto, @Header("Authorization") bearerToken: String) : Single<Unit>
 
     companion object {
-        const val BASE_URL = "http://35.202.66.168:8000/"
+        const val BASE_URL = "http://35.202.66.168:8080/"
     }
 
 }
