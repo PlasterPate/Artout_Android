@@ -30,6 +30,10 @@ class UserRepository @Inject constructor(
         }
     }
 
+    fun getUser(username: String): Single<UserEntity>{
+        return userRemoteDataSource.getUser(username)
+    }
+
     fun getUser(): Single<String> {
         return sessionLocalDataSource.getSession().map { session: SessionEntity -> session.userId }
     }

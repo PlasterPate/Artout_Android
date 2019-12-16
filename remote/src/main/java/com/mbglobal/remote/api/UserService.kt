@@ -12,8 +12,8 @@ interface UserService {
     @POST("/api/v1.0/auth/login/")
     fun login(@Body userLoginItemDto: UserLoginItemDto): Single<UserLoginResponseDto>
 
-    @POST("/api/v1.0/auth/users/")
-    fun getUser(@Body userGetDto: UserGetDto, @Header("Authorization") bearerToken: String): Single<UserResponseDto>
+    @GET("/api/v1.0/users/username/{username}/")
+    fun getUser(@Query("username") username: String): Single<UserDto>
 
     companion object {
         const val BASE_URL: String = "http://35.202.66.168:8080/"
