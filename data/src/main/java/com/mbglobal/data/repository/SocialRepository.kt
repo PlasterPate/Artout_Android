@@ -22,7 +22,6 @@ class SocialRepository @Inject constructor(
     }
 
     fun getUserFollowers(userId: String?): Single<List<UserEntity>> {
-        return Single.just(MockUserFactory.getFollowers())
         val idSingle =
             userId?.let {
                 Single.just(userId)
@@ -53,7 +52,6 @@ class SocialRepository @Inject constructor(
     }
 
     fun getFollowRequests(): Single<List<FollowRequestEntity>> {
-        return Single.just(MockUserFactory.getFollowRequests())
         return followerRemoteDataSource.getFollowRequests()
     }
 

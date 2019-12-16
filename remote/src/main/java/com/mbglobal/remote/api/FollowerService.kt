@@ -8,31 +8,31 @@ import retrofit2.http.*
 
 interface FollowerService {
 
-    @GET("followings/")
+    @GET("/api/v1.0/follow/followings/")
     fun getUserFollowings(): Single<List<UserDto>>
 
-    @GET("followers/")
+    @GET("/api/v1.0/follow/followers/")
     fun getUserFollowers(): Single<List<UserDto>>
 
-    @GET("followings/{id}")
+    @GET("/api/v1.0/follow/followings/{id}")
     fun getFollowing(@Path("id") userId: String): Single<UserDto>
 
-    @GET("followers/{id}/")
+    @GET("/api/v1.0/follow/followers/{id}/")
     fun getFollower(@Path("id") userId: String): Single<UserDto>
 
-    @DELETE("followers/{id}/")
+    @DELETE("/api/v1.0/follow/followers/{id}/")
     fun removeFollower(@Path("id") userId: String): Single<ResponseBody>
 
-    @GET("followings/pendings/")
+    @GET("/api/v1.0/follow/followings/pendings/")
     fun getPendingFollowings(): Single<List<UserDto>>
 
-    @GET("followers/requests/")
+    @GET("/api/v1.0/follow/followers/requests/")
     fun getFollowRequests(): Single<List<FollowRequestDto>>
 
-    @PUT("followers/requests/{id}/")
+    @PUT("/api/v1.0/follow/followers/requests/{id}/")
     fun acceptRequest(@Path("id") userId: String): Single<ResponseBody>
 
-    @DELETE("followers/requests/{id}/")
+    @DELETE("/api/v1.0/follow/followers/requests/{id}/")
     fun rejectRequest(@Path("id") userId: String): Single<ResponseBody>
 
     companion object {

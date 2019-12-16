@@ -91,7 +91,7 @@ class ProfileFragment : BaseFragment() {
             dialog.show()
 
             dialog.dialog_btn_add.setOnClickListener{
-                profileViewModel.sendFollowRequest(dialog_edit_text.text.toString())
+                profileViewModel.sendFollowRequest(dialog.)
             }
 
             dialog.dialog_btn_cancel.setOnClickListener{

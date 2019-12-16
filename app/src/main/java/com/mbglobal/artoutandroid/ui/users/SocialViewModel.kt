@@ -10,6 +10,7 @@ import com.mbglobal.data.repository.SocialRepository
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
+import timber.log.Timber
 import javax.inject.Inject
 
 class SocialViewModel @Inject constructor(
@@ -38,9 +39,11 @@ class SocialViewModel @Inject constructor(
             socialRepository.getUserFollowers(it)
         }.subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe { followers: List<UserEntity> ->
+            .subscribe( { followers: List<UserEntity> ->
                 _followers.postValue(followers)
-            }.also {
+            }, {
+                Timber.e("Throwable followers ${it.message}")
+            }).also {
                 compositeDisposable.add(it)
             }
     }
@@ -68,9 +71,11 @@ class SocialViewModel @Inject constructor(
         socialRepository.getFollowRequests()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe { followRequestEntities: List<FollowRequestEntity> ->
+            .subscribe( { followRequestEntities: List<FollowRequestEntity> ->
                 _followRequests.postValue(followRequestEntities)
-            }.also {
+            }, {
+                Timber.e("Throwable pending ${it.message}")
+            }).also {
                 compositeDisposable.add(it)
             }
     }
