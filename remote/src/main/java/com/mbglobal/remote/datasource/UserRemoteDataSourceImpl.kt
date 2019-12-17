@@ -2,16 +2,18 @@ package com.mbglobal.remote.datasource
 
 import com.mbglobal.data.datasource.UserRemoteDataSource
 import com.mbglobal.data.entity.user.*
+import com.mbglobal.remote.api.FollowerService
 import com.mbglobal.remote.api.UserService
 import com.mbglobal.remote.dto.user.UserGetDto
 import com.mbglobal.remote.mappers.*
 import io.reactivex.Single
 import javax.inject.Inject
 
-class UserRemoteDataSourceImpl @Inject constructor(private val userService: UserService) :
+class UserRemoteDataSourceImpl @Inject constructor(private val userService: UserService,
+                                                   private val followerService: FollowerService) :
     UserRemoteDataSource {
     override fun getUser(username: String): Single<UserEntity> {
-        return userService.getUser(username).map {
+        return followerService.getUser(username).map {
             it.toUserEntity()
         }
     }

@@ -12,5 +12,5 @@ interface SessionLocalDataSource {
 
     fun removeSession(): Completable
 
-    fun getUser() : Single<String>
+    fun getUserId() : Single<String>
 }

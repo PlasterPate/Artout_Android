@@ -21,8 +21,18 @@ class EventRepository @Inject constructor(
     }
 
     fun addEvent(eventEntity: AddEventEntity): Single<EventEntity> {
-        return eventRemoteDataSource.addEvent(eventEntity).flatMap {
-            eventLocalDataSource.addEvent(it)
+        return sessionLocalDataSource.getUserId().flatMap {userId ->
+            eventRemoteDataSource.addEvent(eventEntity.copy(owner = userId.toInt())).flatMap {
+                eventLocalDataSource.addEvent(it)
+            }
+        }
+    }
+
+    fun editEvent(eventId: Int, eventEntity: AddEventEntity): Single<EventEntity> {
+        return sessionLocalDataSource.getUserId().flatMap {userId ->
+            eventRemoteDataSource.editEvent(eventId, eventEntity.copy(owner = userId.toInt())).flatMap {
+                eventLocalDataSource.editEvent(it)
+            }
         }
     }
 
@@ -30,7 +40,7 @@ class EventRepository @Inject constructor(
         val idSingle =
             userId?.let {
                 Single.just(userId)
-            } ?: sessionLocalDataSource.getUser()
+            } ?: sessionLocalDataSource.getUserId()
         return idSingle.flatMap { id -> eventLocalDataSource.getUserEvents() }
     }
 
@@ -38,7 +48,7 @@ class EventRepository @Inject constructor(
         val idSingle =
             userId?.let {
                 Single.just(it)
-            } ?: sessionLocalDataSource.getUser()
+            } ?: sessionLocalDataSource.getUserId()
         return idSingle.flatMap { eventRemoteDataSource.getUserCheckIns() }
     }
 
@@ -46,15 +56,9 @@ class EventRepository @Inject constructor(
         val idSingle =
             userId?.let {
                 Single.just(it)
-            } ?: sessionLocalDataSource.getUser()
+            } ?: sessionLocalDataSource.getUserId()
         return idSingle.flatMap {
             eventRemoteDataSource.getUserSuggestions()
-        }
-    }
-
-    fun editEvent(eventId: Int, eventEntity: AddEventEntity): Single<EventEntity> {
-        return eventRemoteDataSource.editEvent(eventId, eventEntity).flatMap {
-            eventLocalDataSource.editEvent(it)
         }
     }
 }

@@ -10,8 +10,8 @@ data class EventDto(
     val description: String,
     @SerializedName("end_date")
     val endDate: String,
-    @SerializedName("event_owner")
-    val eventOwner: Int,
+    @SerializedName("owner")
+    val owner: Int,
     @SerializedName("location")
     val location: LocationDto,
     @SerializedName("picture_url")

@@ -1,6 +1,7 @@
 package com.mbglobal.artoutandroid.ui.editevent
 
 import android.content.res.Resources
+import android.net.Uri
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.mbglobal.artoutandroid.R
@@ -49,4 +50,5 @@ class EditEventViewModel @Inject constructor(private val eventRepository: EventR
     fun setPageName(pageName : String){
         pageNameText.value = pageName
     }
+
 }
