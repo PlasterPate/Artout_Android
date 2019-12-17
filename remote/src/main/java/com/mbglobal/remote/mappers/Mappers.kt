@@ -59,9 +59,10 @@ fun EventDto.toEventEntity(): EventEntity {
         startDate = startDate,
         endDate = endDate,
         category = category,
-        eventOwner = eventOwner,
+        eventOwner = owner,
         location = location.toLocationEntity(),
-        id = id
+        id = id,
+        owner = owner
     )
 }
 
@@ -73,7 +74,8 @@ fun EventEntity.toAddEventDto(): AddEventDto {
         startDate = startDate,
         endDate = endDate,
         category = category,
-        location = location.toLocationDto()
+        location = location.toLocationDto(),
+        owner = owner
     )
 }
 
@@ -99,7 +101,8 @@ fun AddEventEntity.toAddEventDto(): AddEventDto {
         startDate = startDate,
         endDate = endDate,
         category = category,
-        location = location.toLocationDto()
+        location = location.toLocationDto(),
+        owner = owner
     )
 }
 

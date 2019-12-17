@@ -17,5 +17,7 @@ data class AddEventDto(
     @SerializedName("title")
     val title: String,
     @SerializedName("category")
-    val category: String
+    val category: String,
+    @SerializedName("owner")
+    val owner: Int
 )

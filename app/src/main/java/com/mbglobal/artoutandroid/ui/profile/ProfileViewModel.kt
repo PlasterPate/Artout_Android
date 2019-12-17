@@ -39,11 +39,11 @@ class ProfileViewModel @Inject constructor(
     }
 
     fun sendFollowRequest(userId: String) {
-//        userRepository.getUser(userId)
-//            .subscribeOn(Schedulers.io())
-//            .observeOn(AndroidSchedulers.mainThread())
-//            .subscribe({
-                socialRepository.follow(userId)
+        userRepository.getUser(userId)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({
+                socialRepository.follow(it.id.toString())
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe({
@@ -51,7 +51,7 @@ class ProfileViewModel @Inject constructor(
                     }, {
                         _followStatus.value = LiveEvent(false)
                     })
-//            },{})
+            },{})
             .also {
                 compositeDisposable.add(it)
             }

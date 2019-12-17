@@ -42,7 +42,7 @@ class SessionLocalDataSourceImpl @Inject constructor(
         }
     }
 
-    override fun getUser(): Single<String> {
+    override fun getUserId(): Single<String> {
         return getSession().map { session -> session.userId }
     }
 

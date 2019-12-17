@@ -7,5 +7,6 @@ data class AddEventEntity(
     val image: String?,
     val startDate: String,
     val title: String,
-    val category: String
+    val category: String,
+    val owner: Int
 )

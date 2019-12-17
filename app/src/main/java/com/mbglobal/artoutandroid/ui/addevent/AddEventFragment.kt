@@ -90,6 +90,7 @@ class AddEventFragment : ManageEventFragment() {
                 endDate = binding.endDateEditText.text.toString() + " " + binding.endTimeEditText
                     .text.toString(),
                 category = binding.categoryEditText.text.toString(),
+                owner = 0,
                 location = LocationEntity(12.0, 10.0),
                 image = addEventViewModel.eventImage.value
             )

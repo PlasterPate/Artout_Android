@@ -9,5 +9,6 @@ data class EventEntity(
     val startDate: String,
     val title: String,
     val category: String,
-    val id: Int
+    val id: Int,
+    val owner: Int
 )
