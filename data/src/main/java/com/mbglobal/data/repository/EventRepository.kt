@@ -41,7 +41,7 @@ class EventRepository @Inject constructor(
             userId?.let {
                 Single.just(userId)
             } ?: sessionLocalDataSource.getUserId()
-        return idSingle.flatMap { id -> eventRemoteDataSource.getUserEvents() }
+        return idSingle.flatMap { id -> eventLocalDataSource.getUserEvents() }
     }
 
     fun getUserCheckIns(userId: String?): Single<List<EventEntity>> {

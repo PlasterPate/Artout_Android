@@ -50,7 +50,8 @@ class EditEventFragment : ManageEventFragment() {
                 category = binding.categoryEditText.text.toString(),
                 location = LocationEntity(12.0, 10.0),
                 owner = 0,
-                image = "https://www.euroarts.com/sites/default/files/styles/product_cover_mobile/public/media_product/Argerich%20%26%20Barenboim%20_c_Arnaldo%20Colombaroli%20%282%29.jpg"
+                image = editEventViewModel.eventEntity.value?.image
+                //image = "https://www.euroarts.com/sites/default/files/styles/product_cover_mobile/public/media_product/Argerich%20%26%20Barenboim%20_c_Arnaldo%20Colombaroli%20%282%29.jpg"
             )
             editEventViewModel.editEvent(eventId, eventEntity)
         }
@@ -75,7 +76,7 @@ class EditEventFragment : ManageEventFragment() {
             binding.descriptionEditText.setText(it.description)
             binding.startDateEditText.setText(it.startDate)
             binding.endDateEditText.setText(it.endDate)
-            binding.imagePick.setImageURI(it.image?.toUri())
+            Picasso.get().load(it.image?.toUri()).into(binding.imagePick)
             binding.layoutGroup.visibility = View.VISIBLE
             binding.progress.visibility = View.GONE
         })
