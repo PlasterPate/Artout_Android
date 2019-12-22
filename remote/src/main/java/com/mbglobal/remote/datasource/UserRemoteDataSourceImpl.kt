@@ -12,12 +12,6 @@ import javax.inject.Inject
 class UserRemoteDataSourceImpl @Inject constructor(private val userService: UserService,
                                                    private val followerService: FollowerService) :
     UserRemoteDataSource {
-    override fun getUser(username: String): Single<UserEntity> {
-        return followerService.getUser(username).map {
-            it.toUserEntity()
-        }
-    }
-
     override fun login(userLoginItemEntity: UserLoginItemEntity): Single<UserLoginResponseEntity> {
         return userService.login(userLoginItemEntity.toUserLoginItemDto()).map {
             it.toUserLoginResponseEntity()
@@ -27,6 +21,18 @@ class UserRemoteDataSourceImpl @Inject constructor(private val userService: User
     override fun register(userLoginRegisterItemEntity: UserRegisterItemEntity): Single<UserRegisterResponseEntity> {
         return userService.register(userLoginRegisterItemEntity.toUserRegisterItemDto()).map {
             it.toUserRegisterResponseEntity()
+        }
+    }
+
+    override fun getUser(username: String): Single<UserEntity> {
+        return followerService.getUser(username).map {
+            it.toUserEntity()
+        }
+    }
+
+    override fun getUserProfile(userId: String): Single<UserProfileEntity> {
+        return userService.getUserProfile(userId).map {userProfileDto ->
+            userProfileDto.toUserProfileEntity()
         }
     }
 
