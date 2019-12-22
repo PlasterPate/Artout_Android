@@ -19,6 +19,7 @@ import com.google.android.material.snackbar.Snackbar
 import com.mbglobal.artoutandroid.ui.profile.adapter.ProfileItem
 import com.mbglobal.artoutandroid.ui.profile.adapter.ProfileItemsAdapter
 import com.mbglobal.artoutandroid.ui.profile.listener.OnProfileItemClickListener
+import com.mbglobal.data.entity.user.UserEntity
 import com.mbglobal.data.entity.user.UserProfileEntity
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.dialog_add_friend.*
@@ -26,7 +27,7 @@ import kotlinx.android.synthetic.main.dialog_add_friend.*
 class ProfileFragment : BaseFragment() {
 
     private var userId: String? = null
-    lateinit var followDialog : AlertDialog
+    lateinit var followDialog: AlertDialog
     lateinit var binding: FragmentProfileBinding
     var adapter: ProfileItemsAdapter? = null
 
@@ -53,7 +54,9 @@ class ProfileFragment : BaseFragment() {
                 followerCount = 21,
                 followingCount = 20,
                 suggestionCount = 48,
-                checkinCount = 30
+                checkinCount = 30,
+                State = 0,
+                user = UserEntity("", "", 0, "", "")
             )
         )
         adapter = binding.rvProfileItems.adapter as ProfileItemsAdapter
@@ -62,21 +65,29 @@ class ProfileFragment : BaseFragment() {
             .into(binding.ivProfileImage)
 
         adapter!!.listeners.apply {
-            add(object: OnProfileItemClickListener {
+            add(object : OnProfileItemClickListener {
 
                 override val itemTag: String = ProfileItem.SUGGESTIONS
 
                 override fun onClicked(profileItem: ProfileItem) {
-                    findNavController().navigate(ProfileFragmentDirections.actionProfileFragmentToEventListFragment(userId))
+                    findNavController().navigate(
+                        ProfileFragmentDirections.actionProfileFragmentToEventListFragment(
+                            userId
+                        )
+                    )
                 }
 
             })
-            add(object: OnProfileItemClickListener {
+            add(object : OnProfileItemClickListener {
 
                 override val itemTag: String = ProfileItem.CHECKINS
 
                 override fun onClicked(profileItem: ProfileItem) {
-                    findNavController().navigate(ProfileFragmentDirections.actionProfileFragmentToEventListFragment(userId))
+                    findNavController().navigate(
+                        ProfileFragmentDirections.actionProfileFragmentToEventListFragment(
+                            userId
+                        )
+                    )
                 }
 
             })
@@ -88,17 +99,21 @@ class ProfileFragment : BaseFragment() {
 
     private fun initializeListeners() {
 
-        binding.btnAddFriend.setOnClickListener{
+        binding.btnAddFriend.setOnClickListener {
             val builder = AlertDialog.Builder(requireContext())
             followDialog = builder.setView(R.layout.dialog_add_friend).create()
             followDialog.show()
 
-            followDialog.dialog_btn_add.setOnClickListener{
-                profileViewModel.sendFollowRequest(followDialog.findViewById<EditText>(R.id
-                    .dialog_edit_text).text.toString())
+            followDialog.dialog_btn_add.setOnClickListener {
+                profileViewModel.sendFollowRequest(
+                    followDialog.findViewById<EditText>(
+                        R.id
+                            .dialog_edit_text
+                    ).text.toString()
+                )
             }
 
-            followDialog.dialog_btn_cancel.setOnClickListener{
+            followDialog.dialog_btn_cancel.setOnClickListener {
                 followDialog.hide()
             }
         }
@@ -129,7 +144,7 @@ class ProfileFragment : BaseFragment() {
         })
 
         profileViewModel.followStatus.observe(this, Observer {
-            if (it.getContentIfNotHandled() == true){
+            if (it.getContentIfNotHandled() == true) {
                 followDialog.hide()
                 Snackbar.make(requireView(), "Follow request Sent", Snackbar.LENGTH_LONG).show()
             }
