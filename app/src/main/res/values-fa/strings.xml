@@ -31,4 +31,11 @@
     <string name="username">نام کاربری</string>
     <string name="cancel">لغو</string>
     <string name="send">ارسال</string>
+    <string name="following">دنبال شده</string>
+    <string name="follow">دنبال کردن</string>
+    <string name="pending_follow_requests">درخواست های دنبال کردن</string>
+    <string name="followers">دنبال کنندگان</string>
+    <string name="followings">دنبال شوندگان</string>
+    <string name="accept">تایید</string>
+    <string name="email">پست الکترونیکی</string>
 </resources>
