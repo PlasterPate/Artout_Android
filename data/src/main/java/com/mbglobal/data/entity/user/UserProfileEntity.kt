@@ -4,5 +4,7 @@ data class UserProfileEntity(
     val followerCount: Int,
     val followingCount: Int,
     val suggestionCount: Int,
-    val checkinCount: Int
+    val checkinCount: Int,
+    val State: Int,
+    val user: UserEntity
 )
