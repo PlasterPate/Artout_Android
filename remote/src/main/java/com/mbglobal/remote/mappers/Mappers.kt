@@ -149,3 +149,25 @@ fun UserDto.toFollowRequestEntity(): FollowRequestEntity{
         id = this.id
     )
 }
+
+fun UserProfileEntity.toUserProfileDto(): UserProfileDto{
+    return UserProfileDto(
+        followerCount = followerCount,
+        followingCount = followingCount,
+        checkinCount = checkinCount,
+        suggestionCount = suggestionCount,
+        state = state,
+        user = user
+    )
+}
+
+fun UserProfileDto.toUserProfileEntity(): UserProfileEntity{
+    return UserProfileEntity(
+        followerCount = followerCount,
+        followingCount = followingCount,
+        checkinCount = checkinCount,
+        suggestionCount = suggestionCount,
+        state = state,
+        user = user
+    )
+}
