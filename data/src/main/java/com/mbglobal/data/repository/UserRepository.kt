@@ -38,6 +38,10 @@ class UserRepository @Inject constructor(
         return sessionLocalDataSource.getSession().map { session: SessionEntity -> session.userId }
     }
 
+    fun getUserProfile(userId: String): Single<UserProfileEntity>{
+        return userRemoteDataSource.getUserProfile(userId)
+    }
+
     fun logout(): Completable {
         return sessionLocalDataSource.removeSession()
     }
