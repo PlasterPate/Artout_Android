@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
-import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -55,7 +54,7 @@ class ProfileFragment : BaseFragment() {
                 followingCount = 20,
                 suggestionCount = 48,
                 checkinCount = 30,
-                State = 0,
+                state = 0,
                 user = UserEntity("", "", 0, "", "")
             )
         )
