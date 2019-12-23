@@ -44,9 +44,11 @@ class SocialViewModel @Inject constructor(
         socialRepository.getUserFollowings(userId)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe { followers: List<UserEntity> ->
+            .subscribe({ followers: List<UserEntity> ->
                 _followings.postValue(followers)
-            }.also {
+            }, {
+
+            }).also {
                 compositeDisposable.add(it)
             }
     }
