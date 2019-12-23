@@ -58,7 +58,7 @@ class ProfileFragment : BaseFragment() {
         )
         adapter = binding.rvProfileItems.adapter as ProfileItemsAdapter
 
-        Picasso.get().load("https://pbs.twimg.com/profile_images/959929674355765248/fk3ALoeH.jpg")
+        Picasso.get().load("https://st2.depositphotos.com/4111759/12123/v/950/depositphotos_121233262-stock-illustration-male-default-placeholder-avatar-profile.jpg")
             .into(binding.ivProfileImage)
 
         adapter!!.listeners.apply {
