@@ -2,6 +2,7 @@ package com.mbglobal.data.datasource
 
 import com.mbglobal.data.entity.event.AddEventEntity
 import com.mbglobal.data.entity.event.EventEntity
+import com.mbglobal.data.entity.event.EventSearchEntity
 import io.reactivex.Completable
 import io.reactivex.Single
 
@@ -18,4 +19,6 @@ interface EventRemoteDataSource {
     fun getUserCheckIns(): Single<List<EventEntity>>
 
     fun getUserSuggestions(): Single<List<EventEntity>>
+
+    fun searchEvent(query: EventSearchEntity): Single<List<EventEntity>>
 }
