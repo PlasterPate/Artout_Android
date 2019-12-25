@@ -11,4 +11,5 @@ interface UserRemoteDataSource {
 
     fun getUser(username : String) : Single<UserEntity>
 
+    fun searchUser(query: UserSearchEntity): Single<UserEntity>
 }
