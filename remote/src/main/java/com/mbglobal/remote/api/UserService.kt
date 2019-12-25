@@ -14,7 +14,7 @@ interface UserService {
     fun login(@Body userLoginItemDto: UserLoginItemDto): Single<UserLoginResponseDto>
 
     @GET("/api/v1.0/users/")
-    fun searchUser(@QueryMap query: Map<String, String>): Single<UserEntity>
+    fun searchUser(@QueryMap query: Map<String, String>): Single<List<UserEntity>>
 
     companion object {
         const val BASE_URL: String = "http://35.202.66.168:8080/"

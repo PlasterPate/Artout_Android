@@ -42,4 +42,7 @@ class UserRepository @Inject constructor(
         return sessionLocalDataSource.removeSession()
     }
 
+    fun searchUser(query: UserSearchEntity): Single<List<UserEntity>>{
+        return userRemoteDataSource.searchUser(query)
+    }
 }
