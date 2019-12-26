@@ -15,7 +15,14 @@ import com.mbglobal.artoutandroid.ui.base.BaseFragment
 import com.mbglobal.data.repository.MockEventFactory
 import com.mbglobal.data.repository.MockUserFactory
 
-class DiscoverFragment : BaseFragment(), Search.OnQueryTextListener {
+class DiscoverFragment : BaseFragment(), Search.OnQueryTextListener, Search.OnOpenCloseListener {
+
+    override fun onOpen() {
+    }
+
+    override fun onClose() {
+        binding.searchView.setText("")
+    }
 
     val discoverViewModel : DiscoverViewModel by lazy {
         ViewModelProviders.of(this, viewModelFactory)[DiscoverViewModel::class.java]
@@ -46,6 +53,7 @@ class DiscoverFragment : BaseFragment(), Search.OnQueryTextListener {
         adapter.events = listOf(MockEventFactory.COLDPLAY_CONCERT)
 
         binding.searchView.setOnQueryTextListener(this)
+        binding.searchView.setOnOpenCloseListener(this)
     }
 
     override fun onQueryTextSubmit(query: CharSequence?): Boolean {
@@ -54,7 +62,7 @@ class DiscoverFragment : BaseFragment(), Search.OnQueryTextListener {
     }
 
     override fun onQueryTextChange(newText: CharSequence?) {
-        binding.searchView.onFilterComplete(4)
+        discoverViewModel.onQueryChange(newText.toString())
     }
 
     private fun initializeListeners(){
