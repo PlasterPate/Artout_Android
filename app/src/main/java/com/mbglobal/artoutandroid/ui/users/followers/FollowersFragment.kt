@@ -14,12 +14,12 @@ import com.mbglobal.artoutandroid.R
 import com.mbglobal.artoutandroid.databinding.FragmentFollowersBinding
 import com.mbglobal.artoutandroid.ui.base.BaseFragment
 import com.mbglobal.artoutandroid.ui.users.SocialViewModel
-import com.mbglobal.artoutandroid.ui.users.UserState
 import com.mbglobal.artoutandroid.ui.users.adapter.FollowRequestAdapter
 import com.mbglobal.artoutandroid.ui.users.adapter.UserAdapter
 import com.mbglobal.artoutandroid.ui.users.adapter.UserListItem
 import com.mbglobal.artoutandroid.ui.users.adapter.listener.OnFollowRequestClickListener
 import com.mbglobal.artoutandroid.ui.users.adapter.listener.OnUserItemClickListener
+import com.mbglobal.data.UserState
 import com.mbglobal.data.entity.user.FollowRequestEntity
 import com.mbglobal.data.entity.user.UserEntity
 import kotlinx.android.synthetic.main.fragment_followers.*
@@ -71,7 +71,7 @@ class FollowersFragment : BaseFragment() {
         }
         with(binding.rvFollowers.adapter as UserAdapter) {
             data = it.map {
-                UserListItem(it, UserState.NOT_FOLLOWING)
+                UserListItem(it, it.state)
             }.toMutableList()
             listeners.add(object : OnUserItemClickListener {
                 override val stateTag: UserState

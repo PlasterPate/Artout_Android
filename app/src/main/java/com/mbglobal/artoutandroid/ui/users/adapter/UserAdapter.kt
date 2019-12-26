@@ -6,20 +6,19 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.mbglobal.artoutandroid.R
-import com.mbglobal.artoutandroid.ui.users.UserState
 import com.mbglobal.artoutandroid.ui.users.adapter.listener.OnUserItemClickListener
 import com.mbglobal.artoutandroid.ui.users.adapter.listener.OnFollowRequestClickListener
+import com.mbglobal.data.UserState
 import com.mbglobal.data.entity.user.UserEntity
 import timber.log.Timber
 
-class UserAdapter: RecyclerView.Adapter<UserViewHolder>() {
+class UserAdapter : RecyclerView.Adapter<UserViewHolder>() {
 
     var listeners = mutableListOf<OnUserItemClickListener>()
 
     var onFollowRequestClickListener: OnFollowRequestClickListener? = null
 
-    var data: MutableList<UserListItem> = object : ArrayList<UserListItem>()
-    {
+    var data: MutableList<UserListItem> = object : ArrayList<UserListItem>() {
 
         init {
             notifyDataSetChanged()
@@ -42,22 +41,22 @@ class UserAdapter: RecyclerView.Adapter<UserViewHolder>() {
             notifyItemInserted(index)
         }
     }
-    set (value) {
-        field.clear()
-        field.addAll(value)
-        notifyDataSetChanged()
-    }
+        set(value) {
+            field.clear()
+            field.addAll(value)
+            notifyDataSetChanged()
+        }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserViewHolder {
 
-        val inflate : (Int) -> View = {
+        val inflate: (Int) -> View = {
             LayoutInflater.from(parent.context).inflate(it, parent, false)
         }
 
         return when (viewType) {
             UserState.FOLLOWING.value,
             UserState.NOT_FOLLOWING.value,
-            UserState.REQUEST_SENT.value -> UserViewHolder(inflate(R.layout.item_user))
+            UserState.REQUESTED.value -> UserViewHolder(inflate(R.layout.item_user))
             else -> throw Exception("Invalid User Item")
         }
     }
@@ -82,7 +81,8 @@ class UserAdapter: RecyclerView.Adapter<UserViewHolder>() {
             }
         }
     }
+
     private fun findListenerByCurrentState(userState: UserState): OnUserItemClickListener {
-        return listeners.filter { it.stateTag == userState}[0]
+        return listeners.filter { it.stateTag == userState }[0]
     }
 }

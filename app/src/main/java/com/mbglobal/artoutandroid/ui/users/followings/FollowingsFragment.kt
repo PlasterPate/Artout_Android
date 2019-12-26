@@ -12,10 +12,10 @@ import com.mbglobal.artoutandroid.R
 import com.mbglobal.artoutandroid.databinding.FragmentFollowingsBinding
 import com.mbglobal.artoutandroid.ui.base.BaseFragment
 import com.mbglobal.artoutandroid.ui.users.SocialViewModel
-import com.mbglobal.artoutandroid.ui.users.UserState
 import com.mbglobal.artoutandroid.ui.users.adapter.UserAdapter
 import com.mbglobal.artoutandroid.ui.users.adapter.UserListItem
 import com.mbglobal.artoutandroid.ui.users.adapter.listener.OnUserItemClickListener
+import com.mbglobal.data.UserState
 import com.mbglobal.data.entity.user.UserEntity
 
 class FollowingsFragment : BaseFragment() {
@@ -53,7 +53,7 @@ class FollowingsFragment : BaseFragment() {
 
         with(binding.rvFollowings.adapter as UserAdapter){
             data = it.map {
-                UserListItem(it, UserState.FOLLOWING)
+                UserListItem(it, it.state)
             }.toMutableList() as ArrayList<UserListItem>
 
             listeners.add(object : OnUserItemClickListener {
@@ -61,7 +61,7 @@ class FollowingsFragment : BaseFragment() {
                     get() = UserState.NOT_FOLLOWING
 
                 override fun onClicked(userEntity: UserEntity) {
-                    this@with.updateUserState(userEntity, UserState.FOLLOWING)
+                    this@with.updateUserState(userEntity, UserState.REQUESTED)
                     socialViewModel.followUser(userEntity)
                 }
 
@@ -70,6 +70,17 @@ class FollowingsFragment : BaseFragment() {
             listeners.add(object : OnUserItemClickListener {
                 override val stateTag: UserState
                     get() = UserState.FOLLOWING
+
+                override fun onClicked(userEntity: UserEntity) {
+                    this@with.updateUserState(userEntity, UserState.NOT_FOLLOWING)
+                    socialViewModel.unfollowUser(userEntity)
+                }
+
+            })
+
+            listeners.add(object : OnUserItemClickListener {
+                override val stateTag: UserState
+                    get() = UserState.REQUESTED
 
                 override fun onClicked(userEntity: UserEntity) {
                     this@with.updateUserState(userEntity, UserState.NOT_FOLLOWING)
