@@ -6,8 +6,8 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.mbglobal.artoutandroid.R
-import com.mbglobal.artoutandroid.ui.users.UserState
 import com.mbglobal.artoutandroid.ui.users.adapter.listener.OnUserItemClickListener
+import com.mbglobal.data.UserState
 import com.squareup.picasso.Picasso
 
 class UserViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -28,18 +28,23 @@ class UserViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         itemView.findViewById(R.id.btn_following) as Button
     }
 
+    private val requestedButton by lazy {
+        itemView.findViewById(R.id.btn_requested) as Button
+    }
+
     fun bind(userListItem: UserListItem, onUserItemClickListener: OnUserItemClickListener) {
         val fullName = "${userListItem.userEntity.firstName} ${userListItem.userEntity.lastName}"
         name.text = fullName
         if (userListItem.userEntity.avatar.isNotEmpty())
             Picasso.get().load(userListItem.userEntity.avatar).into(profilePicture)
         //TODO
-        if (userListItem.state == UserState.FOLLOWING) {
-            followingButton.visibility = View.VISIBLE
-        }
+//        if (userListItem.state == UserState.FOLLOWING) {
+//            followingButton.visibility = View.VISIBLE
+//        }
 
         when (userListItem.state) {
             UserState.FOLLOWING -> followingButton.visibility = View.VISIBLE
+            UserState.REQUESTED -> requestedButton.visibility = View.VISIBLE
             UserState.NOT_FOLLOWING -> followButton.visibility = View.VISIBLE
         }
 
@@ -48,6 +53,9 @@ class UserViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
                 onUserItemClickListener.onClicked(userListItem.userEntity)
             }
             UserState.NOT_FOLLOWING -> followButton.setOnClickListener {
+                onUserItemClickListener.onClicked(userListItem.userEntity)
+            }
+            UserState.REQUESTED -> requestedButton.setOnClickListener {
                 onUserItemClickListener.onClicked(userListItem.userEntity)
             }
         }

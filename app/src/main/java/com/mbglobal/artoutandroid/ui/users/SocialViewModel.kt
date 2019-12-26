@@ -47,7 +47,7 @@ class SocialViewModel @Inject constructor(
             .subscribe({ followers: List<UserEntity> ->
                 _followings.postValue(followers)
             }, {
-
+                Timber.e("Throwable followings ${it.message}")
             }).also {
                 compositeDisposable.add(it)
             }
