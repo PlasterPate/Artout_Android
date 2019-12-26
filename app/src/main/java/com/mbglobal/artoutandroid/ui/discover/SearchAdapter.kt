@@ -3,13 +3,13 @@ package com.mbglobal.artoutandroid.ui.discover
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.mbglobal.artoutandroid.R
-import com.mbglobal.artoutandroid.ui.users.UserState
-import com.mbglobal.artoutandroid.ui.users.adapter.UserViewHolder
-import com.mbglobal.data.entity.event.AddEventEntity
 import com.mbglobal.data.entity.event.EventEntity
 import com.mbglobal.data.entity.user.UserEntity
+import com.squareup.picasso.Picasso
 
 class SearchAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
@@ -38,7 +38,7 @@ class SearchAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     }
 
     override fun getItemCount(): Int {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        return users.size + events.size
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
@@ -55,15 +55,39 @@ class SearchAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     class EventSearchItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        fun bind(eventEntity: EventEntity) {
+        private val eventTitle: TextView by lazy {
+            itemView.findViewById<TextView>(R.id.tv_event_title)
+        }
 
+        private val eventIcon: ImageView by lazy {
+            itemView.findViewById<ImageView>(R.id.iv_event_icon)
+        }
+
+        fun bind(eventEntity: EventEntity) {
+            eventTitle.text = eventEntity.title
+            Picasso.get().load(eventEntity.image).into(eventIcon)
         }
     }
 
     class UserSearchItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        fun bind(userEntity: UserEntity) {
+        private val fullName: TextView by lazy {
+            itemView.findViewById<TextView>(R.id.tv_full_name)
+        }
 
+        private val userIcon: ImageView by lazy {
+            itemView.findViewById<ImageView>(R.id.iv_profile_icon)
+        }
+
+        fun bind(userEntity: UserEntity) {
+            fullName.text = userEntity.firstName + " " + userEntity.lastName
+        }
+    }
+
+    override fun getItemViewType(position: Int): Int {
+        return when (position) {
+            in users.indices -> USER_SEARCH_ITEM
+            else -> EVENT_SEARCH_ITEM
         }
     }
 

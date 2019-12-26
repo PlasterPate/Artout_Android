@@ -7,24 +7,25 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.fragment.findNavController
+import com.lapism.searchview.Search
 
 import com.mbglobal.artoutandroid.R
 import com.mbglobal.artoutandroid.databinding.FragmentDiscoverBinding
 import com.mbglobal.artoutandroid.ui.base.BaseFragment
-import com.mbglobal.artoutandroid.ui.users.UserState
-import com.mbglobal.artoutandroid.ui.users.adapter.UserAdapter
-import com.mbglobal.artoutandroid.ui.users.adapter.UserListItem
-import com.mbglobal.artoutandroid.ui.users.adapter.listener.OnUserItemClickListener
-import com.mbglobal.data.entity.user.UserEntity
+import com.mbglobal.data.repository.MockEventFactory
 import com.mbglobal.data.repository.MockUserFactory
 
-class DiscoverFragment : BaseFragment() {
+class DiscoverFragment : BaseFragment(), Search.OnQueryTextListener {
 
     val discoverViewModel : DiscoverViewModel by lazy {
         ViewModelProviders.of(this, viewModelFactory)[DiscoverViewModel::class.java]
     }
 
     lateinit var binding : FragmentDiscoverBinding
+
+    private val adapter: SearchAdapter by lazy {
+        SearchAdapter()
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -40,22 +41,20 @@ class DiscoverFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
         initializeListeners()
 
-        binding.searchView.adapter = UserAdapter()
+        binding.searchView.adapter = adapter
+        adapter.users = listOf(MockUserFactory.MOBIN, MockUserFactory.SAULEH, MockUserFactory.SARAH)
+        adapter.events = listOf(MockEventFactory.COLDPLAY_CONCERT)
 
-        (binding.searchView.adapter as UserAdapter).let {
-            it.listeners.add(object : OnUserItemClickListener {
+        binding.searchView.setOnQueryTextListener(this)
+    }
 
-                override val stateTag: UserState
-                    get() = UserState.FOLLOWING
+    override fun onQueryTextSubmit(query: CharSequence?): Boolean {
+        findNavController().navigate(DiscoverFragmentDirections.actionEventsFragmentToAddEventFragment())
+        return true
+    }
 
-                override fun onClicked(userEntity: UserEntity) {
-                }
-            })
-            it.data = listOf<UserListItem>(
-                UserListItem(MockUserFactory.SAULEH, UserState.FOLLOWING)
-            ).toMutableList()
-        }
-        binding.searchView.onFilterComplete(3)
+    override fun onQueryTextChange(newText: CharSequence?) {
+        binding.searchView.onFilterComplete(4)
     }
 
     private fun initializeListeners(){
