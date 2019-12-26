@@ -18,6 +18,7 @@ import com.google.android.material.snackbar.Snackbar
 import com.mbglobal.artoutandroid.ui.profile.adapter.ProfileItem
 import com.mbglobal.artoutandroid.ui.profile.adapter.ProfileItemsAdapter
 import com.mbglobal.artoutandroid.ui.profile.listener.OnProfileItemClickListener
+import com.mbglobal.data.UserState
 import com.mbglobal.data.entity.user.UserEntity
 import com.mbglobal.data.entity.user.UserProfileEntity
 import com.squareup.picasso.Picasso
@@ -55,7 +56,7 @@ class ProfileFragment : BaseFragment() {
                 suggestionCount = 48,
                 checkinCount = 30,
                 state = 0,
-                user = UserEntity("", "", 0, "", "")
+                user = UserEntity("", "", 0, "", "", UserState.OWNER)
             )
         )
         adapter = binding.rvProfileItems.adapter as ProfileItemsAdapter
