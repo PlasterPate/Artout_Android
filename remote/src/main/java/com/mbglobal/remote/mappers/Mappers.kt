@@ -160,6 +160,8 @@ fun UserSearchEntity.toQueryMap(): Map<String, String>{
 fun EventSearchEntity.toQueryMap(): Map<String, String>{
     val query = HashMap<String, String>()
     query["event"] = this.event
-    query["category"] = this.category
+    this.category?.let {
+        query["category"] = it
+    }
     return query
 }
