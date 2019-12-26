@@ -1,5 +1,6 @@
 package com.mbglobal.remote.mappers
 
+import com.mbglobal.data.UserState
 import com.mbglobal.data.entity.event.AddEventEntity
 import com.mbglobal.data.entity.event.EventEntity
 import com.mbglobal.data.entity.event.LocationEntity
@@ -8,6 +9,7 @@ import com.mbglobal.remote.dto.event.AddEventDto
 import com.mbglobal.remote.dto.event.EventDto
 import com.mbglobal.remote.dto.event.LocationDto
 import com.mbglobal.remote.dto.user.*
+import kotlin.math.absoluteValue
 
 fun UserLoginItemEntity.toUserLoginItemDto(): UserLoginItemDto {
     return UserLoginItemDto(
@@ -37,16 +39,6 @@ fun UserLoginResponseDto.toUserLoginResponseEntity(): UserLoginResponseEntity {
 
 fun UserRegisterResponseDto.toUserRegisterResponseEntity(): UserRegisterResponseEntity {
     return UserRegisterResponseEntity(
-        id = id
-    )
-}
-
-fun UserResponseDto.toUserEntity(): UserEntity {
-    return UserEntity(
-        firstName = firstName,
-        lastName = lastName,
-        avatar = avatar,
-        username = username,
         id = id
     )
 }
@@ -112,7 +104,8 @@ fun UserEntity.toUserDto(): UserDto {
         firstName = firstName,
         lastName = lastName,
         username = username,
-        id = id
+        id = id,
+        state = state.value
     )
 }
 
@@ -122,7 +115,8 @@ fun UserDto.toUserEntity(): UserEntity {
         firstName = firstName,
         lastName = lastName,
         username = username,
-        id = id
+        id = id,
+        state = UserState.fromInt(state)
     )
 }
 
