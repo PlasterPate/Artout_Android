@@ -11,26 +11,16 @@
         android:layout_height="match_parent"
         tools:context=".ui.discover.DiscoverFragment">
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/search_bar_input_layout"
-            style="@style/TextInputLayoutStyleLight"
-            android:theme="@style/AppThemeLight"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+        <com.lapism.searchview.widget.SearchView
+            android:id="@+id/search_view"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:search_hint="Search for events &amp; users"
+            android:focusable="true"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content" />
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/search_bar_edit_text"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:theme="@style/TextInputEditTextStyleLight"
-                android:drawableStart="@drawable/ic_search"
-                android:drawablePadding="8dp"
-                android:drawableTint="@color/colorPrimary"
-                android:hint="@string/search_event"/>
-        </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/add_event_fab"

@@ -11,6 +11,12 @@ import androidx.navigation.fragment.findNavController
 import com.mbglobal.artoutandroid.R
 import com.mbglobal.artoutandroid.databinding.FragmentDiscoverBinding
 import com.mbglobal.artoutandroid.ui.base.BaseFragment
+import com.mbglobal.artoutandroid.ui.users.UserState
+import com.mbglobal.artoutandroid.ui.users.adapter.UserAdapter
+import com.mbglobal.artoutandroid.ui.users.adapter.UserListItem
+import com.mbglobal.artoutandroid.ui.users.adapter.listener.OnUserItemClickListener
+import com.mbglobal.data.entity.user.UserEntity
+import com.mbglobal.data.repository.MockUserFactory
 
 class DiscoverFragment : BaseFragment() {
 
@@ -32,10 +38,27 @@ class DiscoverFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initilizeListeners()
+        initializeListeners()
+
+        binding.searchView.adapter = UserAdapter()
+
+        (binding.searchView.adapter as UserAdapter).let {
+            it.listeners.add(object : OnUserItemClickListener {
+
+                override val stateTag: UserState
+                    get() = UserState.FOLLOWING
+
+                override fun onClicked(userEntity: UserEntity) {
+                }
+            })
+            it.data = listOf<UserListItem>(
+                UserListItem(MockUserFactory.SAULEH, UserState.FOLLOWING)
+            ).toMutableList()
+        }
+        binding.searchView.onFilterComplete(3)
     }
 
-    private fun initilizeListeners(){
+    private fun initializeListeners(){
         binding.addEventFab.setOnClickListener{
             findNavController().navigate(DiscoverFragmentDirections.actionEventsFragmentToAddEventFragment())
         }
