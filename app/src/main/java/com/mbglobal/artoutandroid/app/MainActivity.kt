@@ -50,8 +50,10 @@ class MainActivity : DaggerAppCompatActivity() {
 
     private fun initializeObservers() {
         mainViewModel.loginStatus.observe(this, Observer { status ->
-            status.getContentIfNotHandled()?.let {
-                findNavController(R.id.nav_host_fragment).navigate(R.id.navigation_timeline)
+            status.getContentIfNotHandled()?.let { loginStatus ->
+                if (loginStatus) {
+                    findNavController(R.id.nav_host_fragment).navigate(R.id.navigation_timeline)
+                }
             }
         })
     }
