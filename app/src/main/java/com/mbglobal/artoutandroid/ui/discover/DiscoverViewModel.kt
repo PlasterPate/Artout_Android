@@ -29,20 +29,20 @@ class DiscoverViewModel @Inject constructor(
         if (searchQuery.isBlank()) {
             return
         }
-//        eventRepository.searchEvent(
-//            EventSearchEntity(
-//                event = searchQuery,
-//                category = null
-//            )
-//        ).subscribeOn(Schedulers.io())
-//            .observeOn(AndroidSchedulers.mainThread())
-//            .subscribe({ events ->
-//
-//            }, {
-//
-//            }).also {
-//                compositeDisposable.add(it)
-//            }
+        eventRepository.searchEvent(
+            EventSearchEntity(
+                event = searchQuery,
+                category = null
+            )
+        ).subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({ events ->
+                _events.value = events
+            }, {
+
+            }).also {
+                compositeDisposable.add(it)
+            }
         userRepository.searchUser(
             UserSearchEntity(
                 searchQuery

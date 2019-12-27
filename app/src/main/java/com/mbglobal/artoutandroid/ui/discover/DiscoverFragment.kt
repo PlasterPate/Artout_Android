@@ -52,8 +52,6 @@ class DiscoverFragment : BaseFragment(), Search.OnQueryTextListener, Search.OnOp
         initializeObservers()
 
         binding.searchView.adapter = adapter
-        adapter.users = listOf(MockUserFactory.MOBIN, MockUserFactory.SAULEH, MockUserFactory.SARAH)
-        adapter.events = listOf(MockEventFactory.COLDPLAY_CONCERT)
 
         binding.searchView.setOnQueryTextListener(this)
         binding.searchView.setOnOpenCloseListener(this)
@@ -63,6 +61,12 @@ class DiscoverFragment : BaseFragment(), Search.OnQueryTextListener, Search.OnOp
         discoverViewModel.users.observe(this, Observer { users ->
             Timber.v("Users are here $users")
             adapter.users = users
+            binding.searchView.onFilterComplete(adapter.users.size + adapter.events.size)
+        })
+
+        discoverViewModel.events.observe(this, Observer { events ->
+            Timber.v("Events are here $events")
+            adapter.events = events
             binding.searchView.onFilterComplete(adapter.users.size + adapter.events.size)
         })
     }
