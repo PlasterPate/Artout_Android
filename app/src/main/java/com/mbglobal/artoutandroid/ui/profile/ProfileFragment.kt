@@ -10,23 +10,20 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.snackbar.Snackbar
 import com.mbglobal.artoutandroid.R
 import com.mbglobal.artoutandroid.databinding.FragmentProfileBinding
 import com.mbglobal.artoutandroid.ui.base.BaseFragment
-import androidx.recyclerview.widget.LinearLayoutManager
-import com.google.android.material.snackbar.Snackbar
 import com.mbglobal.artoutandroid.ui.profile.adapter.ProfileItem
 import com.mbglobal.artoutandroid.ui.profile.adapter.ProfileItemsAdapter
 import com.mbglobal.artoutandroid.ui.profile.listener.OnProfileItemClickListener
-import com.mbglobal.data.UserState
-import com.mbglobal.data.entity.user.UserEntity
-import com.mbglobal.data.entity.user.UserProfileEntity
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.dialog_add_friend.*
 
 class ProfileFragment : BaseFragment() {
 
-    private var userId: String? = null
+    //private var userId: String? = null
     lateinit var followDialog: AlertDialog
     lateinit var binding: FragmentProfileBinding
     private val adapter: ProfileItemsAdapter by lazy {
@@ -48,8 +45,6 @@ class ProfileFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        userId = ProfileFragmentArgs.fromBundle(arguments!!).userId
-        if (userId == "0") userId = null
         binding.rvProfileItems.layoutManager = LinearLayoutManager(view.context)
         adapter.items = listOf(
             ProfileItem(
@@ -67,7 +62,6 @@ class ProfileFragment : BaseFragment() {
         )
         binding.rvProfileItems.adapter = adapter
 
-
         Picasso.get().load("https://pbs.twimg.com/profile_images/959929674355765248/fk3ALoeH.jpg")
             .into(binding.ivProfileImage)
 
@@ -79,7 +73,7 @@ class ProfileFragment : BaseFragment() {
                 override fun onClicked(profileItem: ProfileItem) {
                     findNavController().navigate(
                         ProfileFragmentDirections.actionProfileFragmentToEventListFragment(
-                            userId
+                            null
                         )
                     )
                 }
@@ -92,14 +86,14 @@ class ProfileFragment : BaseFragment() {
                 override fun onClicked(profileItem: ProfileItem) {
                     findNavController().navigate(
                         ProfileFragmentDirections.actionProfileFragmentToEventListFragment(
-                            userId
+                            null
                         )
                     )
                 }
 
             })
         }
-
+        profileViewModel.getUserProfile()
         initializeListeners()
         initializeObservers()
     }
@@ -140,6 +134,12 @@ class ProfileFragment : BaseFragment() {
 
     private fun initializeObservers() {
 
+        profileViewModel.userProfile.observe(this, Observer {
+            binding.tvFullName.text = it.user.firstName.plus(" ").plus(it.user.lastName)
+            binding.tvFollowCount.text = it.followerCount
+            binding.tvFollowingCount.text = it.followingCount
+        })
+
         profileViewModel.logoutStatus.observe(this, Observer {
             if (it.getContentIfNotHandled() == true) {
                 findNavController().navigate(ProfileFragmentDirections.actionProfileFragmentToLoginFragment())
@@ -153,9 +153,11 @@ class ProfileFragment : BaseFragment() {
         profileViewModel.followStatus.observe(this, Observer {
             if (it.getContentIfNotHandled() == true) {
                 followDialog.hide()
-                Snackbar.make(requireView(), "Follow request Sent", Snackbar.LENGTH_LONG).show()
-//                findNavController().navigate(ProfileFragmentDirections
-//                    .actionNavigationProfileToUserProfileFragment(profileViewModel.id.toString()))
+//                Snackbar.make(requireView(), "Follow request Sent", Snackbar.LENGTH_LONG).show()
+                findNavController().navigate(
+                    ProfileFragmentDirections
+                        .actionNavigationProfileToUserProfileFragment(profileViewModel.id.toString())
+                )
             }
         })
     }
