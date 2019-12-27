@@ -124,6 +124,9 @@
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right"
             app:popUpTo="@+id/navigation_profile" />
+        <action
+            android:id="@+id/action_navigation_profile_to_userProfileFragment"
+            app:destination="@id/userProfileFragment" />
     </fragment>
 
     <fragment
@@ -183,4 +186,12 @@
         android:name="com.mbglobal.artoutandroid.ui.users.followings.FollowingsFragment"
         android:label="FollowingsFragment"
         tools:layout="@layout/fragment_followings" />
+    <fragment
+        android:id="@+id/userProfileFragment"
+        android:name="com.mbglobal.artoutandroid.ui.profile.UserProfileFragment"
+        android:label="UserProfileFragment" >
+        <argument
+            android:name="userId"
+            app:argType="string" />
+    </fragment>
 </navigation>

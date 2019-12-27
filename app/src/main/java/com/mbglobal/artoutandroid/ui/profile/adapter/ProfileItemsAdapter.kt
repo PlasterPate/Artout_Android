@@ -7,24 +7,13 @@ import com.mbglobal.artoutandroid.R
 import com.mbglobal.artoutandroid.ui.profile.listener.OnProfileItemClickListener
 import com.mbglobal.data.entity.user.UserProfileEntity
 
-class ProfileItemsAdapter(private val userProfileEntity: UserProfileEntity) : RecyclerView.Adapter<ProfileItemViewHolder>() {
+class ProfileItemsAdapter : RecyclerView.Adapter<ProfileItemViewHolder>() {
 
     var listeners = mutableListOf<OnProfileItemClickListener>()
 
-    private val items: List<ProfileItem> = listOf(
-        ProfileItem(
-            titleResource = R.string.suggestions,
-            iconResource = R.drawable.ic_favorite_grey_24dp,
-            count = userProfileEntity.suggestionCount,
-            tag = ProfileItem.SUGGESTIONS
-        ),
-        ProfileItem(
-            titleResource = R.string.checkins,
-            iconResource = R.drawable.ic_check_ins_24dp,
-            count = userProfileEntity.checkinCount,
-            tag = ProfileItem.CHECKINS
-        )
-    )
+    var items = listOf<ProfileItem>()
+
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProfileItemViewHolder {
         val view = LayoutInflater.from(parent.context)
