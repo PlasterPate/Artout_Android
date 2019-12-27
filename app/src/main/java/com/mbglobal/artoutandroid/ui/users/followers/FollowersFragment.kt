@@ -78,14 +78,13 @@ class FollowersFragment : BaseFragment() {
                     get() = UserState.NOT_FOLLOWING
 
                 override fun onClicked(userEntity: UserEntity) {
-                    this@with.updateUserState(userEntity, UserState.FOLLOWING)
+                    this@with.updateUserState(userEntity, UserState.REQUESTED)
                     socialViewModel.followUser(userEntity)
                 }
 
             })
 
             listeners.add(object : OnUserItemClickListener {
-
                 override val stateTag: UserState
                     get() = UserState.FOLLOWING
 
@@ -93,6 +92,18 @@ class FollowersFragment : BaseFragment() {
                     this@with.updateUserState(userEntity, UserState.NOT_FOLLOWING)
                     socialViewModel.unfollowUser(userEntity)
                 }
+
+            })
+
+            listeners.add(object : OnUserItemClickListener {
+                override val stateTag: UserState
+                    get() = UserState.REQUESTED
+
+                override fun onClicked(userEntity: UserEntity) {
+                    this@with.updateUserState(userEntity, UserState.NOT_FOLLOWING)
+                    socialViewModel.unfollowUser(userEntity)
+                }
+
             })
         }
     }
