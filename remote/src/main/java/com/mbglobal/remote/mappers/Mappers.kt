@@ -151,12 +151,6 @@ fun UserDto.toFollowRequestEntity(): FollowRequestEntity{
     )
 }
 
-fun UserSearchEntity.toQueryMap(): Map<String, String>{
-    val query = HashMap<String, String>()
-    query["user"] = this.user
-    return query
-}
-
 fun EventSearchEntity.toQueryMap(): Map<String, String>{
     val query = HashMap<String, String>()
     query["event"] = this.event

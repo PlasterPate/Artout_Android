@@ -31,6 +31,6 @@ class UserRemoteDataSourceImpl @Inject constructor(private val userService: User
 
 
     override fun searchUser(query: UserSearchEntity): Single<List<UserEntity>>{
-        return userService.searchUser(query.toQueryMap())
+        return userService.searchUser(query.search)
     }
 }
