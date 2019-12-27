@@ -100,7 +100,7 @@ class FollowersFragment : BaseFragment() {
 
                 override fun onClicked(userEntity: UserEntity) {
                     this@with.updateUserState(userEntity, UserState.NOT_FOLLOWING)
-                    socialViewModel.unfollowUser(userEntity.id.toString())
+                    socialViewModel.cancelFollowRequest(userEntity.id.toString())
                 }
 
             })

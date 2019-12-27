@@ -24,7 +24,7 @@ class FollowingsFragment : BaseFragment() {
         ViewModelProviders.of(this, viewModelFactory)[SocialViewModel::class.java]
     }
 
-    lateinit var binding : FragmentFollowingsBinding
+    lateinit var binding: FragmentFollowingsBinding
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -51,7 +51,7 @@ class FollowingsFragment : BaseFragment() {
             adapter = UserAdapter()
         }
 
-        with(binding.rvFollowings.adapter as UserAdapter){
+        with(binding.rvFollowings.adapter as UserAdapter) {
             data = it.map {
                 UserListItem(it, it.state)
             }.toMutableList() as ArrayList<UserListItem>
@@ -84,7 +84,7 @@ class FollowingsFragment : BaseFragment() {
 
                 override fun onClicked(userEntity: UserEntity) {
                     this@with.updateUserState(userEntity, UserState.NOT_FOLLOWING)
-                    socialViewModel.unfollowUser(userEntity.id.toString())
+                    socialViewModel.cancelFollowRequest(userEntity.id.toString())
                 }
 
             })

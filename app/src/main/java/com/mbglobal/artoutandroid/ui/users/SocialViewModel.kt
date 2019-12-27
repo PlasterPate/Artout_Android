@@ -7,7 +7,6 @@ import com.mbglobal.data.datasource.SessionLocalDataSource
 import com.mbglobal.data.entity.user.FollowRequestEntity
 import com.mbglobal.data.entity.user.UserEntity
 import com.mbglobal.data.repository.SocialRepository
-import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import timber.log.Timber
@@ -113,5 +112,16 @@ class SocialViewModel @Inject constructor(
                 compositeDisposable.add(it)
             }
 
+    }
+
+    fun cancelFollowRequest(userId: String) {
+
+        socialRepository.cancelFollowPending(userId)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({}, {})
+            .also {
+                compositeDisposable.add(it)
+            }
     }
 }
