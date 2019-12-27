@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.lapism.searchview.Search
 
@@ -14,6 +15,7 @@ import com.mbglobal.artoutandroid.databinding.FragmentDiscoverBinding
 import com.mbglobal.artoutandroid.ui.base.BaseFragment
 import com.mbglobal.data.repository.MockEventFactory
 import com.mbglobal.data.repository.MockUserFactory
+import timber.log.Timber
 
 class DiscoverFragment : BaseFragment(), Search.OnQueryTextListener, Search.OnOpenCloseListener {
 
@@ -47,6 +49,7 @@ class DiscoverFragment : BaseFragment(), Search.OnQueryTextListener, Search.OnOp
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initializeListeners()
+        initializeObservers()
 
         binding.searchView.adapter = adapter
         adapter.users = listOf(MockUserFactory.MOBIN, MockUserFactory.SAULEH, MockUserFactory.SARAH)
@@ -54,6 +57,14 @@ class DiscoverFragment : BaseFragment(), Search.OnQueryTextListener, Search.OnOp
 
         binding.searchView.setOnQueryTextListener(this)
         binding.searchView.setOnOpenCloseListener(this)
+    }
+
+    private fun initializeObservers() {
+        discoverViewModel.users.observe(this, Observer { users ->
+            Timber.v("Users are here $users")
+            adapter.users = users
+            binding.searchView.onFilterComplete(adapter.users.size + adapter.events.size)
+        })
     }
 
     override fun onQueryTextSubmit(query: CharSequence?): Boolean {
