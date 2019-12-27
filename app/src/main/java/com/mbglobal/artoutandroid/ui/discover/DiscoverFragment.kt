@@ -72,7 +72,7 @@ class DiscoverFragment : BaseFragment(), Search.OnQueryTextListener, Search.OnOp
     }
 
     override fun onQueryTextSubmit(query: CharSequence?): Boolean {
-        findNavController().navigate(DiscoverFragmentDirections.actionEventsFragmentToAddEventFragment())
+        findNavController().navigate(DiscoverFragmentDirections.actionNavigationDiscoverToSearchResultFragment())
         return true
     }
 
@@ -82,7 +82,7 @@ class DiscoverFragment : BaseFragment(), Search.OnQueryTextListener, Search.OnOp
 
     private fun initializeListeners(){
         binding.addEventFab.setOnClickListener{
-            findNavController().navigate(DiscoverFragmentDirections.actionEventsFragmentToAddEventFragment())
+            findNavController().navigate(DiscoverFragmentDirections.actionNavigationDiscoverToAddEventFragment())
         }
     }
 
