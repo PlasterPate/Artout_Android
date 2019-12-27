@@ -4,6 +4,7 @@ import com.google.gson.annotations.SerializedName
 import com.mbglobal.remote.dto.user.UserDto
 import com.mbglobal.remote.dto.user.FollowRequestDto
 import com.mbglobal.remote.dto.user.UserGetDto
+import io.reactivex.Completable
 import io.reactivex.Single
 import okhttp3.ResponseBody
 import retrofit2.http.*
@@ -29,7 +30,7 @@ interface FollowingService {
     fun getFollowPendings(): Single<List<UserDto>>
 
     @DELETE("/api/v1.0/follow/followings/pendings/{id}/")
-    fun cancelFollowPending(@Path("id") userId: String): Single<ResponseBody>
+    fun cancelFollowPending(@Path("id") userId: String): Completable
 
     companion object {
         const val BASE_URL: String = "http://35.202.66.168:8080/"
