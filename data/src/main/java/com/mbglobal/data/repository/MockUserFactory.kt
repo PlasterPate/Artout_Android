@@ -21,63 +21,63 @@ object MockUserFactory {
     }
 
     val SAULEH = UserEntity(
+        12,
         "https://pbs.twimg.com/profile_images/959929674355765248/fk3ALoeH.jpg",
         "Sauleh",
-        12,
         "Eeetemadi",
         "sauleh1",
         state = UserState.OWNER
     )
 
     val POOYA = UserEntity(
+        12,
         "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/colorful-of-dahlia-pink-flower-in-beautiful-garden-royalty-free-image-825886130-1554743243.jpg",
         "Pooya",
-        12,
         "Kabiri",
         "sauleh1",
         state = UserState.OWNER
     )
 
     val MOVAHED = UserEntity(
+        12,
         "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/colorful-of-dahlia-pink-flower-in-beautiful-garden-royalty-free-image-825886130-1554743243.jpg",
         "Alimohammad",
-        12,
         "Movahedian",
         "sauleh1",
         state = UserState.OWNER
     )
 
     val MAMAD = UserEntity(
+        12,
         "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/colorful-of-dahlia-pink-flower-in-beautiful-garden-royalty-free-image-825886130-1554743243.jpg",
         "Mamad",
-        12,
         "YN",
         "sauleh1",
         state = UserState.OWNER
     )
 
     val ALIREZA = UserEntity(
+        12,
         "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/colorful-of-dahlia-pink-flower-in-beautiful-garden-royalty-free-image-825886130-1554743243.jpg",
         "Alireza",
-        12,
         "Moradi",
         "sauleh1",
         state = UserState.OWNER
     )
 
     val SARAH = UserEntity(
+        12,
         "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/colorful-of-dahlia-pink-flower-in-beautiful-garden-royalty-free-image-825886130-1554743243.jpg",
         "Sarah",
-        12,
         "Codeiry",
         "sauleh1",
         state = UserState.OWNER
     )
 
     val MOBIN = UserEntity(
+        12,
         "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/colorful-of-dahlia-pink-flower-in-beautiful-garden-royalty-free-image-825886130-1554743243.jpg",
         "Mobin",
-        12,
         "Dariush",
         "sauleh1",
         state = UserState.OWNER
