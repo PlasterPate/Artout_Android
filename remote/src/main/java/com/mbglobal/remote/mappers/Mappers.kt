@@ -146,22 +146,32 @@ fun UserDto.toFollowRequestEntity(): FollowRequestEntity{
 
 fun UserProfileEntity.toUserProfileDto(): UserProfileDto{
     return UserProfileDto(
-        followerCount = followerCount,
-        followingCount = followingCount,
-        checkinCount = checkinCount,
-        suggestionCount = suggestionCount,
+        followerCount = followerCount.toInt(),
+        followingCount = followingCount.toInt(),
+        checkinCount = checkinCount.toInt(),
+        suggestionCount = suggestionCount.toInt(),
         state = state,
-        user = user
+        id = user.id,
+        firstName = user.firstName,
+        lastName = user.lastName,
+        username = user.username,
+        avatar = user.avatar
     )
 }
 
 fun UserProfileDto.toUserProfileEntity(): UserProfileEntity{
     return UserProfileEntity(
-        followerCount = followerCount,
-        followingCount = followingCount,
-        checkinCount = checkinCount,
-        suggestionCount = suggestionCount,
+        followerCount = followerCount.toString(),
+        followingCount = followingCount.toString(),
+        checkinCount = checkinCount.toString(),
+        suggestionCount = suggestionCount.toString(),
         state = state,
-        user = user
+        user = UserEntity(
+            id,
+            avatar,
+            firstName,
+            lastName,
+            username ,
+            UserState.fromInt(state))
     )
 }

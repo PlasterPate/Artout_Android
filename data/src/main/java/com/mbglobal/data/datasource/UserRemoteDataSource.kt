@@ -11,6 +11,6 @@ interface UserRemoteDataSource {
 
     fun getUser(username: String): Single<UserEntity>
 
-    fun getUserProfile(userId: String): Single<UserProfileEntity>
+    fun getUserProfile(userId: String?): Single<UserProfileEntity>
 
 }

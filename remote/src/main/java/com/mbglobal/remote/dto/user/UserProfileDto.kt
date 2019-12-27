@@ -14,6 +14,16 @@ data class UserProfileDto (
     val checkinCount: Int,
     @SerializedName("state")
     val state: Int,
-    @SerializedName("user")
-    val user: UserEntity
+    @SerializedName("id")
+    val id: Int,
+    @SerializedName("first_name")
+    val firstName: String,
+    @SerializedName("last_name")
+    val lastName: String,
+    @SerializedName("username")
+    val username: String,
+    @SerializedName("avatar")
+    val avatar: String
+
+
 )
