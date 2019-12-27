@@ -1,5 +1,6 @@
 package com.mbglobal.artoutandroid.ui.profile
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.mbglobal.artoutandroid.app.LiveEvent
 import com.mbglobal.artoutandroid.ui.base.BaseViewModel
@@ -26,9 +27,11 @@ class ProfileViewModel @Inject constructor(
     val followStatus = _followStatus
 
     private val _userProfile: MutableLiveData<UserProfileEntity> = MutableLiveData()
-    val userProfile = _userProfile
+    val userProfile: LiveData<UserProfileEntity> = _userProfile
 
-    var id = 0
+    var profileId: String? = null
+
+    var id = 2
 
     fun clickLogout() {
         userRepository.logout().subscribe({
@@ -55,20 +58,21 @@ class ProfileViewModel @Inject constructor(
                     }, {
                         _followStatus.value = LiveEvent(false)
                     })
-            },{})
+            }, {})
             .also {
                 compositeDisposable.add(it)
             }
     }
 
-    fun getUserProfile(userId: String){
-        userRepository.getUserProfile(userId)
+    fun getUserProfile() {
+        userRepository.getUserProfile(this.profileId)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe({userProfileEntity ->
-                userProfile.value = userProfileEntity
-            },{
-
+            .subscribe({ userProfileEntity ->
+                println(userProfileEntity)
+                _userProfile.postValue(userProfileEntity)
+            }, {
+                println(it.message)
             })
             .also {
                 compositeDisposable.add(it)
@@ -76,6 +80,11 @@ class ProfileViewModel @Inject constructor(
     }
 
     fun changeUserState(state: UserState) {
-        userProfile.value?.copy(state = state.value)
+        _userProfile.value =
+            _userProfile.value?.copy(user = _userProfile.value?.user?.copy(state = state)!!)
+    }
+
+    fun setUserId(userId: String) {
+        this.profileId = userId
     }
 }

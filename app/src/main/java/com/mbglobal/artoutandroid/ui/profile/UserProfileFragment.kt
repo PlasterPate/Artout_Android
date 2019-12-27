@@ -14,18 +14,12 @@ import com.mbglobal.artoutandroid.databinding.FragmentUserProfileBinding
 import com.mbglobal.artoutandroid.ui.base.BaseFragment
 import com.mbglobal.artoutandroid.ui.profile.adapter.ProfileItem
 import com.mbglobal.artoutandroid.ui.profile.adapter.ProfileItemsAdapter
-import com.mbglobal.artoutandroid.ui.profile.listener.OnProfileItemClickListener
 import com.mbglobal.artoutandroid.ui.users.SocialViewModel
-import com.mbglobal.artoutandroid.ui.users.adapter.UserAdapter
-import com.mbglobal.artoutandroid.ui.users.adapter.UserListItem
-import com.mbglobal.artoutandroid.ui.users.adapter.listener.OnUserItemClickListener
 import com.mbglobal.data.UserState
-import com.mbglobal.data.entity.user.UserEntity
 
-class UserProfileFragment: BaseFragment() {
+class UserProfileFragment : BaseFragment() {
 
 
-    lateinit var userId: String
     lateinit var binding: FragmentUserProfileBinding
     val adapter: ProfileItemsAdapter by lazy {
         ProfileItemsAdapter()
@@ -44,16 +38,17 @@ class UserProfileFragment: BaseFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_user_profile, container, false)
+        binding =
+            DataBindingUtil.inflate(inflater, R.layout.fragment_user_profile, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        userId = UserProfileFragmentArgs.fromBundle(arguments!!).userId
-        profileViewModel.getUserProfile(userId)
+        profileViewModel.setUserId(UserProfileFragmentArgs.fromBundle(arguments!!).userId)
+        profileViewModel.getUserProfile()
         binding.rvProfileItems.layoutManager = LinearLayoutManager(view.context)
+        adapter.items = listOf()
         binding.rvProfileItems.adapter = adapter
 
         initializeObservers()
@@ -68,34 +63,46 @@ class UserProfileFragment: BaseFragment() {
         binding.btnAction.apply {
             btnFollow.setOnClickListener {
                 profileViewModel.changeUserState(UserState.REQUESTED)
-                socialViewModel.followUser(userId)
+                socialViewModel.followUser(profileViewModel.profileId!!)
             }
 
-            btnFollowing.setOnClickListener{
+            btnFollowing.setOnClickListener {
                 profileViewModel.changeUserState(UserState.NOT_FOLLOWING)
-                socialViewModel.unfollowUser(userId)
+                socialViewModel.unfollowUser(profileViewModel.profileId!!)
             }
 
-            btnRequested.setOnClickListener{
+            btnRequested.setOnClickListener {
                 profileViewModel.changeUserState(UserState.NOT_FOLLOWING)
-                socialViewModel.unfollowUser(userId)
+                socialViewModel.cancelFollowRequest(profileViewModel.profileId!!)
             }
         }
     }
 
     private fun initializeObservers() {
         profileViewModel.userProfile.observe(this, Observer {
+            binding.tvFullName.text = it.user.firstName.plus(" ").plus(it.user.lastName)
+            println(it.user.state)
+            when (it.user.state) {
+                UserState.FOLLOWING -> binding.btnAction.btnFollowing.visibility = View.VISIBLE
+                UserState.REQUESTED -> binding.btnAction.btnRequested.visibility = View.VISIBLE
+                UserState.NOT_FOLLOWING -> {
+                    binding.btnAction.btnFollow.visibility = View.VISIBLE
+                    binding.btnAction.btnRequested.visibility = View.GONE
+                }
+            }
+            binding.tvFollowCount.text = it.followerCount
+            binding.tvFollowingCount.text = it.followingCount
             adapter.items = listOf(
                 ProfileItem(
                     titleResource = R.string.suggestions,
                     iconResource = R.drawable.ic_favorite_grey_24dp,
-                    count = it.suggestionCount,
+                    count = it.suggestionCount.toInt(),
                     tag = ProfileItem.SUGGESTIONS
                 ),
                 ProfileItem(
                     titleResource = R.string.checkins,
                     iconResource = R.drawable.ic_check_ins_24dp,
-                    count = it.checkinCount,
+                    count = it.checkinCount.toInt(),
                     tag = ProfileItem.CHECKINS
                 )
             )
