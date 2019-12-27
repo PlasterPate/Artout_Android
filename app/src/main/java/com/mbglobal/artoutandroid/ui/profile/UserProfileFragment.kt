@@ -15,6 +15,7 @@ import com.mbglobal.artoutandroid.ui.base.BaseFragment
 import com.mbglobal.artoutandroid.ui.profile.adapter.ProfileItem
 import com.mbglobal.artoutandroid.ui.profile.adapter.ProfileItemsAdapter
 import com.mbglobal.artoutandroid.ui.profile.listener.OnProfileItemClickListener
+import com.mbglobal.artoutandroid.ui.users.SocialViewModel
 import com.mbglobal.artoutandroid.ui.users.adapter.UserAdapter
 import com.mbglobal.artoutandroid.ui.users.adapter.UserListItem
 import com.mbglobal.artoutandroid.ui.users.adapter.listener.OnUserItemClickListener
@@ -34,6 +35,10 @@ class UserProfileFragment: BaseFragment() {
         ViewModelProviders.of(this, viewModelFactory)[ProfileViewModel::class.java]
     }
 
+    private val socialViewModel: SocialViewModel by lazy {
+        ViewModelProviders.of(this, viewModelFactory)[SocialViewModel::class.java]
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -50,26 +55,7 @@ class UserProfileFragment: BaseFragment() {
         profileViewModel.getUserProfile(userId)
         binding.rvProfileItems.layoutManager = LinearLayoutManager(view.context)
         binding.rvProfileItems.adapter = adapter
-        adapter.listeners.apply {
-            add(object : OnProfileItemClickListener {
 
-                override val itemTag: String = ProfileItem.SUGGESTIONS
-
-                override fun onClicked(profileItem: ProfileItem) {
-
-                }
-
-            })
-            add(object : OnProfileItemClickListener {
-
-                override val itemTag: String = ProfileItem.CHECKINS
-
-                override fun onClicked(profileItem: ProfileItem) {
-
-                }
-
-            })
-        }
         initializeObservers()
         initializeListeners()
     }
@@ -79,6 +65,22 @@ class UserProfileFragment: BaseFragment() {
             findNavController().navigateUp()
         }
 
+        binding.btnAction.apply {
+            btnFollow.setOnClickListener {
+                profileViewModel.changeUserState(UserState.REQUESTED)
+                socialViewModel.followUser(userId)
+            }
+
+            btnFollowing.setOnClickListener{
+                profileViewModel.changeUserState(UserState.NOT_FOLLOWING)
+                socialViewModel.unfollowUser(userId)
+            }
+
+            btnRequested.setOnClickListener{
+                profileViewModel.changeUserState(UserState.NOT_FOLLOWING)
+                socialViewModel.unfollowUser(userId)
+            }
+        }
     }
 
     private fun initializeObservers() {

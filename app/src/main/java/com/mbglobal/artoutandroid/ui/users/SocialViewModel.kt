@@ -91,9 +91,9 @@ class SocialViewModel @Inject constructor(
 
     }
 
-    fun followUser(userEntity: UserEntity) {
+    fun followUser(userId: String) {
 
-        socialRepository.follow(userEntity.id.toString())
+        socialRepository.follow(userId)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .retry(5)
@@ -103,9 +103,9 @@ class SocialViewModel @Inject constructor(
 
     }
 
-    fun unfollowUser(userEntity: UserEntity) {
+    fun unfollowUser(userId: String) {
 
-        socialRepository.unfollow(userEntity.id.toString())
+        socialRepository.unfollow(userId)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .retry(5)

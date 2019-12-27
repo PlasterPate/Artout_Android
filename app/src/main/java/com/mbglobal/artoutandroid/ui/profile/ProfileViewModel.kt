@@ -3,6 +3,7 @@ package com.mbglobal.artoutandroid.ui.profile
 import androidx.lifecycle.MutableLiveData
 import com.mbglobal.artoutandroid.app.LiveEvent
 import com.mbglobal.artoutandroid.ui.base.BaseViewModel
+import com.mbglobal.data.UserState
 import com.mbglobal.data.entity.user.UserProfileEntity
 import com.mbglobal.data.repository.SocialRepository
 import com.mbglobal.data.repository.UserRepository
@@ -72,5 +73,9 @@ class ProfileViewModel @Inject constructor(
             .also {
                 compositeDisposable.add(it)
             }
+    }
+
+    fun changeUserState(state: UserState) {
+        userProfile.value?.copy(state = state.value)
     }
 }

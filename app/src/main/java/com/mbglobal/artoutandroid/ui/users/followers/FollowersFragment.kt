@@ -22,7 +22,6 @@ import com.mbglobal.artoutandroid.ui.users.adapter.listener.OnUserItemClickListe
 import com.mbglobal.data.UserState
 import com.mbglobal.data.entity.user.FollowRequestEntity
 import com.mbglobal.data.entity.user.UserEntity
-import kotlinx.android.synthetic.main.fragment_followers.*
 
 class FollowersFragment : BaseFragment() {
 
@@ -79,7 +78,7 @@ class FollowersFragment : BaseFragment() {
 
                 override fun onClicked(userEntity: UserEntity) {
                     this@with.updateUserState(userEntity, UserState.REQUESTED)
-                    socialViewModel.followUser(userEntity)
+                    socialViewModel.followUser(userEntity.id.toString())
                 }
 
             })
@@ -90,7 +89,7 @@ class FollowersFragment : BaseFragment() {
 
                 override fun onClicked(userEntity: UserEntity) {
                     this@with.updateUserState(userEntity, UserState.NOT_FOLLOWING)
-                    socialViewModel.unfollowUser(userEntity)
+                    socialViewModel.unfollowUser(userEntity.id.toString())
                 }
 
             })
@@ -101,7 +100,7 @@ class FollowersFragment : BaseFragment() {
 
                 override fun onClicked(userEntity: UserEntity) {
                     this@with.updateUserState(userEntity, UserState.NOT_FOLLOWING)
-                    socialViewModel.unfollowUser(userEntity)
+                    socialViewModel.unfollowUser(userEntity.id.toString())
                 }
 
             })
