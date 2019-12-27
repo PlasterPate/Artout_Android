@@ -180,12 +180,20 @@
         android:id="@+id/followersFragment"
         android:name="com.mbglobal.artoutandroid.ui.users.followers.FollowersFragment"
         android:label="FollowersFragment"
-        tools:layout="@layout/fragment_followers" />
+        tools:layout="@layout/fragment_followers" >
+        <action
+            android:id="@+id/action_followersFragment_to_userProfileFragment"
+            app:destination="@id/userProfileFragment" />
+    </fragment>
     <fragment
         android:id="@+id/followingsFragment"
         android:name="com.mbglobal.artoutandroid.ui.users.followings.FollowingsFragment"
         android:label="FollowingsFragment"
-        tools:layout="@layout/fragment_followings" />
+        tools:layout="@layout/fragment_followings" >
+        <action
+            android:id="@+id/action_followingsFragment_to_userProfileFragment"
+            app:destination="@id/userProfileFragment" />
+    </fragment>
     <fragment
         android:id="@+id/userProfileFragment"
         android:name="com.mbglobal.artoutandroid.ui.profile.UserProfileFragment"
