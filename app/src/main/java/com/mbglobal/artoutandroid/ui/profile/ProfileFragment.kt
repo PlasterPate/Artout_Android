@@ -29,7 +29,9 @@ class ProfileFragment : BaseFragment() {
     private var userId: String? = null
     lateinit var followDialog: AlertDialog
     lateinit var binding: FragmentProfileBinding
-    var adapter: ProfileItemsAdapter? = null
+    private val adapter: ProfileItemsAdapter by lazy {
+        ProfileItemsAdapter()
+    }
 
     private val profileViewModel: ProfileViewModel by lazy {
         ViewModelProviders.of(this, viewModelFactory)[ProfileViewModel::class.java]
@@ -49,22 +51,27 @@ class ProfileFragment : BaseFragment() {
         userId = ProfileFragmentArgs.fromBundle(arguments!!).userId
         if (userId == "0") userId = null
         binding.rvProfileItems.layoutManager = LinearLayoutManager(view.context)
-        binding.rvProfileItems.adapter = ProfileItemsAdapter(
-            UserProfileEntity(
-                followerCount = 21,
-                followingCount = 20,
-                suggestionCount = 48,
-                checkinCount = 30,
-                state = 0,
-                user = UserEntity("", "", 0, "", "", UserState.OWNER)
+        adapter.items = listOf(
+            ProfileItem(
+                titleResource = R.string.suggestions,
+                iconResource = R.drawable.ic_favorite_grey_24dp,
+                count = 36,
+                tag = ProfileItem.SUGGESTIONS
+            ),
+            ProfileItem(
+                titleResource = R.string.checkins,
+                iconResource = R.drawable.ic_check_ins_24dp,
+                count = 21,
+                tag = ProfileItem.CHECKINS
             )
         )
-        adapter = binding.rvProfileItems.adapter as ProfileItemsAdapter
+        binding.rvProfileItems.adapter = adapter
+
 
         Picasso.get().load("https://pbs.twimg.com/profile_images/959929674355765248/fk3ALoeH.jpg")
             .into(binding.ivProfileImage)
 
-        adapter!!.listeners.apply {
+        adapter.listeners.apply {
             add(object : OnProfileItemClickListener {
 
                 override val itemTag: String = ProfileItem.SUGGESTIONS
@@ -146,14 +153,16 @@ class ProfileFragment : BaseFragment() {
         profileViewModel.followStatus.observe(this, Observer {
             if (it.getContentIfNotHandled() == true) {
                 followDialog.hide()
-                Snackbar.make(requireView(), "Follow request Sent", Snackbar.LENGTH_LONG).show()
+                //Snackbar.make(requireView(), "Follow request Sent", Snackbar.LENGTH_LONG).show()
+                findNavController().navigate(ProfileFragmentDirections
+                    .actionNavigationProfileToUserProfileFragment(profileViewModel.id.toString()))
             }
         })
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        adapter = null
+        adapter.listeners.clear()
     }
 
 }
