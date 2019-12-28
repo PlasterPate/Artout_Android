@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.mbglobal.artoutandroid.R
 import com.mbglobal.artoutandroid.databinding.FragmentSearchResultBinding
 import com.mbglobal.artoutandroid.ui.base.BaseFragment
@@ -20,6 +21,10 @@ class SearchResultFragment : BaseFragment() {
 
     val discoverViewModel : DiscoverViewModel by lazy {
         ViewModelProviders.of(activity!!, viewModelFactory)[DiscoverViewModel::class.java]
+    }
+
+    private val adapter: SearchResultAdapter by lazy {
+        SearchResultAdapter()
     }
 
     override fun onCreateView(
@@ -44,10 +49,14 @@ class SearchResultFragment : BaseFragment() {
             binding.progress.visibility = if (it) View.VISIBLE else View.GONE
         })
         discoverViewModel.searchResults.observe(this, Observer { searchResults ->
-            Toast.makeText(activity!!, searchResults.toString(), Toast.LENGTH_LONG).show()
+            binding.rvSearchResults.layoutManager = LinearLayoutManager(requireContext())
+            binding.rvSearchResults.adapter = adapter.apply {
+                events = searchResults.first.toMutableList()
+                users = searchResults.second.toMutableList()
+            }
         })
         discoverViewModel.searchQuery.observe(this, Observer { searchQuery ->
-            binding.tvTitle.text = (binding.tvTitle.text.toString().replace("search_query", searchQuery))
+            binding.tvTitle.text = resources.getString(R.string.search_query_prefix) + " " + searchQuery
         })
     }
 }

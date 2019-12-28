@@ -12,6 +12,7 @@ import com.mbglobal.data.repository.UserRepository
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.functions.BiFunction
 import io.reactivex.schedulers.Schedulers
+import timber.log.Timber
 import javax.inject.Inject
 
 //DiscoverViewModel is shared between different fragment, remember to init them with activity scope
@@ -61,6 +62,7 @@ class DiscoverViewModel @Inject constructor(
     }
 
     fun submitSearch(searchQuery: String) {
+        _showSearchResultsLoading.postValue(true)
         eventRepository.searchEvent(
             EventSearchEntity(
                 event = searchQuery,
@@ -82,6 +84,7 @@ class DiscoverViewModel @Inject constructor(
             }).also {
                 compositeDisposable.add(it)
             }
+        Timber.v("Updated searchQuery with value $searchQuery")
         _searchQuery.postValue(searchQuery)
     }
 }
