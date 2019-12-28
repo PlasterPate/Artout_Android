@@ -1,12 +1,11 @@
 package com.mbglobal.artoutandroid.ui.profile
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.mbglobal.artoutandroid.app.LiveEvent
 import com.mbglobal.artoutandroid.ui.base.BaseViewModel
-import com.mbglobal.data.entity.event.EventEntity
-import com.mbglobal.data.entity.user.FollowRequestEntity
-import com.mbglobal.data.entity.user.UserEntity
-import com.mbglobal.data.repository.EventRepository
+import com.mbglobal.data.UserState
+import com.mbglobal.data.entity.user.UserProfileEntity
 import com.mbglobal.data.repository.SocialRepository
 import com.mbglobal.data.repository.UserRepository
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -26,6 +25,13 @@ class ProfileViewModel @Inject constructor(
 
     private val _followStatus: MutableLiveData<LiveEvent<Boolean>> = MutableLiveData()
     val followStatus = _followStatus
+
+    private val _userProfile: MutableLiveData<UserProfileEntity> = MutableLiveData()
+    val userProfile: LiveData<UserProfileEntity> = _userProfile
+
+    var profileId: String? = null
+
+    var id = 2
 
     fun clickLogout() {
         userRepository.logout().subscribe({
@@ -47,14 +53,38 @@ class ProfileViewModel @Inject constructor(
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe({
+                        id = it.id
                         _followStatus.value = LiveEvent(true)
                     }, {
                         _followStatus.value = LiveEvent(false)
                     })
-            },{})
+            }, {})
             .also {
                 compositeDisposable.add(it)
             }
+    }
 
+    fun getUserProfile() {
+        userRepository.getUserProfile(this.profileId)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({ userProfileEntity ->
+                println(userProfileEntity)
+                _userProfile.postValue(userProfileEntity)
+            }, {
+                println(it.message)
+            })
+            .also {
+                compositeDisposable.add(it)
+            }
+    }
+
+    fun changeUserState(state: UserState) {
+        _userProfile.value =
+            _userProfile.value?.copy(user = _userProfile.value?.user?.copy(state = state)!!)
+    }
+
+    fun setUserId(userId: String) {
+        this.profileId = userId
     }
 }

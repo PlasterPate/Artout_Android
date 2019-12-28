@@ -1,8 +1,10 @@
 package com.mbglobal.data.entity.user
 
 data class UserProfileEntity(
-    val followerCount: Int,
-    val followingCount: Int,
-    val suggestionCount: Int,
-    val checkinCount: Int
+    val followerCount: String,
+    val followingCount: String,
+    val suggestionCount: String,
+    val checkinCount: String,
+    val state: Int,
+    val user: UserEntity
 )

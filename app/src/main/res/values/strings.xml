@@ -42,6 +42,7 @@
     <string name="accept">Accept</string>
     <string name="username">Username</string>
     <string name="email">Email</string>
+    <string name="requested">Requested</string>
     <string name="search_results_for_search_query">Results for: <i>search_query</i></string>
     <string name="search_query_prefix">Search results for:</string>
 </resources>

@@ -2,6 +2,7 @@ package com.mbglobal.remote.api
 
 import com.mbglobal.data.entity.event.EventEntity
 import com.mbglobal.remote.dto.event.*
+import com.mbglobal.remote.dto.user.UserProfileDto
 import io.reactivex.Single
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
@@ -27,6 +28,9 @@ interface EventService {
 
     @GET("/api/v1.0/events/")
     fun getUserSuggestions(): Single<List<EventDto>>
+
+    @GET("/api/v1.0/users/profile/")
+    fun getUserProfile(@Query("user") userId: String?): Single<UserProfileDto>
 
     @GET("/api/v1.0/events/")
     fun searchEvent(@QueryMap query: Map<String,String>): Single<List<EventEntity>>

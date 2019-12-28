@@ -12,5 +12,7 @@ data class UserDto(
     @SerializedName("last_name")
     val lastName: String,
     @SerializedName("username")
-    val username: String
+    val username: String,
+    @SerializedName("state")
+    val state: Int
 )

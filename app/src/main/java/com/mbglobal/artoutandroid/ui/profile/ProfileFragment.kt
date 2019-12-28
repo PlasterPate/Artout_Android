@@ -6,29 +6,29 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
-import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.snackbar.Snackbar
 import com.mbglobal.artoutandroid.R
 import com.mbglobal.artoutandroid.databinding.FragmentProfileBinding
 import com.mbglobal.artoutandroid.ui.base.BaseFragment
-import androidx.recyclerview.widget.LinearLayoutManager
-import com.google.android.material.snackbar.Snackbar
 import com.mbglobal.artoutandroid.ui.profile.adapter.ProfileItem
 import com.mbglobal.artoutandroid.ui.profile.adapter.ProfileItemsAdapter
 import com.mbglobal.artoutandroid.ui.profile.listener.OnProfileItemClickListener
-import com.mbglobal.data.entity.user.UserProfileEntity
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.dialog_add_friend.*
 
 class ProfileFragment : BaseFragment() {
 
-    private var userId: String? = null
-    lateinit var followDialog : AlertDialog
+    //private var userId: String? = null
+    lateinit var followDialog: AlertDialog
     lateinit var binding: FragmentProfileBinding
-    var adapter: ProfileItemsAdapter? = null
+    private val adapter: ProfileItemsAdapter by lazy {
+        ProfileItemsAdapter()
+    }
 
     private val profileViewModel: ProfileViewModel by lazy {
         ViewModelProviders.of(this, viewModelFactory)[ProfileViewModel::class.java]
@@ -45,60 +45,77 @@ class ProfileFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        userId = ProfileFragmentArgs.fromBundle(arguments!!).userId
-        if (userId == "0") userId = null
         binding.rvProfileItems.layoutManager = LinearLayoutManager(view.context)
-        binding.rvProfileItems.adapter = ProfileItemsAdapter(
-            UserProfileEntity(
-                followerCount = 21,
-                followingCount = 20,
-                suggestionCount = 48,
-                checkinCount = 30
+        adapter.items = listOf(
+            ProfileItem(
+                titleResource = R.string.suggestions,
+                iconResource = R.drawable.ic_favorite_grey_24dp,
+                count = 36,
+                tag = ProfileItem.SUGGESTIONS
+            ),
+            ProfileItem(
+                titleResource = R.string.checkins,
+                iconResource = R.drawable.ic_check_ins_24dp,
+                count = 21,
+                tag = ProfileItem.CHECKINS
             )
         )
-        adapter = binding.rvProfileItems.adapter as ProfileItemsAdapter
+        binding.rvProfileItems.adapter = adapter
+
 
         Picasso.get().load("https://st2.depositphotos.com/4111759/12123/v/950/depositphotos_121233262-stock-illustration-male-default-placeholder-avatar-profile.jpg")
             .into(binding.ivProfileImage)
 
-        adapter!!.listeners.apply {
-            add(object: OnProfileItemClickListener {
+        adapter.listeners.apply {
+            add(object : OnProfileItemClickListener {
 
                 override val itemTag: String = ProfileItem.SUGGESTIONS
 
                 override fun onClicked(profileItem: ProfileItem) {
-                    findNavController().navigate(ProfileFragmentDirections.actionProfileFragmentToEventListFragment(userId))
+                    findNavController().navigate(
+                        ProfileFragmentDirections.actionProfileFragmentToEventListFragment(
+                            null
+                        )
+                    )
                 }
 
             })
-            add(object: OnProfileItemClickListener {
+            add(object : OnProfileItemClickListener {
 
                 override val itemTag: String = ProfileItem.CHECKINS
 
                 override fun onClicked(profileItem: ProfileItem) {
-                    findNavController().navigate(ProfileFragmentDirections.actionProfileFragmentToEventListFragment(userId))
+                    findNavController().navigate(
+                        ProfileFragmentDirections.actionProfileFragmentToEventListFragment(
+                            null
+                        )
+                    )
                 }
 
             })
         }
-
+        profileViewModel.getUserProfile()
         initializeListeners()
         initializeObservers()
     }
 
     private fun initializeListeners() {
 
-        binding.btnAddFriend.setOnClickListener{
+        binding.btnAddFriend.setOnClickListener {
             val builder = AlertDialog.Builder(requireContext())
             followDialog = builder.setView(R.layout.dialog_add_friend).create()
             followDialog.show()
 
-            followDialog.dialog_btn_add.setOnClickListener{
-                profileViewModel.sendFollowRequest(followDialog.findViewById<EditText>(R.id
-                    .dialog_edit_text).text.toString())
+            followDialog.dialog_btn_add.setOnClickListener {
+                profileViewModel.sendFollowRequest(
+                    followDialog.findViewById<EditText>(
+                        R.id
+                            .dialog_edit_text
+                    ).text.toString()
+                )
             }
 
-            followDialog.dialog_btn_cancel.setOnClickListener{
+            followDialog.dialog_btn_cancel.setOnClickListener {
                 followDialog.hide()
             }
         }
@@ -118,6 +135,12 @@ class ProfileFragment : BaseFragment() {
 
     private fun initializeObservers() {
 
+        profileViewModel.userProfile.observe(this, Observer {
+            binding.tvFullName.text = it.user.firstName.plus(" ").plus(it.user.lastName)
+            binding.tvFollowCount.text = it.followerCount
+            binding.tvFollowingCount.text = it.followingCount
+        })
+
         profileViewModel.logoutStatus.observe(this, Observer {
             if (it.getContentIfNotHandled() == true) {
                 findNavController().navigate(ProfileFragmentDirections.actionProfileFragmentToLoginFragment())
@@ -129,16 +152,20 @@ class ProfileFragment : BaseFragment() {
         })
 
         profileViewModel.followStatus.observe(this, Observer {
-            if (it.getContentIfNotHandled() == true){
+            if (it.getContentIfNotHandled() == true) {
                 followDialog.hide()
-                Snackbar.make(requireView(), "Follow request Sent", Snackbar.LENGTH_LONG).show()
+//                Snackbar.make(requireView(), "Follow request Sent", Snackbar.LENGTH_LONG).show()
+                findNavController().navigate(
+                    ProfileFragmentDirections
+                        .actionNavigationProfileToUserProfileFragment(profileViewModel.id.toString())
+                )
             }
         })
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        adapter = null
+        adapter.listeners.clear()
     }
 
 }
