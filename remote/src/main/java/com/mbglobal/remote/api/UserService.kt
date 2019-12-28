@@ -12,6 +12,8 @@ interface UserService {
     @POST("/api/v1.0/auth/login/")
     fun login(@Body userLoginItemDto: UserLoginItemDto): Single<UserLoginResponseDto>
 
+
+
     companion object {
         const val BASE_URL: String = "http://35.202.66.168:8080/"
     }

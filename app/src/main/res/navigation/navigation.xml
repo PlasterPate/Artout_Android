@@ -77,11 +77,6 @@
         android:name="com.mbglobal.artoutandroid.ui.profile.ProfileFragment"
         android:label="ProfileFragment"
         tools:layout="@layout/fragment_profile">
-        <argument
-            android:name="userId"
-            android:defaultValue="0"
-            app:argType="string"
-            app:nullable="true" />
         <action
             android:id="@+id/action_profileFragment_to_loginFragment"
             app:destination="@id/loginFragment"
@@ -124,6 +119,13 @@
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right"
             app:popUpTo="@+id/navigation_profile" />
+        <action
+            android:id="@+id/action_navigation_profile_to_userProfileFragment"
+            app:destination="@id/userProfileFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
 
     <fragment
@@ -177,10 +179,32 @@
         android:id="@+id/followersFragment"
         android:name="com.mbglobal.artoutandroid.ui.users.followers.FollowersFragment"
         android:label="FollowersFragment"
-        tools:layout="@layout/fragment_followers" />
+        tools:layout="@layout/fragment_followers">
+        <action
+            android:id="@+id/action_followersFragment_to_userProfileFragment"
+            app:destination="@id/userProfileFragment" />
+        <action
+            android:id="@+id/action_followersFragment_to_userProfileFragment2"
+            app:destination="@id/userProfileFragment" />
+    </fragment>
     <fragment
         android:id="@+id/followingsFragment"
         android:name="com.mbglobal.artoutandroid.ui.users.followings.FollowingsFragment"
         android:label="FollowingsFragment"
-        tools:layout="@layout/fragment_followings" />
+        tools:layout="@layout/fragment_followings">
+        <action
+            android:id="@+id/action_followingsFragment_to_userProfileFragment"
+            app:destination="@id/userProfileFragment" />
+        <action
+            android:id="@+id/action_followingsFragment_to_userProfileFragment2"
+            app:destination="@id/userProfileFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/userProfileFragment"
+        android:name="com.mbglobal.artoutandroid.ui.profile.UserProfileFragment"
+        android:label="UserProfileFragment">
+        <argument
+            android:name="userId"
+            app:argType="string" />
+    </fragment>
 </navigation>

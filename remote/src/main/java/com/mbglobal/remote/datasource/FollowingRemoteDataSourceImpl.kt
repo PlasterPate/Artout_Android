@@ -51,6 +51,6 @@ class FollowingRemoteDataSourceImpl @Inject constructor(
     }
 
     override fun cancelFollowPending(userId: String): Completable {
-        return Completable.fromSingle(followingService.cancelFollowPending(userId))
+        return followingService.cancelFollowPending(userId)
     }
 }

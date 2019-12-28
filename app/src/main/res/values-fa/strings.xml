@@ -35,7 +35,8 @@
     <string name="follow">دنبال کردن</string>
     <string name="pending_follow_requests">درخواست های دنبال کردن</string>
     <string name="followers">دنبال کنندگان</string>
-    <string name="followings">دنبال شوندگان</string>
+    <string name="followings">دنبال شدگان</string>
     <string name="accept">تایید</string>
     <string name="email">پست الکترونیکی</string>
+    <string name="requested">درخواست داده شده</string>
 </resources>

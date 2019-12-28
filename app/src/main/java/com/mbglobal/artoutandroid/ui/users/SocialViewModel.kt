@@ -7,7 +7,6 @@ import com.mbglobal.data.datasource.SessionLocalDataSource
 import com.mbglobal.data.entity.user.FollowRequestEntity
 import com.mbglobal.data.entity.user.UserEntity
 import com.mbglobal.data.repository.SocialRepository
-import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import timber.log.Timber
@@ -47,7 +46,7 @@ class SocialViewModel @Inject constructor(
             .subscribe({ followers: List<UserEntity> ->
                 _followings.postValue(followers)
             }, {
-
+                Timber.e("Throwable followings ${it.message}")
             }).also {
                 compositeDisposable.add(it)
             }
@@ -91,9 +90,9 @@ class SocialViewModel @Inject constructor(
 
     }
 
-    fun followUser(userEntity: UserEntity) {
+    fun followUser(userId: String) {
 
-        socialRepository.follow(userEntity.id.toString())
+        socialRepository.follow(userId)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .retry(5)
@@ -103,9 +102,9 @@ class SocialViewModel @Inject constructor(
 
     }
 
-    fun unfollowUser(userEntity: UserEntity) {
+    fun unfollowUser(userId: String) {
 
-        socialRepository.unfollow(userEntity.id.toString())
+        socialRepository.unfollow(userId)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .retry(5)
@@ -113,5 +112,16 @@ class SocialViewModel @Inject constructor(
                 compositeDisposable.add(it)
             }
 
+    }
+
+    fun cancelFollowRequest(userId: String) {
+
+        socialRepository.cancelFollowPending(userId)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({}, {})
+            .also {
+                compositeDisposable.add(it)
+            }
     }
 }
