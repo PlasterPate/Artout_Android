@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -15,15 +16,19 @@ import com.mbglobal.artoutandroid.databinding.FragmentFollowersBinding
 import com.mbglobal.artoutandroid.ui.base.BaseFragment
 import com.mbglobal.artoutandroid.ui.users.SocialViewModel
 import com.mbglobal.artoutandroid.ui.users.adapter.FollowRequestAdapter
+import com.mbglobal.artoutandroid.ui.users.adapter.OnUserItemClickListener
 import com.mbglobal.artoutandroid.ui.users.adapter.UserAdapter
 import com.mbglobal.artoutandroid.ui.users.adapter.UserListItem
 import com.mbglobal.artoutandroid.ui.users.adapter.listener.OnFollowRequestClickListener
-import com.mbglobal.artoutandroid.ui.users.adapter.listener.OnUserItemClickListener
+import com.mbglobal.artoutandroid.ui.users.adapter.listener.OnActionButtonClickListener
 import com.mbglobal.data.UserState
 import com.mbglobal.data.entity.user.FollowRequestEntity
 import com.mbglobal.data.entity.user.UserEntity
 
-class FollowersFragment : BaseFragment() {
+class FollowersFragment : BaseFragment(), OnUserItemClickListener {
+    override fun onClicked(userEntity: UserEntity) {
+        findNavController().navigate(FollowersFragmentDirections.actionFollowersFragmentToUserProfileFragment(userEntity.id.toString()))
+    }
 
     val socialViewModel: SocialViewModel by lazy {
         ViewModelProviders.of(this, viewModelFactory)[SocialViewModel::class.java]
@@ -72,7 +77,7 @@ class FollowersFragment : BaseFragment() {
             data = it.map {
                 UserListItem(it, it.state)
             }.toMutableList()
-            listeners.add(object : OnUserItemClickListener {
+            actionButtonListeners.add(object : OnActionButtonClickListener {
                 override val stateTag: UserState
                     get() = UserState.NOT_FOLLOWING
 
@@ -83,7 +88,7 @@ class FollowersFragment : BaseFragment() {
 
             })
 
-            listeners.add(object : OnUserItemClickListener {
+            actionButtonListeners.add(object : OnActionButtonClickListener {
                 override val stateTag: UserState
                     get() = UserState.FOLLOWING
 
@@ -94,7 +99,7 @@ class FollowersFragment : BaseFragment() {
 
             })
 
-            listeners.add(object : OnUserItemClickListener {
+            actionButtonListeners.add(object : OnActionButtonClickListener {
                 override val stateTag: UserState
                     get() = UserState.REQUESTED
 
@@ -104,6 +109,8 @@ class FollowersFragment : BaseFragment() {
                 }
 
             })
+
+            onUserItemClickListener = this@FollowersFragment
         }
     }
 
