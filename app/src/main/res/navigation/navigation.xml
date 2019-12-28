@@ -183,6 +183,9 @@
         <action
             android:id="@+id/action_followersFragment_to_userProfileFragment"
             app:destination="@id/userProfileFragment" />
+        <action
+            android:id="@+id/action_followersFragment_to_userProfileFragment2"
+            app:destination="@id/userProfileFragment" />
     </fragment>
     <fragment
         android:id="@+id/followingsFragment"
@@ -191,6 +194,9 @@
         tools:layout="@layout/fragment_followings">
         <action
             android:id="@+id/action_followingsFragment_to_userProfileFragment"
+            app:destination="@id/userProfileFragment" />
+        <action
+            android:id="@+id/action_followingsFragment_to_userProfileFragment2"
             app:destination="@id/userProfileFragment" />
     </fragment>
     <fragment

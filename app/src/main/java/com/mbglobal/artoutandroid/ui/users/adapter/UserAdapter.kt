@@ -3,20 +3,17 @@ package com.mbglobal.artoutandroid.ui.users.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.mbglobal.artoutandroid.R
-import com.mbglobal.artoutandroid.ui.users.adapter.listener.OnUserItemClickListener
+import com.mbglobal.artoutandroid.ui.users.adapter.listener.OnActionButtonClickListener
 import com.mbglobal.artoutandroid.ui.users.adapter.listener.OnFollowRequestClickListener
 import com.mbglobal.data.UserState
 import com.mbglobal.data.entity.user.UserEntity
-import timber.log.Timber
 
 class UserAdapter : RecyclerView.Adapter<UserViewHolder>() {
 
-    var listeners = mutableListOf<OnUserItemClickListener>()
-
-    var onFollowRequestClickListener: OnFollowRequestClickListener? = null
+    var actionButtonListeners= mutableListOf<OnActionButtonClickListener>()
+    var onUserItemClickListener: OnUserItemClickListener? = null
 
     var data: MutableList<UserListItem> = object : ArrayList<UserListItem>() {
 
@@ -70,7 +67,7 @@ class UserAdapter : RecyclerView.Adapter<UserViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: UserViewHolder, position: Int) {
-        holder.bind(data[position], findListenerByCurrentState(data[position].state))
+        holder.bind(data[position], onUserItemClickListener!!, findListenerByCurrentState(data[position].state))
     }
 
     fun updateUserState(userEntity: UserEntity, state: UserState) {
@@ -82,7 +79,7 @@ class UserAdapter : RecyclerView.Adapter<UserViewHolder>() {
         }
     }
 
-    private fun findListenerByCurrentState(userState: UserState): OnUserItemClickListener {
-        return listeners.filter { it.stateTag == userState }[0]
+    private fun findListenerByCurrentState(userState: UserState): OnActionButtonClickListener {
+        return actionButtonListeners.filter { it.stateTag == userState }[0]
     }
 }
