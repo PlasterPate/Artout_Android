@@ -32,6 +32,9 @@ interface EventService {
     @GET("/api/v1.0/users/profile/")
     fun getUserProfile(@Query("user") userId: String?): Single<UserProfileDto>
 
+    @GET("/api/v1.0/events/")
+    fun searchEvent(@QueryMap query: Map<String,String>): Single<List<EventEntity>>
+
     companion object {
         const val BASE_URL: String = "http://35.202.66.168:8080/"
     }

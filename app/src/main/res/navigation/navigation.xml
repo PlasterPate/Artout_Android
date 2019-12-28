@@ -64,13 +64,11 @@
         android:label="DiscoverFragment"
         tools:layout="@layout/fragment_discover">
         <action
-            android:id="@+id/action_eventsFragment_to_addEventFragment"
-            app:destination="@id/addEventFragment"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"
-            app:popUpTo="@+id/navigation_discover" />
+            android:id="@+id/action_navigation_discover_to_searchResultFragment"
+            app:destination="@id/searchResultFragment" />
+        <action
+            android:id="@+id/action_navigation_discover_to_addEventFragment"
+            app:destination="@id/addEventFragment" />
     </fragment>
     <fragment
         android:id="@+id/navigation_profile"
@@ -207,4 +205,13 @@
             android:name="userId"
             app:argType="string" />
     </fragment>
+
+    <fragment
+        android:id="@+id/searchResultFragment"
+        android:name="com.mbglobal.artoutandroid.ui.search.SearchResultFragment"
+        app:enterAnim="@anim/slide_in_right"
+        app:exitAnim="@anim/slide_out_left"
+        app:popEnterAnim="@anim/slide_in_left"
+        app:popExitAnim="@anim/slide_out_right"
+        android:label="SearchResultFragment" />
 </navigation>

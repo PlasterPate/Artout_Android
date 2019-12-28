@@ -5,7 +5,6 @@ import com.mbglobal.data.entity.user.*
 import com.mbglobal.remote.api.EventService
 import com.mbglobal.remote.api.FollowerService
 import com.mbglobal.remote.api.UserService
-import com.mbglobal.remote.dto.user.UserGetDto
 import com.mbglobal.remote.mappers.*
 import io.reactivex.Single
 import javax.inject.Inject
@@ -38,4 +37,12 @@ class UserRemoteDataSourceImpl @Inject constructor(private val userService: User
         }
     }
 
+
+    override fun searchUser(query: UserSearchEntity): Single<List<UserEntity>>{
+        return userService.searchUser(query.search).map {
+            it.map {
+                it.toUserEntity()
+            }
+        }
+    }
 }
