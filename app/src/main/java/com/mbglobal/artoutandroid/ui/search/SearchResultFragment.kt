@@ -47,6 +47,7 @@ class SearchResultFragment : BaseFragment() {
         discoverViewModel.showSearchResultsLoading.observe(this, Observer {
             Timber.v("Show Progress $it")
             binding.progress.visibility = if (it) View.VISIBLE else View.GONE
+            binding.rvSearchResults.visibility = if (it) View.GONE else View.VISIBLE
         })
         discoverViewModel.searchResults.observe(this, Observer { searchResults ->
             binding.rvSearchResults.layoutManager = LinearLayoutManager(requireContext())
