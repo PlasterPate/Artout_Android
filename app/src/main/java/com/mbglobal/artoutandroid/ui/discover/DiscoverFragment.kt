@@ -13,8 +13,6 @@ import com.lapism.searchview.Search
 import com.mbglobal.artoutandroid.R
 import com.mbglobal.artoutandroid.databinding.FragmentDiscoverBinding
 import com.mbglobal.artoutandroid.ui.base.BaseFragment
-import com.mbglobal.data.repository.MockEventFactory
-import com.mbglobal.data.repository.MockUserFactory
 import timber.log.Timber
 
 class DiscoverFragment : BaseFragment(), Search.OnQueryTextListener, Search.OnOpenCloseListener {
@@ -27,7 +25,7 @@ class DiscoverFragment : BaseFragment(), Search.OnQueryTextListener, Search.OnOp
     }
 
     val discoverViewModel : DiscoverViewModel by lazy {
-        ViewModelProviders.of(this, viewModelFactory)[DiscoverViewModel::class.java]
+        ViewModelProviders.of(activity!!, viewModelFactory)[DiscoverViewModel::class.java]
     }
 
     lateinit var binding : FragmentDiscoverBinding
@@ -58,26 +56,21 @@ class DiscoverFragment : BaseFragment(), Search.OnQueryTextListener, Search.OnOp
     }
 
     private fun initializeObservers() {
-        discoverViewModel.users.observe(this, Observer { users ->
-            Timber.v("Users are here $users")
-            adapter.users = users
-            binding.searchView.onFilterComplete(adapter.users.size + adapter.events.size)
-        })
-
-        discoverViewModel.events.observe(this, Observer { events ->
-            Timber.v("Events are here $events")
-            adapter.events = events
-            binding.searchView.onFilterComplete(adapter.users.size + adapter.events.size)
+        discoverViewModel.previewSearchResults.observe(this, Observer { previewResults ->
+            adapter.events = previewResults.first
+            adapter.users = previewResults.second
+            binding.searchView.onFilterComplete(10)
         })
     }
 
     override fun onQueryTextSubmit(query: CharSequence?): Boolean {
         findNavController().navigate(DiscoverFragmentDirections.actionNavigationDiscoverToSearchResultFragment())
+        discoverViewModel.submitSearch(query.toString())
         return true
     }
 
     override fun onQueryTextChange(newText: CharSequence?) {
-        discoverViewModel.onQueryChange(newText.toString())
+        discoverViewModel.queryChange(newText.toString())
     }
 
     private fun initializeListeners(){
