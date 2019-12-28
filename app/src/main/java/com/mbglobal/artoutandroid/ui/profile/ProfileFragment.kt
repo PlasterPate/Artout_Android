@@ -153,11 +153,7 @@ class ProfileFragment : BaseFragment() {
         profileViewModel.followStatus.observe(this, Observer {
             if (it.getContentIfNotHandled() == true) {
                 followDialog.hide()
-//                Snackbar.make(requireView(), "Follow request Sent", Snackbar.LENGTH_LONG).show()
-                findNavController().navigate(
-                    ProfileFragmentDirections
-                        .actionNavigationProfileToUserProfileFragment(profileViewModel.id.toString())
-                )
+                Snackbar.make(requireView(), "Follow request Sent", Snackbar.LENGTH_LONG).show()
             }
         })
     }
