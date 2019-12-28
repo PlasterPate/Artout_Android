@@ -46,11 +46,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     style="@style/ProfileName"
+                    android:layout_marginStart="32dp"
                     tools:text="Sauleh Etemadi"
                     android:layout_marginTop="12dp"
                     app:layout_constraintTop_toTopOf="@id/iv_profile_image"
-                    app:layout_constraintStart_toStartOf="@id/iv_profile_image"
-                    app:layout_constraintEnd_toEndOf="parent"/>
+                    app:layout_constraintStart_toEndOf="@id/iv_profile_image" />
 
                 <include layout="@layout/button_follow"
                     android:id="@+id/btn_action"
