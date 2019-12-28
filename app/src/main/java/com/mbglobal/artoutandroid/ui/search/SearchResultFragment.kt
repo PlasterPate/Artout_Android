@@ -46,5 +46,8 @@ class SearchResultFragment : BaseFragment() {
         discoverViewModel.searchResults.observe(this, Observer { searchResults ->
             Toast.makeText(activity!!, searchResults.toString(), Toast.LENGTH_LONG).show()
         })
+        discoverViewModel.searchQuery.observe(this, Observer { searchQuery ->
+            binding.tvTitle.text = (binding.tvTitle.text.toString().replace("search_query", searchQuery))
+        })
     }
 }

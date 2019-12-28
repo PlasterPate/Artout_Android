@@ -30,6 +30,9 @@ class DiscoverViewModel @Inject constructor(
     private val _showSearchResultsLoading: MutableLiveData<Boolean> = MutableLiveData()
     val showSearchResultsLoading: LiveData<Boolean> = _showSearchResultsLoading
 
+    private val _searchQuery: MutableLiveData<String> = MutableLiveData()
+    val searchQuery: LiveData<String> = _searchQuery
+
     fun queryChange(searchQuery: String) {
         if (searchQuery.isBlank()) {
             _previewSearchResults.value = Pair(listOf(), listOf())
@@ -79,5 +82,6 @@ class DiscoverViewModel @Inject constructor(
             }).also {
                 compositeDisposable.add(it)
             }
+        _searchQuery.postValue(searchQuery)
     }
 }
