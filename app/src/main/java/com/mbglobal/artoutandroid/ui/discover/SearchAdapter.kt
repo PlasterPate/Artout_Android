@@ -7,11 +7,16 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.mbglobal.artoutandroid.R
+import com.mbglobal.artoutandroid.ui.eventlist.adapter.OnEventItemClickListener
+import com.mbglobal.artoutandroid.ui.users.adapter.OnUserItemClickListener
 import com.mbglobal.data.entity.event.EventEntity
 import com.mbglobal.data.entity.user.UserEntity
 import com.squareup.picasso.Picasso
 
-class SearchAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class SearchAdapter(
+    private val onEventItemClickListener: OnEventItemClickListener,
+    private val onUserItemClickListener: OnUserItemClickListener
+) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     var users = listOf<UserEntity>()
         set(value) {
@@ -45,10 +50,10 @@ class SearchAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
         when (getItemViewType(position)) {
             USER_SEARCH_ITEM -> {
-                (holder as UserSearchItemViewHolder).bind(users[position])
+                (holder as UserSearchItemViewHolder).bind(users[position], onUserItemClickListener)
             }
             EVENT_SEARCH_ITEM -> {
-                (holder as EventSearchItemViewHolder).bind(events[position - users.size])
+                (holder as EventSearchItemViewHolder).bind(events[position - users.size], onEventItemClickListener)
             }
         }
     }
@@ -63,9 +68,15 @@ class SearchAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             itemView.findViewById<ImageView>(R.id.iv_event_icon)
         }
 
-        fun bind(eventEntity: EventEntity) {
+        fun bind(
+            eventEntity: EventEntity,
+            onEventItemClickListener: OnEventItemClickListener
+        ) {
             eventTitle.text = eventEntity.title
             Picasso.get().load(eventEntity.image).into(eventIcon)
+            itemView.setOnClickListener {
+                onEventItemClickListener.onClicked(eventEntity)
+            }
         }
     }
 
@@ -79,8 +90,14 @@ class SearchAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             itemView.findViewById<ImageView>(R.id.iv_profile_icon)
         }
 
-        fun bind(userEntity: UserEntity) {
+        fun bind(
+            userEntity: UserEntity,
+            onUserItemClickListener: OnUserItemClickListener
+        ) {
             fullName.text = userEntity.firstName + " " + userEntity.lastName
+            itemView.setOnClickListener {
+                onUserItemClickListener.onClicked(userEntity)
+            }
         }
     }
 

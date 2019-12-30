@@ -10,11 +10,15 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.mbglobal.artoutandroid.R
 import com.mbglobal.artoutandroid.ui.eventlist.adapter.OnEventItemClickListener
+import com.mbglobal.artoutandroid.ui.users.adapter.OnUserItemClickListener
 import com.mbglobal.data.entity.event.EventEntity
 import com.mbglobal.data.entity.user.UserEntity
 import com.squareup.picasso.Picasso
 
-class SearchResultAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class SearchResultAdapter(
+    private val onEventItemClickListener: OnEventItemClickListener,
+    private val onUserItemClickListener: OnUserItemClickListener
+): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     var events = mutableListOf<EventEntity>()
         set(value) {
@@ -54,10 +58,10 @@ class SearchResultAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when (getItemViewType(position)) {
             ITEM_USERS_LIST -> {
-                (holder as UserListViewHolder).bind(users)
+                (holder as UserListViewHolder).bind(users, onUserItemClickListener)
             }
             ITEM_EVENT -> {
-                (holder as EventItemViewHolder).bind(events[position - 1])
+                (holder as EventItemViewHolder).bind(events[position - 1], onEventItemClickListener)
             }
         }
     }
@@ -80,9 +84,12 @@ class SearchResultAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             itemView.findViewById(R.id.rv_users) as RecyclerView
         }
 
-        fun bind(userList: List<UserEntity>) {
+        fun bind(
+            userList: List<UserEntity>,
+            onUserItemClickListener: OnUserItemClickListener
+        ) {
             users.layoutManager = LinearLayoutManager(itemView.context, LinearLayoutManager.HORIZONTAL, false)
-            users.adapter = UserResultAdapter().apply {
+            users.adapter = UserResultAdapter(onUserItemClickListener).apply {
                 users = userList.toMutableList()
             }
         }
@@ -93,7 +100,10 @@ class SearchResultAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         private val eventTitle: TextView = itemView.findViewById(R.id.title_item)
         private val eventDescription: TextView = itemView.findViewById(R.id.description_item)
 
-        fun bind(eventEntity: EventEntity){
+        fun bind(
+            eventEntity: EventEntity,
+            onEventItemClickListener: OnEventItemClickListener
+        ){
             try {
                 Picasso.get().load(eventEntity.image?.toUri()).into(eventImage)
             }catch (e: SecurityException){
@@ -101,6 +111,9 @@ class SearchResultAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             }
             eventTitle.text = eventEntity.title
             eventDescription.text = eventEntity.description
+            itemView.setOnClickListener {
+                onEventItemClickListener.onClicked(eventEntity)
+            }
         }
     }
 }

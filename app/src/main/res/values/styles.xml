@@ -16,6 +16,18 @@
         <item name="colorControlHighlight">@color/white</item>
     </style>
 
+<!--    Fix light and dark themes!!!-->
+    <style name="AppThemeDiscover" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <!--        <item name="android:actionBarStyle">@style/ThemeActionBar</item>-->
+        <!--        <item name="android:windowActionBarOverlay">true</item>-->
+        <!--        <item name="windowActionBarOverlay">true</item>-->
+
+    </style>
+
     <style name="ThemeActionBar" parent="Widget.AppCompat.Light.ActionBar.Solid">
         <item name="android:background">@null</item>
         <!-- Support library compatibility -->
