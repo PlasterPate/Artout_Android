@@ -69,6 +69,15 @@
         <action
             android:id="@+id/action_navigation_discover_to_addEventFragment"
             app:destination="@id/addEventFragment" />
+        <action
+            android:id="@+id/action_navigation_discover_to_userProfileFragment"
+            app:destination="@id/userProfileFragment" />
+        <action
+            android:id="@+id/action_navigation_discover_to_addEventFragment2"
+            app:destination="@id/addEventFragment" />
+        <action
+            android:id="@+id/action_navigation_discover_to_eventDetailsFragment"
+            app:destination="@id/eventDetailsFragment" />
     </fragment>
     <fragment
         android:id="@+id/navigation_profile"

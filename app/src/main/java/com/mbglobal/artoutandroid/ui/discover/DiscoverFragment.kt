@@ -14,11 +14,33 @@ import com.lapism.searchview.Search
 import com.mbglobal.artoutandroid.R
 import com.mbglobal.artoutandroid.databinding.FragmentDiscoverBinding
 import com.mbglobal.artoutandroid.ui.base.BaseFragment
+import com.mbglobal.artoutandroid.ui.eventlist.adapter.OnEventItemClickListener
+import com.mbglobal.artoutandroid.ui.users.adapter.OnUserItemClickListener
+import com.mbglobal.data.entity.event.EventEntity
+import com.mbglobal.data.entity.user.UserEntity
 import timber.log.Timber
 
 
 
-class DiscoverFragment : BaseFragment(), Search.OnQueryTextListener, Search.OnOpenCloseListener {
+class DiscoverFragment : BaseFragment(),
+    Search.OnQueryTextListener,
+    Search.OnOpenCloseListener,
+    OnUserItemClickListener,
+    OnEventItemClickListener
+{
+    override fun onClicked(userEntity: UserEntity) {
+        findNavController().navigate(
+            DiscoverFragmentDirections.actionNavigationDiscoverToUserProfileFragment(
+                userEntity.id.toString()
+            )
+        )
+    }
+
+    override fun onClicked(eventEntity: EventEntity) {
+        findNavController().navigate(
+            DiscoverFragmentDirections.actionNavigationDiscoverToEventDetailsFragment(eventEntity.id)
+        )
+    }
 
     override fun onOpen() {
     }
@@ -34,7 +56,7 @@ class DiscoverFragment : BaseFragment(), Search.OnQueryTextListener, Search.OnOp
     lateinit var binding : FragmentDiscoverBinding
 
     private val adapter: SearchAdapter by lazy {
-        SearchAdapter()
+        SearchAdapter(this, this)
     }
 
     override fun onCreateView(
@@ -42,7 +64,7 @@ class DiscoverFragment : BaseFragment(), Search.OnQueryTextListener, Search.OnOp
         savedInstanceState: Bundle?
     ): View? {
 
-        val contextThemeWrapper = ContextThemeWrapper(activity, R.style.AppThemeLight)
+        val contextThemeWrapper = ContextThemeWrapper(requireContext(), R.style.AppThemeDiscover)
         val localInflater = inflater.cloneInContext(contextThemeWrapper)
 
         binding = DataBindingUtil.inflate(

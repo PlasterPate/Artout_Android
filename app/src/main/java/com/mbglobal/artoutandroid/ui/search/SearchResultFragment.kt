@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.view.ContextThemeWrapper
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -36,8 +37,12 @@ class SearchResultFragment : BaseFragment(), OnUserItemClickListener, OnEventIte
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
+        val contextThemeWrapper = ContextThemeWrapper(requireContext(), R.style.AppThemeDiscover)
+        val localInflater = inflater.cloneInContext(contextThemeWrapper)
+
         binding = DataBindingUtil.inflate(
-            inflater, R.layout.fragment_search_result, container, false
+            localInflater, R.layout.fragment_search_result, container, false
         )
         return binding.root
     }
