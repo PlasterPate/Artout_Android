@@ -5,9 +5,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.mbglobal.artoutandroid.R
+import com.mbglobal.artoutandroid.ui.users.adapter.OnUserItemClickListener
 import com.mbglobal.data.entity.user.UserEntity
 
-class UserResultAdapter : RecyclerView.Adapter<UserResultItemViewHolder>() {
+class UserResultAdapter(private val onUserItemClickListener: OnUserItemClickListener) : RecyclerView.Adapter<UserResultItemViewHolder>() {
 
     var users = mutableListOf<UserEntity>()
 
@@ -26,6 +27,6 @@ class UserResultAdapter : RecyclerView.Adapter<UserResultItemViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: UserResultItemViewHolder, position: Int) {
-        holder.bind(users[position])
+        holder.bind(users[position], onUserItemClickListener)
     }
 }
