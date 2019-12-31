@@ -14,6 +14,7 @@ import com.mbglobal.artoutandroid.databinding.FragmentUserProfileBinding
 import com.mbglobal.artoutandroid.ui.base.BaseFragment
 import com.mbglobal.artoutandroid.ui.profile.adapter.ProfileItem
 import com.mbglobal.artoutandroid.ui.profile.adapter.ProfileItemsAdapter
+import com.mbglobal.artoutandroid.ui.profile.listener.OnProfileItemClickListener
 import com.mbglobal.artoutandroid.ui.users.SocialViewModel
 import com.mbglobal.data.UserState
 
@@ -26,11 +27,11 @@ class UserProfileFragment : BaseFragment() {
     }
 
     private val profileViewModel: ProfileViewModel by lazy {
-        ViewModelProviders.of(this, viewModelFactory)[ProfileViewModel::class.java]
+        ViewModelProviders.of(activity!!, viewModelFactory)[ProfileViewModel::class.java]
     }
 
     private val socialViewModel: SocialViewModel by lazy {
-        ViewModelProviders.of(this, viewModelFactory)[SocialViewModel::class.java]
+        ViewModelProviders.of(activity!!, viewModelFactory)[SocialViewModel::class.java]
     }
 
     override fun onCreateView(
@@ -47,8 +48,43 @@ class UserProfileFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
         profileViewModel.setUserId(UserProfileFragmentArgs.fromBundle(arguments!!).userId)
         profileViewModel.getUserProfile()
+        adapter.items = listOf(
+            ProfileItem(
+                titleResource = R.string.suggestions,
+                iconResource = R.drawable.ic_favorite_grey_24dp,
+                count = 45,
+                tag = ProfileItem.SUGGESTIONS
+            ),
+            ProfileItem(
+                titleResource = R.string.checkins,
+                iconResource = R.drawable.ic_check_ins_24dp,
+                count = 32,
+                tag = ProfileItem.CHECKINS
+            )
+        )
+
+        adapter.listeners.apply {
+            add(object : OnProfileItemClickListener {
+
+                override val itemTag: String = ProfileItem.SUGGESTIONS
+
+                override fun onClicked(profileItem: ProfileItem) {
+
+                }
+
+            })
+            add(object : OnProfileItemClickListener {
+
+                override val itemTag: String = ProfileItem.CHECKINS
+
+                override fun onClicked(profileItem: ProfileItem) {
+
+                }
+
+            })
+        }
+
         binding.rvProfileItems.layoutManager = LinearLayoutManager(view.context)
-        adapter.items = listOf()
         binding.rvProfileItems.adapter = adapter
 
         initializeObservers()
@@ -92,20 +128,6 @@ class UserProfileFragment : BaseFragment() {
             }
             binding.tvFollowCount.text = it.followerCount
             binding.tvFollowingCount.text = it.followingCount
-            adapter.items = listOf(
-                ProfileItem(
-                    titleResource = R.string.suggestions,
-                    iconResource = R.drawable.ic_favorite_grey_24dp,
-                    count = it.suggestionCount.toInt(),
-                    tag = ProfileItem.SUGGESTIONS
-                ),
-                ProfileItem(
-                    titleResource = R.string.checkins,
-                    iconResource = R.drawable.ic_check_ins_24dp,
-                    count = it.checkinCount.toInt(),
-                    tag = ProfileItem.CHECKINS
-                )
-            )
         })
     }
 }

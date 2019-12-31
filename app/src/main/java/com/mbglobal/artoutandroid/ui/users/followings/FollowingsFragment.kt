@@ -23,7 +23,7 @@ import com.mbglobal.data.entity.user.UserEntity
 class FollowingsFragment : BaseFragment(), OnUserItemClickListener {
 
     val socialViewModel: SocialViewModel by lazy {
-        ViewModelProviders.of(this, viewModelFactory)[SocialViewModel::class.java]
+        ViewModelProviders.of(requireActivity(), viewModelFactory)[SocialViewModel::class.java]
     }
 
     lateinit var binding: FragmentFollowingsBinding

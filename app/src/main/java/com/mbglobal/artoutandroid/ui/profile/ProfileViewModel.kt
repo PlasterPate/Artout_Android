@@ -31,8 +31,6 @@ class ProfileViewModel @Inject constructor(
 
     var profileId: String? = null
 
-    var id = 2
-
     fun clickLogout() {
         userRepository.logout().subscribe({
             _logoutStatus.value = LiveEvent(true)
@@ -76,7 +74,7 @@ class ProfileViewModel @Inject constructor(
             })
             .also {
                 compositeDisposable.add(it)
-            }
+                }
     }
 
     fun changeUserState(state: UserState) {
