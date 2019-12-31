@@ -5,6 +5,7 @@ import com.mbglobal.data.datasource.EventRemoteDataSource
 import com.mbglobal.data.datasource.SessionLocalDataSource
 import com.mbglobal.data.entity.event.AddEventEntity
 import com.mbglobal.data.entity.event.EventEntity
+import com.mbglobal.data.entity.event.EventSearchEntity
 import io.reactivex.Single
 import javax.inject.Inject
 
@@ -60,5 +61,10 @@ class EventRepository @Inject constructor(
         return idSingle.flatMap {
             eventRemoteDataSource.getUserSuggestions()
         }
+    }
+
+    fun searchEvent(query: EventSearchEntity): Single<List<EventEntity>>{
+        return Single.just(listOf(MockEventFactory.COLDPLAY_CONCERT, MockEventFactory.COLDPLAY_CONCERT2, MockEventFactory.COLDPLAY_CONCERT3))
+        return eventRemoteDataSource.searchEvent(query)
     }
 }

@@ -62,7 +62,8 @@ class ProfileFragment : BaseFragment() {
         )
         binding.rvProfileItems.adapter = adapter
 
-        Picasso.get().load("https://pbs.twimg.com/profile_images/959929674355765248/fk3ALoeH.jpg")
+
+        Picasso.get().load("https://st2.depositphotos.com/4111759/12123/v/950/depositphotos_121233262-stock-illustration-male-default-placeholder-avatar-profile.jpg")
             .into(binding.ivProfileImage)
 
         adapter.listeners.apply {
@@ -153,7 +154,11 @@ class ProfileFragment : BaseFragment() {
         profileViewModel.followStatus.observe(this, Observer {
             if (it.getContentIfNotHandled() == true) {
                 followDialog.hide()
-                Snackbar.make(requireView(), "Follow request Sent", Snackbar.LENGTH_LONG).show()
+//                Snackbar.make(requireView(), "Follow request Sent", Snackbar.LENGTH_LONG).show()
+                findNavController().navigate(
+                    ProfileFragmentDirections
+                        .actionNavigationProfileToUserProfileFragment(profileViewModel.id.toString())
+                )
             }
         })
     }

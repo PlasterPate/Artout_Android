@@ -9,6 +9,7 @@ import com.mbglobal.artoutandroid.ui.login.LoginFragment
 import com.mbglobal.artoutandroid.ui.profile.ProfileFragment
 import com.mbglobal.artoutandroid.ui.profile.UserProfileFragment
 import com.mbglobal.artoutandroid.ui.register.RegisterFragment
+import com.mbglobal.artoutandroid.ui.search.SearchResultFragment
 import com.mbglobal.artoutandroid.ui.timeline.TimelineFragment
 import com.mbglobal.artoutandroid.ui.users.followers.FollowersFragment
 import com.mbglobal.artoutandroid.ui.users.followings.FollowingsFragment
@@ -53,4 +54,8 @@ abstract class FragmentsModule {
 
     @ContributesAndroidInjector
     abstract fun followingsFragment(): FollowingsFragment
+
+    @ContributesAndroidInjector
+    abstract fun searchResultFragment(): SearchResultFragment
+
 }

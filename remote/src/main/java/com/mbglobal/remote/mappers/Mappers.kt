@@ -3,6 +3,7 @@ package com.mbglobal.remote.mappers
 import com.mbglobal.data.UserState
 import com.mbglobal.data.entity.event.AddEventEntity
 import com.mbglobal.data.entity.event.EventEntity
+import com.mbglobal.data.entity.event.EventSearchEntity
 import com.mbglobal.data.entity.event.LocationEntity
 import com.mbglobal.data.entity.user.*
 import com.mbglobal.remote.dto.event.AddEventDto
@@ -174,4 +175,13 @@ fun UserProfileDto.toUserProfileEntity(): UserProfileEntity{
             username ,
             UserState.fromInt(state))
     )
+}
+
+fun EventSearchEntity.toQueryMap(): Map<String, String>{
+    val query = HashMap<String, String>()
+    query["event"] = this.event
+    this.category?.let {
+        query["category"] = it
+    }
+    return query
 }

@@ -51,6 +51,7 @@ class ProfileViewModel @Inject constructor(
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe({
+                        id = it.id
                         _followStatus.value = LiveEvent(true)
                     }, {
                         _followStatus.value = LiveEvent(false)
