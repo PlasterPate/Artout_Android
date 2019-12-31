@@ -31,7 +31,7 @@ class ProfileFragment : BaseFragment() {
     }
 
     private val profileViewModel: ProfileViewModel by lazy {
-        ViewModelProviders.of(this, viewModelFactory)[ProfileViewModel::class.java]
+        ViewModelProviders.of(requireActivity(), viewModelFactory)[ProfileViewModel::class.java]
     }
 
     override fun onCreateView(

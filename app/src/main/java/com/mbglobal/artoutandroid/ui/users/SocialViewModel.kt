@@ -28,20 +28,16 @@ class SocialViewModel @Inject constructor(
     val followings: LiveData<List<UserEntity>> = _followings
 
     fun loadFollowers(userId: String?) {
-        if (_followers.value == null) {
-            socialRepository.getUserFollowers(userId)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({ followers: List<UserEntity> ->
-                    _followers.postValue(followers)
-                }, {
-                    Timber.e("Throwable followers ${it.message}")
-                }).also {
-                    compositeDisposable.add(it)
-                }
-        }
-
-
+        socialRepository.getUserFollowers(userId)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({ followers: List<UserEntity> ->
+                _followers.postValue(followers)
+            }, {
+                Timber.e("Throwable followers ${it.message}")
+            }).also {
+                compositeDisposable.add(it)
+            }
     }
 
     fun loadFollowings(userId: String?) {

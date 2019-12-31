@@ -27,11 +27,11 @@ class UserProfileFragment : BaseFragment() {
     }
 
     private val profileViewModel: ProfileViewModel by lazy {
-        ViewModelProviders.of(this, viewModelFactory)[ProfileViewModel::class.java]
+        ViewModelProviders.of(activity!!, viewModelFactory)[ProfileViewModel::class.java]
     }
 
     private val socialViewModel: SocialViewModel by lazy {
-        ViewModelProviders.of(this, viewModelFactory)[SocialViewModel::class.java]
+        ViewModelProviders.of(activity!!, viewModelFactory)[SocialViewModel::class.java]
     }
 
     override fun onCreateView(

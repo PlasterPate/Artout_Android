@@ -31,8 +31,6 @@ class ProfileViewModel @Inject constructor(
 
     var profileId: String? = null
 
-    var id = 2
-
     fun clickLogout() {
         userRepository.logout().subscribe({
             _logoutStatus.value = LiveEvent(true)
@@ -53,7 +51,6 @@ class ProfileViewModel @Inject constructor(
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe({
-                        id = it.id
                         _followStatus.value = LiveEvent(true)
                     }, {
                         _followStatus.value = LiveEvent(false)
@@ -76,7 +73,7 @@ class ProfileViewModel @Inject constructor(
             })
             .also {
                 compositeDisposable.add(it)
-            }
+                }
     }
 
     fun changeUserState(state: UserState) {
