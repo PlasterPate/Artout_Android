@@ -64,7 +64,7 @@ class EventRepository @Inject constructor(
     }
 
     fun searchEvent(query: EventSearchEntity): Single<List<EventEntity>>{
-        return Single.just(listOf(MockEventFactory.COLDPLAY_CONCERT, MockEventFactory.COLDPLAY_CONCERT2, MockEventFactory.COLDPLAY_CONCERT3))
+        //return Single.just(listOf(MockEventFactory.COLDPLAY_CONCERT, MockEventFactory.COLDPLAY_CONCERT2, MockEventFactory.COLDPLAY_CONCERT3))
         return eventRemoteDataSource.searchEvent(query)
     }
 }

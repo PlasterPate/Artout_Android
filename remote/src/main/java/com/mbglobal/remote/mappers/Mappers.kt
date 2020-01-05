@@ -10,7 +10,6 @@ import com.mbglobal.remote.dto.event.AddEventDto
 import com.mbglobal.remote.dto.event.EventDto
 import com.mbglobal.remote.dto.event.LocationDto
 import com.mbglobal.remote.dto.user.*
-import kotlin.math.absoluteValue
 
 fun UserLoginItemEntity.toUserLoginItemDto(): UserLoginItemDto {
     return UserLoginItemDto(
@@ -179,7 +178,7 @@ fun UserProfileDto.toUserProfileEntity(): UserProfileEntity{
 
 fun EventSearchEntity.toQueryMap(): Map<String, String>{
     val query = HashMap<String, String>()
-    query["event"] = this.event
+    query["title__icontains"] = this.title
     this.category?.let {
         query["category"] = it
     }

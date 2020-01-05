@@ -41,7 +41,7 @@ class DiscoverViewModel @Inject constructor(
         }
         eventRepository.searchEvent(
             EventSearchEntity(
-                event = searchQuery,
+                title = searchQuery,
                 category = null
             )
         ).zipWith(
@@ -65,7 +65,7 @@ class DiscoverViewModel @Inject constructor(
         _showSearchResultsLoading.postValue(true)
         eventRepository.searchEvent(
             EventSearchEntity(
-                event = searchQuery,
+                title = searchQuery,
                 category = null
             )
         ).zipWith(
