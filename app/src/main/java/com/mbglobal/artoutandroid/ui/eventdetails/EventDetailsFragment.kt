@@ -1,29 +1,29 @@
 package com.mbglobal.artoutandroid.ui.eventdetails
 
 import android.os.Bundle
-import android.view.*
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.core.view.children
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.ui.NavigationUI
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.snackbar.Snackbar
 import com.mbglobal.artoutandroid.R
-import com.mbglobal.artoutandroid.app.MainActivity
 import com.mbglobal.artoutandroid.databinding.FragmentEventDetailsBinding
 import com.mbglobal.artoutandroid.ui.base.BaseFragment
-import kotlinx.android.synthetic.main.fragment_event_details.*
 
 class EventDetailsFragment : BaseFragment() {
 
     private var eventId: Int? = null
 
-    private val eventDetailsViewModel : EventDetailsViewModel by lazy {
+    private val eventDetailsViewModel: EventDetailsViewModel by lazy {
         ViewModelProviders.of(this, viewModelFactory)[EventDetailsViewModel::class.java]
     }
 
-    lateinit var binding : FragmentEventDetailsBinding
+    lateinit var binding: FragmentEventDetailsBinding
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -41,23 +41,10 @@ class EventDetailsFragment : BaseFragment() {
 
         eventId = EventDetailsFragmentArgs.fromBundle(arguments!!).eventId
 
-        eventDetailsViewModel.loadEvent(eventId?:0)
+        eventDetailsViewModel.loadEvent(eventId ?: 0)
 
         binding.rvDetails.let {
             it.layoutManager = LinearLayoutManager(view.context)
-        }
-
-        binding.toolbarEventDetail.setOnMenuItemClickListener { item ->
-            when(item.itemId){
-                R.id.edit_menu_item -> {
-                    findNavController().navigate(
-                        EventDetailsFragmentDirections
-                            .actionEventDetailsFragmentToEditEventFragment(eventId!!)
-                    )
-                    return@setOnMenuItemClickListener true
-                }
-            }
-            false
         }
 
         initializeObservers()
@@ -68,12 +55,42 @@ class EventDetailsFragment : BaseFragment() {
         binding.toolbarEventDetail.setNavigationOnClickListener {
             findNavController().navigateUp()
         }
+
+        binding.toolbarEventDetail.setOnMenuItemClickListener { item ->
+            when (item.itemId) {
+                R.id.edit_menu_item -> {
+                    findNavController().navigate(
+                        EventDetailsFragmentDirections
+                            .actionEventDetailsFragmentToEditEventFragment(eventId!!)
+                    )
+                    return@setOnMenuItemClickListener true
+                }
+
+                R.id.checkin_menu_item -> {
+                    eventDetailsViewModel.checkin()
+                }
+            }
+            false
+        }
     }
 
     private fun initializeObservers() {
 
         eventDetailsViewModel.eventEntity.observe(this, Observer {
             binding.rvDetails.adapter = EventDetailsAdapter(it)
+        })
+
+        eventDetailsViewModel.checkinStatus.observe(this, Observer {message ->
+            Snackbar.make(requireView(), message.getContentIfNotHandled()!!, Snackbar.LENGTH_LONG).show()
+        })
+
+        eventDetailsViewModel.checkinStateTemp.observe(this, Observer {
+            if (it){
+                binding.toolbarEventDetail.menu.findItem(R.id.checkin_menu_item).title = "Check In"
+            }
+            else{
+                binding.toolbarEventDetail.menu.findItem(R.id.checkin_menu_item).title = "Check Out"
+            }
         })
     }
 }

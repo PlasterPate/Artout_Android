@@ -45,4 +45,5 @@
     <string name="requested">Requested</string>
     <string name="search_results_for_search_query">Results for: <i>search_query</i></string>
     <string name="search_query_prefix">Search results for:</string>
+    <string name="check_in">Check In</string>
 </resources>

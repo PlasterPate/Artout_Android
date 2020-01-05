@@ -3,6 +3,7 @@ package com.mbglobal.artoutandroid.ui.eventdetails
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.mbglobal.artoutandroid.app.LiveEvent
 import com.mbglobal.artoutandroid.ui.base.BaseViewModel
 import com.mbglobal.data.entity.event.EventEntity
 import com.mbglobal.data.repository.EventRepository
@@ -18,6 +19,11 @@ class EventDetailsViewModel @Inject constructor(private val eventRepository: Eve
 
     private val _eventLoadError = MutableLiveData<String>()
     val eventLoadError: LiveData<String> = _eventLoadError
+
+    private val _checkinStatus = MutableLiveData<LiveEvent<String>>()
+    val checkinStatus: LiveData<LiveEvent<String>> = _checkinStatus
+
+    var checkinStateTemp = MutableLiveData<Boolean>(true)
 
     fun loadEvent(eventId: Int) {
 
@@ -36,5 +42,12 @@ class EventDetailsViewModel @Inject constructor(private val eventRepository: Eve
                 compositeDisposable.add(it)
             }
 
+    }
+
+    fun checkin() {
+        checkinStateTemp.value = checkinStateTemp.value?.not()
+        _checkinStatus.value = if (checkinStateTemp.value == false)
+            LiveEvent("You Checked In this Event")
+        else LiveEvent("You Checked Out this Event")
     }
 }
