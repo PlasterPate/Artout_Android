@@ -22,7 +22,7 @@ interface EventService {
     fun addEvent(@Body addEventDto: AddEventDto): Single<EventDto>
 
     @GET("/api/v1.0/events/")
-    fun getUserEvents(): Single<List<EventDto>>
+    fun getUserEvents(@Query("owner") userId: String): Single<List<EventDto>>
 
     @GET("/api/v1.0/events/")
     fun getUserCheckIns(): Single<List<EventDto>>
