@@ -29,4 +29,16 @@ class EventListViewModel @Inject constructor(
             }
     }
 
+    fun getUserCheckins(userId: String?){
+        eventRepository.getUserCheckIns(userId)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({events ->
+                _userEvents.value = events
+            }, {
+
+            }).also {
+                compositeDisposable.add(it)
+            }
+    }
 }

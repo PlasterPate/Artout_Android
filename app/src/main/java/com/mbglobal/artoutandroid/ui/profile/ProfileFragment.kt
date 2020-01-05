@@ -86,7 +86,7 @@ class ProfileFragment : BaseFragment() {
 
                 override fun onClicked(profileItem: ProfileItem) {
                     findNavController().navigate(
-                        ProfileFragmentDirections.actionProfileFragmentToEventListFragment(
+                        ProfileFragmentDirections.actionNavigationProfileToCheckinListFragment(
                             null
                         )
                     )

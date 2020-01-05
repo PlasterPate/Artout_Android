@@ -9,23 +9,22 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.ListAdapter
 import com.mbglobal.artoutandroid.R
+import com.mbglobal.artoutandroid.databinding.FragmentCheckinListBinding
 import com.mbglobal.artoutandroid.databinding.FragmentEventListBinding
 import com.mbglobal.artoutandroid.ui.base.BaseFragment
 import com.mbglobal.artoutandroid.ui.eventlist.adapter.EventListAdapter
 import com.mbglobal.artoutandroid.ui.eventlist.adapter.OnEventItemClickListener
-import com.mbglobal.artoutandroid.ui.profile.ProfileFragmentDirections
 import com.mbglobal.data.entity.event.EventEntity
 
-class EventListFragment : BaseFragment(), OnEventItemClickListener {
+class CheckinListFragment : BaseFragment(), OnEventItemClickListener {
 
     private val userId: String? by lazy {
         EventListFragmentArgs.fromBundle(arguments!!).userId
     }
     var adapter: EventListAdapter? = null
 
-    lateinit var binding: FragmentEventListBinding
+    lateinit var binding: FragmentCheckinListBinding
 
     private val eventListViewModel: EventListViewModel by lazy {
         ViewModelProviders.of(this, viewModelFactory)[EventListViewModel::class.java]
@@ -36,23 +35,23 @@ class EventListFragment : BaseFragment(), OnEventItemClickListener {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_event_list, container, false)
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_checkin_list, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initializeObservers()
 
-        binding.eventsList.apply {
+        binding.checkinList.apply {
             layoutManager = LinearLayoutManager(requireContext())
-            adapter = EventListAdapter(this@EventListFragment)
+            adapter = EventListAdapter(this@CheckinListFragment)
         }
 
-        adapter = binding.eventsList.adapter as EventListAdapter
+        adapter = binding.checkinList.adapter as EventListAdapter
 
-        eventListViewModel.getUserEvents(userId)
+        eventListViewModel.getUserCheckins(userId)
 
+        initializeObservers()
     }
 
     private fun initializeObservers() {
@@ -63,7 +62,6 @@ class EventListFragment : BaseFragment(), OnEventItemClickListener {
     }
 
     override fun onClicked(eventEntity: EventEntity) {
-        findNavController().navigate(EventListFragmentDirections.actionEventListFragmentToEventDetailsFragment(eventEntity.id))
+        findNavController().navigate(CheckinListFragmentDirections.actionCheckinListFragmentToEventDetailsFragment(eventEntity.id))
     }
-
 }
