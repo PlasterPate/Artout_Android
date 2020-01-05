@@ -1,6 +1,6 @@
 package com.mbglobal.data.entity.event
 
 data class EventSearchEntity(
-    val event: String,
+    val title: String,
     val category: String?
 )

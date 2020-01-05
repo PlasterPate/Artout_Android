@@ -17,6 +17,7 @@ import com.mbglobal.artoutandroid.ui.profile.adapter.ProfileItemsAdapter
 import com.mbglobal.artoutandroid.ui.profile.listener.OnProfileItemClickListener
 import com.mbglobal.artoutandroid.ui.users.SocialViewModel
 import com.mbglobal.data.UserState
+import com.squareup.picasso.Picasso
 
 class UserProfileFragment : BaseFragment() {
 
@@ -86,6 +87,9 @@ class UserProfileFragment : BaseFragment() {
 
         binding.rvProfileItems.layoutManager = LinearLayoutManager(view.context)
         binding.rvProfileItems.adapter = adapter
+
+        Picasso.get().load("https://st2.depositphotos.com/4111759/12123/v/950/depositphotos_121233262-stock-illustration-male-default-placeholder-avatar-profile.jpg")
+            .into(binding.ivProfileImage)
 
         initializeObservers()
         initializeListeners()

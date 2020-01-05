@@ -2,6 +2,7 @@ package com.mbglobal.remote.api
 
 import com.mbglobal.data.entity.event.EventEntity
 import com.mbglobal.remote.dto.event.*
+import com.mbglobal.remote.dto.user.UserDto
 import com.mbglobal.remote.dto.user.UserProfileDto
 import io.reactivex.Single
 import retrofit2.Retrofit
@@ -34,6 +35,9 @@ interface EventService {
 
     @GET("/api/v1.0/events/")
     fun searchEvent(@QueryMap query: Map<String,String>): Single<List<EventEntity>>
+
+    @GET("/api/v1.0/users/")
+    fun searchUser(@Query("search") query: String): Single<List<UserDto>>
 
     companion object {
         const val BASE_URL: String = "http://35.202.66.168:8080/"
