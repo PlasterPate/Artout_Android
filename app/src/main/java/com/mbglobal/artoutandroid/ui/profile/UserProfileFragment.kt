@@ -70,7 +70,11 @@ class UserProfileFragment : BaseFragment() {
                 override val itemTag: String = ProfileItem.SUGGESTIONS
 
                 override fun onClicked(profileItem: ProfileItem) {
-
+                    findNavController().navigate(
+                        UserProfileFragmentDirections.actionUserProfileFragmentToEventListFragment(
+                            profileViewModel.profileId
+                        )
+                    )
                 }
 
             })
@@ -79,7 +83,11 @@ class UserProfileFragment : BaseFragment() {
                 override val itemTag: String = ProfileItem.CHECKINS
 
                 override fun onClicked(profileItem: ProfileItem) {
-
+                    findNavController().navigate(
+                        UserProfileFragmentDirections.actionUserProfileFragmentToCheckinListFragment(
+                            profileViewModel.profileId
+                        )
+                    )
                 }
 
             })
