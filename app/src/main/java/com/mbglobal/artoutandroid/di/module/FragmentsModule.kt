@@ -3,9 +3,10 @@ package com.mbglobal.artoutandroid.di.module
 import com.mbglobal.artoutandroid.ui.addevent.AddEventFragment
 import com.mbglobal.artoutandroid.ui.discover.DiscoverFragment
 import com.mbglobal.artoutandroid.ui.editevent.EditEventFragment
+import com.mbglobal.artoutandroid.ui.eventcheckinlist.EventCheckinListFragment
 import com.mbglobal.artoutandroid.ui.eventdetails.EventDetailsFragment
-import com.mbglobal.artoutandroid.ui.eventlist.CheckinListFragment
 import com.mbglobal.artoutandroid.ui.eventlist.EventListFragment
+import com.mbglobal.artoutandroid.ui.eventlist.UserCheckinListFragment
 import com.mbglobal.artoutandroid.ui.login.LoginFragment
 import com.mbglobal.artoutandroid.ui.profile.ProfileFragment
 import com.mbglobal.artoutandroid.ui.profile.UserProfileFragment
@@ -24,7 +25,10 @@ abstract class FragmentsModule {
     abstract fun eventListFragment(): EventListFragment
 
     @ContributesAndroidInjector
-    abstract fun checkinListFragment(): CheckinListFragment
+    abstract fun userCheckinListFragment(): UserCheckinListFragment
+
+    @ContributesAndroidInjector
+    abstract fun eventCheckinListFragment(): EventCheckinListFragment
 
     @ContributesAndroidInjector
     abstract fun eventDetailsFragment(): EventDetailsFragment
