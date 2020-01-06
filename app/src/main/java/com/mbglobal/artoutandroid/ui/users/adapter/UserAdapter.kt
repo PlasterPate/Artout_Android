@@ -15,25 +15,25 @@ class UserAdapter : RecyclerView.Adapter<UserViewHolder>() {
     var actionButtonListeners= mutableListOf<OnActionButtonClickListener>()
     var onUserItemClickListener: OnUserItemClickListener? = null
 
-    var data: MutableList<UserListItem> = object : ArrayList<UserListItem>() {
+    var data: MutableList<UserEntity> = object : ArrayList<UserEntity>() {
 
         init {
             notifyDataSetChanged()
         }
 
-        override fun add(element: UserListItem): Boolean {
+        override fun add(element: UserEntity): Boolean {
             val result = super.add(element)
             notifyDataSetChanged()
             return result
         }
 
-        override fun set(index: Int, element: UserListItem): UserListItem {
+        override fun set(index: Int, element: UserEntity): UserEntity {
             val result = super.set(index, element)
             notifyItemChanged(index)
             return result
         }
 
-        override fun add(index: Int, element: UserListItem) {
+        override fun add(index: Int, element: UserEntity) {
             super.add(index, element)
             notifyItemInserted(index)
         }
@@ -71,9 +71,9 @@ class UserAdapter : RecyclerView.Adapter<UserViewHolder>() {
     }
 
     fun updateUserState(userEntity: UserEntity, state: UserState) {
-        data.forEachIndexed { index, userListItem ->
-            if (userListItem.userEntity == userEntity) {
-                data[index] = UserListItem(userEntity, state)
+        data.forEachIndexed { index, it ->
+            if (it == userEntity) {
+                data[index] = userEntity.copy(state = state)
                 notifyItemChanged(index)
             }
         }

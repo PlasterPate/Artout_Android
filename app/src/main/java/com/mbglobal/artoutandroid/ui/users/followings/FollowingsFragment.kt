@@ -15,7 +15,6 @@ import com.mbglobal.artoutandroid.ui.base.BaseFragment
 import com.mbglobal.artoutandroid.ui.users.SocialViewModel
 import com.mbglobal.artoutandroid.ui.users.adapter.OnUserItemClickListener
 import com.mbglobal.artoutandroid.ui.users.adapter.UserAdapter
-import com.mbglobal.artoutandroid.ui.users.adapter.UserListItem
 import com.mbglobal.artoutandroid.ui.users.adapter.listener.OnActionButtonClickListener
 import com.mbglobal.data.UserState
 import com.mbglobal.data.entity.user.UserEntity
@@ -58,10 +57,7 @@ class FollowingsFragment : BaseFragment(), OnUserItemClickListener {
         }
 
         with(binding.rvFollowings.adapter as UserAdapter) {
-            data = it.map {
-                UserListItem(it, it.state)
-            }.toMutableList() as ArrayList<UserListItem>
-
+            data = it.toMutableList()
             actionButtonListeners.add(object : OnActionButtonClickListener {
                 override val stateTag: UserState
                     get() = UserState.NOT_FOLLOWING

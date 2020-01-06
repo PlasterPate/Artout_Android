@@ -18,7 +18,6 @@ import com.mbglobal.artoutandroid.ui.users.SocialViewModel
 import com.mbglobal.artoutandroid.ui.users.adapter.FollowRequestAdapter
 import com.mbglobal.artoutandroid.ui.users.adapter.OnUserItemClickListener
 import com.mbglobal.artoutandroid.ui.users.adapter.UserAdapter
-import com.mbglobal.artoutandroid.ui.users.adapter.UserListItem
 import com.mbglobal.artoutandroid.ui.users.adapter.listener.OnFollowRequestClickListener
 import com.mbglobal.artoutandroid.ui.users.adapter.listener.OnActionButtonClickListener
 import com.mbglobal.data.UserState
@@ -74,9 +73,7 @@ class FollowersFragment : BaseFragment(), OnUserItemClickListener {
             adapter = UserAdapter()
         }
         with(binding.rvFollowers.adapter as UserAdapter) {
-            data = it.map {
-                UserListItem(it, it.state)
-            }.toMutableList()
+            data = it.toMutableList()
             actionButtonListeners.add(object : OnActionButtonClickListener {
                 override val stateTag: UserState
                     get() = UserState.NOT_FOLLOWING
@@ -126,10 +123,7 @@ class FollowersFragment : BaseFragment(), OnUserItemClickListener {
                         remove(userEntity)
                     }
                     (binding.rvFollowers.adapter as UserAdapter).data.add(
-                        0,
-                        UserListItem(
-                            userEntity, UserState.NOT_FOLLOWING
-                        )
+                        0, userEntity
                     )
                     binding.rvFollowers.scrollToPosition(0)
                     socialViewModel.acceptRequest(userEntity)

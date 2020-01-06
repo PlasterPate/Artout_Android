@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.mbglobal.artoutandroid.R
 import com.mbglobal.artoutandroid.ui.users.adapter.listener.OnActionButtonClickListener
 import com.mbglobal.data.UserState
+import com.mbglobal.data.entity.user.UserEntity
 import com.squareup.picasso.Picasso
 
 class UserViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -32,17 +33,17 @@ class UserViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         itemView.findViewById(R.id.btn_requested) as Button
     }
 
-    fun bind(userListItem: UserListItem, onUserItemClickListener: OnUserItemClickListener, onActionButtonClickListener: OnActionButtonClickListener) {
-        val fullName = "${userListItem.userEntity.firstName} ${userListItem.userEntity.lastName}"
+    fun bind(userEntity: UserEntity, onUserItemClickListener: OnUserItemClickListener, onActionButtonClickListener: OnActionButtonClickListener) {
+        val fullName = "${userEntity.firstName} ${userEntity.lastName}"
         name.text = fullName
-        if (userListItem.userEntity.avatar.isNotEmpty())
-            Picasso.get().load(userListItem.userEntity.avatar).into(profilePicture)
+        if (userEntity.avatar.isNotEmpty())
+            Picasso.get().load(userEntity.avatar).into(profilePicture)
         //TODO
 //        if (userListItem.state == UserState.FOLLOWING) {
 //            followingButton.visibility = View.VISIBLE
 //        }
 
-        when (userListItem.state) {
+        when (userEntity.state) {
             UserState.FOLLOWING -> followingButton.visibility = View.VISIBLE
             UserState.REQUESTED -> requestedButton.visibility = View.VISIBLE
             UserState.NOT_FOLLOWING -> followButton.visibility = View.VISIBLE
@@ -50,18 +51,18 @@ class UserViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         when (onActionButtonClickListener.stateTag) {
             UserState.FOLLOWING -> followingButton.setOnClickListener {
-                onActionButtonClickListener.onClicked(userListItem.userEntity)
+                onActionButtonClickListener.onClicked(userEntity)
             }
             UserState.NOT_FOLLOWING -> followButton.setOnClickListener {
-                onActionButtonClickListener.onClicked(userListItem.userEntity)
+                onActionButtonClickListener.onClicked(userEntity)
             }
             UserState.REQUESTED -> requestedButton.setOnClickListener {
-                onActionButtonClickListener.onClicked(userListItem.userEntity)
+                onActionButtonClickListener.onClicked(userEntity)
             }
         }
 
         itemView.setOnClickListener {
-            onUserItemClickListener.onClicked(userListItem.userEntity)
+            onUserItemClickListener.onClicked(userEntity)
         }
     }
 
