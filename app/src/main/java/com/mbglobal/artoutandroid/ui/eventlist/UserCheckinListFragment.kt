@@ -11,13 +11,12 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.mbglobal.artoutandroid.R
 import com.mbglobal.artoutandroid.databinding.FragmentCheckinListBinding
-import com.mbglobal.artoutandroid.databinding.FragmentEventListBinding
 import com.mbglobal.artoutandroid.ui.base.BaseFragment
 import com.mbglobal.artoutandroid.ui.eventlist.adapter.EventListAdapter
 import com.mbglobal.artoutandroid.ui.eventlist.adapter.OnEventItemClickListener
 import com.mbglobal.data.entity.event.EventEntity
 
-class CheckinListFragment : BaseFragment(), OnEventItemClickListener {
+class UserCheckinListFragment : BaseFragment(), OnEventItemClickListener {
 
     private val userId: String? by lazy {
         EventListFragmentArgs.fromBundle(arguments!!).userId
@@ -44,7 +43,7 @@ class CheckinListFragment : BaseFragment(), OnEventItemClickListener {
 
         binding.checkinList.apply {
             layoutManager = LinearLayoutManager(requireContext())
-            adapter = EventListAdapter(this@CheckinListFragment)
+            adapter = EventListAdapter(this@UserCheckinListFragment)
         }
 
         adapter = binding.checkinList.adapter as EventListAdapter
@@ -62,6 +61,6 @@ class CheckinListFragment : BaseFragment(), OnEventItemClickListener {
     }
 
     override fun onClicked(eventEntity: EventEntity) {
-        findNavController().navigate(CheckinListFragmentDirections.actionCheckinListFragmentToEventDetailsFragment(eventEntity.id))
+        findNavController().navigate(UserCheckinListFragmentDirections.actionCheckinListFragmentToEventDetailsFragment(eventEntity.id))
     }
 }
