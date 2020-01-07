@@ -1,14 +1,12 @@
 package com.mbglobal.remote.api
 
-import com.mbglobal.data.entity.event.EventEntity
-import com.mbglobal.remote.dto.CheckinDto
+import com.mbglobal.remote.dto.checkin.AddCheckinDto
+import com.mbglobal.remote.dto.checkin.CheckinDto
 import com.mbglobal.remote.dto.event.*
 import com.mbglobal.remote.dto.user.UserDto
 import com.mbglobal.remote.dto.user.UserProfileDto
 import io.reactivex.Single
-import retrofit2.Retrofit
-import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
-import retrofit2.converter.gson.GsonConverterFactory
+import okhttp3.ResponseBody
 import retrofit2.http.*
 
 interface EventService {
@@ -27,6 +25,9 @@ interface EventService {
 
     @GET("/api/v1.0/checkins/")
     fun getUserCheckIns(@Query("user") userId: String): Single<List<CheckinDto>>
+
+    @POST("api/v1.0/checkins")
+    fun checkin(@Body addCheckinDto: AddCheckinDto): Single<ResponseBody>
 
     @GET("/api/v1.0/events/")
     fun searchEvent(@QueryMap query: Map<String,String>): Single<List<EventDto>>

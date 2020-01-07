@@ -9,6 +9,7 @@ import com.mbglobal.remote.api.EventService
 import com.mbglobal.remote.dto.event.AddEventDto
 import com.mbglobal.remote.dto.event.EventGetDto
 import com.mbglobal.remote.mappers.*
+import io.reactivex.Completable
 import io.reactivex.Single
 import javax.inject.Inject
 
@@ -46,6 +47,10 @@ class EventRemoteDataSourceImpl @Inject constructor(private val eventService: Ev
                 checkinDto.toCheckinEntity()
             }
         }
+    }
+
+    override fun checkin(eventEntity: EventEntity): Completable {
+        return Completable.fromSingle(eventService.checkin(eventEntity.toAddCheckinDto()))
     }
 
     override fun searchEvent(query: EventSearchEntity): Single<List<EventEntity>> {

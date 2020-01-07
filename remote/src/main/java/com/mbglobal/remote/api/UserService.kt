@@ -1,7 +1,6 @@
 package com.mbglobal.remote.api
 
-import com.mbglobal.data.entity.user.UserEntity
-import com.mbglobal.remote.dto.CheckinDto
+import com.mbglobal.remote.dto.checkin.CheckinDto
 import com.mbglobal.remote.dto.user.*
 import io.reactivex.Single
 import retrofit2.http.*

@@ -7,6 +7,7 @@ import com.mbglobal.data.entity.checkin.CheckinEntity
 import com.mbglobal.data.entity.event.AddEventEntity
 import com.mbglobal.data.entity.event.EventEntity
 import com.mbglobal.data.entity.event.EventSearchEntity
+import io.reactivex.Completable
 import io.reactivex.Single
 import javax.inject.Inject
 
@@ -52,6 +53,10 @@ class EventRepository @Inject constructor(
                 Single.just(it)
             } ?: sessionLocalDataSource.getUserId()
         return idSingle.flatMap { id -> eventRemoteDataSource.getUserCheckIns(id) }
+    }
+
+    fun checkin(eventEntity: EventEntity): Completable{
+        return eventRemoteDataSource.checkin(eventEntity)
     }
 
     fun searchEvent(query: EventSearchEntity): Single<List<EventEntity>>{

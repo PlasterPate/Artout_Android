@@ -7,7 +7,8 @@ import com.mbglobal.data.entity.event.EventEntity
 import com.mbglobal.data.entity.event.EventSearchEntity
 import com.mbglobal.data.entity.event.LocationEntity
 import com.mbglobal.data.entity.user.*
-import com.mbglobal.remote.dto.CheckinDto
+import com.mbglobal.remote.dto.checkin.AddCheckinDto
+import com.mbglobal.remote.dto.checkin.CheckinDto
 import com.mbglobal.remote.dto.event.AddEventDto
 import com.mbglobal.remote.dto.event.EventDto
 import com.mbglobal.remote.dto.event.LocationDto
@@ -60,6 +61,20 @@ fun EventDto.toEventEntity(): EventEntity {
         eventOwner = owner,
         location = location?.toLocationEntity(),
         id = id,
+        owner = owner
+    )
+}
+
+fun EventEntity.toEventDto(): EventDto{
+    return EventDto(
+        id = id,
+        title = title,
+        image = image,
+        description = description,
+        startDate = startDate,
+        endDate = endDate,
+        category = category,
+        location = location.toLocationDto(),
         owner = owner
     )
 }
@@ -194,16 +209,23 @@ fun EventSearchEntity.toQueryMap(): Map<String, String> {
 
 fun CheckinDto.toCheckinEntity(): CheckinEntity {
     return CheckinEntity(
-        userEntity = userEntity,
-        eventEntity = eventEntity
+        userEntity = userEntity.toUserEntity(),
+        eventEntity = eventEntity.toEventEntity()
     )
 }
 
 fun CheckinEntity.toCheckinDto(): CheckinDto {
     return CheckinDto(
-        userEntity = userEntity,
-        eventEntity = eventEntity,
+        userEntity = userEntity.toUserDto(),
+        eventEntity = eventEntity.toEventDto(),
         goTime = "",
         submittedTime = ""
+    )
+}
+
+fun EventEntity.toAddCheckinDto(): AddCheckinDto{
+    return AddCheckinDto(
+        eventDto = this.toEventDto(),
+        goTime = ""
     )
 }
