@@ -6,8 +6,6 @@ import com.mbglobal.data.entity.event.AddEventEntity
 import com.mbglobal.data.entity.event.EventEntity
 import com.mbglobal.data.entity.event.EventSearchEntity
 import com.mbglobal.remote.api.EventService
-import com.mbglobal.remote.dto.event.AddEventDto
-import com.mbglobal.remote.dto.event.EventGetDto
 import com.mbglobal.remote.mappers.*
 import io.reactivex.Completable
 import io.reactivex.Single
@@ -33,16 +31,16 @@ class EventRemoteDataSourceImpl @Inject constructor(private val eventService: Ev
         }
     }
 
-    override fun getUserEvents(userid: String): Single<List<EventEntity>> {
-        return eventService.getUserEvents(userid).map { events ->
+    override fun getUserEvents(userId: String): Single<List<EventEntity>> {
+        return eventService.getUserEvents(userId).map { events ->
             events.map { eventDto ->
                 eventDto.toEventEntity()
             }
         }
     }
 
-    override fun getUserCheckIns(userid: String): Single<List<CheckinEntity>> {
-        return eventService.getUserCheckIns(userid).map { checkins ->
+    override fun getUserCheckIns(userId: String): Single<List<CheckinEntity>> {
+        return eventService.getUserCheckIns(userId).map { checkins ->
             checkins.map { checkinDto ->
                 checkinDto.toCheckinEntity()
             }
@@ -51,6 +49,10 @@ class EventRemoteDataSourceImpl @Inject constructor(private val eventService: Ev
 
     override fun checkin(eventEntity: EventEntity): Completable {
         return Completable.fromSingle(eventService.checkin(eventEntity.toAddCheckinDto()))
+    }
+
+    override fun checkout(eventId: String): Completable {
+        return Completable.fromSingle(eventService.checkout(eventId))
     }
 
     override fun searchEvent(query: EventSearchEntity): Single<List<EventEntity>> {

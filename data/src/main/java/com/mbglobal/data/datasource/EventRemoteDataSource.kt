@@ -21,5 +21,7 @@ interface EventRemoteDataSource {
 
     fun checkin(eventEntity: EventEntity): Completable
 
+    fun checkout(eventId: String): Completable
+
     fun searchEvent(query: EventSearchEntity): Single<List<EventEntity>>
 }

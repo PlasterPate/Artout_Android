@@ -29,6 +29,9 @@ interface EventService {
     @POST("api/v1.0/checkins")
     fun checkin(@Body addCheckinDto: AddCheckinDto): Single<ResponseBody>
 
+    @DELETE("api/v1.0/checkins/{id}/")
+    fun checkout(@Path("id") eventId: String): Single<ResponseBody>
+
     @GET("/api/v1.0/events/")
     fun searchEvent(@QueryMap query: Map<String,String>): Single<List<EventDto>>
 

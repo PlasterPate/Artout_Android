@@ -59,6 +59,10 @@ class EventRepository @Inject constructor(
         return eventRemoteDataSource.checkin(eventEntity)
     }
 
+    fun checkout(eventId: String): Completable{
+        return eventRemoteDataSource.checkout(eventId)
+    }
+
     fun searchEvent(query: EventSearchEntity): Single<List<EventEntity>>{
         return eventRemoteDataSource.searchEvent(query)
     }
