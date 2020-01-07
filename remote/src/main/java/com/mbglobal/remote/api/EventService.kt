@@ -1,6 +1,7 @@
 package com.mbglobal.remote.api
 
 import com.mbglobal.data.entity.event.EventEntity
+import com.mbglobal.remote.dto.CheckinDto
 import com.mbglobal.remote.dto.event.*
 import com.mbglobal.remote.dto.user.UserDto
 import com.mbglobal.remote.dto.user.UserProfileDto
@@ -24,17 +25,14 @@ interface EventService {
     @GET("/api/v1.0/events/")
     fun getUserEvents(@Query("owner") userId: String): Single<List<EventDto>>
 
-    @GET("/api/v1.0/events/")
-    fun getUserCheckIns(): Single<List<EventDto>>
+    @GET("/api/v1.0/checkins/")
+    fun getUserCheckIns(@Query("user") userId: String): Single<List<CheckinDto>>
 
     @GET("/api/v1.0/events/")
-    fun getUserSuggestions(): Single<List<EventDto>>
+    fun searchEvent(@QueryMap query: Map<String,String>): Single<List<EventDto>>
 
     @GET("/api/v1.0/users/profile/")
     fun getUserProfile(@Query("user") userId: String?): Single<UserProfileDto>
-
-    @GET("/api/v1.0/events/")
-    fun searchEvent(@QueryMap query: Map<String,String>): Single<List<EventEntity>>
 
     @GET("/api/v1.0/users/")
     fun searchUser(@Query("search") query: String): Single<List<UserDto>>

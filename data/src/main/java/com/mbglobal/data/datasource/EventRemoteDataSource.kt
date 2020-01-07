@@ -1,5 +1,6 @@
 package com.mbglobal.data.datasource
 
+import com.mbglobal.data.entity.checkin.CheckinEntity
 import com.mbglobal.data.entity.event.AddEventEntity
 import com.mbglobal.data.entity.event.EventEntity
 import com.mbglobal.data.entity.event.EventSearchEntity
@@ -16,9 +17,7 @@ interface EventRemoteDataSource {
 
     fun getUserEvents(userId: String) : Single<List<EventEntity>>
 
-    fun getUserCheckIns(): Single<List<EventEntity>>
-
-    fun getUserSuggestions(): Single<List<EventEntity>>
+    fun getUserCheckIns(userId: String): Single<List<CheckinEntity>>
 
     fun searchEvent(query: EventSearchEntity): Single<List<EventEntity>>
 }
