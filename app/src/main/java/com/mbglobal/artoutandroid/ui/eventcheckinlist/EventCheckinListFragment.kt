@@ -48,6 +48,8 @@ class EventCheckinListFragment : BaseFragment(), OnUserItemClickListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        eventCheckinListViewModel.setEventId(EventCheckinListFragmentArgs.fromBundle(arguments!!).eventId)
         eventCheckinListViewModel.loadCheckedInUsers()
         initializeObservers()
 

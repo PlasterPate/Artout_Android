@@ -89,7 +89,8 @@ class EventDetailsFragment : BaseFragment() {
             binding.rvDetails.adapter = EventDetailsAdapter(it,
                 object : OnCheckinListItemClickListener{
                     override fun onClicked(eventEntity: EventEntity) {
-                        findNavController().navigate(EventDetailsFragmentDirections.actionEventDetailsFragmentToEventCheckinListFragment())
+                        findNavController().navigate(EventDetailsFragmentDirections
+                            .actionEventDetailsFragmentToEventCheckinListFragment(eventEntity.id.toString()))
                     }
                 })
         })
