@@ -4,16 +4,19 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.core.view.children
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
 import com.mbglobal.artoutandroid.R
 import com.mbglobal.artoutandroid.databinding.FragmentEventDetailsBinding
 import com.mbglobal.artoutandroid.ui.base.BaseFragment
+import com.mbglobal.data.entity.event.EventEntity
 
 class EventDetailsFragment : BaseFragment() {
 
@@ -43,9 +46,15 @@ class EventDetailsFragment : BaseFragment() {
 
         eventDetailsViewModel.loadEvent(eventId ?: 0)
 
-        binding.rvDetails.let {
-            it.layoutManager = LinearLayoutManager(view.context)
+        binding.rvDetails.apply {
+            layoutManager = LinearLayoutManager(view.context)
+            val divider = DividerItemDecoration(
+                requireContext(),
+                DividerItemDecoration.VERTICAL)
+            divider.setDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.divider)!!)
+            addItemDecoration(divider)
         }
+
 
         initializeObservers()
         initializeListeners()
@@ -77,7 +86,12 @@ class EventDetailsFragment : BaseFragment() {
     private fun initializeObservers() {
 
         eventDetailsViewModel.eventEntity.observe(this, Observer {
-            binding.rvDetails.adapter = EventDetailsAdapter(it)
+            binding.rvDetails.adapter = EventDetailsAdapter(it,
+                object : OnCheckinListItemClickListener{
+                    override fun onClicked(eventEntity: EventEntity) {
+                        findNavController().navigate(EventDetailsFragmentDirections.actionEventDetailsFragmentToEventCheckinListFragment())
+                    }
+                })
         })
 
         eventDetailsViewModel.checkinStatus.observe(this, Observer {message ->
