@@ -9,6 +9,7 @@ import com.mbglobal.data.entity.event.EventEntity
 import com.mbglobal.data.repository.EventRepository
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
+import timber.log.Timber
 import javax.inject.Inject
 
 class EventDetailsViewModel @Inject constructor(private val eventRepository: EventRepository) :
@@ -44,10 +45,46 @@ class EventDetailsViewModel @Inject constructor(private val eventRepository: Eve
 
     }
 
-    fun checkin() {
-        checkinStateTemp.value = checkinStateTemp.value?.not()
-        _checkinStatus.value = if (checkinStateTemp.value == false)
-            LiveEvent("You Checked In this Event")
-        else LiveEvent("You Checked Out this Event")
+    fun switchCheckinState() {
+//        checkinStateTemp.value = checkinStateTemp.value?.not()
+//        _checkinStatus.value = if (checkinStateTemp.value == false)
+//            LiveEvent("You Checked In this Event")
+//        else LiveEvent("You Checked Out this Event")
+        if (checkinStateTemp.value == true){
+            checkout()
+        }else{
+            checkin()
+        }
+        
+    }
+
+    private fun checkin(){
+        eventRepository.checkin(_eventEntity.value!!)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({
+                checkinStateTemp.value = checkinStateTemp.value?.not()
+                _checkinStatus.value = LiveEvent("You Checked In this Event")
+            },{
+                Timber.e("Failed to checkin")
+            })
+            .also {
+                compositeDisposable.add(it)
+            }
+    }
+
+    private fun checkout(){
+        eventRepository.checkout(_eventEntity.value?.id.toString())
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({
+                checkinStateTemp.value = checkinStateTemp.value?.not()
+                _checkinStatus.value = LiveEvent("You Checked Out this Event")
+            },{
+                Timber.e("Failed to checkout")
+            })
+            .also {
+                compositeDisposable.add(it)
+            }
     }
 }
