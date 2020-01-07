@@ -33,8 +33,8 @@ class EventListViewModel @Inject constructor(
         eventRepository.getUserCheckIns(userId)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe({events ->
-                _userEvents.value = events
+            .subscribe({checkins ->
+                _userEvents.value = checkins.map { it.eventEntity }
             }, {
 
             }).also {

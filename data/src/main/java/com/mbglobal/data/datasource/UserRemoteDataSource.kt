@@ -1,5 +1,6 @@
 package com.mbglobal.data.datasource
 
+import com.mbglobal.data.entity.checkin.CheckinEntity
 import com.mbglobal.data.entity.user.*
 import io.reactivex.Single
 
@@ -14,4 +15,6 @@ interface UserRemoteDataSource {
     fun getUserProfile(userId: String?): Single<UserProfileEntity>
 
     fun searchUser(query: UserSearchEntity): Single<List<UserEntity>>
+
+    fun getEventCheckins(eventId: String): Single<List<CheckinEntity>>
 }

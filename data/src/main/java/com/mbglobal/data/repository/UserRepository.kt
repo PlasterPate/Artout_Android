@@ -1,6 +1,7 @@
 package com.mbglobal.data.repository
 
 import com.mbglobal.data.datasource.*
+import com.mbglobal.data.entity.checkin.CheckinEntity
 import com.mbglobal.data.entity.session.SessionEntity
 import com.mbglobal.data.entity.user.*
 import com.mbglobal.data.mapper.toSessionEntity
@@ -51,5 +52,9 @@ class UserRepository @Inject constructor(
 
     fun searchUser(query: UserSearchEntity): Single<List<UserEntity>>{
         return userRemoteDataSource.searchUser(query)
+    }
+
+    fun getEventCheckins(eventId: String): Single<List<CheckinEntity>>{
+        return userRemoteDataSource.getEventCheckins(eventId)
     }
 }
