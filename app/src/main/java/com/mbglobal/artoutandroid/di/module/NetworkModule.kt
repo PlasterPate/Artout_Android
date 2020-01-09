@@ -67,4 +67,9 @@ class NetworkModule {
     fun providesTokenService(retrofit: Retrofit): TokenService {
         return retrofit.create(TokenService::class.java)
     }
+
+    @Provides
+    fun providesTimelineService(retrofit: Retrofit): TimelineService {
+        return retrofit.create(TimelineService::class.java)
+    }
 }

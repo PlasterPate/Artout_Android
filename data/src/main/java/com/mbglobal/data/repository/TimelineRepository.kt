@@ -1,0 +1,13 @@
+package com.mbglobal.data.repository
+
+import com.mbglobal.data.datasource.TimelineRemoteDataSource
+import com.mbglobal.data.entity.event.EventEntity
+import io.reactivex.Single
+import javax.inject.Inject
+
+class TimelineRepository @Inject constructor(private val timelineRemoteDataSource: TimelineRemoteDataSource) {
+
+    fun getTimelineItems(): Single<List<EventEntity>> {
+        return timelineRemoteDataSource.getTimelineItems()
+    }
+}
