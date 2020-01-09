@@ -27,10 +27,10 @@ data class EventTable(
     val eventOwner: Int,
 
     @ColumnInfo(name = "location_lat")
-    val locationLat: Double,
+    val locationLat: Double?,
 
     @ColumnInfo(name = "location_long")
-    val locationLong: Double,
+    val locationLong: Double?,
 
     @ColumnInfo(name = "start_date")
     val startDate: String,
