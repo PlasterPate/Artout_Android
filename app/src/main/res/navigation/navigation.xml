@@ -43,7 +43,19 @@
         android:id="@+id/navigation_timeline"
         android:name="com.mbglobal.artoutandroid.ui.timeline.TimelineFragment"
         android:label="TimelineFragment"
-        tools:layout="@layout/fragment_timeline" />
+        tools:layout="@layout/fragment_timeline" >
+        <argument
+            android:name="eventId"
+            app:argType="string"
+            app:nullable="true" />
+        <action
+            android:id="@+id/action_navigation_timeline_to_eventDetailsFragment"
+            app:destination="@id/eventDetailsFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
     <fragment
         android:id="@+id/addEventFragment"
         android:name="com.mbglobal.artoutandroid.ui.addevent.AddEventFragment"

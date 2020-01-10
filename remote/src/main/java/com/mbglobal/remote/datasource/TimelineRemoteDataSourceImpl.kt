@@ -9,8 +9,8 @@ import javax.inject.Inject
 
 class TimelineRemoteDataSourceImpl @Inject constructor(private val timelineService: TimelineService) : TimelineRemoteDataSource {
 
-    override fun getTimelineItems(): Single<List<EventEntity>> {
-        return timelineService.getTimelineItems().map { eventDtos ->
+    override fun getTimelineItems(pageNumber: Int): Single<List<EventEntity>> {
+        return timelineService.getTimelineItems(pageNumber = pageNumber).map { eventDtos ->
             eventDtos.map {
                 it.toEventEntity()
             }

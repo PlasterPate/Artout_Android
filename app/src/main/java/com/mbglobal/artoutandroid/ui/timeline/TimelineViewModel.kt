@@ -7,6 +7,7 @@ import com.mbglobal.data.entity.event.EventEntity
 import com.mbglobal.data.repository.TimelineRepository
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
+import timber.log.Timber
 import javax.inject.Inject
 
 class TimelineViewModel @Inject constructor(
@@ -16,12 +17,18 @@ class TimelineViewModel @Inject constructor(
     private val _timelineItems: MutableLiveData<List<EventEntity>> = MutableLiveData()
     val timelineItems: LiveData<List<EventEntity>> = _timelineItems
 
+    private var pageCounter = 1
+
     fun loadTimeline() {
-        timelineRepository.getTimelineItems()
+        timelineRepository.getTimelineItems(pageCounter)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
+            .doAfterSuccess {
+                pageCounter += 1
+            }
             .subscribe({
-                _timelineItems.postValue(it)
+                val newItems = (_timelineItems.value?: mutableListOf()) + it
+                _timelineItems.postValue(newItems)
             }, {
 
             }).also {

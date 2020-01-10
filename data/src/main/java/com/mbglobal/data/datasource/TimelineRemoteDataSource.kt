@@ -5,5 +5,5 @@ import io.reactivex.Single
 
 interface TimelineRemoteDataSource {
 
-    fun getTimelineItems(): Single<List<EventEntity>>
+    fun getTimelineItems(pageNumber: Int): Single<List<EventEntity>>
 }
