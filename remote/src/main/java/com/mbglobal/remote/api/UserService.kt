@@ -13,7 +13,7 @@ interface UserService {
     @POST("/api/v1.0/auth/login/")
     fun login(@Body userLoginItemDto: UserLoginItemDto): Single<UserLoginResponseDto>
 
-    @GET("api/v1.0/chekins/")
+    @GET("api/v1.0/checkins/")
     fun getEventCheckins(@Query("event") eventId: String): Single<List<CheckinDto>>
 
     companion object {

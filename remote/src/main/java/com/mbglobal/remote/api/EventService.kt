@@ -26,7 +26,7 @@ interface EventService {
     @GET("/api/v1.0/checkins/")
     fun getUserCheckIns(@Query("user") userId: String): Single<List<CheckinDto>>
 
-    @POST("api/v1.0/checkins")
+    @POST("api/v1.0/checkins/")
     fun checkin(@Body addCheckinDto: AddCheckinDto): Single<ResponseBody>
 
     @DELETE("api/v1.0/checkins/{id}/")

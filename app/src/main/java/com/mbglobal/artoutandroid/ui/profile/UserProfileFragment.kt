@@ -51,10 +51,10 @@ class UserProfileFragment : BaseFragment() {
         profileViewModel.getUserProfile()
         adapter.items = listOf(
             ProfileItem(
-                titleResource = R.string.suggestions,
+                titleResource = R.string.events,
                 iconResource = R.drawable.ic_favorite_grey_24dp,
                 count = 45,
-                tag = ProfileItem.SUGGESTIONS
+                tag = ProfileItem.EVENTS
             ),
             ProfileItem(
                 titleResource = R.string.checkins,
@@ -67,7 +67,7 @@ class UserProfileFragment : BaseFragment() {
         adapter.listeners.apply {
             add(object : OnProfileItemClickListener {
 
-                override val itemTag: String = ProfileItem.SUGGESTIONS
+                override val itemTag: String = ProfileItem.EVENTS
 
                 override fun onClicked(profileItem: ProfileItem) {
                     findNavController().navigate(

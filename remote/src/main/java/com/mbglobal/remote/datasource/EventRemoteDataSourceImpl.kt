@@ -1,11 +1,13 @@
 package com.mbglobal.remote.datasource
 
+import com.google.gson.annotations.SerializedName
 import com.mbglobal.data.datasource.EventRemoteDataSource
 import com.mbglobal.data.entity.checkin.CheckinEntity
 import com.mbglobal.data.entity.event.AddEventEntity
 import com.mbglobal.data.entity.event.EventEntity
 import com.mbglobal.data.entity.event.EventSearchEntity
 import com.mbglobal.remote.api.EventService
+import com.mbglobal.remote.dto.checkin.AddCheckinDto
 import com.mbglobal.remote.mappers.*
 import io.reactivex.Completable
 import io.reactivex.Single
@@ -47,8 +49,8 @@ class EventRemoteDataSourceImpl @Inject constructor(private val eventService: Ev
         }
     }
 
-    override fun checkin(eventEntity: EventEntity): Completable {
-        return Completable.fromSingle(eventService.checkin(eventEntity.toAddCheckinDto()))
+    override fun checkin(eventId: String): Completable {
+        return Completable.fromSingle(eventService.checkin( AddCheckinDto(eventId)))
     }
 
     override fun checkout(eventId: String): Completable {

@@ -44,7 +44,7 @@ class EventRepository @Inject constructor(
             userId?.let {
                 Single.just(userId)
             } ?: sessionLocalDataSource.getUserId()
-        return idSingle.flatMap { eventRemoteDataSource.getUserEvents() }
+        return idSingle.flatMap { id -> eventRemoteDataSource.getUserEvents(id) }
     }
 
     fun getUserCheckIns(userId: String?): Single<List<CheckinEntity>> {
@@ -56,7 +56,7 @@ class EventRepository @Inject constructor(
     }
 
     fun checkin(eventEntity: EventEntity): Completable{
-        return eventRemoteDataSource.checkin(eventEntity)
+        return eventRemoteDataSource.checkin(eventEntity.id.toString())
     }
 
     fun checkout(eventId: String): Completable{

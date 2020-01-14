@@ -29,7 +29,7 @@
     <string name="add_event">Add Event</string>
     <string name="edit_event">Edit Event</string>
     <string name="checkins">Check-Ins</string>
-    <string name="suggestions">Suggestions</string>
+    <string name="events">Events</string>
     <string name="add_new_friend">Add new friend</string>
     <string name="enter_your_friend_s_exact_username">Enter your friend\'s exact username</string>
     <string name="cancel">Cancel</string>

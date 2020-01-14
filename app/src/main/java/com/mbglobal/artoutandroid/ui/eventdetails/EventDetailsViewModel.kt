@@ -24,8 +24,6 @@ class EventDetailsViewModel @Inject constructor(private val eventRepository: Eve
     private val _checkinStatus = MutableLiveData<LiveEvent<String>>()
     val checkinStatus: LiveData<LiveEvent<String>> = _checkinStatus
 
-    var checkinStateTemp = MutableLiveData<Boolean>(true)
-
     fun loadEvent(eventId: Int) {
 
         if (eventId == 0) {
@@ -46,16 +44,11 @@ class EventDetailsViewModel @Inject constructor(private val eventRepository: Eve
     }
 
     fun switchCheckinState() {
-//        checkinStateTemp.value = checkinStateTemp.value?.not()
-//        _checkinStatus.value = if (checkinStateTemp.value == false)
-//            LiveEvent("You Checked In this Event")
-//        else LiveEvent("You Checked Out this Event")
-        if (checkinStateTemp.value == true){
+        if (_eventEntity.value?.checkinState == true){
             checkout()
         }else{
             checkin()
         }
-        
     }
 
     private fun checkin(){
@@ -63,7 +56,6 @@ class EventDetailsViewModel @Inject constructor(private val eventRepository: Eve
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
-                checkinStateTemp.value = checkinStateTemp.value?.not()
                 _checkinStatus.value = LiveEvent("You Checked In this Event")
             },{
                 Timber.e("Failed to checkin")
@@ -78,7 +70,6 @@ class EventDetailsViewModel @Inject constructor(private val eventRepository: Eve
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
-                checkinStateTemp.value = checkinStateTemp.value?.not()
                 _checkinStatus.value = LiveEvent("You Checked Out this Event")
             },{
                 Timber.e("Failed to checkout")

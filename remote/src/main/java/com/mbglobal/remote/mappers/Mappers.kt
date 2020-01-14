@@ -61,7 +61,8 @@ fun EventDto.toEventEntity(): EventEntity {
         eventOwner = owner,
         location = location?.toLocationEntity(),
         id = id,
-        owner = owner
+        owner = owner,
+        checkinState = checkinState
     )
 }
 
@@ -75,7 +76,8 @@ fun EventEntity.toEventDto(): EventDto{
         endDate = endDate,
         category = category,
         location = location.toLocationDto(),
-        owner = owner
+        owner = owner,
+        checkinState = checkinState
     )
 }
 
@@ -225,7 +227,6 @@ fun CheckinEntity.toCheckinDto(): CheckinDto {
 
 fun EventEntity.toAddCheckinDto(): AddCheckinDto{
     return AddCheckinDto(
-        eventDto = this.toEventDto(),
-        goTime = ""
+        eventId = id.toString()
     )
 }

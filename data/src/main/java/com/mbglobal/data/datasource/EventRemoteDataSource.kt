@@ -19,7 +19,7 @@ interface EventRemoteDataSource {
 
     fun getUserCheckIns(userId: String): Single<List<CheckinEntity>>
 
-    fun checkin(eventEntity: EventEntity): Completable
+    fun checkin(eventId: String): Completable
 
     fun checkout(eventId: String): Completable
 

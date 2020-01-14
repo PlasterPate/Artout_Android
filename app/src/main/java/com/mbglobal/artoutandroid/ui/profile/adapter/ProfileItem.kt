@@ -8,7 +8,7 @@ data class ProfileItem(
 ) {
 
     companion object {
-        const val SUGGESTIONS = "SUGGESTIONS"
+        const val EVENTS = "EVENTS"
         const val CHECKINS = "CHECKINS"
     }
 }

@@ -19,11 +19,13 @@ class RequestInterceptor @Inject constructor(private val sessionLocalDataSource:
         }.blockingGet()
 
         val originalRequest = chain.request()
-
-
-        val newRequest = originalRequest.newBuilder()
+        val path = originalRequest.url.encodedPath
+        var newRequest = originalRequest.newBuilder()
             .addHeader("Authorization", "Bearer $token")
             .build()
+        if (path.contains("login") || path.contains("register")){
+            newRequest = originalRequest
+        }
 
         Timber.v("movahedisstupid${newRequest.headers}")
         return chain.proceed(newRequest)

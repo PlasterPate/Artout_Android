@@ -76,7 +76,7 @@ class EventDetailsFragment : BaseFragment() {
                 }
 
                 R.id.checkin_menu_item -> {
-                    eventDetailsViewModel.checkin()
+                    eventDetailsViewModel.switchCheckinState()
                 }
             }
             false
@@ -99,12 +99,12 @@ class EventDetailsFragment : BaseFragment() {
             Snackbar.make(requireView(), message.getContentIfNotHandled()!!, Snackbar.LENGTH_LONG).show()
         })
 
-        eventDetailsViewModel.checkinStateTemp.observe(this, Observer {
-            if (it){
-                binding.toolbarEventDetail.menu.findItem(R.id.checkin_menu_item).title = "Check In"
+        eventDetailsViewModel.eventEntity.observe(this, Observer {
+            if (it.checkinState){
+                binding.toolbarEventDetail.menu.findItem(R.id.checkin_menu_item).title = "Check Out"
             }
             else{
-                binding.toolbarEventDetail.menu.findItem(R.id.checkin_menu_item).title = "Check Out"
+                binding.toolbarEventDetail.menu.findItem(R.id.checkin_menu_item).title = "Check In"
             }
         })
     }

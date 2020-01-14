@@ -19,6 +19,7 @@ object MockEventFactory {
         category = "Music",
         id = 12,
         owner = 20,
+        checkinState = false
         startTime = "00:00",
         endTime = "00:00"
     )
@@ -36,6 +37,7 @@ object MockEventFactory {
         title = "Coldplay Concert 2",
         category = "Music",
         id = 12,
+        checkinState = false
         owner = 20,
         startTime = "00:00",
         endTime = "00:00"
@@ -54,6 +56,7 @@ object MockEventFactory {
         title = "Coldplay Concert 3",
         category = "Music",
         id = 12,
+        checkinState = false
         owner = 20,
         startTime = "00:00",
         endTime = "00:00"
