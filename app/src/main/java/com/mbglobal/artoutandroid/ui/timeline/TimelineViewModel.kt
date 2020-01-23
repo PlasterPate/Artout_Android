@@ -22,6 +22,14 @@ class TimelineViewModel @Inject constructor(
 
     private var pageCounter = 1
 
+    fun initializeTimeline() {
+        if (_timelineItems.value != null) {
+            _showProgress.value = false
+            return
+        }
+        loadTimeline()
+    }
+
     fun loadTimeline() {
         _showProgress.value = true
         timelineRepository.getTimelineItems(pageCounter)

@@ -32,7 +32,7 @@
             android:id="@+id/progress"
             android:layout_width="48dp"
             android:layout_height="48dp"
-            android:visibility="visible"
+            android:visibility="gone"
             android:indeterminate="true"
             android:indeterminateTintMode="src_atop"
             android:indeterminateTint="@color/colorPrimaryDark"

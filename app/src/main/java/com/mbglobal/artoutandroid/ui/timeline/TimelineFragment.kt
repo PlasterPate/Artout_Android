@@ -59,7 +59,7 @@ class TimelineFragment : BaseFragment(), OnEventItemClickListener {
 
         Timber.v("DBug -> Load timeline");
 
-        timelineViewModel.loadTimeline()
+        timelineViewModel.initializeTimeline()
 
     }
 
@@ -83,7 +83,11 @@ class TimelineFragment : BaseFragment(), OnEventItemClickListener {
             binding.progress.visibility = View.GONE
         })
         timelineViewModel.showProgress.observe(this, Observer {
-            binding.progress.visibility = View.VISIBLE
+            if (it) {
+                binding.progress.visibility = View.VISIBLE
+            } else {
+                binding.progress.visibility = View.GONE
+            }
         })
     }
 
