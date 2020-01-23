@@ -4,10 +4,7 @@ import com.mbglobal.data.datasource.*
 import com.mbglobal.local.datasource.SessionLocalDataSourceImpl
 import com.mbglobal.local.database.LocalDatabaseDao
 import com.mbglobal.local.datasource.EventLocalDataSourceImpl
-import com.mbglobal.remote.datasource.EventRemoteDataSourceImpl
-import com.mbglobal.remote.datasource.FollowerRemoteDataSourceImpl
-import com.mbglobal.remote.datasource.FollowingRemoteDataSourceImpl
-import com.mbglobal.remote.datasource.UserRemoteDataSourceImpl
+import com.mbglobal.remote.datasource.*
 import dagger.Binds
 import dagger.Module
 
@@ -34,4 +31,7 @@ abstract class DataModule {
 
     @Binds
     abstract fun bindFollowingRemoteDataSource(followingRemoteDataSourceImpl: FollowingRemoteDataSourceImpl): FollowingRemoteDataSource
+
+    @Binds
+    abstract fun bindTimelineRemoteDataSource(timelineRemoteDataSource: TimelineRemoteDataSourceImpl): TimelineRemoteDataSource
 }

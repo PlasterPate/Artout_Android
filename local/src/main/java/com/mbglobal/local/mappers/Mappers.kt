@@ -14,8 +14,8 @@ fun EventEntity.toEventTable(): EventTable {
         eventOwner = eventOwner,
         startDate = startDate,
         endDate = endDate,
-        locationLat = location.latitude,
-        locationLong = location.longitude
+        locationLat = location?.latitude,
+        locationLong = location?.longitude
     )
 }
 
@@ -29,7 +29,7 @@ fun EventTable.toEventEntity(): EventEntity {
         eventOwner = eventOwner,
         startDate = startDate,
         endDate = endDate,
-        location = LocationEntity(locationLong, locationLat),
+        location = LocationEntity(locationLong?:0.0, locationLat?:0.0),
         owner = 0
     )
 }

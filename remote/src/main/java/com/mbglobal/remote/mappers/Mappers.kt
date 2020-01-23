@@ -46,13 +46,13 @@ fun UserRegisterResponseDto.toUserRegisterResponseEntity(): UserRegisterResponse
 fun EventDto.toEventEntity(): EventEntity {
     return EventEntity(
         title = title,
-        image = image,
+        image = pictureUrl,
         description = description,
         startDate = startDate,
         endDate = endDate,
         category = category,
         eventOwner = owner,
-        location = location.toLocationEntity(),
+        location = location?.toLocationEntity(),
         id = id,
         owner = owner
     )
@@ -66,7 +66,7 @@ fun EventEntity.toAddEventDto(): AddEventDto {
         startDate = startDate,
         endDate = endDate,
         category = category,
-        location = location.toLocationDto(),
+        location = location?.toLocationDto(),
         owner = owner
     )
 }

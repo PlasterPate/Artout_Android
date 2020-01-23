@@ -9,7 +9,7 @@ data class AddEventDto(
     @SerializedName("end_date")
     val endDate: String,
     @SerializedName("location")
-    val location: LocationDto,
+    val location: LocationDto?,
     @SerializedName("picture_url")
     val image: String?,
     @SerializedName("start_date")
