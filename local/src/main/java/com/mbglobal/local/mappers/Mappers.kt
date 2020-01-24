@@ -28,7 +28,9 @@ fun EventTable.toEventEntity(): EventEntity {
         category = category,
         eventOwner = eventOwner,
         startDate = startDate,
+        startTime = startDate,
         endDate = endDate,
+        endTime = endDate,
         location = LocationEntity(locationLong?:0.0, locationLat?:0.0),
         owner = 0
     )

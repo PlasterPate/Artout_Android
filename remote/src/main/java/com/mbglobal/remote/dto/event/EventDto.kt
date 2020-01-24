@@ -11,7 +11,7 @@ data class EventDto(
     @SerializedName("description")
     val description: String,
     @SerializedName("end_date")
-    val endDate: String,
+    val endDateTime: String,
     @SerializedName("id")
     val id: Int,
     @SerializedName("is_checked_in")
@@ -23,7 +23,7 @@ data class EventDto(
     @SerializedName("picture_url")
     val pictureUrl: String?,
     @SerializedName("start_date")
-    val startDate: String,
+    val startDateTime: String,
     @SerializedName("title")
     val title: String
 )

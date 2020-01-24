@@ -10,6 +10,8 @@ import com.mbglobal.remote.dto.event.AddEventDto
 import com.mbglobal.remote.dto.event.EventDto
 import com.mbglobal.remote.dto.event.LocationDto
 import com.mbglobal.remote.dto.user.*
+import com.mbglobal.remote.getDateFromDateTime
+import com.mbglobal.remote.getTimeFromDateTime
 
 fun UserLoginItemEntity.toUserLoginItemDto(): UserLoginItemDto {
     return UserLoginItemDto(
@@ -48,8 +50,10 @@ fun EventDto.toEventEntity(): EventEntity {
         title = title,
         image = pictureUrl,
         description = description,
-        startDate = startDate,
-        endDate = endDate,
+        startDate = getDateFromDateTime(startDateTime),
+        startTime = getTimeFromDateTime(startDateTime),
+        endDate = getDateFromDateTime(endDateTime),
+        endTime = getTimeFromDateTime(endDateTime),
         category = category,
         eventOwner = owner,
         location = location?.toLocationEntity(),
@@ -63,8 +67,8 @@ fun EventEntity.toAddEventDto(): AddEventDto {
         title = title,
         image = image,
         description = description,
-        startDate = startDate,
-        endDate = endDate,
+        startDateTime = "$startDate $startTime",
+        endDateTime = "$endDate $endTime",
         category = category,
         location = location?.toLocationDto(),
         owner = owner
@@ -90,8 +94,8 @@ fun AddEventEntity.toAddEventDto(): AddEventDto {
         title = title,
         image = image,
         description = description,
-        startDate = startDate,
-        endDate = endDate,
+        startDateTime = "$startDate $startTime",
+        endDateTime = "$endDate $endTime",
         category = category,
         location = location.toLocationDto(),
         owner = owner
