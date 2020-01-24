@@ -11,7 +11,8 @@ import javax.inject.Inject
 
 class UserRepository @Inject constructor(
     private val userRemoteDataSource: UserRemoteDataSource,
-    private val sessionLocalDataSource: SessionLocalDataSource
+    private val sessionLocalDataSource: SessionLocalDataSource,
+    private val sessionRemoteDataSource: SessionRemoteDataSource
 ) {
     fun login(userLoginItemEntity: UserLoginItemEntity): Completable {
         return userRemoteDataSource.login(userLoginItemEntity)
@@ -35,7 +36,9 @@ class UserRepository @Inject constructor(
     }
 
     fun getUser(): Single<String> {
-        return sessionLocalDataSource.getSession().map { session: SessionEntity -> session.userId }
+        return sessionLocalDataSource.getSession().flatMap {
+            sessionRemoteDataSource.refreshSession(it)
+        }.map { session: SessionEntity -> session.userId }
     }
 
     fun getUserProfile(userId: String?): Single<UserProfileEntity>{

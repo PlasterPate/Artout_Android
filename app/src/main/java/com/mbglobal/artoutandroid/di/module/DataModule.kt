@@ -1,9 +1,8 @@
 package com.mbglobal.artoutandroid.di.module
 
 import com.mbglobal.data.datasource.*
-import com.mbglobal.local.datasource.SessionLocalDataSourceImpl
-import com.mbglobal.local.database.LocalDatabaseDao
 import com.mbglobal.local.datasource.EventLocalDataSourceImpl
+import com.mbglobal.local.datasource.SessionLocalDataSourceImpl
 import com.mbglobal.remote.datasource.*
 import dagger.Binds
 import dagger.Module
@@ -20,18 +19,26 @@ abstract class DataModule {
             EventRemoteDataSource
 
     @Binds
-    abstract fun bindSessionLocalDataSource(sessionLocalDataSourceImpl: SessionLocalDataSourceImpl): SessionLocalDataSource
+    abstract fun bindSessionLocalDataSource(sessionLocalDataSourceImpl: SessionLocalDataSourceImpl):
+            SessionLocalDataSource
+
+    @Binds
+    abstract fun bindSessionRemoteDataSource(sessionRemoteDataSourceImpl: SessionRemoteDataSourceImpl):
+            SessionRemoteDataSource
 
     @Binds
     abstract fun bindUserRemoteDataSource(userRemoteDataSourceImpl: UserRemoteDataSourceImpl):
             UserRemoteDataSource
 
     @Binds
-    abstract fun bindFollowersRemoteDataSource(followerRemoteDataSourceImpl: FollowerRemoteDataSourceImpl): FollowerRemoteDataSource
+    abstract fun bindFollowersRemoteDataSource(followerRemoteDataSourceImpl: FollowerRemoteDataSourceImpl):
+            FollowerRemoteDataSource
 
     @Binds
-    abstract fun bindFollowingRemoteDataSource(followingRemoteDataSourceImpl: FollowingRemoteDataSourceImpl): FollowingRemoteDataSource
+    abstract fun bindFollowingRemoteDataSource(followingRemoteDataSourceImpl: FollowingRemoteDataSourceImpl):
+            FollowingRemoteDataSource
 
     @Binds
-    abstract fun bindTimelineRemoteDataSource(timelineRemoteDataSource: TimelineRemoteDataSourceImpl): TimelineRemoteDataSource
+    abstract fun bindTimelineRemoteDataSource(timelineRemoteDataSource: TimelineRemoteDataSourceImpl):
+            TimelineRemoteDataSource
 }

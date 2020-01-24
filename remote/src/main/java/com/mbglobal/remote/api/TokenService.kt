@@ -10,8 +10,8 @@ import retrofit2.http.POST
 
 interface TokenService {
 
-    @POST("/api/token/refresh/")
-    fun refreshAccessToken(@Body refreshAccessItemDto : RefreshAccessItemDto) : Single<RefreshAccessResponseDto?>
+    @POST("/api/v1.0/auth/token/refresh/")
+    fun refreshAccessToken(@Body refreshAccessItemDto : RefreshAccessItemDto) : Single<RefreshAccessResponseDto>
 
     @POST("/api/notification/token/")
     fun sendAccessToken(@Body tokenItemDto : TokenItemDto, @Header("Authorization") bearerToken: String) : Single<Unit>
