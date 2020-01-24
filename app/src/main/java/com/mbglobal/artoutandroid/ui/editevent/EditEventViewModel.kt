@@ -11,6 +11,7 @@ import com.mbglobal.data.entity.event.EventEntity
 import com.mbglobal.data.repository.EventRepository
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
+import java.time.format.DateTimeFormatter
 import javax.inject.Inject
 
 class EditEventViewModel @Inject constructor(private val eventRepository: EventRepository) : ManageEventViewModel() {
@@ -50,5 +51,6 @@ class EditEventViewModel @Inject constructor(private val eventRepository: EventR
     fun setPageName(pageName : String){
         pageNameText.value = pageName
     }
+
 
 }

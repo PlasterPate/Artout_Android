@@ -1,12 +1,14 @@
 package com.mbglobal.data.entity.event
 
 data class AddEventEntity(
+    val title: String,
     val description: String,
-    val endDate: String,
+    val owner: Int,
     val location: LocationEntity,
     val image: String?,
     val startDate: String,
-    val title: String,
-    val category: String,
-    val owner: Int
+    val startTime: String,
+    val endDate: String,
+    val endTime: String,
+    val category: String
 )
