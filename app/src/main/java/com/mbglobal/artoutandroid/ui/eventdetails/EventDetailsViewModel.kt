@@ -49,6 +49,7 @@ class EventDetailsViewModel @Inject constructor(private val eventRepository: Eve
         }else{
             checkin()
         }
+        loadEvent(_eventEntity.value!!.id)
     }
 
     private fun checkin(){
