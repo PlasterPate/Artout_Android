@@ -100,11 +100,11 @@ class EventDetailsFragment : BaseFragment() {
         })
 
         eventDetailsViewModel.eventEntity.observe(this, Observer {
-            if (it.checkinState){
-                binding.toolbarEventDetail.menu.findItem(R.id.checkin_menu_item).title = "Check Out"
+            if (it.checkinState!!){
+                binding.toolbarEventDetail.menu.findItem(R.id.checkin_menu_item).title = resources.getString(R.string.check_out)
             }
             else{
-                binding.toolbarEventDetail.menu.findItem(R.id.checkin_menu_item).title = "Check In"
+                binding.toolbarEventDetail.menu.findItem(R.id.checkin_menu_item).title = resources.getString(R.string.check_in)
             }
         })
     }

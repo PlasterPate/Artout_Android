@@ -13,5 +13,6 @@ data class EventEntity(
     val endTime: String,
     val category: String,
     val owner: Int,
-    val checkinState: Boolean
+    val checkinState: Boolean?,
+    val checkinCount: Int?
 )

@@ -36,5 +36,11 @@ data class EventTable(
     val startDate: String,
 
     @ColumnInfo(name = "end_date")
-    val endDate: String
+    val endDate: String,
+
+    @ColumnInfo(name = "checkin_state")
+    val checkinState: Boolean?,
+
+    @ColumnInfo(name = "checkin_count")
+    val checkinCount: Int?
 )

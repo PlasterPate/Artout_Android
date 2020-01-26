@@ -62,7 +62,8 @@ fun EventDto.toEventEntity(): EventEntity {
         location = location?.toLocationEntity(),
         id = id,
         owner = owner,
-        checkinState = checkinState
+        checkinState = isCheckedIn!!,
+        checkinCount = checkinCount
     )
 }
 
@@ -70,14 +71,15 @@ fun EventEntity.toEventDto(): EventDto{
     return EventDto(
         id = id,
         title = title,
-        image = image,
+        pictureUrl = image,
         description = description,
-        startDate = startDate,
-        endDate = endDate,
+        startDateTime = "$startDate $startTime",
+        endDateTime = "$endDate $endTime",
         category = category,
-        location = location.toLocationDto(),
+        location = location?.toLocationDto(),
         owner = owner,
-        checkinState = checkinState
+        isCheckedIn = checkinState,
+        checkinCount = checkinCount
     )
 }
 
