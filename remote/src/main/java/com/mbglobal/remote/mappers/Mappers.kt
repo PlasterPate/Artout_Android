@@ -1,11 +1,14 @@
 package com.mbglobal.remote.mappers
 
 import com.mbglobal.data.UserState
+import com.mbglobal.data.entity.checkin.CheckinEntity
 import com.mbglobal.data.entity.event.AddEventEntity
 import com.mbglobal.data.entity.event.EventEntity
 import com.mbglobal.data.entity.event.EventSearchEntity
 import com.mbglobal.data.entity.event.LocationEntity
 import com.mbglobal.data.entity.user.*
+import com.mbglobal.remote.dto.checkin.AddCheckinDto
+import com.mbglobal.remote.dto.checkin.CheckinDto
 import com.mbglobal.remote.dto.event.AddEventDto
 import com.mbglobal.remote.dto.event.EventDto
 import com.mbglobal.remote.dto.event.LocationDto
@@ -58,7 +61,25 @@ fun EventDto.toEventEntity(): EventEntity {
         eventOwner = owner,
         location = location?.toLocationEntity(),
         id = id,
-        owner = owner
+        owner = owner,
+        checkinState = isCheckedIn!!,
+        checkinCount = checkinCount
+    )
+}
+
+fun EventEntity.toEventDto(): EventDto{
+    return EventDto(
+        id = id,
+        title = title,
+        pictureUrl = image,
+        description = description,
+        startDateTime = "$startDate $startTime",
+        endDateTime = "$endDate $endTime",
+        category = category,
+        location = location?.toLocationDto(),
+        owner = owner,
+        isCheckedIn = checkinState,
+        checkinCount = checkinCount
     )
 }
 
@@ -140,7 +161,7 @@ fun FollowRequestDto.toFollowRequsetEntity(): FollowRequestEntity {
     )
 }
 
-fun UserDto.toFollowRequestEntity(): FollowRequestEntity{
+fun UserDto.toFollowRequestEntity(): FollowRequestEntity {
     return FollowRequestEntity(
         source = this.toUserEntity(),
         destination = this.toUserEntity(),
@@ -148,7 +169,7 @@ fun UserDto.toFollowRequestEntity(): FollowRequestEntity{
     )
 }
 
-fun UserProfileEntity.toUserProfileDto(): UserProfileDto{
+fun UserProfileEntity.toUserProfileDto(): UserProfileDto {
     return UserProfileDto(
         followerCount = followerCount.toInt(),
         followingCount = followingCount.toInt(),
@@ -163,7 +184,7 @@ fun UserProfileEntity.toUserProfileDto(): UserProfileDto{
     )
 }
 
-fun UserProfileDto.toUserProfileEntity(): UserProfileEntity{
+fun UserProfileDto.toUserProfileEntity(): UserProfileEntity {
     return UserProfileEntity(
         followerCount = followerCount.toString(),
         followingCount = followingCount.toString(),
@@ -175,16 +196,39 @@ fun UserProfileDto.toUserProfileEntity(): UserProfileEntity{
             avatar,
             firstName,
             lastName,
-            username ,
-            UserState.fromInt(state))
+            username,
+            UserState.fromInt(state)
+        )
     )
 }
 
-fun EventSearchEntity.toQueryMap(): Map<String, String>{
+fun EventSearchEntity.toQueryMap(): Map<String, String> {
     val query = HashMap<String, String>()
     query["title__icontains"] = this.title
     this.category?.let {
         query["category"] = it
     }
     return query
+}
+
+fun CheckinDto.toCheckinEntity(): CheckinEntity {
+    return CheckinEntity(
+        userEntity = userEntity.toUserEntity(),
+        eventEntity = eventEntity.toEventEntity()
+    )
+}
+
+fun CheckinEntity.toCheckinDto(): CheckinDto {
+    return CheckinDto(
+        userEntity = userEntity.toUserDto(),
+        eventEntity = eventEntity.toEventDto(),
+        goTime = "",
+        submittedTime = ""
+    )
+}
+
+fun EventEntity.toAddCheckinDto(): AddCheckinDto{
+    return AddCheckinDto(
+        eventId = id.toString()
+    )
 }

@@ -3,9 +3,11 @@ package com.mbglobal.data.repository
 import com.mbglobal.data.datasource.EventLocalDataSource
 import com.mbglobal.data.datasource.EventRemoteDataSource
 import com.mbglobal.data.datasource.SessionLocalDataSource
+import com.mbglobal.data.entity.checkin.CheckinEntity
 import com.mbglobal.data.entity.event.AddEventEntity
 import com.mbglobal.data.entity.event.EventEntity
 import com.mbglobal.data.entity.event.EventSearchEntity
+import io.reactivex.Completable
 import io.reactivex.Single
 import javax.inject.Inject
 
@@ -42,29 +44,26 @@ class EventRepository @Inject constructor(
             userId?.let {
                 Single.just(userId)
             } ?: sessionLocalDataSource.getUserId()
-        return idSingle.flatMap { eventRemoteDataSource.getUserEvents() }
+        return idSingle.flatMap { id -> eventRemoteDataSource.getUserEvents(id) }
     }
 
-    fun getUserCheckIns(userId: String?): Single<List<EventEntity>> {
+    fun getUserCheckIns(userId: String?): Single<List<CheckinEntity>> {
         val idSingle =
             userId?.let {
                 Single.just(it)
             } ?: sessionLocalDataSource.getUserId()
-        return idSingle.flatMap { eventRemoteDataSource.getUserCheckIns() }
+        return idSingle.flatMap { id -> eventRemoteDataSource.getUserCheckIns(id) }
     }
 
-    fun getUserSuggestions(userId: String?): Single<List<EventEntity>> {
-        val idSingle =
-            userId?.let {
-                Single.just(it)
-            } ?: sessionLocalDataSource.getUserId()
-        return idSingle.flatMap {
-            eventRemoteDataSource.getUserSuggestions()
-        }
+    fun checkin(eventEntity: EventEntity): Completable{
+        return eventRemoteDataSource.checkin(eventEntity.id.toString())
+    }
+
+    fun checkout(eventId: String): Completable{
+        return eventRemoteDataSource.checkout(eventId)
     }
 
     fun searchEvent(query: EventSearchEntity): Single<List<EventEntity>>{
-        //return Single.just(listOf(MockEventFactory.COLDPLAY_CONCERT, MockEventFactory.COLDPLAY_CONCERT2, MockEventFactory.COLDPLAY_CONCERT3))
         return eventRemoteDataSource.searchEvent(query)
     }
 }

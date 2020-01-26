@@ -6,6 +6,7 @@ import com.mbglobal.artoutandroid.di.annotation.ViewModelKey
 import com.mbglobal.artoutandroid.ui.addevent.AddEventViewModel
 import com.mbglobal.artoutandroid.ui.discover.DiscoverViewModel
 import com.mbglobal.artoutandroid.ui.editevent.EditEventViewModel
+import com.mbglobal.artoutandroid.ui.eventcheckinlist.EventCheckinListViewModel
 import com.mbglobal.artoutandroid.ui.eventdetails.EventDetailsViewModel
 import com.mbglobal.artoutandroid.ui.eventlist.EventListViewModel
 import com.mbglobal.artoutandroid.ui.login.LoginViewModel
@@ -74,5 +75,10 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(SocialViewModel::class)
     abstract fun bindSocialViewModel(socialViewModel: SocialViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(EventCheckinListViewModel::class)
+    abstract fun bindEventCheckinListViewModel(eventCheckinListViewModel: EventCheckinListViewModel): ViewModel
 
 }

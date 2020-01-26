@@ -73,7 +73,7 @@ class SearchAdapter(
             onEventItemClickListener: OnEventItemClickListener
         ) {
             eventTitle.text = eventEntity.title
-            Picasso.get().load(eventEntity.image).into(eventIcon)
+            //Picasso.get().load(eventEntity.image).into(eventIcon)
             itemView.setOnClickListener {
                 onEventItemClickListener.onClicked(eventEntity)
             }

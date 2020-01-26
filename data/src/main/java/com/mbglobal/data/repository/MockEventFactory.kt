@@ -18,9 +18,11 @@ object MockEventFactory {
         title = "Coldplay Concert",
         category = "Music",
         id = 12,
-        owner = 20,
         startTime = "00:00",
-        endTime = "00:00"
+        endTime = "00:00",
+        owner = 20,
+        checkinState = false,
+        checkinCount = 27
     )
 
     val COLDPLAY_CONCERT2 = EventEntity(
@@ -36,9 +38,11 @@ object MockEventFactory {
         title = "Coldplay Concert 2",
         category = "Music",
         id = 12,
-        owner = 20,
         startTime = "00:00",
-        endTime = "00:00"
+        endTime = "00:00",
+        owner = 20,
+        checkinState = false,
+        checkinCount = 7
     )
 
     val COLDPLAY_CONCERT3 = EventEntity(
@@ -54,9 +58,11 @@ object MockEventFactory {
         title = "Coldplay Concert 3",
         category = "Music",
         id = 12,
-        owner = 20,
         startTime = "00:00",
-        endTime = "00:00"
+        endTime = "00:00",
+        owner = 20,
+        checkinState = false,
+        checkinCount = 162
     )
 
 

@@ -4,14 +4,15 @@
     android:layout_height="wrap_content"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
-    android:padding="16dp">
+    android:background="@color/silver"
+    android:padding="24dp">
 
         <TextView
             android:drawableStart="@drawable/ic_description"
             android:drawablePadding="8dp"
             android:text="@string/detail_description"
             android:textStyle="bold"
-            android:textSize="16sp"
+            android:textSize="20sp"
             android:layout_marginBottom="8dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
@@ -19,7 +20,7 @@
         <TextView
             android:id="@+id/tv_event_detail_description"
             android:layout_width="match_parent"
-            android:textSize="12sp"
+            android:textSize="16sp"
             tools:text="تنسیشبتنشستینبتشنسیبتینتشسیبنتن"
             android:layout_height="wrap_content"/>
 

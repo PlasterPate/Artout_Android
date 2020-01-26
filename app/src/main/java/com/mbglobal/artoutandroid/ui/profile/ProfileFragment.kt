@@ -48,10 +48,10 @@ class ProfileFragment : BaseFragment() {
         binding.rvProfileItems.layoutManager = LinearLayoutManager(view.context)
         adapter.items = listOf(
             ProfileItem(
-                titleResource = R.string.suggestions,
+                titleResource = R.string.events,
                 iconResource = R.drawable.ic_favorite_grey_24dp,
                 count = 36,
-                tag = ProfileItem.SUGGESTIONS
+                tag = ProfileItem.EVENTS
             ),
             ProfileItem(
                 titleResource = R.string.checkins,
@@ -69,7 +69,7 @@ class ProfileFragment : BaseFragment() {
         adapter.listeners.apply {
             add(object : OnProfileItemClickListener {
 
-                override val itemTag: String = ProfileItem.SUGGESTIONS
+                override val itemTag: String = ProfileItem.EVENTS
 
                 override fun onClicked(profileItem: ProfileItem) {
                     findNavController().navigate(
@@ -86,12 +86,11 @@ class ProfileFragment : BaseFragment() {
 
                 override fun onClicked(profileItem: ProfileItem) {
                     findNavController().navigate(
-                        ProfileFragmentDirections.actionProfileFragmentToEventListFragment(
-                            null
+                        ProfileFragmentDirections.actionNavigationProfileToCheckinListFragment(
+                            "Mobin"
                         )
                     )
                 }
-
             })
         }
         profileViewModel.getUserProfile()

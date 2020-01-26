@@ -1,6 +1,7 @@
 package com.mbglobal.data.repository
 
 import com.mbglobal.data.datasource.*
+import com.mbglobal.data.entity.checkin.CheckinEntity
 import com.mbglobal.data.entity.session.SessionEntity
 import com.mbglobal.data.entity.user.*
 import com.mbglobal.data.mapper.toSessionEntity
@@ -17,6 +18,8 @@ class UserRepository @Inject constructor(
     fun login(userLoginItemEntity: UserLoginItemEntity): Completable {
         return userRemoteDataSource.login(userLoginItemEntity)
             .flatMapCompletable { userLoginResponseEntity ->
+                var s = sessionLocalDataSource.getSession().blockingGet().access
+                println(s)
                 sessionLocalDataSource.saveSession(userLoginResponseEntity.toSessionEntity())
             }
     }
@@ -38,6 +41,15 @@ class UserRepository @Inject constructor(
     fun getUser(): Single<String> {
         return sessionLocalDataSource.getSession().flatMap {
             sessionRemoteDataSource.refreshSession(it)
+        }.flatMap {
+            var s = sessionLocalDataSource.getSession().blockingGet().access
+            //println(it)
+            println(s)
+            sessionLocalDataSource.removeSession()
+//            sessionLocalDataSource.saveSession(it)
+            s = sessionLocalDataSource.getSession().blockingGet().access
+            println(s)
+            return@flatMap Single.just(it)
         }.map { session: SessionEntity -> session.userId }
     }
 
@@ -51,5 +63,9 @@ class UserRepository @Inject constructor(
 
     fun searchUser(query: UserSearchEntity): Single<List<UserEntity>>{
         return userRemoteDataSource.searchUser(query)
+    }
+
+    fun getEventCheckins(eventId: String): Single<List<CheckinEntity>>{
+        return userRemoteDataSource.getEventCheckins(eventId)
     }
 }

@@ -1,6 +1,7 @@
 package com.mbglobal.remote.datasource
 
 import com.mbglobal.data.datasource.UserRemoteDataSource
+import com.mbglobal.data.entity.checkin.CheckinEntity
 import com.mbglobal.data.entity.user.*
 import com.mbglobal.remote.api.EventService
 import com.mbglobal.remote.api.FollowerService
@@ -37,11 +38,18 @@ class UserRemoteDataSourceImpl @Inject constructor(private val userService: User
         }
     }
 
-
     override fun searchUser(query: UserSearchEntity): Single<List<UserEntity>>{
         return eventService.searchUser(query.search).map {
             it.map {
                 it.toUserEntity()
+            }
+        }
+    }
+
+    override fun getEventCheckins(eventId: String): Single<List<CheckinEntity>> {
+        return userService.getEventCheckins(eventId).map {checkins ->
+            checkins.map { checkinDto ->
+                checkinDto.toCheckinEntity()
             }
         }
     }

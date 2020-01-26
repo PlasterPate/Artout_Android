@@ -29,7 +29,7 @@
     <string name="add_event">Add Event</string>
     <string name="edit_event">Edit Event</string>
     <string name="checkins">Check-Ins</string>
-    <string name="suggestions">Suggestions</string>
+    <string name="events">Events</string>
     <string name="add_new_friend">Add new friend</string>
     <string name="enter_your_friend_s_exact_username">Enter your friend\'s exact username</string>
     <string name="cancel">Cancel</string>
@@ -45,4 +45,7 @@
     <string name="requested">Requested</string>
     <string name="search_results_for_search_query">Results for: <i>search_query</i></string>
     <string name="search_query_prefix">Search results for:</string>
+    <string name="check_in">Check In</string>
+    <string name="check_out">Check Out</string>
+    <string name="my_check_ins">My Check Ins</string>
 </resources>

@@ -58,9 +58,8 @@ class NetworkModule {
     }
 
     @Provides
-    fun providesUserService(): UserService {
-        return providesRetrofit(OkHttpClient.Builder().addInterceptor
-            (provideHttpLoggingInterceptor()).build()).create(UserService::class.java)
+    fun providesUserService(retrofit: Retrofit): UserService {
+        return retrofit.create(UserService::class.java)
     }
 
     @Provides

@@ -1,16 +1,17 @@
-package com.mbglobal.artoutandroid.ui.users.adapter
+package com.mbglobal.artoutandroid.ui.eventcheckinlist
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.mbglobal.artoutandroid.R
+import com.mbglobal.artoutandroid.ui.users.adapter.OnUserItemClickListener
+import com.mbglobal.artoutandroid.ui.users.adapter.UserViewHolder
 import com.mbglobal.artoutandroid.ui.users.adapter.listener.OnActionButtonClickListener
-import com.mbglobal.artoutandroid.ui.users.adapter.listener.OnFollowRequestClickListener
 import com.mbglobal.data.UserState
 import com.mbglobal.data.entity.user.UserEntity
 
-class UserAdapter : RecyclerView.Adapter<UserViewHolder>() {
+class EventCheckinListAdapter : RecyclerView.Adapter<UserViewHolder>() {
 
     var actionButtonListeners= mutableListOf<OnActionButtonClickListener>()
     var onUserItemClickListener: OnUserItemClickListener? = null
@@ -43,9 +44,7 @@ class UserAdapter : RecyclerView.Adapter<UserViewHolder>() {
             field.addAll(value)
             notifyDataSetChanged()
         }
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserViewHolder {
-
         val inflate: (Int) -> View = {
             LayoutInflater.from(parent.context).inflate(it, parent, false)
         }
@@ -56,10 +55,6 @@ class UserAdapter : RecyclerView.Adapter<UserViewHolder>() {
             UserState.REQUESTED.value -> UserViewHolder(inflate(R.layout.item_user))
             else -> throw Exception("Invalid User Item")
         }
-    }
-
-    override fun getItemViewType(position: Int): Int {
-        return data[position].state.value
     }
 
     override fun getItemCount(): Int {
