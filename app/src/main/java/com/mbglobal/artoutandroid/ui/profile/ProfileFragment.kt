@@ -87,7 +87,7 @@ class ProfileFragment : BaseFragment() {
                 override fun onClicked(profileItem: ProfileItem) {
                     findNavController().navigate(
                         ProfileFragmentDirections.actionNavigationProfileToCheckinListFragment(
-                            "Mobin"
+                            null
                         )
                     )
                 }

@@ -6,6 +6,7 @@ import com.mbglobal.remote.dto.event.*
 import com.mbglobal.remote.dto.user.UserDto
 import com.mbglobal.remote.dto.user.UserProfileDto
 import io.reactivex.Single
+import okhttp3.RequestBody
 import okhttp3.ResponseBody
 import retrofit2.http.*
 
@@ -18,7 +19,7 @@ interface EventService {
     fun editEvent(@Path("id") eventId: Int, @Body addEventDto: AddEventDto): Single<EventDto>
 
     @POST("/api/v1.0/events/")
-    fun addEvent(@Body addEventDto: AddEventDto): Single<EventDto>
+    fun addEvent(@Body addEventDto: AddEventDto): Single<AddEventResponseDto>
 
     @GET("/api/v1.0/events/")
     fun getUserEvents(@Query("owner") userId: String): Single<List<EventDto>>

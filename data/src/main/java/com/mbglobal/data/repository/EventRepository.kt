@@ -7,6 +7,7 @@ import com.mbglobal.data.entity.checkin.CheckinEntity
 import com.mbglobal.data.entity.event.AddEventEntity
 import com.mbglobal.data.entity.event.EventEntity
 import com.mbglobal.data.entity.event.EventSearchEntity
+import com.mbglobal.data.entity.event.S3ResponseEntity
 import io.reactivex.Completable
 import io.reactivex.Single
 import javax.inject.Inject
@@ -26,7 +27,12 @@ class EventRepository @Inject constructor(
     fun addEvent(eventEntity: AddEventEntity): Single<EventEntity> {
         return sessionLocalDataSource.getUserId().flatMap {userId ->
             eventRemoteDataSource.addEvent(eventEntity.copy(owner = userId.toInt())).flatMap {
-                eventLocalDataSource.addEvent(it)
+                eventEntity.image?.let {image ->
+                    println("Going to upload")
+                    uploadImage("events",it.s3ResponseEntity,image)
+                }
+
+                eventLocalDataSource.addEvent(it.event)
             }
         }
     }
@@ -65,5 +71,12 @@ class EventRepository @Inject constructor(
 
     fun searchEvent(query: EventSearchEntity): Single<List<EventEntity>>{
         return eventRemoteDataSource.searchEvent(query)
+    }
+
+    fun uploadImage(url: String,s3ResponseEntity: S3ResponseEntity, imagePath: String){
+        println("url : $url")
+        println("path : $imagePath")
+        eventRemoteDataSource.uploadImage(url,s3ResponseEntity, imagePath)
+        println("uploaded")
     }
 }

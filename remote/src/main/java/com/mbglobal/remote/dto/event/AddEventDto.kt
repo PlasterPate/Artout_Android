@@ -19,5 +19,7 @@ data class AddEventDto(
     @SerializedName("category")
     val category: String,
     @SerializedName("owner")
-    val owner: Int
+    val owner: Int,
+    @SerializedName("picture_exists")
+    val picture_exists: Boolean
 )

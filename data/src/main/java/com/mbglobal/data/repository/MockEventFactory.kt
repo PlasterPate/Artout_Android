@@ -2,6 +2,7 @@ package com.mbglobal.data.repository
 
 import com.mbglobal.data.entity.event.EventEntity
 import com.mbglobal.data.entity.event.LocationEntity
+import com.mbglobal.data.entity.event.S3ResponseEntity
 
 object MockEventFactory {
 

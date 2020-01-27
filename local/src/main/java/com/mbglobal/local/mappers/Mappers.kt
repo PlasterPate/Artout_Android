@@ -2,6 +2,7 @@ package com.mbglobal.local.mappers
 
 import com.mbglobal.data.entity.event.EventEntity
 import com.mbglobal.data.entity.event.LocationEntity
+import com.mbglobal.data.entity.event.S3ResponseEntity
 import com.mbglobal.local.database.tables.EventTable
 
 fun EventEntity.toEventTable(): EventTable {

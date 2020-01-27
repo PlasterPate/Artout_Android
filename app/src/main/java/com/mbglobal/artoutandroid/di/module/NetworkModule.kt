@@ -71,4 +71,16 @@ class NetworkModule {
     fun providesTimelineService(retrofit: Retrofit): TimelineService {
         return retrofit.create(TimelineService::class.java)
     }
+
+    @Provides
+    fun provideS3Service(okHttpLoggingInterceptor: HttpLoggingInterceptor): S3Service{
+        return Retrofit.Builder()
+            .baseUrl("http://194.5.193.99:9000/")
+            .client(OkHttpClient.Builder().addInterceptor(okHttpLoggingInterceptor).build())
+            .addConverterFactory(GsonConverterFactory.create())
+            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+            .build()
+            .create(S3Service::class.java)
+//        return retrofit.create(S3Service::class.java)
+    }
 }

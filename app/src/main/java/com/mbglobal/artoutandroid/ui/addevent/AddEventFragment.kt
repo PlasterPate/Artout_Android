@@ -1,12 +1,14 @@
 package com.mbglobal.artoutandroid.ui.addevent
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.os.Environment
@@ -108,7 +110,7 @@ class AddEventFragment : ManageEventFragment() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (resultCode == Activity.RESULT_OK && requestCode == IMAGE_PICK_CODE) {
-            addEventViewModel.setImage(data?.data)
+            addEventViewModel.setImage(data?.data!!)
         }
     }
 
@@ -123,4 +125,18 @@ class AddEventFragment : ManageEventFragment() {
             requestPermissions(permissions, PERMISSION_CODE)
         }
     }
+
+//    @SuppressLint("Recycle")
+//    private fun getPath(uri: Uri): String{
+//        val projection = Array<String>(1){MediaStore.Images.Media.DATA}
+//        val cursor = requireContext().contentResolver.query(uri, projection, null,null,null)
+//        val colIdx = cursor?.getColumnIndex(MediaStore.Images.Media.DATA)
+//        var s = ""
+//        cursor?.let {
+//            it.moveToFirst()
+//            s = it.getString(colIdx!!)
+//            it.close()
+//        }
+//        return s
+//    }
 }
