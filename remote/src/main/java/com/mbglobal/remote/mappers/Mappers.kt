@@ -6,12 +6,14 @@ import com.mbglobal.data.entity.event.AddEventEntity
 import com.mbglobal.data.entity.event.EventEntity
 import com.mbglobal.data.entity.event.EventSearchEntity
 import com.mbglobal.data.entity.event.LocationEntity
+import com.mbglobal.data.entity.event.*
 import com.mbglobal.data.entity.user.*
 import com.mbglobal.remote.dto.checkin.AddCheckinDto
 import com.mbglobal.remote.dto.checkin.CheckinDto
 import com.mbglobal.remote.dto.event.AddEventDto
 import com.mbglobal.remote.dto.event.EventDto
 import com.mbglobal.remote.dto.event.LocationDto
+import com.mbglobal.remote.dto.event.*
 import com.mbglobal.remote.dto.user.*
 import com.mbglobal.remote.getDateFromDateTime
 import com.mbglobal.remote.getTimeFromDateTime
@@ -62,8 +64,8 @@ fun EventDto.toEventEntity(): EventEntity {
         location = location?.toLocationEntity(),
         id = id,
         owner = owner,
-        checkinState = isCheckedIn!!,
-        checkinCount = checkinCount
+        checkinState = isCheckedIn ?: false,
+        checkinCount = checkinCount ?: 0
     )
 }
 
@@ -71,7 +73,7 @@ fun EventEntity.toEventDto(): EventDto{
     return EventDto(
         id = id,
         title = title,
-        pictureUrl = image,
+        pictureUrl = image!!,
         description = description,
         startDateTime = "$startDate $startTime",
         endDateTime = "$endDate $endTime",
@@ -92,7 +94,8 @@ fun EventEntity.toAddEventDto(): AddEventDto {
         endDateTime = "$endDate $endTime",
         category = category,
         location = location?.toLocationDto(),
-        owner = owner
+        owner = owner,
+        picture_exists = image!!.isNotEmpty()
     )
 }
 
@@ -119,7 +122,8 @@ fun AddEventEntity.toAddEventDto(): AddEventDto {
         endDateTime = "$endDate $endTime",
         category = category,
         location = location.toLocationDto(),
-        owner = owner
+        owner = owner,
+        picture_exists = image!!.isNotEmpty()
     )
 }
 
@@ -230,5 +234,47 @@ fun CheckinEntity.toCheckinDto(): CheckinDto {
 fun EventEntity.toAddCheckinDto(): AddCheckinDto{
     return AddCheckinDto(
         eventId = id.toString()
+    )
+}
+
+fun AddEventResponseDto.toAddEventResponseEntity(): AddEventResponseEntity{
+    return AddEventResponseEntity(
+        event = EventEntity(
+            id = id,
+            endTime = endDateTime,
+            startTime = startDateTime,
+            owner = owner,
+            title = title,
+            category = category,
+            checkinCount = 0,
+            checkinState = false,
+            image = "",
+            location = location?.toLocationEntity(),
+            description = description,
+            endDate = endDateTime,
+            startDate = startDateTime,
+            eventOwner = owner),
+        s3ResponseEntity = s3ResponseDto.toS3ResponseEntity()
+    )
+}
+
+fun S3ResponseDto.toS3ResponseEntity(): S3ResponseEntity{
+    return S3ResponseEntity(
+        url = url,
+        key = s3FieldsDto.key,
+        awsAccessKeyId = s3FieldsDto.awsAccessKeyId,
+        policy = s3FieldsDto.policy,
+        signature = s3FieldsDto.signature
+    )
+}
+
+fun S3ResponseEntity.toS3ResponseDto(): S3ResponseDto{
+    return S3ResponseDto(
+        url = url,
+        s3FieldsDto = S3FieldsDto(
+            key = key,
+            policy = policy,
+            awsAccessKeyId = awsAccessKeyId,
+            signature = signature)
     )
 }

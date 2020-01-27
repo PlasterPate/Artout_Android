@@ -18,8 +18,8 @@ class UserRepository @Inject constructor(
     fun login(userLoginItemEntity: UserLoginItemEntity): Completable {
         return userRemoteDataSource.login(userLoginItemEntity)
             .flatMapCompletable { userLoginResponseEntity ->
-                var s = sessionLocalDataSource.getSession().blockingGet().access
-                println(s)
+//                var s = sessionLocalDataSource.getSession().blockingGet().access
+//                println(s)
                 sessionLocalDataSource.saveSession(userLoginResponseEntity.toSessionEntity())
             }
     }
@@ -40,17 +40,16 @@ class UserRepository @Inject constructor(
 
     fun getUser(): Single<String> {
         return sessionLocalDataSource.getSession().flatMap {
-            sessionRemoteDataSource.refreshSession(it)
-        }.flatMap {
-            var s = sessionLocalDataSource.getSession().blockingGet().access
-            //println(it)
-            println(s)
-            sessionLocalDataSource.removeSession()
-//            sessionLocalDataSource.saveSession(it)
-            s = sessionLocalDataSource.getSession().blockingGet().access
-            println(s)
-            return@flatMap Single.just(it)
+            if (it.userId.isNotBlank()){
+                refreshSession(it)
+            }
+            Single.just(it)
         }.map { session: SessionEntity -> session.userId }
+    }
+
+    fun refreshSession(sessionEntity: SessionEntity){
+        sessionRemoteDataSource.refreshSession(sessionEntity)
+        sessionLocalDataSource.saveSession(sessionEntity)
     }
 
     fun getUserProfile(userId: String?): Single<UserProfileEntity>{

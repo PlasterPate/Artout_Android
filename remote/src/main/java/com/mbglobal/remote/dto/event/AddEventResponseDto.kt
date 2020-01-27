@@ -1,9 +1,8 @@
 package com.mbglobal.remote.dto.event
 
-
 import com.google.gson.annotations.SerializedName
 
-data class EventDto(
+data class AddEventResponseDto (
     @SerializedName("id")
     val id: Int,
     @SerializedName("title")
@@ -20,10 +19,6 @@ data class EventDto(
     val location: LocationDto?,
     @SerializedName("owner")
     val owner: Int,
-    @SerializedName("is_checked_in")
-    val isCheckedIn: Boolean?,
-    @SerializedName("checkin_count")
-    val checkinCount: Int?,
-    @SerializedName("picture_url")
-    val pictureUrl: String
+    @SerializedName("s3_response")
+    val s3ResponseDto: S3ResponseDto
 )

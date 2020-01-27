@@ -29,7 +29,7 @@ class EventDetailsViewModel @Inject constructor(private val eventRepository: Eve
         if (eventId == 0) {
             _eventLoadError.value = "Invalid event"
         }
-
+        println("hey")
         eventRepository.getEvent(eventId)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
@@ -49,7 +49,8 @@ class EventDetailsViewModel @Inject constructor(private val eventRepository: Eve
         }else{
             checkin()
         }
-        loadEvent(_eventEntity.value!!.id)
+        println(_eventEntity.value!!.id)
+
     }
 
     private fun checkin(){
@@ -58,6 +59,7 @@ class EventDetailsViewModel @Inject constructor(private val eventRepository: Eve
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
                 _checkinStatus.value = LiveEvent("You Checked In this Event")
+                loadEvent(_eventEntity.value!!.id)
             },{
                 Timber.e("Failed to checkin")
             })
@@ -72,6 +74,7 @@ class EventDetailsViewModel @Inject constructor(private val eventRepository: Eve
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
                 _checkinStatus.value = LiveEvent("You Checked Out this Event")
+                loadEvent(_eventEntity.value!!.id)
             },{
                 Timber.e("Failed to checkout")
             })
