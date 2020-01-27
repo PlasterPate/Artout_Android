@@ -29,6 +29,7 @@ class EditEventViewModel @Inject constructor(private val eventRepository: EventR
             .subscribe({
                 _addedId.value = it.id
             },{
+                println("rid")
                 _addedId.value = null
             }).also {
                 compositeDisposable.add(it)

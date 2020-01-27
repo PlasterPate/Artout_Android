@@ -1,10 +1,16 @@
 package com.mbglobal.artoutandroid.ui.manageevent
 
+import android.Manifest
 import android.annotation.SuppressLint
+import android.app.Activity
+import android.content.Intent
+import android.content.pm.PackageManager
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.textfield.TextInputEditText
@@ -18,6 +24,11 @@ import java.util.*
 import javax.inject.Inject
 
 abstract class ManageEventFragment : BaseFragment() {
+
+    //image pick code
+    protected val IMAGE_PICK_CODE = 1000
+    //Permission code
+    protected val PERMISSION_CODE = 1001
 
     lateinit var binding : FragmentManageEventBinding
 
@@ -86,5 +97,30 @@ abstract class ManageEventFragment : BaseFragment() {
         timePicker.setCancelColor(resources.getColor(R.color.white))
         timePicker.setOkColor(resources.getColor(R.color.white))
         timePicker.show(fragmentManager!!, "TimePicker")
+    }
+
+    protected fun pickImageFromGallery() {
+        val intent = Intent(Intent.ACTION_PICK).apply {
+            type = "image/*"
+            action = Intent.ACTION_GET_CONTENT
+        }
+        startActivityForResult(Intent.createChooser(intent, "Select Picture"), IMAGE_PICK_CODE)
+    }
+
+
+
+    protected fun checkPermissions(){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M &&
+            ContextCompat.checkSelfPermission(
+                requireContext(),
+                Manifest.permission.WRITE_EXTERNAL_STORAGE
+            )
+            == PackageManager.PERMISSION_DENIED
+        ) {
+            //permission denied
+            val permissions = arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+            //show popup to request runtime permission
+            requestPermissions(permissions, PERMISSION_CODE)
+        }
     }
 }

@@ -26,19 +26,21 @@ class EventRepository @Inject constructor(
 
     fun addEvent(eventEntity: AddEventEntity): Single<EventEntity> {
         return sessionLocalDataSource.getUserId().flatMap {userId ->
-            eventRemoteDataSource.addEvent(eventEntity.copy(owner = userId.toInt())).flatMap {
-                eventEntity.image?.let {image ->
-                    println("Going to upload")
-                    uploadImage("events",it.s3ResponseEntity,image)
-                }
-
-                eventLocalDataSource.addEvent(it.event)
+            eventRemoteDataSource.addEvent(eventEntity.copy(owner = userId.toInt()))
+                .flatMap {
+//                eventEntity.image?.let {image ->
+//                    println("Going to upload")
+//                    //uploadImage("events",it.s3ResponseEntity,image)
+//                }
+                //eventLocalDataSource.addEvent(it.event)
+                    Single.just(it.event)
             }
         }
     }
 
     fun editEvent(eventId: Int, eventEntity: AddEventEntity): Single<EventEntity> {
         return sessionLocalDataSource.getUserId().flatMap {userId ->
+            println("repo edit")
             eventRemoteDataSource.editEvent(eventId, eventEntity.copy(owner = userId.toInt())).flatMap {
                 eventLocalDataSource.editEvent(it)
             }

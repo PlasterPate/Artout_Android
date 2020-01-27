@@ -53,7 +53,7 @@ fun UserRegisterResponseDto.toUserRegisterResponseEntity(): UserRegisterResponse
 fun EventDto.toEventEntity(): EventEntity {
     return EventEntity(
         title = title,
-        image = pictureUrl,
+        image = "https://vignette.wikia.nocookie.net/friends/images/9/94/Central_Perk.jpg",
         description = description,
         startDate = getDateFromDateTime(startDateTime),
         startTime = getTimeFromDateTime(startDateTime),
@@ -248,7 +248,7 @@ fun AddEventResponseDto.toAddEventResponseEntity(): AddEventResponseEntity{
             category = category,
             checkinCount = 0,
             checkinState = false,
-            image = "",
+            image = "https://vignette.wikia.nocookie.net/friends/images/9/94/Central_Perk.jpg",
             location = location?.toLocationEntity(),
             description = description,
             endDate = endDateTime,
