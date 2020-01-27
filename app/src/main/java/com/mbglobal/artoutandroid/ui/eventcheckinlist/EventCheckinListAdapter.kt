@@ -52,7 +52,8 @@ class EventCheckinListAdapter : RecyclerView.Adapter<UserViewHolder>() {
         return when (viewType) {
             UserState.FOLLOWING.value,
             UserState.NOT_FOLLOWING.value,
-            UserState.REQUESTED.value -> UserViewHolder(inflate(R.layout.item_user))
+            UserState.REQUESTED.value,
+            UserState.OWNER.value -> UserViewHolder(inflate(R.layout.item_user))
             else -> throw Exception("Invalid User Item")
         }
     }

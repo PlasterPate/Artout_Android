@@ -7,9 +7,9 @@ import com.mbglobal.remote.dto.event.EventDto
 import com.mbglobal.remote.dto.user.UserDto
 
 data class CheckinDto(
-    @SerializedName("user")
+    @SerializedName("checkin_user")
     val userEntity: UserDto,
-    @SerializedName("event")
+    @SerializedName("checkin_event")
     val eventEntity: EventDto,
     @SerializedName("go_time")
     val goTime: String,
