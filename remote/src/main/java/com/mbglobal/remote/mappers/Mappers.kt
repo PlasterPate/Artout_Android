@@ -53,7 +53,7 @@ fun UserRegisterResponseDto.toUserRegisterResponseEntity(): UserRegisterResponse
 fun EventDto.toEventEntity(): EventEntity {
     return EventEntity(
         title = title,
-        image = "https://vignette.wikia.nocookie.net/friends/images/9/94/Central_Perk.jpg",
+        image = imageList.random(),
         description = description,
         startDate = getDateFromDateTime(startDateTime),
         startTime = getTimeFromDateTime(startDateTime),
@@ -278,3 +278,12 @@ fun S3ResponseEntity.toS3ResponseDto(): S3ResponseDto{
             signature = signature)
     )
 }
+
+val imageList = listOf<String>("https://upgradedpoints.com/wp-content/uploads/2018/06/Top-20-Amusement-Parks-in-North-America.jpg",
+    "https://vignette.wikia.nocookie.net/friends/images/9/94/Central_Perk.jpg",
+    "https://www.nickselway.com/images/xl/BEST.jpg",
+    "https://cdn.getyourguide.com/img/tour_img-2420980-146.jpg",
+    "https://afremov.com/images/product/image_2347.jpeg",
+    "https://www.carredartistes.com/img/cms/Blog/2019-04-Street%20art/intro-article%20(1).jpg",
+    "https://static.spin.com/files/2015/10/1501005-rock-band-640x426.jpg")
+
