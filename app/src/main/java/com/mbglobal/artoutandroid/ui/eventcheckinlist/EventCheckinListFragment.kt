@@ -60,8 +60,10 @@ class EventCheckinListFragment : BaseFragment(), OnUserItemClickListener {
     }
 
     override fun onClicked(userEntity: UserEntity) {
-        findNavController().navigate(EventCheckinListFragmentDirections.
-            actionEventCheckinListFragmentToUserProfileFragment(userEntity.id.toString()))
+        if (userEntity.state != UserState.OWNER){
+            findNavController().navigate(EventCheckinListFragmentDirections.
+                actionEventCheckinListFragmentToUserProfileFragment(userEntity.id.toString()))
+        }
     }
 
     private val userObserver: Observer<List<UserEntity>> = Observer {
@@ -102,6 +104,16 @@ class EventCheckinListFragment : BaseFragment(), OnUserItemClickListener {
                 override fun onClicked(userEntity: UserEntity) {
                     this@with.updateUserState(userEntity, UserState.NOT_FOLLOWING)
                     socialViewModel.cancelFollowRequest(userEntity.id.toString())
+                }
+
+            })
+
+            actionButtonListeners.add(object : OnActionButtonClickListener {
+                override val stateTag: UserState
+                    get() = UserState.OWNER
+
+                override fun onClicked(userEntity: UserEntity) {
+
                 }
 
             })

@@ -47,6 +47,11 @@ class UserViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
             UserState.FOLLOWING -> followingButton.visibility = View.VISIBLE
             UserState.REQUESTED -> requestedButton.visibility = View.VISIBLE
             UserState.NOT_FOLLOWING -> followButton.visibility = View.VISIBLE
+            UserState.OWNER -> {
+                followButton.visibility = View.GONE
+                requestedButton.visibility = View.GONE
+                followingButton.visibility = View.GONE
+            }
         }
 
         when (onActionButtonClickListener.stateTag) {
@@ -59,6 +64,7 @@ class UserViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
             UserState.REQUESTED -> requestedButton.setOnClickListener {
                 onActionButtonClickListener.onClicked(userEntity)
             }
+            UserState.OWNER -> {}
         }
 
         itemView.setOnClickListener {
