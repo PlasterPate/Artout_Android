@@ -22,6 +22,7 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import com.mbglobal.artoutandroid.R
 import com.mbglobal.artoutandroid.ui.manageevent.ManageEventFragment
+import com.mbglobal.artoutandroid.ui.manageevent.ManageEventViewModel
 import com.mbglobal.data.entity.event.AddEventEntity
 import com.mbglobal.data.entity.event.LocationEntity
 import com.mbglobal.data.repository.UserRepository
@@ -38,10 +39,7 @@ class AddEventFragment : ManageEventFragment() {
     @Inject
     lateinit var userRepository: UserRepository
 
-    //image pick code
-    private val IMAGE_PICK_CODE = 1000
-    //Permission code
-    private val PERMISSION_CODE = 1001
+
 
     private val addEventViewModel: AddEventViewModel by lazy {
         ViewModelProviders.of(this, viewModelFactory)[AddEventViewModel::class.java]
@@ -94,35 +92,15 @@ class AddEventFragment : ManageEventFragment() {
                 category = binding.categoryEditText.text.toString(),
                 owner = 0,
                 location = LocationEntity(12.0, 10.0),
-                image = addEventViewModel.eventImage.value
+                image = "https://vignette.wikia.nocookie.net/friends/images/9/94/Central_Perk.jpg"
             )
             addEventViewModel.addEvent(eventEntity)
         }
     }
 
-    private fun pickImageFromGallery() {
-        val intent = Intent(Intent.ACTION_PICK).apply {
-            type = "image/*"
-            action = Intent.ACTION_GET_CONTENT
-        }
-        startActivityForResult(Intent.createChooser(intent, "Select Picture"), IMAGE_PICK_CODE)
-    }
-
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (resultCode == Activity.RESULT_OK && requestCode == IMAGE_PICK_CODE) {
             addEventViewModel.setImage(data?.data!!)
-        }
-    }
-
-    private fun checkPermissions(){
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M &&
-            checkSelfPermission(requireContext(), Manifest.permission.WRITE_EXTERNAL_STORAGE)
-            == PackageManager.PERMISSION_DENIED
-        ) {
-            //permission denied
-            val permissions = arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE)
-            //show popup to request runtime permission
-            requestPermissions(permissions, PERMISSION_CODE)
         }
     }
 

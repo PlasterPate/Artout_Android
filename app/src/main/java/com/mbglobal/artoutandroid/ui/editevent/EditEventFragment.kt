@@ -1,5 +1,7 @@
 package com.mbglobal.artoutandroid.ui.editevent
 
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.core.net.toUri
@@ -8,10 +10,12 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import com.mbglobal.artoutandroid.R
 import com.mbglobal.artoutandroid.ui.manageevent.ManageEventFragment
+import com.mbglobal.artoutandroid.ui.manageevent.ManageEventViewModel
 import com.mbglobal.data.entity.event.AddEventEntity
 import com.mbglobal.data.entity.event.LocationEntity
 import com.mbglobal.data.repository.UserRepository
 import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.fragment_manage_event.*
 import javax.inject.Inject
 
 class EditEventFragment : ManageEventFragment() {
@@ -55,11 +59,20 @@ class EditEventFragment : ManageEventFragment() {
             )
             editEventViewModel.editEvent(eventId, eventEntity)
         }
+
+        image_pick.setOnClickListener {
+            checkPermissions()
+            pickImageFromGallery()
+        }
     }
 
     private fun initializeObservers(){
         editEventViewModel.pageNameText.observe(this, Observer {
             binding.pageName.text = it
+        })
+
+        editEventViewModel.eventImage.observe(this, Observer { imageUri ->
+            Picasso.get().load(imageUri?.toUri()).into(binding.imagePick)
         })
 
         editEventViewModel.addedId.observe(this, Observer { eventId ->
@@ -78,9 +91,16 @@ class EditEventFragment : ManageEventFragment() {
             binding.startTimeEditText.setText(it.startTime)
             binding.endDateEditText.setText(it.endDate)
             binding.endTimeEditText.setText(it.endTime)
-            Picasso.get().load(it.image?.toUri()).into(binding.imagePick)
+//            Picasso.get().load(it.image?.toUri()).into(binding.imagePick)
+            Picasso.get().load("https://vignette.wikia.nocookie.net/friends/images/9/94/Central_Perk.jpg").into(binding.imagePick)
             binding.layoutGroup.visibility = View.VISIBLE
             binding.progress.visibility = View.GONE
         })
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if (resultCode == Activity.RESULT_OK && requestCode == IMAGE_PICK_CODE) {
+            editEventViewModel.setImage(data?.data!!)
+        }
     }
 }

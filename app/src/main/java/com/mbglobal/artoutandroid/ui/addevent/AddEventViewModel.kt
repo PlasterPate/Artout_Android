@@ -17,10 +17,6 @@ import javax.inject.Inject
 class AddEventViewModel @Inject constructor(private val eventRepository: EventRepository) :
     ManageEventViewModel() {
 
-    private val _eventImage = MutableLiveData<String?>()
-    val eventImage: LiveData<String?>
-        get() = _eventImage
-
     private val _addedId = MutableLiveData<Int?>()
     val addedId: LiveData<Int?>
         get() = _addedId
@@ -34,7 +30,8 @@ class AddEventViewModel @Inject constructor(private val eventRepository: EventRe
                     _addedId.value = event.id
                 },
                 { throwable ->
-                    Log.v("OkHttp", "${throwable.message}");
+                    Log.v("OkHttp", "${throwable.message}")
+                    println("error $throwable")
                     _addedId.value = null
                 }
             ).also {
@@ -46,7 +43,4 @@ class AddEventViewModel @Inject constructor(private val eventRepository: EventRe
         pageNameText.value = pageName
     }
 
-    fun setImage(imageUri: Uri?) {
-        _eventImage.value = imageUri.toString()
-    }
 }
