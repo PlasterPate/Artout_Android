@@ -50,7 +50,7 @@ class ProfileFragment : BaseFragment() {
             ProfileItem(
                 titleResource = R.string.events,
                 iconResource = R.drawable.ic_favorite_grey_24dp,
-                count = 36,
+                count = 6,
                 tag = ProfileItem.EVENTS
             ),
             ProfileItem(
@@ -62,9 +62,6 @@ class ProfileFragment : BaseFragment() {
         )
         binding.rvProfileItems.adapter = adapter
 
-
-        Picasso.get().load("https://st2.depositphotos.com/4111759/12123/v/950/depositphotos_121233262-stock-illustration-male-default-placeholder-avatar-profile.jpg")
-            .into(binding.ivProfileImage)
 
         adapter.listeners.apply {
             add(object : OnProfileItemClickListener {
@@ -138,6 +135,8 @@ class ProfileFragment : BaseFragment() {
             binding.tvFullName.text = it.user.firstName.plus(" ").plus(it.user.lastName)
             binding.tvFollowCount.text = it.followerCount
             binding.tvFollowingCount.text = it.followingCount
+            Picasso.get().load(it.user.avatar)
+                .into(binding.ivProfileImage)
         })
 
         profileViewModel.logoutStatus.observe(this, Observer {

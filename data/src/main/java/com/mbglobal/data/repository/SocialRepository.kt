@@ -18,10 +18,13 @@ class SocialRepository @Inject constructor(
     // FOLLOWERS
 
     fun getUserFollowers(userId: String?): Single<List<UserEntity>> {
+        return MockUserFactory.getFollowers()       // Mock Code
+        /*                                          // Correct code
         return if (userId == null)
             followerRemoteDataSource.getUserFollowers()
         else
             followerRemoteDataSource.getUserFollowers(userId)
+         */
     }
 
     fun getFollower(userId: String): Single<UserEntity>{
@@ -33,10 +36,13 @@ class SocialRepository @Inject constructor(
     }
 
     fun getFollowRequests(): Single<List<FollowRequestEntity>> {
+        return MockUserFactory.getFollowRequests()      // Mock Code
+        /*                                              // Correct Code
         return followerRemoteDataSource.getFollowRequests().map {
             println(it)
             it
         }
+         */
     }
 
     fun acceptRequest(userId: String): Completable {
@@ -50,8 +56,10 @@ class SocialRepository @Inject constructor(
     // FOLLOWINGS
 
     fun getUserFollowings(userId: String?): Single<List<UserEntity>> {
-        //return Single.just(MockUserFactory.getFollowings())
+        return MockUserFactory.getFollowings()          // Mock Code
+        /*                                              // Correct Code
         return followingRemoteDataSource.getUserFollowings(userId)
+         */
     }
 
     fun getFollowing(userId: String): Single<UserEntity>{
@@ -67,7 +75,10 @@ class SocialRepository @Inject constructor(
     }
 
     fun getFollowPendings(): Single<List<FollowRequestEntity>> {
+        return MockUserFactory.getFollowPendings()          // Mock code
+        /*                                                  // Correct code
         return followingRemoteDataSource.getFollowPendings()
+         */
     }
 
     fun cancelFollowPending(userId: String): Completable {

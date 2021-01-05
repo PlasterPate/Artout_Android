@@ -19,9 +19,12 @@ class EventRepository @Inject constructor(
 ) {
 
     fun getEvent(eventId: Int): Single<EventEntity> {
+        return MockEventFactory.getEvent()          // Mock code
+        /*                                          // Correct code
         return eventLocalDataSource.getEvent(eventId).onErrorResumeNext {
             eventRemoteDataSource.getEvent(eventId)
         }
+         */
     }
 
     fun addEvent(eventEntity: AddEventEntity): Single<EventEntity> {
@@ -48,11 +51,14 @@ class EventRepository @Inject constructor(
     }
 
     fun getUserEvents(userId: String?): Single<List<EventEntity>> {
+        return MockEventFactory.getEvents()             // Mock code
+        /*                                              // Correct code
         val idSingle =
             userId?.let {
                 Single.just(userId)
             } ?: sessionLocalDataSource.getUserId()
         return idSingle.flatMap { id -> eventRemoteDataSource.getUserEvents(id) }
+         */
     }
 
     fun getUserCheckIns(userId: String?): Single<List<CheckinEntity>> {

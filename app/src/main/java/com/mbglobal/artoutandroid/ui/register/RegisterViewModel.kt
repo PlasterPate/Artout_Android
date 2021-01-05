@@ -23,6 +23,9 @@ class RegisterViewModel @Inject constructor(private val userRepository: UserRepo
     val showLoading: LiveData<Boolean> = _showLoading
 
     fun onRegisterClicked(userRegisterItemEntity: UserRegisterItemEntity) {
+        _registerStatus.value = true       // Mock code
+
+        /*                                  // Correct code
         _showLoading.value = true
         if (validateRegisterInfo(userRegisterItemEntity)) {
             userRepository.register(userRegisterItemEntity)
@@ -42,6 +45,7 @@ class RegisterViewModel @Inject constructor(private val userRepository: UserRepo
             _showLoading.value = false
             _registerError.value = "Invalid register info!"
         }
+         */
     }
 
     fun validateRegisterInfo(userRegisterItemEntity: UserRegisterItemEntity) : Boolean {

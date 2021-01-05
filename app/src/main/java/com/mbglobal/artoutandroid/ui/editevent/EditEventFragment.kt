@@ -92,7 +92,7 @@ class EditEventFragment : ManageEventFragment() {
             binding.endDateEditText.setText(it.endDate)
             binding.endTimeEditText.setText(it.endTime)
 //            Picasso.get().load(it.image?.toUri()).into(binding.imagePick)
-            Picasso.get().load("https://vignette.wikia.nocookie.net/friends/images/9/94/Central_Perk.jpg").into(binding.imagePick)
+            Picasso.get().load(it.image).into(binding.imagePick)
             binding.layoutGroup.visibility = View.VISIBLE
             binding.progress.visibility = View.GONE
         })

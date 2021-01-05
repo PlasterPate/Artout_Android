@@ -27,8 +27,10 @@ class LoginViewModel @Inject constructor(private val userRepository: UserReposit
 
     fun onLoginClicked(userName : String, password : String) {
 
-        val userLoginItemEntity = UserLoginItemEntity(userName, password)
+        _loginStatus.value = true       // Mock code
 
+        /*                              // Correct code
+        val userLoginItemEntity = UserLoginItemEntity(userName, password)
 
         if (isLoginInfoValid(userLoginItemEntity)) {
             _showLoading.value = true
@@ -50,6 +52,7 @@ class LoginViewModel @Inject constructor(private val userRepository: UserReposit
                     compositeDisposable.add(it)
                 }
         }
+         */
 
     }
 

@@ -8,6 +8,7 @@ import javax.inject.Inject
 class TimelineRepository @Inject constructor(private val timelineRemoteDataSource: TimelineRemoteDataSource) {
 
     fun getTimelineItems(pageNumber: Int): Single<List<EventEntity>> {
-        return timelineRemoteDataSource.getTimelineItems(pageNumber)
+        return MockEventFactory.getEvents()                                      // Mock code
+//        return timelineRemoteDataSource.getTimelineItems(pageNumber)      // Correct code
     }
 }

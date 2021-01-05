@@ -53,7 +53,10 @@ class UserRepository @Inject constructor(
     }
 
     fun getUserProfile(userId: String?): Single<UserProfileEntity>{
+        return MockProfileFactory.getProfile()          // Mock code
+        /*                                              // Correct code
         return userRemoteDataSource.getUserProfile(userId)
+         */
     }
 
     fun logout(): Completable {

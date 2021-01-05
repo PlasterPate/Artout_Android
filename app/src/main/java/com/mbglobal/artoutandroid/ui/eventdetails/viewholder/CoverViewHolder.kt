@@ -14,7 +14,7 @@ class CoverViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
     fun bind(eventEntity: EventEntity) {
         try {
-            Picasso.get().load("https://vignette.wikia.nocookie.net/friends/images/9/94/Central_Perk.jpg").into(cover)
+            Picasso.get().load(eventEntity.image).into(cover)
         }catch (e: SecurityException){
 
         }

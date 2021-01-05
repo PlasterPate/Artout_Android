@@ -96,8 +96,7 @@ class UserProfileFragment : BaseFragment() {
         binding.rvProfileItems.layoutManager = LinearLayoutManager(view.context)
         binding.rvProfileItems.adapter = adapter
 
-        Picasso.get().load("https://st2.depositphotos.com/4111759/12123/v/950/depositphotos_121233262-stock-illustration-male-default-placeholder-avatar-profile.jpg")
-            .into(binding.ivProfileImage)
+
 
         initializeObservers()
         initializeListeners()
@@ -140,6 +139,8 @@ class UserProfileFragment : BaseFragment() {
             }
             binding.tvFollowCount.text = it.followerCount
             binding.tvFollowingCount.text = it.followingCount
+            Picasso.get().load(it.user.avatar)
+                .into(binding.ivProfileImage)
         })
     }
 }
