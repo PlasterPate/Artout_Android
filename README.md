@@ -19,9 +19,23 @@ Unfortunately I wasn't able to mock "search" feature and its not completely visi
 look at the source code and see everything.
 
 # Screenshots
-<img src="screenshots/login.png" width="220"/>  <img src="screenshots/timeline.png" width="220"/>  <img src="screenshots/my_events.png" width="220"/>  <img src="screenshots/event_detail.png" width="220"/>
+<img src="screenshots/login.png" width="220"/>  <img src="screenshots/timeline.png" width="220"/>  <img src="screenshots/my_events.png" width="220"/>  <img src="screenshots/event_detail.png" width="220"/>  <img src="screenshots/own_profile.png" width="220"/>  <img src="screenshots/followers.png" width="220"/>  <img src="screenshots/add_friend.png" width="220"/>  <img src="screenshots/edit_event.png" width="220"/>
 
-<img src="screenshots/own_profile.png" width="220"/>  <img src="screenshots/followers.png" width="220"/>  <img src="screenshots/add_friend.png" width="220"/>  <img src="screenshots/edit_event.png" width="220"/>
+# Project details and Libraries
+- Architecture
+  - Clean Architecture (Presentation, Data, Remote)
+  - MVVM for presentation layer
+  - Repository pattern for data layer
+- Layout
+  - Material design
+  - Constraint layout
+  - RecyclerView
+- Data Binding
+- RoomDB (for local datasource)
+- Retrofit (for remote datasource)
+- RXJava
+- Dagger2
+
 
 
 
