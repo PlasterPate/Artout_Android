@@ -17,3 +17,11 @@ are visible in the app but doesn't work(due to server problems).
 
 Unfortunately I wasn't able to mock "search" feature and its not completely visible in the app but you can still
 look at the source code and see everything.
+
+# Screenshots
+<img src="screenshots/login.png" width="220"/>  <img src="screenshots/timeline.png" width="220"/>  <img src="screenshots/my_events.png" width="220"/>  <img src="screenshots/event_detail.png" width="220"/>
+
+<img src="screenshots/own_profile.png" width="220"/>  <img src="screenshots/followers.png" width="220"/>  <img src="screenshots/add_friend.png" width="220"/>  <img src="screenshots/edit_event.png" width="220"/>
+
+
+
