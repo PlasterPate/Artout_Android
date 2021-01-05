@@ -36,6 +36,7 @@ look at the source code and see everything.
 - RXJava
 - Dagger2
 
-
+# Installation
+Download the apk file from [releases](https://github.com/PlasterPate/Artout_Android/releases) and install it on your android device
 
 
